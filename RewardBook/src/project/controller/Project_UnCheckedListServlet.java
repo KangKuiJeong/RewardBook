@@ -3,6 +3,7 @@ package project.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,7 @@ public class Project_UnCheckedListServlet extends HttpServlet {
 			job.put("p_no", project.getP_no());
 			job.put("p_title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 			job.put("u_name", project.getU_name());
+			job.put("p_sdate", new SimpleDateFormat("yyyy-MM-dd").format(project.getP_sdate()));
 			jarr.add(job);
 		}
 		

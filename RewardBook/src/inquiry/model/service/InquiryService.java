@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import inquiry.model.dao.InquiryDao;
 import inquiry.model.vo.Inquiry;
-import project.model.vo.Project;
 
 public class InquiryService {
 	
@@ -65,6 +64,12 @@ public class InquiryService {
 		return list;
 	}
 
+	public ArrayList<Inquiry> selectNewInquiry() {
+		Connection conn = getConnection();
+		ArrayList<Inquiry> list = iqDao.selectNewInquiry(conn);
+		return list;
+	}
+
 	public ArrayList<Inquiry> pageSelect(int start, int limit, String check1, String check2, String select1, String text1) {
 		Connection conn = getConnection();
 		ArrayList<Inquiry> list = iqDao.pageSelect(conn, start, limit, check1, check2, select1, text1);
@@ -74,6 +79,18 @@ public class InquiryService {
 	public int pageCount(String check1, String check2, String select1, String text1) {
 		Connection conn = getConnection();
 		int result = iqDao.pageCount(conn, check1, check2, select1, text1);
+		return result;
+	}
+
+	public ArrayList<Inquiry> pageSelect_D(int start, int limit, String check1, String check2, String select1, String text1) {
+		Connection conn = getConnection();
+		ArrayList<Inquiry> list = iqDao.pageSelect_D(conn, start, limit, check1, check2, select1, text1);
+		return list;
+	}
+
+	public int pageCount_D(String check1, String check2, String select1, String text1) {
+		Connection conn = getConnection();
+		int result = iqDao.pageCount_D(conn, check1, check2, select1, text1);
 		return result;
 	}
 

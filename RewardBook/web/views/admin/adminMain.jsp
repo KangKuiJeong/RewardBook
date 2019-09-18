@@ -118,11 +118,15 @@
 				var values = "";
 				var listcount = 0;
 				for (var i in json.list){
-					values += "<tr><td>" + json.list[i].p_no + "</td><td>";
-					var str = decodeURIComponent(json.list[i].p_title).replace(/\+/gi, " ");
-					if (str.length > 25)
-						var str = str.substring(0, 25) + "..."
-					values += str + "</td><td>" + json.list[i].u_name + "</td><td>2019-09-10</td></tr>";
+					values += "<tr OnClick=\"location.href='/RewardBook/pp_detail?page=permission&p_no=" + json.list[i].p_no + "'\" style='cursor : pointer;'><td>" + json.list[i].p_no + "</td><td>";
+					var title = decodeURIComponent(json.list[i].p_title).replace(/\+/gi, " ");
+					if (title.length > 25)
+						var title = title.substring(0, 25) + "...";
+					values += title + "</td><td>";
+					var name = decodeURIComponent(json.list[i].u_name).replace(/\+/gi, " ");
+					if (name.length > 5)
+						var name = name.substring(0, 5) + "..";
+					values += name + "</td><td>" + json.list[i].p_sdate + "</td></tr>";
 					listcount++;
 					if (listcount >= 7)
 						break;
@@ -140,7 +144,46 @@
 				console.log("error");
 			}
 		});
-		
+
+		$.ajax({
+			url: "/RewardBook/iq_unchecked",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				
+				var jsonStr = JSON.stringify(data);
+				var json = JSON.parse(jsonStr);
+				
+				var values = "";
+				var listcount = 0;
+				for (var i in json.list){
+					values += "<tr OnClick=\"location.href='/RewardBook/iq_detail_a?page=inquiry&iq_no=" + json.list[i].iq_no + "'\" style='cursor : pointer;'><td>" + json.list[i].iq_no + "</td><td>";
+					var title = decodeURIComponent(json.list[i].iq_title).replace(/\+/gi, " ");
+					if (title.length > 25)
+						var title = title.substring(0, 25) + "...";
+					values += title + "</td><td>";
+					var name = decodeURIComponent(json.list[i].u_name).replace(/\+/gi, " ");
+					if (name.length > 5)
+						var name = name.substring(0, 5) + "..";
+					values += name + "</td><td>" + json.list[i].iq_date + "</td></tr>";
+					listcount++;
+					if (listcount >= 7)
+						break;
+				}
+				
+				for (var a = listcount; a < 7; a++) {
+					values += "<tr><td></td><td></td><td></td><td></td></tr>"
+				}
+
+				$(".main_area3_section2 table").html($(".main_area3_section2 table").html() + values);
+				$(".main_area3_section1 #s1Count").html(listcount + " 건");
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error");
+			}
+		});
+
 	});
 	
 	var c1 = 0;
@@ -194,14 +237,7 @@
 			</div>
 			<div class="main_area3_section2">
 				<table cellspacing="0" cellpadding='0'>
-					<tr><th style="width : 60px">번호</th><th style="width : 380px">프로젝트 제목</th><th style="width : 100px">작성자</th><th style="width : 170px">작성일</th></tr>
-					<tr><td>121212</td><td>간식좀 주세요</td><td>강아지</td><td>2018-07-10</td></tr>
-					<tr><td>232323</td><td>강아지가 괴롭혀요 ㅠ_ㅠ</td><td>고양이</td><td>2018-07-11</td></tr>
-					<tr><td></td><td></td><td></td><td></td></tr>
-					<tr><td></td><td></td><td></td><td></td></tr>
-					<tr><td></td><td></td><td></td><td></td></tr>
-					<tr><td></td><td></td><td></td><td></td></tr>
-					<tr><td></td><td></td><td></td><td></td></tr>
+					<tr><th style="width : 60px">번호</th><th style="width : 380px">문의 제목</th><th style="width : 100px">작성자</th><th style="width : 170px">작성일</th></tr>
 				</table>
 			</div>
 		</div>
