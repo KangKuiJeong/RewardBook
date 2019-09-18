@@ -15,17 +15,17 @@ CREATE TABLE USERS (
    U_BANK   VARCHAR2(100)   NULL,
    U_BANK_ACCOUNT   VARCHAR2(50)   CONSTRAINT UNQ_U_BANK_ACCOUNT UNIQUE,
    U_HOMEPAGE   VARCHAR2(100)   NULL,
-   U_CATEGORY   VARCHAR2(150)   CONSTRAINT CHK_U_CATEGORY CHECK (U_CATEGORY IN ('ï¿½Ö·ï¿½', 'ï¿½ï¿½È°', 'ï¿½Ç°ï¿½', 'ï¿½Ç·ï¿½', 'IT', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½Å¹ï¿½'))
+   U_CATEGORY   VARCHAR2(150)   CONSTRAINT CHK_U_CATEGORY CHECK (U_CATEGORY IN ('ÁÖ·ù', '»ýÈ°', '°Ç°­', 'ÀÇ·ù', 'IT', '¿©Çà', '¾Ç¼¼¼­¸®', '°¡¹æ', '½Å¹ß'))
 );
 
---ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ö¼ï¿½ ï¿½Ã·ï¿½ï¿½ß°ï¿½
+--Á÷¾÷, »ó¼¼ÁÖ¼Ò ÄÃ·³Ãß°¡
 alter table users add(u_address_detail varchar2(255));
 alter table users add(u_job varchar2(30));
 
---ï¿½ï¿½È­ï¿½ï¿½È£ nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+--ÀüÈ­¹øÈ£ null°ª Çã¿ëÀ¸·Î ¼öÁ¤
 ALTER TABLE users MODIFY (u_phone NULL);
 
---users ï¿½ï¿½ï¿½Ìºï¿½ Ä«ï¿½×°ï¿½ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½)
+--users Å×ÀÌºí Ä«Å×°í¸®ºÎºÐ Á¦¾àÁ¶°Ç »èÁ¦(´ÙÁß¼±ÅÃ ÇÊ¿ä)
 ALTER TABLE users DROP CONSTRAINT CHK_U_CATEGORY;
 
 
@@ -154,7 +154,7 @@ CREATE TABLE INQUIRY (
 CREATE TABLE REWARD (
    R_NO   VARCHAR2(40)   CONSTRAINT PK_R_NO PRIMARY KEY,
    P_NO   VARCHAR2(40)   CONSTRAINT FK_R_P_NO  REFERENCES PROJECT(P_NO) ON DELETE CASCADE NOT NULL,
-   R_AMOUNT VARCHAR2(40) DEFAULT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' NOT NULL,
+   R_AMOUNT VARCHAR2(40) DEFAULT '¹«Á¦ÇÑ' NOT NULL,
    R_NAME   VARCHAR2(100)   NOT NULL,
    R_DETAIL   VARCHAR2(500)   NOT NULL,
    R_PRICE   NUMBER   NOT NULL
@@ -168,148 +168,148 @@ CREATE TABLE ADMIN (
    A_JOIN_DATE   DATE   DEFAULT SYSDATE NOT NULL
 );
 
-COMMENT ON TABLE ADMIN IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON TABLE ADMIN IS '°ü¸®ÀÚ';
 COMMENT ON TABLE FAQ IS 'FAQ';
-COMMENT ON TABLE FOLLOW IS 'ï¿½È·Î¿ï¿½';
-COMMENT ON TABLE NOTICE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON TABLE PAYMENT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON TABLE ADMIN IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON TABLE PROJECT IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®';
-COMMENT ON TABLE PROJECT_LIKE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®_ï¿½ï¿½ï¿½Æ¿ï¿½';
-COMMENT ON TABLE PROJECT_NEWS IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®_ï¿½ï¿½ï¿½Ò½ï¿½';
-COMMENT ON TABLE REVIEW IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON TABLE REVIEW_LIKE IS 'ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Æ¿ï¿½';
-COMMENT ON TABLE REVIEW_REPLY IS 'ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½';
-COMMENT ON TABLE REWARD IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON TABLE USERS IS 'È¸ï¿½ï¿½';
-COMMENT ON TABLE VISIT IS 'ï¿½æ¹®ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON TABLE FOLLOW IS 'ÆÈ·Î¿ì';
+COMMENT ON TABLE NOTICE IS '°øÁö»çÇ×';
+COMMENT ON TABLE PAYMENT IS '°áÁ¦';
+COMMENT ON TABLE ADMIN IS '°ü¸®ÀÚ';
+COMMENT ON TABLE PROJECT IS 'ÇÁ·ÎÁ§Æ®';
+COMMENT ON TABLE PROJECT_LIKE IS 'ÇÁ·ÎÁ§Æ®_ÁÁ¾Æ¿ä';
+COMMENT ON TABLE PROJECT_NEWS IS 'ÇÁ·ÎÁ§Æ®_»õ¼Ò½Ä';
+COMMENT ON TABLE REVIEW IS '¸®ºä';
+COMMENT ON TABLE REVIEW_LIKE IS '¸®ºä_ÁÁ¾Æ¿ä';
+COMMENT ON TABLE REVIEW_REPLY IS '¸®ºä_´ñ±Û';
+COMMENT ON TABLE REWARD IS '¸®¿öµå';
+COMMENT ON TABLE USERS IS 'È¸¿ø';
+COMMENT ON TABLE VISIT IS '¹æ¹®ÀÚÅë°è';
 
-COMMENT ON COLUMN ADMIN.A_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½È£';
-COMMENT ON COLUMN ADMIN.A_ID IS 'ï¿½ï¿½ï¿½Ìµï¿½';
-COMMENT ON COLUMN ADMIN.A_NAME IS 'ï¿½Ì¸ï¿½';
-COMMENT ON COLUMN ADMIN.A_PW IS 'ï¿½ï¿½Ð¹ï¿½È£';
-COMMENT ON COLUMN ADMIN.A_JOIN_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN ADMIN.A_NO IS '°ü¸®ÀÚ¹øÈ£';
+COMMENT ON COLUMN ADMIN.A_ID IS '¾ÆÀÌµð';
+COMMENT ON COLUMN ADMIN.A_NAME IS 'ÀÌ¸§';
+COMMENT ON COLUMN ADMIN.A_PW IS 'ºñ¹Ð¹øÈ£';
+COMMENT ON COLUMN ADMIN.A_JOIN_DATE IS '°¡ÀÔÀÏ';
 
-COMMENT ON COLUMN FAQ.FAQ_NO IS 'ï¿½Û¹ï¿½È£';
-COMMENT ON COLUMN FAQ.A_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN FAQ.FAQ_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN FAQ.FAQ_TEXT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN FAQ.FAQ_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN FAQ.FAQ_OC IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FAQ.FAQ_NO IS '±Û¹øÈ£';
+COMMENT ON COLUMN FAQ.A_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN FAQ.FAQ_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN FAQ.FAQ_TEXT IS 'º»¹®';
+COMMENT ON COLUMN FAQ.FAQ_DATE IS 'µî·ÏÀÏ';
+COMMENT ON COLUMN FAQ.FAQ_OC IS '°ø°³¿©ºÎ';
 
- COMMENT ON COLUMN INQUIRY.IQ_NO IS 'ï¿½Û¹ï¿½È£';
-COMMENT ON COLUMN INQUIRY.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN INQUIRY.IQ_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN INQUIRY.IQ_TEXT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN INQUIRY.IQ_REPLY IS 'ï¿½äº¯';
- COMMENT ON COLUMN INQUIRY.A_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½È£';
-COMMENT ON COLUMN INQUIRY.IQ_OC IS 'È®ï¿½Î¿ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN INQUIRY.IQ_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN INQUIRY.IQ_IMG IS 'ï¿½Ì¹ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN INQUIRY.IQ_RDATE IS 'ï¿½äº¯ï¿½ï¿½';
-COMMENT ON COLUMN INQUIRY.IQ_CATEGORY IS 'ï¿½Ð·ï¿½(ï¿½Å°ï¿½,1ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½)';
-COMMENT ON COLUMN INQUIRY.IQ_DCATEGORY IS 'ï¿½Å°ï¿½Ð·ï¿½';
+ COMMENT ON COLUMN INQUIRY.IQ_NO IS '±Û¹øÈ£';
+COMMENT ON COLUMN INQUIRY.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN INQUIRY.IQ_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN INQUIRY.IQ_TEXT IS 'º»¹®';
+COMMENT ON COLUMN INQUIRY.IQ_REPLY IS '´äº¯';
+ COMMENT ON COLUMN INQUIRY.A_NO IS '°ü¸®ÀÚ¹øÈ£';
+COMMENT ON COLUMN INQUIRY.IQ_OC IS 'È®ÀÎ¿©ºÎ';
+COMMENT ON COLUMN INQUIRY.IQ_DATE IS 'µî·ÏÀÏ';
+COMMENT ON COLUMN INQUIRY.IQ_IMG IS 'ÀÌ¹ÌÁö';
+COMMENT ON COLUMN INQUIRY.IQ_RDATE IS '´äº¯ÀÏ';
+COMMENT ON COLUMN INQUIRY.IQ_CATEGORY IS 'ºÐ·ù(½Å°í,1´ë1¹®ÀÇ,°ü¸®ÀÚ¹®ÀÇ)';
+COMMENT ON COLUMN INQUIRY.IQ_DCATEGORY IS '½Å°íºÐ·ù';
 
-CCOMMENT ON COLUMN FOLLOW.U_NO_F IS 'È¸ï¿½ï¿½ï¿½ï¿½È£(ï¿½È·Î¿ï¿½)';
-COMMENT ON COLUMN FOLLOW.U_NO_FR IS 'È¸ï¿½ï¿½ï¿½ï¿½È£(ï¿½È·Î¿ï¿½)';
-COMMENT ON COLUMN FOLLOW.F_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
+CCOMMENT ON COLUMN FOLLOW.U_NO_F IS 'È¸¿ø¹øÈ£(ÆÈ·Î¿ì)';
+COMMENT ON COLUMN FOLLOW.U_NO_FR IS 'È¸¿ø¹øÈ£(ÆÈ·Î¿ö)';
+COMMENT ON COLUMN FOLLOW.F_DATE IS 'µî·ÏÀÏ';
 
-COMMENT ON COLUMN NOTICE.NT_NO IS 'ï¿½Û¹ï¿½È£';
-COMMENT ON COLUMN NOTICE.A_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½È£';
-COMMENT ON COLUMN NOTICE.NT_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN NOTICE.NT_TEXT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN NOTICE.NT_IMG IS 'ï¿½Ì¹ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN NOTICE.NT_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN NOTICE.NT_OC IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN NOTICE.NT_TYPE IS 'Å¸ï¿½ï¿½';
+COMMENT ON COLUMN NOTICE.NT_NO IS '±Û¹øÈ£';
+COMMENT ON COLUMN NOTICE.A_NO IS '°ü¸®ÀÚ¹øÈ£';
+COMMENT ON COLUMN NOTICE.NT_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN NOTICE.NT_TEXT IS 'º»¹®';
+COMMENT ON COLUMN NOTICE.NT_IMG IS 'ÀÌ¹ÌÁö';
+COMMENT ON COLUMN NOTICE.NT_DATE IS 'µî·ÏÀÏ';
+COMMENT ON COLUMN NOTICE.NT_OC IS '°ø°³¿©ºÎ';
+COMMENT ON COLUMN NOTICE.NT_TYPE IS 'Å¸ÀÔ';
 
-COMMENT ON COLUMN PAYMENT.PM_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN PAYMENT.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN PAYMENT.P_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È£';
-COMMENT ON COLUMN PAYMENT.R_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN PAYMENT.PM_INFO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_PRICE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_PRICE_PLUS IS 'ï¿½ß°ï¿½ï¿½Ý¾ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_MILEAGE IS 'ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_QUANTITY IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_NOPEN IS 'ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_POPEN IS 'ï¿½Ý¾×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PAYMENT.PM_OPTION IS 'ï¿½É¼Ç¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN PAYMENT.PM_NO IS '°áÁ¦¹øÈ£';
+COMMENT ON COLUMN PAYMENT.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN PAYMENT.P_NO IS 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+COMMENT ON COLUMN PAYMENT.R_NO IS '¸®¿öµå¹øÈ£';
+COMMENT ON COLUMN PAYMENT.PM_INFO IS '°áÁ¦Á¤º¸';
+COMMENT ON COLUMN PAYMENT.PM_PRICE IS '°áÁ¦±Ý¾×';
+COMMENT ON COLUMN PAYMENT.PM_PRICE_PLUS IS 'Ãß°¡±Ý¾×';
+COMMENT ON COLUMN PAYMENT.PM_DATE IS '°áÁ¦¿¹Á¤ÀÏ';
+COMMENT ON COLUMN PAYMENT.PM_MILEAGE IS '¸¶ÀÏ¸®Áö';
+COMMENT ON COLUMN PAYMENT.PM_QUANTITY IS '¼ö·®';
+COMMENT ON COLUMN PAYMENT.PM_NOPEN IS 'ÀÌ¸§°ø°³¿©ºÎ';
+COMMENT ON COLUMN PAYMENT.PM_POPEN IS '±Ý¾×°ø°³¿©ºÎ';
+COMMENT ON COLUMN PAYMENT.PM_OPTION IS '¿É¼Ç¼±ÅÃ';
 
-COMMENT ON COLUMN PROJECT.P_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È£';
-COMMENT ON COLUMN PROJECT.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN PROJECT.P_TITLE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_CATEGORY IS 'Ä«ï¿½×°ï¿½';
-COMMENT ON COLUMN PROJECT.P_STORY IS 'ï¿½ï¿½ï¿½ä¸®';
-COMMENT ON COLUMN PROJECT.P_IMG IS 'ï¿½Ì¹ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_INFO IS 'ï¿½È³ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_NPRICE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½';
-COMMENT ON COLUMN PROJECT.P_TPRICE IS 'ï¿½ï¿½Ç¥ï¿½Ý¾ï¿½';
-COMMENT ON COLUMN PROJECT.P_SDATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_EDATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_SECONDARY IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_DDATE IS 'ï¿½ß¼ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_COUNT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_PERMISSION IS 'ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_PDATE IS 'Ã³ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT.P_RETURN IS 'ï¿½Ý·ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN PROJECT.P_NO IS 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+COMMENT ON COLUMN PROJECT.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN PROJECT.P_TITLE IS 'ÇÁ·ÎÁ§Æ®Á¦¸ñ';
+COMMENT ON COLUMN PROJECT.P_CATEGORY IS 'Ä«Å×°í¸®';
+COMMENT ON COLUMN PROJECT.P_STORY IS '½ºÅä¸®';
+COMMENT ON COLUMN PROJECT.P_IMG IS 'ÀÌ¹ÌÁö';
+COMMENT ON COLUMN PROJECT.P_INFO IS '¾È³»»çÇ×';
+COMMENT ON COLUMN PROJECT.P_NPRICE IS 'ÇöÀç¸ðÁý±Ý¾×';
+COMMENT ON COLUMN PROJECT.P_TPRICE IS '¸ñÇ¥±Ý¾×';
+COMMENT ON COLUMN PROJECT.P_SDATE IS '½ÃÀÛÀÏ';
+COMMENT ON COLUMN PROJECT.P_EDATE IS '¸¶°¨ÀÏ';
+COMMENT ON COLUMN PROJECT.P_SECONDARY IS 'Â÷¼ö';
+COMMENT ON COLUMN PROJECT.P_DDATE IS '¹ß¼ÛÀÏ';
+COMMENT ON COLUMN PROJECT.P_COUNT IS 'Á¶È¸¼ö';
+COMMENT ON COLUMN PROJECT.P_PERMISSION IS '½ÂÀÎ¿©ºÎ';
+COMMENT ON COLUMN PROJECT.P_PDATE IS 'Ã³¸®ÀÏ';
+COMMENT ON COLUMN PROJECT.P_RETURN IS '¹Ý·Á»çÀ¯';
 
-COMMENT ON COLUMN PROJECT_LIKE.P_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È£';
-COMMENT ON COLUMN PROJECT_LIKE.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN PROJECT_LIKE.PL_POST IS 'ï¿½Þ¸ï¿½';
-COMMENT ON COLUMN PROJECT_LIKE.PL_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN PROJECT_LIKE.P_NO IS 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+COMMENT ON COLUMN PROJECT_LIKE.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN PROJECT_LIKE.PL_POST IS '¸Þ¸ð';
+COMMENT ON COLUMN PROJECT_LIKE.PL_DATE IS 'µî·ÏÀÏ';
 
-COMMENT ON COLUMN PROJECT_NEWS.PN_NO IS 'ï¿½Û¹ï¿½È£';
-COMMENT ON COLUMN PROJECT_NEWS.P_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È£';
-COMMENT ON COLUMN PROJECT_NEWS.PN_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT_NEWS.PN_TEXT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT_NEWS.PN_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN PROJECT_NEWS.PN_COUNT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN PROJECT_NEWS.PN_NO IS '±Û¹øÈ£';
+COMMENT ON COLUMN PROJECT_NEWS.P_NO IS 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+COMMENT ON COLUMN PROJECT_NEWS.PN_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN PROJECT_NEWS.PN_TEXT IS 'º»¹®';
+COMMENT ON COLUMN PROJECT_NEWS.PN_DATE IS 'ÀÛ¼ºÀÏ';
+COMMENT ON COLUMN PROJECT_NEWS.PN_COUNT IS 'Á¶È¸¼ö';
 
-COMMENT ON COLUMN REVIEW.RV_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW.P_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW.RV_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN REVIEW.RV_TEXT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN REVIEW.RV_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN REVIEW.RV_GRADE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN REVIEW.RV_IMG IS 'ï¿½Ì¹ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN REVIEW.RV_NO IS '¸®ºä¹øÈ£';
+COMMENT ON COLUMN REVIEW.P_NO IS 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+COMMENT ON COLUMN REVIEW.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN REVIEW.RV_TITLE IS 'Á¦¸ñ';
+COMMENT ON COLUMN REVIEW.RV_TEXT IS 'º»¹®';
+COMMENT ON COLUMN REVIEW.RV_DATE IS 'ÀÛ¼ºÀÏ';
+COMMENT ON COLUMN REVIEW.RV_GRADE IS 'ÆòÁ¡';
+COMMENT ON COLUMN REVIEW.RV_IMG IS 'ÀÌ¹ÌÁö';
 
-COMMENT ON COLUMN REVIEW_LIKE.RV_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW_LIKE.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW_LIKE.RVL_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN REVIEW_LIKE.RV_NO IS '¸®ºä¹øÈ£';
+COMMENT ON COLUMN REVIEW_LIKE.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN REVIEW_LIKE.RVL_DATE IS 'µî·ÏÀÏ';
 
-COMMENT ON COLUMN REVIEW_REPLY.RV_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW_REPLY.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REVIEW_REPLY.RVR_TEXT IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN REVIEW_REPLY.RVR_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN REVIEW_REPLY.RV_NO IS '¸®ºä¹øÈ£';
+COMMENT ON COLUMN REVIEW_REPLY.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN REVIEW_REPLY.RVR_TEXT IS 'º»¹®';
+COMMENT ON COLUMN REVIEW_REPLY.RVR_DATE IS 'ÀÛ¼ºÀÏ';
 
-COMMENT ON COLUMN REWARD.R_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN REWARD.P_NO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½È£';
-COMMENT ON COLUMN REWARD.R_NAME IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN REWARD.R_DETAIL IS 'ï¿½ï¿½ï¿½ï¿½ï¿½å¼³ï¿½ï¿½';
-COMMENT ON COLUMN REWARD.R_PRICE IS 'ï¿½Ý¾ï¿½';
+COMMENT ON COLUMN REWARD.R_NO IS '¸®¿öµå¹øÈ£';
+COMMENT ON COLUMN REWARD.P_NO IS 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+COMMENT ON COLUMN REWARD.R_NAME IS '¸®¿öµå¸í';
+COMMENT ON COLUMN REWARD.R_DETAIL IS '¸®¿öµå¼³¸í';
+COMMENT ON COLUMN REWARD.R_PRICE IS '±Ý¾×';
 
-COMMENT ON COLUMN USERS.U_NO IS 'È¸ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN USERS.U_BNO IS 'ï¿½ï¿½ï¿½ï¿½Úµï¿½Ï¹ï¿½È£';
-COMMENT ON COLUMN USERS.U_ID IS 'ï¿½ï¿½ï¿½Ìµï¿½';
-COMMENT ON COLUMN USERS.U_NAME IS 'ï¿½Ì¸ï¿½';
-COMMENT ON COLUMN USERS.U_PW IS 'ï¿½ï¿½Ð¹ï¿½È£';
-COMMENT ON COLUMN USERS.U_JOIN_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN USERS.U_PHONE IS 'ï¿½ï¿½È­ï¿½ï¿½È£';
-COMMENT ON COLUMN USERS.U_PROFILE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ê»ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN USERS.U_INTRO IS 'ï¿½Ò°ï¿½';
-COMMENT ON COLUMN USERS.U_ADDRESS IS 'ï¿½Ö¼ï¿½';
-COMMENT ON COLUMN USERS.U_POST IS 'ï¿½ï¿½ï¿½ï¿½ï¿½È£';
-COMMENT ON COLUMN USERS.U_MILEAGE IS 'ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN USERS.U_BANK IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN USERS.U_BANK_ACCOUNT IS 'ï¿½ï¿½ï¿½Â¹ï¿½È£';
-COMMENT ON COLUMN USERS.U_HOMEPAGE IS 'È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN USERS.U_CATEGORY IS 'Ä«ï¿½×°ï¿½';
+COMMENT ON COLUMN USERS.U_NO IS 'È¸¿ø¹øÈ£';
+COMMENT ON COLUMN USERS.U_BNO IS '»ç¾÷ÀÚµî·Ï¹øÈ£';
+COMMENT ON COLUMN USERS.U_ID IS '¾ÆÀÌµð';
+COMMENT ON COLUMN USERS.U_NAME IS 'ÀÌ¸§';
+COMMENT ON COLUMN USERS.U_PW IS 'ºñ¹Ð¹øÈ£';
+COMMENT ON COLUMN USERS.U_JOIN_DATE IS '°¡ÀÔÀÏ';
+COMMENT ON COLUMN USERS.U_PHONE IS 'ÀüÈ­¹øÈ£';
+COMMENT ON COLUMN USERS.U_PROFILE IS 'ÇÁ·ÎÇÊ»çÁø';
+COMMENT ON COLUMN USERS.U_INTRO IS '¼Ò°³';
+COMMENT ON COLUMN USERS.U_ADDRESS IS 'ÁÖ¼Ò';
+COMMENT ON COLUMN USERS.U_POST IS '¿ìÆí¹øÈ£';
+COMMENT ON COLUMN USERS.U_MILEAGE IS '¸¶ÀÏ¸®Áö';
+COMMENT ON COLUMN USERS.U_BANK IS 'ÀºÇà';
+COMMENT ON COLUMN USERS.U_BANK_ACCOUNT IS '°èÁÂ¹øÈ£';
+COMMENT ON COLUMN USERS.U_HOMEPAGE IS 'È¨ÆäÀÌÁö';
+COMMENT ON COLUMN USERS.U_CATEGORY IS 'Ä«Å×°í¸®';
 
-COMMENT ON COLUMN VISIT.V_DATE IS 'ï¿½ï¿½ï¿½ï¿½';
-COMMENT ON COLUMN VISIT.V_VALUE IS 'ï¿½ï¿½';
+COMMENT ON COLUMN VISIT.V_DATE IS 'ÀÏÀÚ';
+COMMENT ON COLUMN VISIT.V_VALUE IS '°ª';
 
 
 CREATE SEQUENCE SEQ_U_PNO
@@ -371,7 +371,7 @@ INSERT INTO ADMIN
   VALUES (
     'C0000'|| TO_CHAR(SEQ_A_NO.nextval),
     'admin@rewardbook.com',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    '°­±ÍÁ¤',
     '1234',
     sysdate
   );
@@ -380,7 +380,7 @@ INSERT INTO ADMIN
   VALUES (
     'C0000'|| TO_CHAR(SEQ_A_NO.nextval),
     'admin2@rewardbook.com',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    '¿À¼¼ÁØ',
     '1234',
     sysdate
   );
@@ -389,7 +389,7 @@ INSERT INTO ADMIN
   VALUES (
     'C0000'|| TO_CHAR(SEQ_A_NO.nextval),
     'admin3@rewardbook.com',
-    'ï¿½Ì½ï¿½ï¿½ï¿½',
+    'ÀÌ½ÂÁø',
     '1234',
     sysdate
   );
@@ -398,7 +398,7 @@ INSERT INTO ADMIN
   VALUES (
     'C0000'|| TO_CHAR(SEQ_A_NO.nextval),
     'admin4@rewardbook.com',
-    'ï¿½Ö¼ï¿½ï¿½ï¿½',
+    'ÃÖ¼±Çý',
     '1234',
     sysdate
   );
@@ -407,7 +407,7 @@ INSERT INTO ADMIN
   VALUES (
     'C0000'|| TO_CHAR(SEQ_A_NO.nextval),
     'admin5@rewardbook.com',
-    'ï¿½Ö¿ï¿½ï¿½ï¿½',
+    'ÃÖ¿¬¿µ',
     '1234',
     sysdate
   );
@@ -415,10 +415,10 @@ INSERT INTO ADMIN
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ö¿ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö³ï¿½ï¿½ï¿½?',
-    'Å©ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Â°ï¿½ï¿½ï¿½. 
-    ï¿½×·ï¿½ï¿½Ùºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Å³ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï±âµµ ï¿½Õ´Ï´ï¿½. ï¿½Ì·ï¿½ ï¿½ÎºÐ¿ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ ï¿½Íµï¿½ï¿½î¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ä²ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ù¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÃÖ¿¬¿µ'),
+    '¹è¼ÛÀÌ Áö¿¬µÉ ¼öµµ ÀÖ³ª¿ä?',
+    'Å©¶ó¿ìµåÆÝµùÀ¸·Î ÁøÇàÇÏ´Â Á¦Ç°µéÀÇ °æ¿ì¿¡´Â ¾ç»êÀ» °ÅÄ¡Áö ¾ÊÀº ½ÃÁ¦Ç° Á¤µµÀÇ »óÅÂÀÎ °æ¿ì°¡ ¸¹ÀÌ ÀÖ½À´Ï´Ù. ¾ç»ê Àü ÆÝµùÀ» ÅëÇØ ÀÚ±ÝÀ» ¸ðÁýÇÏ¿© Á¦ÀÛÇÏ°í ¹è¼ÛÇÏ´Â ÇüÅÂ·Î ÁøÇàÀ» ÇÏ´Â°ÅÁÒ. 
+    ±×·¯´Ùº¸´Ï ½ÇÁ¦ ½ÃÁ¦Ç°°ú ¾ç»ê Á¦Ç°ÀÌ ´Ù¸£°Å³ª, Á¦ÀÛ °úÁ¤ Áß ¹®Á¦°¡ ¹ß»ýÇÏ´Â µî ¿¹»óÄ¡ ¸øÇÏ´Â »óÈ²ÀÌ ¹ß»ýÇÏ±âµµ ÇÕ´Ï´Ù. ÀÌ·± ºÎºÐ¿¡ ´ëÇØ¼­´Â ¿ÍµðÁî¿¡¼­µµ ÇÁ·ÎÁ§Æ® ¿ÀÇÂ Àü ²Ä²ÄÈ÷ È®ÀÎÇÏ±â À§ÇØ ³ë·ÂÇÏ°í ÀÖÀ¸³ª, ´Ù¾çÇÑ º¯¼öµé·Î Á¾Á¾ ¹è¼ÛÀÌ Áö¿¬µÉ ¼ö ÀÖ½À´Ï´Ù.',
     SYSDATE,
     'Y'
   );
@@ -426,9 +426,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ö¼ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ÃºÒ·Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É¾ï¿½Î´ï¿½ ï¿½ï¿½ï¿½ï¿½Ì´Ùºï¿½ï¿½ï¿½ ï¿½Ï½Ãºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ÒºÎ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÃÖ¼±Çý'),
+    '°áÁ¦´Â ÀÏ½ÃºÒ·Î¸¸ °¡´ÉÇÑ°¡¿ä?',
+    '¸®¿öµåºÏ¿¡¼­ ÆÝµùÇÏ½Ç ¶§¿¡´Â Ä«µåÁ¤º¸¸¦ ÀÔ·ÂÇÏ¿© °áÁ¦¿¹¾àÀ» °É¾îµÎ´Â ¹æ½ÄÀÌ´Ùº¸´Ï ÀÏ½ÃºÒ °áÁ¦¸¸ °¡´ÉÇÏ°í, ÇÒºÎ°áÁ¦´Â ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.',
     SYSDATE,
     'Y'
   );
@@ -436,9 +436,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ö¼ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É°ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½?',
-    'ï¿½Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¢ï¿½ï¿½ï¿½ï¿½ ï¿½î¿µï¿½Ç°ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÃÖ¼±Çý'),
+    '¸®¿öµå¸¦ Á÷Á¢ ¼ö·É°¡´ÉÇÑ°¡¿ä?',
+    'ÀÏ¹ÝÀûÀ¸·Î ÅÃ¹è¹è¼ÛÀ» ¿øÄ¢À¸·Î ¿î¿µµÇ°íÀÖ½À´Ï´Ù.',
     SYSDATE,
     'Y'
   );
@@ -446,9 +446,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='¿À¼¼ÁØ'),
+    '°áÁ¦´Â ¾ðÁ¦ µÇ³ª¿ä?',
+    'ÇÁ·ÎÁ§Æ®°¡ Á¾·áµÉ ¶§ °áÁ¦°¡ ÀÌ·ç¾îÁý´Ï´Ù.',
     SYSDATE,
     'Y'
   );
@@ -456,9 +456,9 @@ INSERT INTO FAQ
  INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ì½ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½È¯/È¯ï¿½ï¿½/ASï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ï³ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯/È¯ï¿½ï¿½/ASï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÀÌ½ÂÁø'),
+    '±³È¯/È¯ºÒ/AS´Â ¾îµð·Î ¹®ÀÇÇØ¾ßÇÏ³ª¿ä?',
+    'Á¦Ç° °ü·Ã ±³È¯/È¯ºÒ/ASÀº ¸ÞÀÌÄ¿¿¡°Ô ¹®ÀÇÇØÁÖ¼¼¿ä.',
     SYSDATE,
     'Y'
   );  
@@ -466,9 +466,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ ï¿½Ú±ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½Ï¼ï¿½ï¿½Ç¸ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç° ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½Ý¿ï¿½ï¿½Ï°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½Ýµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½Ç°/ï¿½ï¿½ï¿½ñ½º¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ¯Â¡ï¿½Ô´Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='°­±ÍÁ¤'),
+    '¸®¿öµå ÆÝµùÀÌ¶õ ¹«¾ùÀÎ°¡¿ä?',
+    '¸®¿öµåÇü ÆÝµùÀº ÀÚ±ÝÀÌ ÇÊ¿äÇÑ ¸ÞÀÌÄ¿°¡ ÆÝµùÀ» ÅëÇØ ÀÚ±ÝÀ» ¸ðÁýÇÏ¿© Á¦ÀÛÇÏ¸ç ¸®¿öµå°¡ ¿Ï¼ºµÇ¸é ÆÝµù¿¡ Âü¿©ÇÑ ¼­Æ÷ÅÍ¿¡°Ô Á¦°øÇÏ´Â ¹æ½ÄÀÔ´Ï´Ù. ¸ÞÀÌÄ¿´Â ÇÁ·ÎÁ§Æ® ÁøÇàÁß ¼­Æ÷ÅÍ¿¡°Ô ¹ÞÀº ÇÇµå¹éÀ» º¸»óÇ° Á¦ÀÛ¿¡ ¹Ý¿µÇÏ°Å³ª ÇÁ·ÎÁ§Æ® È«º¸¿¡ µµ¿òÀ» ÁØ ¼­Æ÷ÅÍµéÀ» À§ÇØ ÀÌº¥Æ®¸¦ ÁøÇàÇÏ´Â µî ÆÝµùÇÏ´Â ¼­Æ÷ÅÍ¿Í Á¦Ç°/¼­ºñ½º¸¦ ¸¸µå´Â ¸ÞÀÌÄ¿°£ÀÇ ±ä¹ÐÇÑ ¼ÒÅëÀÌ ÀÌ·ç¾îÁö´Â Á¡ÀÌ Æ¯Â¡ÀÔ´Ï´Ù.',
     SYSDATE,
     'N'
   );
@@ -476,9 +476,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ö¼ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï³ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÃÖ¼±Çý'),
+    '¿Ö °áÁ¦ ¿¹¾à ¹æ½ÄÀ» »ç¿ëÇÏ³ª¿ä?',
+    'ÇÁ·ÎÁ§Æ®°¡ ½ÇÆÐÇÑ °æ¿ì °áÁ¦°¡ ÀÌ·ç¾îÁöÁö ¾Ê½À´Ï´Ù.',
     SYSDATE,
     'Y'
   );
@@ -486,9 +486,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ö¿ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ç¥ ï¿½Ý¾ï¿½ï¿½ï¿½ 100% ï¿½Ì¸ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ç¥ ï¿½Ý¾ï¿½ï¿½ï¿½ 100% ï¿½Ì»ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÃÖ¿¬¿µ'),
+    'ÇÁ·ÎÁ§Æ® ¼º°ø/½ÇÆÐÀÇ ±âÁØÀº ¹«¾ùÀÎ°¡¿ä?',
+    '¸ðÁýµÈ ±Ý¾×ÀÌ ÇÁ·ÎÁ§Æ® ¸ñÇ¥ ±Ý¾×ÀÇ 100% ¹Ì¸¸ÀÌ¸é ½ÇÆÐ, ¸ðÁýµÈ ±Ý¾×ÀÌ ÇÁ·ÎÁ§Æ® ¸ñÇ¥ ±Ý¾×ÀÇ 100% ÀÌ»ó ´Þ¼ºÇÑ °æ¿ì ¼º°øÀÔ´Ï´Ù',
     SYSDATE,
     'Y'
   );
@@ -496,9 +496,9 @@ INSERT INTO FAQ
 INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½Ì½ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½Ò½ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å·Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½, ï¿½Ýµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ ï¿½Ðµé²² ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½Ì±âµµ ï¿½Õ´Ï´ï¿½. ',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ÀÌ½ÂÁø'),
+    '»õ¼Ò½ÄÀÌ¶õ ¹«¾ùÀÎ°¡¿ä?',
+    '»õ¼Ò½ÄÀº¼­Æ÷ÅÍ¿Í ¼ÒÅëÇÏ´Â Ã¢±¸ÀÌÀÚ ½Å·Ú¸¦ ¸¸µå´Â °ø°£ÀÏ »Ó ¾Æ´Ï¶ó, ÆÝµù°ú ÁöÁö¼­¸í¿¡ Âü¿©ÇØÁÖ½Å ºÐµé²² ÀÌ¸ÞÀÏ·Î ¾Ë¸²ÀÌ °¡±â ¶§¹®¿¡ ¸ÞÀÌÄ¿´ÔÀÇ ¿­Á¤°ú ¼ºÀÇ¸¦ º¸¿©ÁÙ ¼ö ÀÖ´Â ±â´ÉÀÌ±âµµ ÇÕ´Ï´Ù. ',
     SYSDATE,
     'N'
   );
@@ -506,9 +506,9 @@ INSERT INTO FAQ
  INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_FAQ_NO.nextval),
-    (SELECT A_NO FROM ADMIN WHERE A_NAME ='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?',
-    'ï¿½ï¿½Å·Å¸ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ 9ï¿½ï¿½~6ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï°¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½Å·Å¸ï¿½ï¿½ ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½å¸³ï¿½Ï´ï¿½.',
+    (SELECT A_NO FROM ADMIN WHERE A_NAME ='¿À¼¼ÁØ'),
+    'ÇÁ·ÎÁ§Æ®´Â ¾ðÁ¦ ¿ÀÇÂÇÏ´Â °Ô Á¦ÀÏ ÁÁÀº°¡¿ä?',
+    '¿öÅ·Å¸ÀÓ (ÆòÀÏ 9½Ã~6½Ã)¿¡ Á¢¼ÓÀÚ°¡ ¸¹Àº ÆíÀÌ¸ç È¤½Ã ¿ÀÇÂ ÈÄ¿¡ ¹ß»ýÇÒ ¼ö ÀÖ´Â ¹®Á¦¿¡ ¸®¿öµåºÏ¿¡¼­ Áï°¢ÀûÀ¸·Î ´ëÀÀÇÒ ¼ö ÀÖµµ·Ï ¿öÅ·Å¸ÀÓ Áß¿¡ ¿ÀÇÂÇÏ½Ã´Â °ÍÀ» ±ÇÀåµå¸³´Ï´Ù.',
     SYSDATE,
     'N'
   ); 
@@ -516,150 +516,150 @@ INSERT INTO FAQ
  
  
  
- INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+ INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --°³ÀÎÈ¸¿ø
   VALUES (
     'A0000'|| TO_CHAR(SEQ_U_PNO.nextval),
     'kimjy@gmail.com',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    '±èÁö¿¬',
     '1234__@@rsb',
     sysdate,
     '010-7644-0834',
-    'ï¿½È³ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½Ý°ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½Ö°ß¿ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½!',
+    '¾È³çÇÏ¼¼¿ä ¹Ý°©½À´Ï´Ù. ¾Ö°ß¿ëÇ°¿¡ °ü½ÉÀÌ ¸¹¾Æ¿ä!',
     0
   ); 
   
-   INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --°³ÀÎÈ¸¿ø
   VALUES (
     'A0000'|| TO_CHAR(SEQ_U_PNO.nextval),
     'sangwanpark@naver.com',
-    'ï¿½Ú»ï¿½ï¿½',
+    '¹Ú»ó¿Ï',
     'psw00_!',
     sysdate,
     '010-5097-1268',
-    'ï¿½È³ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½ßºï¿½Å¹ï¿½å¸³ï¿½Ï´ï¿½.',
+    '¾È³çÇÏ¼¼¿ä ÀßºÎÅ¹µå¸³´Ï´Ù.',
     2300
   ); 
   
-  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE,  U_INTRO, U_ADDRESS, U_POST, U_BANK, U_BANK_ACCOUNT,U_MILEAGE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE,  U_INTRO, U_ADDRESS, U_POST, U_BANK, U_BANK_ACCOUNT,U_MILEAGE)  --°³ÀÎÈ¸¿ø
   VALUES (
     'A0000'|| TO_CHAR(SEQ_U_PNO.nextval),
     'jinjoooo@naver.com',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    '°­ÁøÁÖ',
     '94_kang!!',
     sysdate,
     '010-3301-4599',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.',
-    'ï¿½ï¿½âµµ ï¿½ï¿½Ãµï¿½ï¿½ ï¿½Ò»ç±¸ ï¿½Û³ï¿½ï¿½ï¿½ 402-1ï¿½ï¿½ï¿½ï¿½ 303È£',
+    '°­ÁøÁÖÀÔ´Ï´Ù.',
+    '°æ±âµµ ºÎÃµ½Ã ¼Ò»ç±¸ ¼Û³»µ¿ 402-1¹øÁö 303È£',
     '11407',
-    'ï¿½Ï³ï¿½',
+    'ÇÏ³ª',
     '302-9923-331-01',
     0
   );
   
-  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --°³ÀÎÈ¸¿ø
   VALUES (
     'A0000'|| TO_CHAR(SEQ_U_PNO.nextval),
     'kimdooo11@naver.com',
-    'ï¿½èµµï¿½ï¿½',
+    '±èµµ¿¬',
     'doyeon1@@0809',
     sysdate,
     '010-5202-9633',
-    'ï¿½ï¿½Ç»ï¿½Í¿ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',
+    'ÄÄÇ»ÅÍ¿ëÇ°¿¡ °ü½ÉÀÌ ¸¹½À´Ï´Ù.',
     100
   ); 
  
    
-  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_MILEAGE)  --°³ÀÎÈ¸¿ø
   VALUES (
     'A0000'|| TO_CHAR(SEQ_U_PNO.nextval),
     'jiwwwoo@gmail.com',
-    'È²ï¿½ï¿½ï¿½ï¿½',
+    'È²Áö¿ì',
     'jwh_##3399',
     sysdate,
     '010-8685-0102',
-    'ï¿½Ú±ï¿½Ò°ï¿½',
+    'ÀÚ±â¼Ò°³',
     1380
   );
   
-  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE,  U_INTRO, U_ADDRESS, U_POST, U_BANK, U_BANK_ACCOUNT,U_MILEAGE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE,  U_INTRO, U_ADDRESS, U_POST, U_BANK, U_BANK_ACCOUNT,U_MILEAGE)  --°³ÀÎÈ¸¿ø
   VALUES (
     'A0000'|| TO_CHAR(SEQ_U_PNO.nextval),
     'jangsyyy@daum.net',
-    'ï¿½å¼­ï¿½ï¿½',
+    'Àå¼­¿µ',
     '9292__kcgood!@',
     sysdate,
     '010-2202-5619',
-    'ï¿½Ý°ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ßºï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½.',
-    'ï¿½ï¿½ï¿½ï¿½Æ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ïµ¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2F',
+    '¹Ý°©½À´Ï´Ù. ÀßºÎÅ¹µå·Á¿ä.',
+    '¼­¿ïÆ¯º°½Ã ¿ª»ïµ¿ ³²µµºôµù 2F',
     '100382',
-    'ï¿½ï¿½ï¿½ï¿½',
+    '±¹¹Î',
     '110-402-744292',
     0
   );  
   
-  INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_ADDRESS, U_POST, U_HOMEPAGE, U_CATEGORY) --ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_ADDRESS, U_POST, U_HOMEPAGE, U_CATEGORY) --±â¾÷È¸¿ø
   VALUES(
     'B0000'|| TO_CHAR(SEQ_U_CNO.nextval),
     '243-85-00787',
     'michyeora@naver.com',
-    'ï¿½ï¿½ï¿½ï¿½Å©ï¿½Î½ï¿½',
+    'À§µåÅ©·Î½º',
     'micheya5501!!',
     sysdate,
     '1666-3166',
-    'ï¿½ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ä¶ï¿½',
-    'ï¿½ï¿½âµµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1-50 ï¿½ì¸®ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å©ï¿½Î½ï¿½',
+    '¿¹»Û¿©¼ºÀÇ·ù¸¸À» °íÁýÇÏ´Â ¹ÌÃÄ¶ó',
+    '°æ±âµµ ±ºÆ÷½Ã ±ÝÁ¤µ¿ 1-50 ¿ì¸®ºôµù 5Ãþ À§µåÅ©·Î½º',
     '12088',
     'https://www.michyeora.com',
-    'ï¿½Ç·ï¿½'
+    'ÀÇ·ù'
   );
   
-    INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_ADDRESS, U_POST, U_HOMEPAGE, U_CATEGORY) --ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+    INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_ADDRESS, U_POST, U_HOMEPAGE, U_CATEGORY) --±â¾÷È¸¿ø
   VALUES(
     'B0000'|| TO_CHAR(SEQ_U_CNO.nextval),
     '201-86-40287',
     'sappun@naver.com',
-    'ï¿½Ö½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½',
+    'ÁÖ½ÄÈ¸»ç »ç»Ó',
     'micheya5501!!',
     '2019/01/22',
     '1544-2767',
-    'ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, SAPPUN',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1262-211ï¿½ï¿½ï¿½ï¿½',
+    '»ç»ÓÇÏ°Ô, SAPPUN',
+    '¼­¿ï½Ã ¼ººÏ±¸ ±æÀ½µ¿ 1262-211¹øÁö',
     '12088',
     'http://www.sappun.co.kr',
-    'ï¿½Å¹ï¿½'
+    '½Å¹ß'
   );
   
-  INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_CATEGORY) --ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_CATEGORY) --±â¾÷È¸¿ø
   VALUES(
     'B0000'|| TO_CHAR(SEQ_U_CNO.nextval),
     '606-86-47092',
     'good1212@gmail.com',
-    'ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½È¸ï¿½ï¿½',
+    'º£½ºÆ®À§Áî ÁÖ½ÄÈ¸»ç',
     'healthgood12!!',
     '2019/05/11',
     '010-4789-0504',
-    'ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ï¿½ï¿½',
-    'ï¿½Ç°ï¿½'
+    '°Ç°­À» À§ÇÑ °Ç°­¸ô',
+    '°Ç°­'
   );
   
-  INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_CATEGORY) --ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO USERS(U_NO, U_BNO, U_ID, U_NAME, U_PW, U_JOIN_DATE, U_PHONE, U_INTRO, U_CATEGORY) --±â¾÷È¸¿ø
   VALUES(
     'B0000'|| TO_CHAR(SEQ_U_CNO.nextval),
     '105-88-04158',
     'zoomhaven@daum.net',
-    'ï¿½ï¿½ï¿½Ø¼ï¿½',
+    '¼ö¾Ø¼ö',
     '@soosoo1001@',
     '2019/07/30',
     '02-334-3332',
-    'ï¿½ï¿½Å¸ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½! ï¿½ï¿½ï¿½Ø¼ï¿½',
-    'ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½'
+    '½ºÅ¸ÀÏ¿¡ Ä÷¸®Æ¼¸¦ ´õÇÏ´Ù! ¼ö¾Ø¼ö',
+    '¾Ç¼¼¼­¸®'
   ); 
   
   INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '±èÁö¿¬'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '¹Ú»ó¿Ï'),
     sysdate
     
   );
@@ -667,8 +667,8 @@ INSERT INTO FAQ
   INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½èµµï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '°­ÁøÁÖ'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '±èµµ¿¬'),
     sysdate
     
   );
@@ -676,8 +676,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½èµµï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '±èµµ¿¬'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '°­ÁøÁÖ'),
     sysdate
     
   );
@@ -685,8 +685,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'È²ï¿½ï¿½ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½å¼­ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = 'È²Áö¿ì'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = 'Àå¼­¿µ'),
     sysdate
     
   );
@@ -694,8 +694,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'È²ï¿½ï¿½ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '±èÁö¿¬'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = 'È²Áö¿ì'),
     sysdate
     
   );
@@ -703,8 +703,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '¹Ú»ó¿Ï'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '°­ÁøÁÖ'),
     sysdate
     
   );
@@ -712,8 +712,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½ï¿½ï¿½ï¿½Å©ï¿½Î½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '°­ÁøÁÖ'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = 'À§µåÅ©·Î½º'),
     sysdate
     
   );
@@ -721,8 +721,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½å¼­ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = 'Àå¼­¿µ'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '¹Ú»ó¿Ï'),
     sysdate
     
   );
@@ -730,8 +730,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½ï¿½ï¿½Ø¼ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = '¹Ú»ó¿Ï'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '¼ö¾Ø¼ö'),
     sysdate
     
   );
@@ -739,8 +739,8 @@ INSERT INTO FAQ
     INSERT INTO FOLLOW
   VALUES(
   
-    (SELECT U_NO FROM USERS where U_NAME = 'ï¿½å¼­ï¿½ï¿½'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS where U_NAME = 'Àå¼­¿µ'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '°­ÁøÁÖ'),
     sysdate
     
   );
@@ -750,144 +750,144 @@ INSERT INTO FAQ
   INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ö¿ï¿½ï¿½ï¿½')
+    '°øÁö»çÇ× Å×½ºÆ®±Û', --Á¦¸ñ
+    '°øÁö»çÇ× Å×½ºÆ®±ÛÀÔ´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÃÖ¿¬¿µ')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×±ï¿½ï¿½Ô´Ï´ï¿½..', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'N',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
+    '°øÁö»çÇ×À» È®ÀÎÇØÁÖ¼¼¿ä.', --Á¦¸ñ
+    '°øÁö»çÇ×±ÛÀÔ´Ï´Ù..', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'N',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = '°­±ÍÁ¤')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 7ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½È³ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 7ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½È³ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    '2019/07/01',  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'N',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ö¼ï¿½ï¿½ï¿½')
+    '¸®¿öµåºÏ 7¿ù ÀÌº¥Æ® ¾È³»', --Á¦¸ñ
+    '¸®¿öµåºÏ 7¿ù ÀÌº¥Æ® ¾È³» ±ÛÀÔ´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    '2019/07/01',  --µî·ÏÀÏ
+    'N',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÃÖ¼±Çý')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 8ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½È³ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 8ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½È³ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'EVENT', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ö¿ï¿½ï¿½ï¿½')
+    '¸®¿öµåºÏ 8¿ù ÀÌº¥Æ® ¾È³»', --Á¦¸ñ
+    '¸®¿öµåºÏ 8¿ù ÀÌº¥Æ® ¾È³» ±ÛÀÔ´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'EVENT', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÃÖ¿¬¿µ')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
+    '°øÁö»çÇ×ÀÌ ÀúÀåµÇ´Â Å×½ºÆ®±ÛÀÔ´Ï´Ù.', --Á¦¸ñ
+    '°øÁö»çÇ× Å×½ºÆ®±ÛÀÔ´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = '¿À¼¼ÁØ')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½Ï¸ï¿½ ï¿½ß¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½Ï¸ï¿½ ï¿½ß¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½!', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'EVENT', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
+    'Áö±Ý ÆÝµùÇÏ¸é Ãß¼® Àü ¹è¼Û', --Á¦¸ñ
+    'Áö±Ý ÆÝµùÇÏ¸é Ãß¼® Àü ¹è¼Û!', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'EVENT', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = '¿À¼¼ÁØ')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½..', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ì½ï¿½ï¿½ï¿½')
+    'Ãß¼®¿¬ÈÞ ÆÝµù¿ÀÇÂÇÒ ¸ÞÀÌÄ¿¸¦ ¸ðÁýÇÕ´Ï´Ù.', --Á¦¸ñ
+    'Ãß¼®¿¬ÈÞ ÆÝµù¿ÀÇÂÇÒ ¸ÞÀÌÄ¿¸¦ ¸ðÁýÇÕ´Ï´Ù..', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÀÌ½ÂÁø')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½Ýµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½Ö±ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ê°ï¿½ ï¿½ß°ßµÇ°ï¿½ ï¿½Ö¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¸³ï¿½Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ö¿ï¿½ï¿½ï¿½')
+    '¸ÞÀÌÄ¿ÀÇ ÆÝµù Á¶ÀÛ ÇàÀ§ °ü·Ã °øÁö', --Á¦¸ñ
+    'ÃÖ±Ù ÀüÃ¼ ÇÁ·ÎÁ§Æ® ´ëºñ ¾ÆÁÖ ÀûÀº ºñÀ²ÀÌÁö¸¸ ÇÁ·ÎÁ§Æ® ÁøÇà Áß ÀÏºÎ ¸ÞÀÌÄ¿ ¹× °ü°èÀÚ°¡ Á÷Á¢ ÆÝµù¿¡ Âü¿©ÇÏ¿© ÆÝµù¾×À» ³ôÀÎ ÈÄ °íÀÇÀûÀ¸·Î °áÁ¦ ½ÇÆÐ Ã³¸®ÇÏ´Â »ç·Ê°¡ ¹ß°ßµÇ°í ÀÖ¾î °øÁöµå¸³´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÃÖ¿¬¿µ')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ö¿ï¿½ï¿½ï¿½')
+    '°øÁö»çÇ× Å×½ºÆ®±Û', --Á¦¸ñ
+    '°øÁö»çÇ× Å×½ºÆ®±ÛÀÔ´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÃÖ¿¬¿µ')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ ï¿½ï¿½Å¹ï¿½å¸³ï¿½Ï´ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½Ö¼ï¿½ï¿½ï¿½')
+    '¸ÞÀÎ °³Æí', --Á¦¸ñ
+    '¸ÞÀÎÀÌ °³ÆíµÇ¾ú½À´Ï´Ù. ¸¹Àº ÀÌ¿ë ºÎÅ¹µå¸³´Ï´Ù.', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = 'ÃÖ¼±Çý')
   );
   
     INSERT INTO NOTICE
   VALUES(
     TO_CHAR(SEQ_NT_NO.nextval),
-    'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½', --ï¿½ï¿½ï¿½ï¿½
-    'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½.', --ï¿½ï¿½ï¿½ï¿½
-    NULL, --ï¿½Ì¹ï¿½ï¿½ï¿½
-    SYSDATE,  --ï¿½ï¿½ï¿½ï¿½ï¿½
-    'Y',   --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    'NOTICE', --Å¸ï¿½ï¿½
-    (SELECT A_NO FROM ADMIN where A_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
+    '¾à°ü °³Á¤ ¾È³»', --Á¦¸ñ
+    '¾à°ü °³Á¤ ¾È³».', --º»¹®
+    NULL, --ÀÌ¹ÌÁö
+    SYSDATE,  --µî·ÏÀÏ
+    'Y',   --°ø°³¿©ºÎ
+    'NOTICE', --Å¸ÀÔ
+    (SELECT A_NO FROM ADMIN where A_NAME = '¿À¼¼ÁØ')
   );
   
   INSERT INTO PROJECT
   VALUES(
    TO_CHAR(SEQ_P_NO.nextval),
-  (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½Ø¼ï¿½'),
-  'ï¿½ï¿½ï¿½ï¿½ ï¿½ç°¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½! Åºï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½ï¿½Æ®',
-  'ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½',
-  'ï¿½ï¿½ï¿½ï¿½ ï¿½ç°¢ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Åºï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½, ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Â¾î³­ ï¿½Þ°ï¿½ ï¿½Â´ï¿½ Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´Ï´ï¿½.',
+  (SELECT U_NO FROM USERS where U_NAME = '¼ö¾Ø¼ö'),
+  'ÀÛÀº »ç°¢ °ø°£ ¼Ó ºû³ª´Â ³Ê¸¦ À§ÇÑ ¼Ò¸Á! Åº»ý¼® ÁÖ¾ó¸® ¼¼Æ®',
+  '¾Ç¼¼¼­¸®',
+  'ÀÛÀº »ç°¢Çü ¼Ó ¼Ò¸ÁÀ» ´ãÀº Åº»ý¼® ÁÖ¾ó¸®, ÀÚ½ÅÀÇ ÅÂ¾î³­ ´Þ°ú ¸Â´Â Åº»ý¼®À» Âø¿ëÇÏ°í ÀÖÀ¸¸é °Ç°­°ú Çà¿îÀ» º¸¼®ÀÌ °¡Á®´ÙÁÝ´Ï´Ù.',
   NULL,
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ 2019.10.30 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½Ýµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Å³ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.',
+  '¸®¿öµå ¹ß¼ÛÀÌ 2019.10.30 ±îÁö Áö¿¬µÉ ¼ö ÀÖ½À´Ï´Ù. ÆÝµù ¹ÞÀº ÈÄ, ¸®¿öµå¸¦ Á¦ÀÛÇÒ ¼ö ÀÖ´Â Å©¶ó¿ìµåÆÝµùÀÇ Æ¯¼º°ú »ý»ê °úÁ¤¿¡¼­ÀÇ ¿¹»óÄ¡ ¸øÇÑ »óÈ²À¸·Î ÀÎÇÏ¿© ¸®¿öµå ¹ß¼ÛÀÌ Áö¿¬µÇ°Å³ª ¹ß¼ÛÀÌ ºÒ°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.',
   0,
   1000000,
   SYSDATE,
@@ -903,12 +903,12 @@ INSERT INTO FAQ
   INSERT INTO PROJECT
   VALUES(
    TO_CHAR(SEQ_P_NO.nextval),
-  (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½D ï¿½Ö·ï¿½ï¿½ - ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ì½º',
+  (SELECT U_NO FROM USERS where U_NAME = '±èÁö¿¬'),
+  '°£ÆíÇÑ ºñÅ¸¹ÎD ¼Ö·ç¼Ç - ºñÅ¸¸¶¿ì½º',
   'IT',
-  'ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Ï»ï¿½ ï¿½ï¿½È°ï¿½ï¿½ Å« ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½Dï¿½ï¿½ ï¿½Õ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½×¸ï¿½ï¿½ï¿½, ï¿½ï¿½Ä§ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ðµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ï»ï¿½ï¿½È°ï¿½ï¿½ Å« ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½Dï¿½ï¿½ ï¿½Õ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½Ç»ï¿½Í·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã´Ù¸ï¿½, ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½Ýµï¿½ ï¿½ï¿½Å¸ï¿½ï¿½Dï¿½ï¿½ ï¿½Õ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½å¸®ï¿½ï¿½, ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ò°ï¿½ï¿½Õ´Ï´ï¿½.',
+  '±×·¡¼­ ÀúÈñ´Â °í¹ÎÀ» ½ÃÀÛÇß½À´Ï´Ù. ¾ÈÀüÇÏ°Ô, °£ÆíÇÏ°Ô, ±×¸®°í ÀÏ»ó »ýÈ°ÀÇ Å« º¯È­ ¾øÀÌ ºñÅ¸¹ÎD¸¦ ÇÕ¼ºÇÒ ¼ö´Â ¾øÀ»±î? ±×¸®°í, ¸¶Ä§³» ¸ðµç ºÐµéÀÌ ¾ÈÀüÇÏ°í °£ÆíÇÏ¸ç ÀÏ»ó»ýÈ°¿¡ Å« º¯È­ ¾øÀÌ ºñÅ¸¹ÎD¸¦ ÇÕ¼ºÇÒ ¼ö ÀÖ´Â ¸¶¿ì½º¸¦ ¸¸µé°Ô µÇ¾ú½À´Ï´Ù. ÄÄÇ»ÅÍ·Î ÀÌ ±ÛÀ» º¸°í °è½Ã´Ù¸é, ¹Ù·Î Áö±Ýµµ ºñÅ¸¹ÎD¸¦ ÇÕ¼ºÇÒ ¼ö ÀÖ°Ô ¸¸µé¾î µå¸®´Â, ºñÅ¸¸¶¿ì½º¸¦ ¼Ò°³ÇÕ´Ï´Ù.',
   NULL,
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ 2019.10.30 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½Ýµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Å³ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.',
+  '¸®¿öµå ¹ß¼ÛÀÌ 2019.10.30 ±îÁö Áö¿¬µÉ ¼ö ÀÖ½À´Ï´Ù. ÆÝµù ¹ÞÀº ÈÄ, ¸®¿öµå¸¦ Á¦ÀÛÇÒ ¼ö ÀÖ´Â Å©¶ó¿ìµåÆÝµùÀÇ Æ¯¼º°ú »ý»ê °úÁ¤¿¡¼­ÀÇ ¿¹»óÄ¡ ¸øÇÑ »óÈ²À¸·Î ÀÎÇÏ¿© ¸®¿öµå ¹ß¼ÛÀÌ Áö¿¬µÇ°Å³ª ¹ß¼ÛÀÌ ºÒ°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.',
   1900000,
   2000000,
   SYSDATE,
@@ -924,12 +924,12 @@ INSERT INTO FAQ
    INSERT INTO PROJECT
   VALUES(
    TO_CHAR(SEQ_P_NO.nextval),
-  (SELECT U_NO FROM USERS where U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
-  'ï¿½ï¿½ 1ï¿½Ð¸ï¿½ï¿½ï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½! ï¿½ï¿½Å¸ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ ï¿½Ú¿Ü¼ï¿½ ï¿½ï¿½Õ±ï¿½',
+  (SELECT U_NO FROM USERS where U_NAME = '¹Ú»ó¿Ï'),
+  '´Ü 1ºÐ¸¸¿¡ ¿Ïº® »ì±Õ! ½ºÅ¸ÀÏ¸®½¬ÇÑ ÈÞ´ë¿ë ÀÚ¿Ü¼± »ì±Õ±â',
   'IT',
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 1ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½Ä¡ ï¿½Ê¾Æ¿ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ ï¿½ï¿½ï¿½â¼¼ï¿½ï¿½.',
+  '²¨³»°í, ´©¸£°í, 1ºÐ. º¹ÀâÇÑ »ì±Õ ¹æ¹ýÀº ÇÊ¿äÄ¡ ¾Ê¾Æ¿ä. °¡Àå Á÷°üÀûÀ¸·Î ¼³°èµÈ À¯ºñÅ©¸®. ÇÑ ¹øÀÇ Å¬¸¯À¸·Î ±ú²ýÇÔ¸¸ ³²±â¼¼¿ä.',
   NULL,
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ 2019.11.03 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.',
+  '¸®¿öµå ¹ß¼ÛÀÌ 2019.11.03 ±îÁö Áö¿¬µÉ ¼ö ÀÖ½À´Ï´Ù.',
   1000000,
   3500000,
   SYSDATE,
@@ -945,12 +945,12 @@ INSERT INTO FAQ
    INSERT INTO PROJECT
   VALUES(
    TO_CHAR(SEQ_P_NO.nextval),
-  (SELECT U_NO FROM USERS where U_NAME = 'ï¿½èµµï¿½ï¿½'),
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ¸ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ OFMï¿½Ê·ï¿½ï¿½ï¿½Æ®',
+  (SELECT U_NO FROM USERS where U_NAME = '±èµµ¿¬'),
+  '´ç½ÅÀÇ ¼ÒÁßÇÑ ¼Õ¸ñÀ» º¸È£ÇØÁÙ OFMÆÊ·¹½ºÆ®',
   'IT',
-  'ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Âµï¿½ ï¿½Õ¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½. Å°ï¿½ï¿½ï¿½åµµ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ OFM ï¿½Ê·ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½Äµå¸±ï¿½ï¿½ï¿½ï¿½.',
+  '°ñÄ¡µµ ¾ÆÇÂµ¥ ¼Õ¸ñ±îÁö ¾ÆÇÁÁö ¾Êµµ·Ï. Å°º¸µåµµ ¸¶¿ì½ºµµ OFM ÆÊ·¹½ºÆ®°¡ ¹ÞÃÄµå¸±²²¿ä.',
   NULL,
-  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ 2019.01.09 / 2019.01.19 / 2019.01.30 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.',
+  '¸®¿öµå ¹ß¼ÛÀÌ 2019.01.09 / 2019.01.19 / 2019.01.30 ±îÁö Áö¿¬µÉ ¼ö ÀÖ½À´Ï´Ù.',
   1000000,
   3500000,
   SYSDATE,
@@ -966,12 +966,12 @@ INSERT INTO FAQ
    INSERT INTO PROJECT
   VALUES(
    TO_CHAR(SEQ_P_NO.nextval),
-  (SELECT U_NO FROM USERS where U_NAME = 'ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½È¸ï¿½ï¿½'),
-  'ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¾îµµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½! [ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½Ï¹ï¿½ï¿½ï¿½]',
-  'ï¿½Ç·ï¿½',
-  'ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½×´ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½! 40ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ì¸¦ ï¿½ï¿½Æ³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº».  ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½',
+  (SELECT U_NO FROM USERS where U_NAME = 'º£½ºÆ®À§Áî ÁÖ½ÄÈ¸»ç'),
+  '´©°¡ ÀÔ¾îµµ ½ÇÆÐÇÏÁö ¾Ê´Â ÃÖ»óÀÇ ¶óÀÌ´õÀÚÄÏ! [½½·Î¿ìÀ¯´Ï¹ö½º]',
+  'ÀÇ·ù',
+  '»ó»óÇß´ø ±× ÇÍ ±×´ë·Î, ½ÇÆÐÇÏÁö ¾ÊÀ» ÃÖ»óÀÇ ¶óÀÌ´õÀÚÄÏ! 40³â °æ·ÂÀÇ ·¹´õ¸¶½ºÅÍÀÇ ³ëÇÏ¿ì¸¦ ´ã¾Æ³½ °¡Á×ÀÚÄÏÀÇ ±âº».  ½½·Î¿ìÀ¯´Ï¹ö½ºÀÇ Å¬·¡½Ä+¿À¹öÇÍ ¶óÀÌ´õÀÚÄÏ',
   NULL,
-  'ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ 9ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.',
+  '¸®¿öµå°¡ 9¿ù ÃÊ ¿ÀÇÂ¿¹Á¤ÀÔ´Ï´Ù.',
   0,
   5000000,
   SYSDATE,
@@ -987,36 +987,36 @@ INSERT INTO FAQ
   INSERT INTO PROJECT_LIKE(P_NO, U_NO, PL_DATE)
   VALUES(
     (SELECT P_NO FROM PROJECT WHERE P_NO = '1'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '¹Ú»ó¿Ï'),
     SYSDATE
   );
 
   INSERT INTO PROJECT_LIKE(P_NO, U_NO, PL_DATE)
   VALUES(
     (SELECT P_NO FROM PROJECT WHERE P_NO = '1'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½èµµï¿½ï¿½'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '±èµµ¿¬'),
     SYSDATE
   );
   
     INSERT INTO PROJECT_LIKE(P_NO, U_NO, PL_DATE)
   VALUES(
     (SELECT P_NO FROM PROJECT WHERE P_NO = '4'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'È²ï¿½ï¿½ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = 'È²Áö¿ì'),
     SYSDATE
   );
   
     INSERT INTO PROJECT_LIKE(P_NO, U_NO, PL_DATE)
   VALUES(
     (SELECT P_NO FROM PROJECT WHERE P_NO = '4'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+    (SELECT U_NO FROM USERS WHERE U_NAME = '°­ÁøÁÖ'),
     SYSDATE
   );
   
     INSERT INTO PROJECT_LIKE
   VALUES(
     (SELECT P_NO FROM PROJECT WHERE P_NO = '5'),
-    (SELECT U_NO FROM USERS WHERE U_NAME = 'ï¿½Ú»ï¿½ï¿½'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½Ö¿ï¿½ ï¿½Ä¿ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½!',
+    (SELECT U_NO FROM USERS WHERE U_NAME = '¹Ú»ó¿Ï'),
+    '´ÙÀ½ÁÖ¿¡ ÈÄ¿øÇÒ¿¹Á¤!',
     SYSDATE
   );
   COMMIT;
@@ -1025,8 +1025,8 @@ INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_PN_NO.nextval),
     (SELECT P_NO FROM PROJECT WHERE P_NO = '1'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½Ô´Ï´ï¿½.',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½! ï¿½ï¿½ï¿½ï¿½ï¿½ÍºÐµï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½!',
+    'ÇÁ·ÎÁ§Æ® »õ¼Ò½Ä ÀÔ´Ï´Ù.',
+    '¸¶°¨ÀÓ¹Ú! ¼­Æ÷ÅÍºÐµé, Á¤¸» °¨»çÇÕ´Ï´Ù!',
     SYSDATE,
     0
   );
@@ -1035,8 +1035,8 @@ INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_PN_NO.nextval),
     (SELECT P_NO FROM PROJECT WHERE P_NO = '1'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ÍºÐµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½! ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.',
+    '¸¶°¨µÇ¾ú½À´Ï´Ù.',
+    '¼­Æ÷ÅÍºÐµéÀÇ ¼º¿ø¿¡ ÈûÀÔ¾î ¸¶°¨µÇ¾ú½À´Ï´Ù! °¨»çÇÕ´Ï´Ù.',
     SYSDATE,
     0
   ); 
@@ -1045,8 +1045,8 @@ INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_PN_NO.nextval),
     (SELECT P_NO FROM PROJECT WHERE P_NO = '4'),
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ï¿½È³ï¿½',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ÍºÐµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 100ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·È½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.',
+    '¸®¿öµå ¼ö·®Ãß°¡¾È³»',
+    '¼­Æ÷ÅÍºÐµéÀÇ ¼º¿ø¿¡ ÈûÀÔ¾î ¸®¿öµå ¼ö·®À» 100°³ ´õ ´Ã·È½À´Ï´Ù. °¨»çÇÕ´Ï´Ù.',
     SYSDATE,
     0
   ); 
@@ -1056,8 +1056,8 @@ INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_PN_NO.nextval),
     (SELECT P_NO FROM PROJECT WHERE P_NO = '5'),
-    'ï¿½ï¿½ï¿½Æ¿ï¿½ 100ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Â¦ ï¿½Ìºï¿½Æ® ï¿½ï¿½Ã·ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½Ô´Ï´ï¿½.',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ÍºÐµé²² Å« ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½, ï¿½ï¿½Â¦ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',
+    'ÁÁ¾Æ¿ä 100°³ ±â³ä ±ôÂ¦ ÀÌº¥Æ® ´çÃ·ÀÚ ¹ßÇ¥ÀÔ´Ï´Ù.',
+    '¼­Æ÷ÅÍºÐµé²² Å« »ç¶ûÀ» ¹Þ¾Æ¼­ °¨»çÇÑ ¸¶À½À» ÀüÇÏ°íÀÚ, ±ôÂ¦ ÀÌº¥Æ®¸¦ ¿­¾ú½À´Ï´Ù.',
     SYSDATE,
     0
   );
@@ -1066,67 +1066,67 @@ INSERT INTO FAQ
   VALUES(
     TO_CHAR(SEQ_PN_NO.nextval),
     (SELECT P_NO FROM PROJECT WHERE P_NO = '1'),
-    'ï¿½ï¿½ï¿½Æ¿ï¿½ 30ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Â¦ ï¿½Ìºï¿½Æ® ï¿½ï¿½Ã·ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½Ô´Ï´ï¿½.',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ÍºÐµé²² Å« ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½, ï¿½ï¿½Â¦ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',
+    'ÁÁ¾Æ¿ä 30°³ ±â³ä ±ôÂ¦ ÀÌº¥Æ® ´çÃ·ÀÚ ¹ßÇ¥ÀÔ´Ï´Ù.',
+    '¼­Æ÷ÅÍºÐµé²² Å« »ç¶ûÀ» ¹Þ¾Æ¼­ °¨»çÇÑ ¸¶À½À» ÀüÇÏ°íÀÚ, ±ôÂ¦ ÀÌº¥Æ®¸¦ ¿­¾ú½À´Ï´Ù.',
     SYSDATE,
     0
   );
 
- INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+ INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_rv_no.nextval),
     '1',
     'A0000100',
-    'ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
-    'ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö³×¿ï¿½ ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½Þ´Ï´ï¿½',
+    'ÀÌ°É »ç°í ¿©ÀÚÄ£±¸°¡ ´Þ¶óÁ³¾î¿ä',
+    '¿©ÀÚÄ£±¸ »ýÀÏ·Î ¼±¹°ÇØÁá´õ´Ï Á¤¸» ÀßÇØÁÖ³×¿ä ÁøÂ¥ ¿¹»Þ´Ï´Ù',
      sysdate,
      4,
      null
   ); 
   
-   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_rv_no.nextval),
     '2',
     'A0000101',
-    'ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â°¡ ï¿½ï¿½ï¿½Ò¾ï¿½ï¿½',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµ ï¿½Õ´Ï´ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Å±ï¿½..',
+    'ÀÌ°É »ç°í °¨±â°¡ ³ª¾Ò¾î¿ä',
+    '°­·ÂÃßÃµ ÇÕ´Ï´Ù ¸¶¿ì½º¿¡¼­ ºñÅ¸¹ÎÀÌ ³ª¿Í¿ä ½Å±â..',
      sysdate,
      4,
      null
   ); 
   
-   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_rv_no.nextval),
     '3',
     'A0000102',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½ï¿½Ï´ï¿½..',
-    'ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´Âµï¿½ 1ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï³×¿ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½',
+    'Áý¾ÈÀÌ ´Þ¶óÁý´Ï´Ù..',
+    'ÀÌ¾ß »ì±ÕÇÏ´Âµ¥ 1ºÐÀÌ¸é ÃæºÐÇÏ³×¿ä ´ë´ÜÇÕ´Ï´Ù',
      sysdate,
      1,
      null
   ); 
   
-   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_rv_no.nextval),
     '4',
     'A0000103',
-    'ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ï¿½×¿ï¿½',
-    'ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½ï¿½ï¿½',
+    '¸¶¿ì½º ÁøÂ¥ ±¦Âú³×¿ä',
+    '¿©ÀÚÄ£±¸ ¼±¹°ÇØÁá´Âµ¥ Á¤¸» ÁÁ¾ÆÇØ¿ä ¤¾¤¾',
      sysdate,
      3,
      null
   ); 
   
-   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW(RV_NO, P_NO, U_NO, RV_TITLE, RV_TEXT, RV_DATE, RV_GRADE, RV_IMG)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_rv_no.nextval),
     '5',
     'A0000104',
-    'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½',
-    'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¼ï¿½ ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½×¿ï¿½',
+    'ÇÍ ÁÁ½À´Ï´Ù ¤¾¤¾',
+    'Á¦ ¸öÀÌ ÁÁ¾Æ¼­ ±×·±Áö´Â ¸ô¶óµµ ÇÍ ÁÁ³×¿ä',
      sysdate,
      5,
      null
@@ -1134,77 +1134,77 @@ INSERT INTO FAQ
 
 
 
- INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+ INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '1',
     'A0000104',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î·ï¿½ï¿½×¿ï¿½',
+    '¤»¤»¤»¤» ºÎ·´³×¿ä',
     sysdate
     ); 
   
-   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '2',
     'A0000103',
-    'ï¿½ï¿½Â¥ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?',
+    'ÁøÂ¥ ºñÅ¸¹Î ³ª¿È?',
     sysdate
   ); 
   
-   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '3',
     'A0000102',
-    'ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    'ÀÌ°Å ±¦ÂúÀ»µí',
     sysdate
   ); 
   
-   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '4',
     'A0000101',
-    'ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½',
+    'ÀÌ°Å ¸¶¿ì½º »ý±ä°Å ÀÌ»óÇÔ',
     sysdate
   ); 
   
-   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW_REPLY(RV_NO, U_NO, RVR_TEXT, RVR_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '5',
     'A0000100',
-    'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?',
+    '´Ô ½ºÆåÀÌ?',
     sysdate
   ); 
 
 
 
-INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '1',
     'A0000104',
     sysdate
     ); 
   
-   INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '2',
     'A0000103',
     sysdate
   ); 
   
-  INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '3',
     'A0000102',
     sysdate
   ); 
   
-  INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '4',
     'A0000101',
     sysdate
   ); 
   
-  INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --°³ÀÎÈ¸¿ø
   VALUES (
     '5',
     'A0000100',
@@ -1213,65 +1213,65 @@ INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
 
 
 
- INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+ INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_r_no.nextval),
     '1',
     '300',
-    'Åºï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½',
+    'Åº»ý¼® ¸ñ°ÉÀÌ',
+    'Á¸¿¹»Õ»Õ ¸ñ°ÉÀÌ ÀÔ´Ï´Ù',
     '49800'
     ); 
   
-   INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)--ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)--°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_r_no.nextval),
     '2',
     '500',
-    'ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ì½º',
-    'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½!',
+    'ºñÅ¸¸¶¿ì½º',
+    '´ç½ÅÀ» À§ÇÑ ºñÅ¸¹Î!',
     '59500'
   ); 
   
-  INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_r_no.nextval),
     '3',
     '1000',
-    'ï¿½ï¿½Å¸ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½Ú¿Ü¼ï¿½ ï¿½ï¿½Õ±ï¿½',
-    'ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿Ü¼ï¿½ ï¿½ï¿½Õ±ï¿½',
+    '½ºÅ¸ÀÏ¸®½¬ ÀÚ¿Ü¼± »ì±Õ±â',
+    '½´ÆÛ ÀÚ¿Ü¼± »ì±Õ±â',
     '20000'
   ); 
   
-  INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE) --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE) --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_r_no.nextval),
     '4',
     default,
-    'OFM ï¿½Ê·ï¿½ï¿½ï¿½Æ®',
-    'ï¿½Õ¸ï¿½È£ ï¿½ï¿½ï¿½ì½º',
+    'OFM ÆÊ·¹½ºÆ®',
+    '¼Õ¸ñº¸È£ ¸¶¿ì½º',
     '80000'
   ); 
   
-  INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO REWARD (R_NO, P_NO,R_AMOUNT, R_NAME, R_DETAIL, R_PRICE)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_r_no.nextval),
     '5',
     '142'
-    'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½',
-    'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+    '½´ÆÛ ¶óÀÌ´õ ÀÚÄÏ',
+    'ÇÍ ±âÀå ÃÖ°í °¡¼ººñ',
     '149800'
   ); 
 
 
 
- INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+ INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_pm_no.nextval),
     'A0000100',
     '1',
     '1',
-    'Ä¿ï¿½ï¿½ ï¿½ó¸®¹ï¿½ï¿½ï¿½',
+    'Ä¿ÇÃ ¾ó¸®¹öµå',
     '49800',
     '20000',
     sysdate,
@@ -1281,13 +1281,13 @@ INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
     default
     ); 
   
-   INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)--ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+   INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)--°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_pm_no.nextval),
     'A0000101',
     '2',
     '2',
-    'ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸®¹ï¿½ï¿½ï¿½',
+    '½´ÆÛ ¾ó¸®¹öµå',
     '59500',
     '30000',
     sysdate,
@@ -1297,13 +1297,13 @@ INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
     default
   ); 
   
-  INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_pm_no.nextval),
     'A0000102',
     '3',
     '3',
-    'ï¿½ó¸®¹ï¿½ï¿½ï¿½',
+    '¾ó¸®¹öµå',
     '20000',
     '10000',
     sysdate,
@@ -1313,13 +1313,13 @@ INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
     default
   ); 
   
-  INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN) --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN) --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_pm_no.nextval),
     'A0000103',
     '4',
     '4',
-    'Ä¿ï¿½ï¿½ ï¿½ó¸®¹ï¿½ï¿½ï¿½',
+    'Ä¿ÇÃ ¾ó¸®¹öµå',
     '80000',
     '20000',
     sysdate,
@@ -1329,13 +1329,13 @@ INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
     default
   ); 
   
-  INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
+  INSERT INTO PAYMENT (PM_NO, U_NO, P_NO, R_NO, PM_INFO, PM_PRICE, PM_PRICE_PLUS, PM_DATE, PM_MILEAGE, PM_QUANTITY, PM_NOPEN, PM_POPEN)  --°³ÀÎÈ¸¿ø
   VALUES (
     TO_CHAR(seq_pm_no.nextval),
     'A0000104',
     '5',
     '5',
-    'ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ó¸®¹ï¿½ï¿½ï¿½',
+    '¿ïÆ®¶ó ¾ó¸®¹öµå',
     '149800',
     '20000',
     sysdate,
@@ -1345,7 +1345,59 @@ INSERT INTO REVIEW_LIKE(RV_NO, U_NO, RVL_DATE)  --ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½
     default
   ); 
   
-  --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Îºï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½  
+  --°øÁö»çÇ× ³»¿ëºÎºÐ null°ª Çã¿ë  
   ALTER TABLE notice MODIFY (nt_text NULL);
-  
+
   ALTER TABLE faq RENAME COLUMN u_no TO a_no;
+  
+ -- reward Å×ÀÌºí r_amount ÄÃ·³Ãß°¡ 
+ALTER TABLE reward ADD(R_AMOUNT VARCHAR2(40));
+
+-- inquiry Å×ÀÌºí »ùÇÃµ¥ÀÌÅÍÃß°¡
+ INSERT INTO inquiry
+  VALUES(
+    TO_CHAR(SEQ_IQ_NO.nextval),
+    'A0000104',
+    '¸®¿öµåÆÝµùÀÌ ¹«¾ùÀÎ°¡¿ä?',
+    '¸®¿öµåÆÝµùÀÌ ¹ºÁö Àß ¸ð¸£°Ú½À´Ï´Ù. ¾Ë·ÁÁÖ¼¼¿ä.',
+    null,
+    default,
+    null,
+    sysdate,
+    'Y',
+    '¸®¿öµå¶õ ÀÚ±ÝÀÌ ÇÊ¿äÇÑ ¸ÞÀÌÄ¿°¡ ÆÝµùÀ» ÅëÇØ ÀÚ±ÝÀ» ¸ðÁýÇÏ¿© Á¦ÀÛÇÏ¸ç ¸®¿öµå°¡ ¿Ï¼ºµÇ¸é ÆÝµù¿¡ Âü¿©ÇÑ ¼­Æ÷ÅÍ¿¡°Ô Á¦°øÇÏ´Â ¹æ½ÄÀÔ´Ï´Ù. ¸ÞÀÌÄ¿´Â ÇÁ·ÎÁ§Æ® ÁøÇàÁß ¼­Æ÷ÅÍ¿¡°Ô ¹ÞÀº ÇÇµå¹éÀ» º¸»óÇ° Á¦ÀÛ¿¡ ¹Ý¿µÇÏ°Å³ª ÇÁ·ÎÁ§Æ® È«º¸¿¡ µµ¿òÀ» ÁØ ¼­Æ÷ÅÍµéÀ» À§ÇØ ÀÌº¥Æ®¸¦ ÁøÇàÇÏ´Â µî ÆÝµùÇÏ´Â ¼­Æ÷ÅÍ¿Í Á¦Ç°/¼­ºñ½º¸¦ ¸¸µå´Â ¸ÞÀÌÄ¿°£ÀÇ ±ä¹ÐÇÑ ¼ÒÅëÀÌ ÀÌ·ç¾îÁö´Â Á¡ÀÌ Æ¯Â¡ÀÔ´Ï´Ù.',
+    sysdate,
+    'C0000100'
+  ); 
+
+ INSERT INTO inquiry
+  VALUES(
+    TO_CHAR(SEQ_IQ_NO.nextval),
+    'A0000104',
+    '¸®¿öµå¸¦ Á÷Á¢ ¼ö·É°¡´ÉÇÑ°¡¿ä?',
+    'Á¦°¡ Á÷Á¢ ¸®¿öµå¸¦ Ã£¾Æ°¡¼­ ¼ö·ÉÇÏ°í ½ÍÀºµ¥ °¡´ÉÇÒ±î¿ä?',
+    null,
+    default,
+    null,
+    sysdate,
+    'Y',
+    '¸®¿öµå´Â ÅÃ¹è ¹è¼ÛÀ» ¿øÄ¢À¸·Î ÇÏ°íÀÖ½À´Ï´Ù.',
+    sysdate,
+    'C0000100'
+  );
+  
+   INSERT INTO inquiry
+  VALUES(
+    TO_CHAR(SEQ_IQ_NO.nextval),
+    'A0000104',
+    '°áÁ¦´Â ÀÏ½ÃºÒ·Î¸¸ °¡´ÉÇÑ°¡¿ä?',
+    '°áÁ¦´Â ÀÏ½ÃºÒ·Î¸¸ °¡´ÉÇÑ°¡¿ä?',
+    null,
+    default,
+    null,
+    sysdate,
+    'Y',
+    '³×. ¸®¿öµåºÏ¿¡¼­ ÆÝµùÇÏ½Ç ¶§¿¡´Â Ä«µåÁ¤º¸¸¦ ÀÔ·ÂÇÏ¿© °áÁ¦¿¹¾àÀ» °É¾îµÎ´Â ¹æ½ÄÀÌ´Ùº¸´Ï ÀÏ½ÃºÒ °áÁ¦¸¸ °¡´ÉÇÏ°í, ÇÒºÎ°áÁ¦´Â ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.',
+    sysdate,
+    'C0000101'
+  ); 
