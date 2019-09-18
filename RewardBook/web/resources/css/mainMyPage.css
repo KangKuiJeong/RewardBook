@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+	/*메인 마이페이지 창 영역*/
+	
+	#myBox{ position:absolute; width:280px; height:390px; background-color:#fff; border:1px solid #f1f1f1; display:none; margin-top: -5px; margin-left: 1020px;
+			z-index:9999999;  }
+	#myBox ul { float:left; padding:7px; background:#fff;}
+	#myBox ul #profileUpdateLi { width:100%; padding-top:10px;}
+	#myBox ul #profileUpdate { border:1px solid #8C8C8C; font-weight:normal; background:#fff; font-size:13px; padding: 3px 10px; float:left;
+							  display:block; color:#8C8C8C; border-radius:10px;}
+	#myBox ul #profileUpdate:hover { border:1px solid #353535; font-weight:bold; background:#fff; font-size:13px; padding: 3px 10px; float:left;
+							  			display:block; color:#353535; border-radius:10px;}		
+	#myBox ul #proName { font-size:28px; font-weight:bold; margin-top: 7px;}
+	#myBox ul #proName span { color:#8c8c8c; font-weight:normal; font-size:22px; padding-left:5px;}
+	#myBox ul #userDivision { color: #8C8C8C; font-size: 13px; clear: both; font-weight: normal; padding: 0px 15px; clear:both;
+							  margin-top:-10px;}
+	#myBox ul #myMileage { clear:both; padding:0 13px; font-size:15px; margin-top:7px;}
+	#myBox ul #proifileImg { float:right; margin-right:10px;}
+	#myBox ul #proifileImg img{ border-radius:50%}
+	#myBox ul #maileage { clear:both; padding: 0px 15px; background:#8c8c8c; color:#fff; margin-top:7px 0px 0px 15px;; font-weight:400;
+							font-size:15px;}
+	#myBox ul #maileage span{ font-weight:bold;}						
+	#myBox #menuUl { width:100%; margin:0; padding:0; }
+	#myBox #menuUl li { width:100%; border-top:1px solid #E1E1E1; margin:0; padding: 10px 0 10px 0; text-align:center;}
+	#myBox #menuUl .menuli { font-size:15px; color:#353535; font-wieght:normal;padding-top: 12px; padding-bottom: 12px; }
+	#myBox #menuUl #liTop {margin-top:10px;}
+	#myBox #menuUl #liBottom {border-bottom:1px solid #E1E1E1;}
+	#myBox #close { margin-top:10px; float:right; background-color:#fff; border:1px solid #fff; padding: 3px 7px; margin-right:10px;}
+	#myBox #close:hover { color:#8c8c8c}
+	#myBox #close span { font-weight:bold;}
+
+	/* 프로필 사진등록 팝업창 */
+	#profileForm { width:90%; margin:0 auto; margin-top:80px;}
+	#profileForm .line { width:50px; height:3px; background-color:#ffb202; }
+	.profileUploadsBtn { font-size:18px; font-weight:bold; color:#353535; margin: 8px 0 20px 0;}
+	#uploadsBtn { background:#f0f0f0; border:1px solid #e1e1e1;}

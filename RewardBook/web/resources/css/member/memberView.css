@@ -1,0 +1,55 @@
+@charset "UTF-8";
+/*
+	로그인창 & 메인회원가입페이지 CSS
+*/
+
+
+/*로그인  css*/
+#loginContainer { width:400px; margin:0 auto; padding:100px 0 200px 0;}
+#loginContainer .title { font-size:38px; text-align:left; font-weight:bold; }
+#loginContainer #loginId { width:100%; height:50px; margin-top:15px; border:1px solid #E1E1E1;}
+#loginContainer #loginPw { width:100%; height:50px; margin-top:5px; border:1px solid #E1E1E1;}
+#loginContainer #loginId::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#loginContainer #loginPw::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#saveIdtext { font-size:15px; color:#8c8c8c;}
+input[id="saveId"]{ display: inline-block; width: 15px; height: 15px; border: 2px solid #bcbcbc; cursor: pointer; margin-top: 3px; }
+#saveId { margin-top: 10px;}
+#idSaveDiv {float:left; width:100px;}
+#find {float:right; margin-top: 5px;}
+#find a{  font-size:15px; color:#8c8c8c; text-decoration:none; letter-spacing:-1px;}
+#find a:hover{ text-decoration:underline;}
+#subLogin { clear:both; width:100%; background-color:#ffb202; color:#fff; border:1px solid #fff; height:50px;
+			margin:15px 0 7px 0; font-size:20px;}
+#subLogin:hover{ background-color:#e8a100; }		
+	
+
+/*메인회원가입창 css*/
+#joinContainer { width:400px; margin:0 auto; padding:100px 0 200px 0;}
+#joinContainer .title { font-size:38px; text-align:left; font-weight:bold; }
+#joinContainer { text-align:center; font-size: 14px; font-weight:normal;}
+#joinContainer a {font-weight:bold; text-decoration:none; color:#353535;}
+#joinIntro { text-align:center; font-size: 14px; font-weight:normal; margin-top:10px}
+#joinIntro a {font-weight:bold; text-decoration:none; color:#000;}
+#joinIntro a:hover { text-decoration:underline;}
+#emailJoin { width:400px; height:50px; border:1px solid #e1e1e1; margin-top:15px;}
+#emailJoin:hover { background:#f1f1f1;}
+#emailJoin a{ font-size:20px; text-align:center; line-height:50px; text-decoration:none;}
+.snsJoinbtn { width:32.3%; display:inline-block; border:1px solid #e1e1e1; padding:13px 0; margin:15px 0;}
+#JoinMessage {text-align:left; color:#8c8c8c; margin: 3px 0 30px 0;}
+#companyJoin {margin-bottom:20px; color:#8c8c8c; text-decoration:underline;}
+
+
+/* 관리자 로그인창 css */
+#adminLoginContainer { width:400px; margin:0 auto; padding:100px 0 200px 0;}
+#adminLoginContainer .title { font-size:38px; text-align:left; font-weight:bold; }
+#adminLoginContainer #loginId { width:100%; height:50px; margin-top:15px; border:1px solid #E1E1E1;}
+#adminLoginContainer #loginPw { width:100%; height:50px; margin-top:5px; border:1px solid #E1E1E1;}
+#adminLoginContainer #loginId::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#adminLoginContainer #loginPw::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#adminLoginContainer #subLogin {background-color:#0B0A34}
+
+/* api 로그인 css */
+#snsWrap ul li { width: 32.3%; display: inline-block; background:#ffe400; padding: 13px 0; margin: 5px 0;
+				 text-align:center;}
+#snsWrap ul li:hover { background:#FFDF24;}
+#custom-login-btn { font-weight: bold; text-decoration: none; color: #353535; font-size:15px;}

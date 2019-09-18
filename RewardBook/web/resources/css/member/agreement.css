@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+/*이용약관 css*/
+.contentsWrap { width:70%; margin:0 auto;}
+.contentsWrap .contentsTitle { padding:50px 0 30px 0; font-weight:bold; font-size:30px; }
+.contentsWrap .contents { font-size:14px; color:#8c8c8c; margin-bottom:20px;}
+.contentsWrap .p1 { font-size:14px; color:#353535; margin-bottom:150px;}

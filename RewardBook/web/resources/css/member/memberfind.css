@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+/*아이디 비밀번호 찾기 페이지 css*/
+
+#findHeader{width:100%; border-bottom:1px solid #e1e1e1;}
+#findWrap{ width:50%;margin:0 auto; padding:90px 60px 0px 60px;}
+#findHeader #findTitle { font-size:28px; text-align:left; font-weight:bold;}
+#fineLink {padding-top:50px;}
+#findHeader a{ text-decoration:none; color:#353535; font-weight:bold; font-size:16px; margin-right:10px; padding:0 5px; margin-bottom:5px;}
+#select{ border-bottom:3px solid #ffb202;}
+#findContentsId { clear:both; width:100%;}
+#findContentsId #findSubTitle { width:50%; margin:0 auto; padding:50px 0 30px 0; font-size:15px; color:#8c8c8c;}
+#findContentsId form{ width:50%; margin:0 auto;}
+#findContentsId input[type="submit"] {width:40%; border:1px solid #fff; background:#ffb202; color:#fff;
+											height:50px; margin-bottom:85px; font-size:20px;}
+#findContentsId input[type="text"] { width:40%; border:1px solid #e1e1e1; height:50px; margin:10px 0; display:block;}
+#findContentsId input[type="text"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#submitReturn{ font-size:13px; color: rgb(242, 85, 85); padding-bottom:5px;}
+#goLogin{ width:40%; border:1px solid #e1e1e1; display:block; height:50px; margin:20px 0 5px 0; font-size:20px;}
+#findPwText { font-size:13px; color: rgb(242, 85, 85); padding-bottom:5px;}

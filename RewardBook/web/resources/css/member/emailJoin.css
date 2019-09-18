@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+/* 이메일로 회원가입 css(개인,기업 공통) */
+
+#joinEmailContainer { width:400px; margin:0 auto; padding:100px 0 200px 0;}
+#joinEmailContainer .title { font-size:38px; text-align:left; font-weight:bold; margin-bottom:15px; }
+#joinForm label { width:100%; font-size:13px;}
+.termsName{ width:100%; display: inline-block; padding:10px 0 0 0; font-size: 14px; text-decoration: none; color: #000; font-weight: bold;}
+#allChoice { color:#000; font-size:18px !important; padding:20px 0; font-weight:bold;}
+.termsWrap { border:1px solid #e1e1e1; margin-top:20px; padding:10px}
+.termsBox { width:95%; height:200px; overflow:scroll; margin:0 auto; border:1px solid #e1e1e1; padding:10px; display:none;}
+.termsBox .termsContents { font-size:12px;}
+#joinEmailContainer input[type="submit"] {width:100%; border:1px solid #fff; background:#ffb202; color:#fff;
+											height:50px; margin-top:15px; font-size:20px;}
+#joinEmailContainer input[type="text"] { width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0;}
+#joinEmailContainer input[type="text"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#joinEmailContainer input[type="password"] { width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0 5px 0;}
+#joinEmailContainer input[type="password"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#bnumber { width:75% !important; display:inline;}
+#bnumCheck { width: 21%; display:inline; margin-left:2%; height:55px; border:1px solid #fff; background:#ffb202; color:#fff;
+			 font-size:16px;}
+#bnumCheckbox{ font-size:13px; color:rgb(242, 85, 85); }			 
+#passwordCheck { font-size:13px; color:rgb(242, 85, 85);}
+#emailCheck { font-size:13px; color:rgb(242, 85, 85);}
+#userNameCheck { font-size:13px; color:rgb(242, 85, 85); }
+#checkSpan1,#checkSpan2,#checkSpan3{ color:#8c8c8c; font-size:12px; margin-right:7px; float:right;}
+#checkSpan1:hover,#checkSpan2:hover,#checkSpan3:hover{ color:#353535;}
+#authNum, #userId { width:100% !important; display:inline-block !important;}
+#authBtn { position:absolute; margin-left: 290px; font-size:15px; margin-top: 14px; padding: 10px 10px; border:1px solid #fff; background:#ffb202; color:#fff;}
+#checkBtn { position:absolute; margin-left: 290px; font-size:15px; margin-top: 14px; padding: 10px 23px; border:1px solid #fff; background:#ffb202; color:#fff;}
+
+/* 이메일로 회원가입 완료페이지 css*/
+#okWrap { width:450px; margin:0 auto; padding:100px 0 200px 0;}
+#okWrap #okMessage { font-size:32px; text-align:left; font-weight:bold; margin-bottom:15px; text-align:center; }
+#okWrap #subOkMessage { font-size:15px; color:#8c8c8c; text-align:center;}
+#okWrap #goLogin { width:30%; border:1px solid #ccc; padding:10px 20px; margin-right:10px; display:inline;}
+#okWrap ul{ margin-top:45px;}
+#okWrap ul li a { text-decoration:none; font-weight:bold; width:100%; color:#353535;}
+#okWrap ul li:hover { background:#f0f0f0;}
+#goLogin { background:#ffb202; border:1px solid #fff !important}
+#goLogin a { color:#fff !important;}
+#goLogin:hover { color:#353535; background-color:#e8a100 !important;}
+#okWrap #goView { width:30%; border:1px solid #ccc; padding:10px 20px; margin-right:10px; display:inline;}
+#okWrap #goProject { width:30%; border:1px solid #ccc; padding:10px 20px; margin-right:10px; display:inline;}
+

@@ -1,0 +1,56 @@
+
+@charset "UTF-8";
+
+/* 프로젝트 메인 css */
+
+#projectListWrap{margin: 40px auto;max-width: 1032px; height: auto; }
+.categoryWrap{margin: 0 auto;max-width: 1032px;	}
+.categoryList{position: relative;height: 118px; display: flex;overflow: hidden;}
+.imageName{ margin-top: 8px;line-height: 18px;white-space: nowrap;font-size: 13px;font-weight: 500;}
+.categoryIcon{display: block;margin: 0;padding: 21px 0 15px;width: 90px;height: 118px; text-align: center;text-indent: 0;font-size: 13px;box-sizing: border-box;}
+.fashionIcon{display: inline-block;}
+.techIcon{display: inline-block;}
+a{text-decoration: none;align: center; color: black;}
+.category{padding-right: 15px;}
+.iconImage img {position: relative;transition-property: border-color,border-width;margin: 0 auto;border: 2px solid #ffb202;border-radius: 50%;background: #dedede no-repeat 50%/cover border-box;width: 56px;height: 56px;box-sizing: border-box;}
+.projectListHeader{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid rgba(178, 178, 178, 0.7);
+	margin: 20px auto;
+	padding-bottom: 13px;
+}
+.categorySearch{
+	display: flex;
+}
+.invest_list {display: grid;
+    grid-template-columns: repeat(3,calc(33.33333% - 30px));
+    grid-row-gap: 40px;
+    grid-column-gap: 30px;}
+.invest_box {display: inline-block; vartical-align: baseline; width:313.33px; height:302.2px; padding-bottom:30px;border-radius:5px; }
+.invest_box.invest_item1 {margin-left:0}
+.txt_center {text-align:center}
+.invest_plus {display:inline-block; width:180px; height:48px; line-height:46px; background-color:#f2849e; color:#fff; border-radius:5px; }
+.invest_img {width: 100%; height: 178.2px; overflow: hidden; display: inline-block; margin-bottom: 10px;}
+.invest_title {width: 100%; height: 80px; }
+.invest_titlelink > p{margin-bottom: 4px; max-height: none; line-height: 24px; font-size: 17px; text-align: left; color: black;}
+.invest_name{display: inline-block; }
+.invest_category{float: left; display: inline-block; height: 16px; vertical-align: baseline; line-height: 16px; color: #90949c; font-weight: 500; font-size: 13px; max-height: none;}
+.invest_maker{display: block;
+    position: relative;
+    outline: none;
+    padding-left: 11px;
+    max-width: 150px;
+    overflow: hidden;
+    max-height: none;
+    vertical-align: baseline;
+    font-size: 13px; color: #90949c; text-align: left;
+    border-left: 1px solid rgba(178, 178, 178, 0.54); height: 16px;}
+.target_gauge{ height: 3px; background-color: #e6eaed; position: relative; width: 100%; overflow: hidden;}    
+.gauge {background-color: #ffb202; height: 3px; display: block; vertical-align: baseline;}    
+.percentage{font-size: 17px; font-weight: 700; color: #ffb202; float: left;}
+.invest_info{font-size: 14px; font-weight: 500; color: #90949c; display: inline-block; line-height: 24px; }
+.nowprice{float: left;}   
+.enddate{float: right;}
+    
+    

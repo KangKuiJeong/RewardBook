@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+/*기업 개인회원 공통 정보수정페이지 */
+
+/*개인회원 css*/
+#personalUpdateContainer { width:400px; margin:0 auto; padding:100px 0 200px 0;}
+#personalUpdateContainer p{text-align:center;}
+#personalUpdateContainer .title { font-size:38px; text-align:center; font-weight:bold; margin-bottom:15px; }
+#updateProfile { width:220px; heigth:220px; border-radius:50%; display:block; margin:0 auto;}
+#pUdateForm #emailId {font-weight:bold; font-size:15px; color:#353535; padding:10px 0 20px 0; }
+#personalUpdateContainer input {padding-left:5px;}
+#personalUpdateContainer input[type="submit"] {width:48%; border:1px solid #fff; background:#ffb202; color:#fff;
+											height:50px; margin-top:15px; font-size:20px;}
+#personalUpdateContainer input[type="reset"] {width:48%; border:1px solid #fff; background:#ffb202; color:#fff;
+											height:50px; margin-top:15px; font-size:20px;}
+#btnArea { width:80%; margin:0 auto;}																						
+#profileBtn { float:right; margin-bottom:30px;}
+#personalUpdateContainer input[type="text"] { font-size:16px; width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0;}
+#personalUpdateContainer input#userName {font-weight:bold;}
+#personalUpdateContainer input[type="text"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#personalUpdateContainer input[type="password"] { width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0 5px 0;}
+#personalUpdateContainer input[type="password"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#personalUpdateContainer input[type="tel"] { width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0 5px 0;}
+#personalUpdateContainer input[type="tel"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#personalUpdateContainer textarea { width:100%; height:100px; border:1px solid #e1e1e1; font-size:14px; padding:5px;}
+#personalUpdateContainer textarea::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#personalUpdateContainer #post{ width:70% !important; display:inline;}
+#personalUpdateContainer #findPost { margin-left:5px; height:55px; border:1px solid #e1e1e1; background:#f6f6f6; color:#353535; padding:0 8px;
+									 font-size:15px;}
+#personalUpdateContainer #jobSelect {width:407px; height:35px; margin:15px 0; font-size:16px; border:1px soild #e1e1e1;}									 
+#personalUpdateContainer #jobSelect option{ font-size:16px;}
+#profileSubmit {width:20% !important; height:20px !important; background:#fff !important; border:1px solid #8c8c8c !important;
+				 float:right !important; color:#000 !important; display:inline-block !important; font-size:13px !important;}
+#pUdateForm { clear:both;}
+#passwordCheckUpdate, #passwordCheckUpdate2 { text-align:left !important; font-size:13px; color:rgb(242, 85, 85);}
+#personalUpdateContainer .btnArea { width:80%; margin:0 auto;}
+#personalDelForm {margin-top:50px;}	
+#personalDelForm input[type="submit"]{float:right; color:#8c8c8c; background:#fff; padding:0; width:28%; font-size:17px;
+										height:40px; border:1px solid #e1e1e1; padding: 5px 10px;}
+#personalDelForm input[type="submit"]:hover { color:#353535; border:1px solid #353535;}
+
+/*기업회원 css*/
+#companyUpdateContainer { width:400px; margin:0 auto; padding:100px 0 200px 0;}
+#companyUpdateContainer p{text-align:center;}
+#companyUpdateContainer .title { font-size:38px; text-align:center; font-weight:bold; margin-bottom:15px; }
+#updateProfile { width:220px; heigth:220px; border-radius:50%; display:block; margin:0 auto;}
+#pUdateForm #emailId {font-weight:bold; font-size:15px; color:#353535; padding:10px 0 20px 0; }
+#companyUpdateContainer input {padding-left:5px;}
+#companyUpdateContainer input[type="reset"] {width:48%; border:1px solid #fff; background:#ffb202; color:#fff;
+											height:50px; margin-top:15px; font-size:20px;}
+#companyUpdateContainer input[type="submit"] {width:48%; border:1px solid #fff; background:#ffb202; color:#fff;
+											height:50px; margin-top:15px; font-size:20px;}
+#profileBtn { float:right; margin-bottom:30px;}
+#companyUpdateContainer input[type="text"] { font-size:16px; width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0;}
+#companyUpdateContainer input#userName {font-weight:bold;}
+#companyUpdateContainer input[type="text"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#companyUpdateContainer input[type="password"] { width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0 5px 0;}
+#companyUpdateContainer input[type="password"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#companyUpdateContainer input[type="tel"] { width:100%; border:1px solid #e1e1e1; height:50px; margin:10px 0 5px 0;}
+#companyUpdateContainer input[type="tel"]::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#companyUpdateContainer textarea { width:100%; height:100px; border:1px solid #e1e1e1; font-size:14px; padding:5px;}
+#companyUpdateContainer textarea::placeholder { font-size:16px; color:#8c8c8c; padding-left:5px;}
+#companyUpdateContainer #post{ width:70% !important; display:inline;}
+#companyUpdateContainer #findPost { margin-left:5px; height:55px; border:1px solid #e1e1e1; background:#f6f6f6; color:#353535; padding:0 8px;
+									 font-size:15px;}
+#companyUpdateContainer #jobSelect {width:407px; height:35px; margin:15px 0; font-size:16px; border:1px soild #e1e1e1;}									 
+#companyUpdateContainer #jobSelect option{ font-size:16px;}
+#profileSubmit {width:20% !important; height:20px !important; background:#fff !important; border:1px solid #8c8c8c !important;
+				 float:right !important; color:#000 !important; display:inline-block !important; font-size:13px !important;}
+#pUdateForm { clear:both;}
+#passwordCheckUpdate, #passwordCheckUpdate2 { text-align:left !important; font-size:13px; color:rgb(242, 85, 85);}
+#companyUpdateContainer .btnArea { width:80%; margin:0 auto;}
+#checkBoxDiv { width:90%; padding:15px 0 20px 0; margin:0 auto; }
+#checkBoxDiv .checkArea { width:30%; display:inline-block; text-align:center; padding:3px 0;}
+#checkBoxDiv .checkArea input[type="checkbox"] { margin-right:10px;}
+#companyDelForm {margin-top:50px;}	
+#companyDelForm input[type="submit"]{float:right; color:#8c8c8c; background:#fff; padding:0; width:28%; font-size:17px;
+										height:40px; border:1px solid #e1e1e1; padding: 5px 10px;}
+#companyDelForm input[type="submit"]:hover { color:#353535; border:1px solid #353535;}
+#userBno { background:#f1f1f1; color:#353535;}		
+#bNumContents { text-align:left !important; font-size:13px; color:#8c8c8c;}

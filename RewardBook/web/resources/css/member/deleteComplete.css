@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+#completeWrap{width:100%; border-bottom:1px solid #e1e1e1;}
+#completeWrapContents{ width:50%;margin:0 auto; padding:120px 60px 0px 60px;}
+#deleteMessage { font-size:40px; text-align:center; font-weight:bold;}
+#deleteSubMessage { margin-top:10px; color:#8c8c8c; font-size:20px; text-align:center;}
+#homeBtn { width:30%; text-align:center; margin:70px auto;}
+#homeBtn a { padding: 10px 20px; text-decoration:none; background:#ffb202; color:#fff; font-size:18px; }
