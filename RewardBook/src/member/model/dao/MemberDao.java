@@ -443,8 +443,8 @@ public class MemberDao {
 			
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, start + limit - 1);
+			pstmt.setInt(1, (start - 1) * limit + 1);
+			pstmt.setInt(2, start * limit);
 			
 			rest = pstmt.executeQuery();
 			

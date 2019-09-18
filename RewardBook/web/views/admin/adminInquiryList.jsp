@@ -147,59 +147,68 @@
 <script src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
-		$(".main_area3_section1 .pageButton#page0").on("click", function() {
-			var link = "page=project&movePage=1";
+
+		$(".main_area2_section2 .search .submit").on("click", function() {
+			var link = "page=inquiry&movePage=1";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
-			location.href="/RewardBook/p_list_a?" + link;
+			location.href="/RewardBook/iq_list_a?" + link;
+		});
+		
+		$(".main_area3_section1 .pageButton#page0").on("click", function() {
+			var link = "page=inquiry&movePage=1";
+			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
+			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
+			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
+			location.href="/RewardBook/iq_list_a?" + link;
 		});
 		
 		$(".main_area3_section1 .pageButton#page1").on("click", function() {
-			var link = "page=project&movePage=<%= currentPage - 2 %>";
+			var link = "page=inquiry&movePage=<%= currentPage - 2 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
-			location.href="/RewardBook/p_list_a?" + link;
+			location.href="/RewardBook/iq_list_a?" + link;
 		});
 
 		$(".main_area3_section1 .pageButton#page2").on("click", function() {
-			var link = "page=project&movePage=<%= currentPage - 1 %>";
+			var link = "page=inquiry&movePage=<%= currentPage - 1 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
-			location.href="/RewardBook/p_list_a?" + link;
+			location.href="/RewardBook/iq_list_a?" + link;
 		});
 
 		$(".main_area3_section1 .pageButton#page4").on("click", function() {
-			var link = "page=project&movePage=<%= currentPage + 1 %>";
+			var link = "page=inquiry&movePage=<%= currentPage + 1 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
-			location.href="/RewardBook/p_list_a?" + link;
+			location.href="/RewardBook/iq_list_a?" + link;
 		});
 
 		$(".main_area3_section1 .pageButton#page5").on("click", function() {
-			var link = "page=project&movePage=<%= currentPage + 2 %>";
+			var link = "page=inquiry&movePage=<%= currentPage + 2 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
-			location.href="/RewardBook/p_list_a?" + link;
+			location.href="/RewardBook/iq_list_a?" + link;
 		});
 		
 		$(".main_area3_section1 .pageButton#page6").on("click", function() {
-			var link = "page=project&movePage=<%= maxPage %>";
+			var link = "page=inquiry&movePage=<%= maxPage %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
-			location.href="/RewardBook/p_list_a?" + link;
+			location.href="/RewardBook/iq_list_a?" + link;
 		});
 
 		$(".main_area3_section1 .table table tr").on("mouseover", function() {
@@ -223,7 +232,7 @@
 	<div class="main">
 		<div class="main_area1">
 			<div class="main_area1_section1">
-				<span>승인 관리</span>
+				<span>문의 관리</span>
 			</div>
 		</div>
 		<div class="main_area2">
@@ -244,7 +253,7 @@
 							<option value="답변인" <% if (s2select1.equals("답변인")) { %>selected<% } %>>답변인</option>
 						</select>
 						<input name="s2text1" type="text"  <% if (!s2text1.equals("")) { %>value="<%= s2text1 %>"<% } %> style="width : 150px; height : 24px; font-size : 17px;">
-						<input type="submit" value="전송">
+						<div class="submit" style="width : 30px; height : 30px; cursor : pointer"><img src="resources/images/admin/admin_submit.png" style="width : 30px; height : 30px;"></div>
 					</div>
 				</div>
 			</form>
