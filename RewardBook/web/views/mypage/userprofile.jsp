@@ -192,6 +192,10 @@ width:33.333%;
 				<span>팔로우</span>
 			</li>
 			
+			<li class="litype">
+				<img id="fbtn" src="/RewardBook/resources/images/mypage/fbtn.png">
+			</li>
+			
 			
 			
 		</ul>
