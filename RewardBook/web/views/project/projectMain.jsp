@@ -104,18 +104,18 @@
 			<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
 		<div class="invest_box invest_item<%= i+1 %>">
 			<div class="invest_img">
-				<a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
+				<a class="invest_imgtag" href="/RewardBook/p_sel?p_no=<%=list.get(i).getP_no()%>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
 			<div class="invest_title">
-				<a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
+				<a href="/RewardBook/p_sel?p_no=<%=list.get(i).getP_no()%>" class="invest_titlelink"><p><%=list.get(i).getP_title()%></p></a>
 				<div class="invest_name">
 					<span class="invest_category"><%= list.get(i).getP_category() %></span>
 					<span class="invest_maker">IT세준</span>
 				</div>
 			</div>
-			<div class="target_gauge"><span class="gauge" style="width:<%= percent %>%;"></span></div>
-			<span class="percentage"><%= percent %>%</span>
-			<span class="invest_info nowprice"><%= list.get(i).getP_nprice() %>원</span>
-			<span class="invest_info enddate"><%= list.get(i).getP_rdate() %>일 남음</span>
+			<div class="target_gauge"><span class="gauge" style="width:<%=percent%>%;"></span></div>
+			<span class="percentage"><%=percent%>%</span>
+			<span class="invest_info nowprice"><%=list.get(i).getP_nprice()%>원</span>
+			<span class="invest_info enddate"><%=list.get(i).getP_rdate()%>일 남음</span>
 		</div>
 		
 			<% } %>
@@ -151,20 +151,20 @@
 					$(".invest_list").append(
 						"<div class='invest_box invest_item'>"
 						+ "<div class='invest_img'>"
-						+ "<a class='invest_imgtag' href='/RewardBook//p_sel?p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
+						+ "<a class='invest_imgtag' href='/RewardBook/p_sel?p_no="+json.list[count].no+"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
 						+ "<div class='invest_title'>"
-						+ "<a href='/RewardBook//p_sel?p_no="+ json.list[count].no +"' class='invest_titlelink'><p>"+ decodeURIComponent(json.list[count].title).replace(/\+/gi, " ") +"</p></a>"
+						+ "<a href='/RewardBook/p_sel?p_no="+ json.list[count].no +"' class='invest_titlelink'><p>"+decodeURIComponent(json.list[count].title).replace(/\+/gi, " ")+"</p></a>"
 						+ "<div class='invest_name'>"
-						+ "<span class='invest_category'>"+ decodeURIComponent(json.list[count].category).replace(/\+/gi, " ") +"</span>"
+						+ "<span class='invest_category'>"+decodeURIComponent(json.list[count].category).replace(/\+/gi, " ")+"</span>"
 						+ "<span class='invest_maker'>IT세준</span>"
 						+ "</div></div>"
-						+ "<div class='target_gauge'><span class='gauge' style='width:" + (json.list[count].nprice / json.list[count].tprice) * 100 + "%'></span></div>"
-						+ "<span class='percentage'>"+ parseInt((json.list[count].nprice / json.list[count].tprice) * 100) +"%</span>"
-						+ "<span class='invest_info nowprice'>"+ json.list[count].nprice +"원</span>"
-						+ "<span class='invest_info enddate'>"+ json.list[count].rdate +"일 남음</span>"
+						+ "<div class='target_gauge'><span class='gauge' style='width:"+(json.list[count].nprice / json.list[count].tprice)*100+"%'></span></div>"
+						+ "<span class='percentage'>"+parseInt((json.list[count].nprice / json.list[count].tprice) * 100)+"%</span>"
+						+ "<span class='invest_info nowprice'>"+json.list[count].nprice+"원</span>"
+						+ "<span class='invest_info enddate'>"+json.list[count].rdate+"일 남음</span>"
 					);
 					count++;
-					
+					console.log(count);
 				}
 				if(start_number >= maxlength) {
 					$(".load_btn_box").fadeOut("fast");

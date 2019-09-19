@@ -44,6 +44,7 @@ public class RewardDao {
 				
 				reward.setR_no(rset.getString("R_NO"));
 				reward.setP_no(rset.getString("P_NO"));
+				reward.setR_amount(rset.getString("R_AMOUNT"));
 				reward.setR_name(rset.getString("R_NAME"));
 				reward.setR_detail(rset.getString("R_DETAIL"));
 				reward.setR_price(rset.getInt("R_PRICE"));

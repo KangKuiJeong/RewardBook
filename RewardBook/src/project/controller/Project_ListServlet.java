@@ -44,6 +44,7 @@ public class Project_ListServlet extends HttpServlet {
 		if(result > 0) {
 			ArrayList<Project> list = new ProjectService().listProject();
 		
+			response.setContentType("text/html; charset=UTF-8");
 			RequestDispatcher view = null;
 			if(list.size() > 0) {
 				view = request.getRequestDispatcher("views/project/projectMain.jsp");

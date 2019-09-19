@@ -31,7 +31,7 @@ public class ProjectService {
 	public Project selectProject(String p_no) {
 		Connection conn = getConnection();
 		Project project = pDao.selectProject(conn, p_no);;
-		
+		close(conn);
 		return project;
 	}
 
@@ -52,6 +52,7 @@ public class ProjectService {
 	public ArrayList<Project> listProject() {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.listProject(conn);
+		close(conn);
 		
 		return list;
 	}
@@ -59,7 +60,7 @@ public class ProjectService {
 	public ArrayList<Project> listPermission(String permission) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.listPermission(conn, permission);
-		
+		close(conn);
 		return list;
 	}
 
@@ -104,36 +105,42 @@ public class ProjectService {
 	   public ArrayList<Project> selectNewProject() {
 	      Connection conn = getConnection();
 	      ArrayList<Project> list = pDao.selectNewProject(conn);
+	      close(conn);
 	      return list;
 	   }
 
 	   public ArrayList<Project> pageSelect(int start, int limit, String check1, String check2, String check3, String select1, String text1) {
 	      Connection conn = getConnection();
 	      ArrayList<Project> list = pDao.pageSelect(conn, start, limit, check1, check2, check3, select1, text1);
+	      close(conn);
 	      return list;
 	   }
 
 	   public int pageCount(String check1, String check2, String check3, String select1, String text1) {
 	      Connection conn = getConnection();
 	      int result = pDao.pageCount(conn, check1, check2, check3, select1, text1);
+	      close(conn);
 	      return result;
 	   }
 
 	   public Project detailProject(String p_no) {
 	      Connection conn = getConnection();
 	      Project project = pDao.detailProject(conn, p_no);
+	      close(conn);
 	      return project;
 	   }
 
 	   public ArrayList<Project> pageSelect_P(int start, int limit, String select1, String text1) {
 	      Connection conn = getConnection();
 	      ArrayList<Project> list = pDao.pageSelect_P(conn, start, limit, select1, text1);
+	      close(conn);
 	      return list;
 	   }
 
 	   public int pageCount_P(String select1, String text1) {
 	      Connection conn = getConnection();
 	      int result = pDao.pageCount_P(conn, select1, text1);
+	      close(conn);
 	      return result;
 	   }
 }

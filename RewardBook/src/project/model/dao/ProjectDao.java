@@ -29,9 +29,8 @@ public class ProjectDao {
 		Project project = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 
-		String query = "select to_number(round(p_sdate - p_edate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project where p_no = ?";
+		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project where p_no = ? and p_permission = 'Y'";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -83,7 +82,7 @@ public class ProjectDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project";
+		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project where p_permission = 'Y'";
 		
 		try {
 			stmt = conn.createStatement();
@@ -116,7 +115,6 @@ public class ProjectDao {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(rset);

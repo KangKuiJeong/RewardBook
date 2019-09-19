@@ -36,7 +36,7 @@ public class Project_MainAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-ArrayList<Project> list = new ProjectService().listProject();
+		ArrayList<Project> list = new ProjectService().listProject();
 		
 		JSONObject sendJSON = new JSONObject();
 		

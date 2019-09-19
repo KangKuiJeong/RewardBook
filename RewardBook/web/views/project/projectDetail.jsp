@@ -195,6 +195,7 @@ border: 1px solid rgba(178, 178, 178, 0.67);
     max-height: 50%;
     display: flex;
     flex-direction: column;
+    display: block;
 }
 
 .option{
@@ -275,7 +276,7 @@ border: 1px solid rgba(178, 178, 178, 0.67);
     text-decoration: none;
 }
 
-.option_itemlist{
+.option_iteminfo{
 	border : 1px solid #ffb202;
 	display: flex;
     width: 100%;
@@ -285,7 +286,23 @@ border: 1px solid rgba(178, 178, 178, 0.67);
     padding: 16px 20px;
     font-size: 14px;
     letter-spacing: -0.3px;
+    cursor: pointer !important;
 }
+
+.item_left{width: 23%;
+    margin-right: 10px;
+    position: relative;
+}
+
+.reward{font-size: 14px; letter-spacing: -0.3px;}
+strong{font-weight: 700;}
+.item_price{font-size: 18px; letter-spacing: -0.3px; line-height: 18px; font-weight: bold;}
+.item_amount{margin-top: 5px !important;}
+.item_content{width: 52%; margin-right: 10px; margin-top: -2px;}
+.item_title{font-size: 16px; line-height: 21px; letter-spacing: -0.3px; font-weight: bold;}
+.item_datail{line-height: 20px;}
+.item_ddate{font-size: 14px; line-height: 14px; letter-spacing: -0.3px; margin-bottom: 13px;}
+.ddate{margin-top: 10px;}
 
 .target_gauge{ height: 4px; background-color: #e6eaed; position: relative; width: 100%; overflow: hidden; margin-bottom: 25px;}    
 .gauge {background-color: #ffb202; height: 4px; display: block; vertical-align: baseline;}
@@ -413,17 +430,31 @@ border: 1px solid rgba(178, 178, 178, 0.67);
 	<div class="option_list">
 		<div class="option_item">
 			<% for(Reward reward : rewardList){ %>
-			<div class="option_itemlist">
-				<div class="itemlist_price">
-					<%= reward.getR_price() %>
+			<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/r_list?p_no=<%= project.getP_no() %>'">
+				<div class="reward item_left">
+					<div class="reward item_price">
+						<%= reward.getR_price() %> 원 펀딩
+					</div>
+					<div class="reward item_amount">
+					<% if(reward.getR_amount().equals("무제한")){ %>
+						<span><strong><%= reward.getR_amount() %></strong></span>
+							<span style="opacity: 0.5;">  |  10개 펀딩</span>
+					<%}else{ %>
+						<strong><%= reward.getR_amount() %>개 남음</strong>
+						<span style="opacity: 0.5;">  |  10개 펀딩</span>
+					<% } %>
+					</div>
 				</div>
-				<div class="itemlist_quantity">
-					무제한
+				<div class="reward item_content">
+					<div class="reward item_title"><%= reward.getR_name() %></div>
+					<div class="reward item_detail"><%= reward.getR_detail() %></div>
+				</div>
+				<div class="reward item_ddate">
+					<span class="ddate"><strong>예상배송일</strong></span>
+					<span> <%= project.getP_ddate() %></span>
+					
 				</div>
 			</div>
-			<div class="option_itemlist">dd</div>
-			<div class="option_itemlist">dd</div>
-			<div class="option_itemlist">dd</div>
 			<% } %>
 		</div>
 	</div>
