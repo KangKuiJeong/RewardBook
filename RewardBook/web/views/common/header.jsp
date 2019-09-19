@@ -119,8 +119,8 @@
 					
 					<%} %>
 					</li>
-					<li class="menuli"><a href="">1:1문의</a></li>
-					<li class="menuli"><a href="">관리자문의</a></li>
+					<li class="menuli"><a href="#">1:1문의</a></li>
+					<li class="menuli"><a href="/RewardBook/iq_clist?u_no=<%= loginMember.getuNo() %>">관리자문의</a></li>
 					<li class="menuli" id="liBottom">
 						<a href="#" onclick="logoutCheck();">로그아웃</a>
 						<script>	

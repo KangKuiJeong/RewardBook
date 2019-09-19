@@ -36,6 +36,7 @@ public class Inquiry implements java.io.Serializable{
 		this.a_no = a_no;
 		this.iq_reply = iq_reply;
 		this.iq_rdate = iq_rdate;
+
 	}
 
 
@@ -162,11 +163,15 @@ public class Inquiry implements java.io.Serializable{
 		this.a_name = a_name;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Inquiry [iq_no=" + iq_no + ", u_no=" + u_no + ", iq_title=" + iq_title + ", iq_text=" + iq_text
 				+ ", iq_category=" + iq_category + ", iq_dcategory=" + iq_dcategory + ", iq_date=" + iq_date
-				+ ", iq_oc=" + iq_oc + ", a_no=" + a_no + ", iq_reply=" + iq_reply + ", iq_rdate=" + iq_rdate + "]";
+				+ ", iq_oc=" + iq_oc + ", a_no=" + a_no + ", iq_reply=" + iq_reply + ", iq_rdate=" + iq_rdate
+				+ ", u_name=" + u_name + ", a_name=" + a_name + "]";
 	}
+
+	
 	
 }

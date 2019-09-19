@@ -147,6 +147,15 @@
 <script src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+
+		$(".main_area2_section2 .search .submit").on("click", function() {
+			var link = "page=member&movePage=1";
+			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
+			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
+			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
+			location.href="/RewardBook/m_list?" + link;
+		});
 		
 		$(".main_area3_section1 .pageButton#page0").on("click", function() {
 			var link = "page=member&movePage=1";
@@ -245,7 +254,7 @@
 							<option value="전화번호" <% if (s2select1.equals("전화번호")) { %>selected<% } %>>전화번호</option>
 						</select>
 						<input name="s2text1" type="text"  <% if (!s2text1.equals("")) { %>value="<%= s2text1 %>"<% } %> style="width : 150px; height : 24px; font-size : 17px;">
-						<input type="submit" value="전송">
+						<div class="submit" style="width : 30px; height : 30px; cursor : pointer"><img src="resources/images/admin/admin_submit.png" style="width : 30px; height : 30px;"></div>
 					</div>
 				</div>
 			</form>

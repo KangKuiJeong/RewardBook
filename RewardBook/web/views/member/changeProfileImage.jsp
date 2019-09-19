@@ -12,7 +12,6 @@
 </head>
 <body>
 	<form method="post" action="/RewardBook/m_profileImg" enctype="multipart/form-data" id="profileForm">
-		<div class="line"></div>
 		<p class="profileUploadsBtn">프로필사진등록</p>
 		<input type="file" name="profileImg" id="uploadsBtn">
 		<input type="hidden" name="userNo" id="subBtn" value="<%= loginMember.getuNo() %>">
