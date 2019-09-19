@@ -11,9 +11,9 @@ public class NoticeService {
 	
 	private NoticeDao nDao = new NoticeDao();
 	
-	public int deleteNotice(String n_no) {
+	public int deleteNotice(String nt_no) {
 		Connection conn = getConnection();
-		int result = nDao.deleteNotice(conn, n_no);
+		int result = nDao.deleteNotice(conn, nt_no);
 		
 		if(result > 0) {
 			commit(conn);
@@ -25,9 +25,9 @@ public class NoticeService {
 		return result;
 	}
 
-	public int insertNotice(String n_no) {
+	public int insertNotice(Notice notice, String nt_img) {
 		Connection conn = getConnection();
-		int result = nDao.insertNotice(conn, n_no);;
+		int result = nDao.insertNotice(conn, notice, nt_img);
 		
 		if(result > 0) {
 			commit(conn);
@@ -39,9 +39,9 @@ public class NoticeService {
 		return result;
 	}
 
-	public int updateNotice(String n_no) {
+	public int updateNotice(Notice notice) {
 		Connection conn = getConnection();
-		int result = nDao.updateNotice(conn, n_no);;
+		int result = nDao.updateNotice(conn, notice);
 		
 		if(result > 0) {
 			commit(conn);
@@ -53,21 +53,35 @@ public class NoticeService {
 		return result;
 	}
 
-	public Notice selectNotice(String n_no) {
+	public Notice selectNotice(String nt_no) {
 		Connection conn = getConnection();
-		Notice notice = nDao.selectNotice(conn, n_no);
+		Notice notice = nDao.selectNotice(conn, nt_no);
 		
 		close(conn);
 		
 		return notice;
 	}
 
-	public ArrayList<Notice> listNotice() {
+	public ArrayList<Notice> listNotice(int currentPage, int limit) {
 		Connection conn = getConnection();
-		ArrayList<Notice> list = nDao.listNotice(conn);
+		ArrayList<Notice> list = nDao.listNotice(conn, currentPage, limit);
 		
 		close(conn);
 		
+		return list;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = nDao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Notice> SearchNT(String searchbt, String nt_search){
+		Connection conn = getConnection();
+		ArrayList<Notice> list = nDao.SearchNT(conn, searchbt, nt_search);
+		close(conn);
 		return list;
 	}
 
