@@ -162,7 +162,7 @@ width:16.66%;
 			
 			<li class="litype"><a href="inquiry_maker.jsp">1:1문의</a></li>
 			
-			<li class="litype"><a href="inquiry_admin.jsp">관리자 문의</a></li>
+			<li class="litype"><a href="/RewardBook/iq_clist?u_no=<%= loginMember.getuNo() %>">관리자 문의</a></li>
 			
 			<li class="litype">
 				<span class="flwc">팔로워 : </span><span id="flwcount"></span>
@@ -174,7 +174,7 @@ width:16.66%;
 								type:"get",
 								dataType: "json",
 								success: function(data){
-									$("#flwcount").html($("#flwcount").text() + data.uNo);
+									$("#flwcount").html($("#flwcount").text() + data.listCount);
 								}
 							});
 						});
@@ -309,6 +309,7 @@ width:16.66%;
 										var count = 0;
 										for(var i in json.result){
 											var type = (json.result[i].u_no.charAt(0) == 'A')? "개인" : "기업";
+												
 													$(".followinglink").html($(".followinglink").html()
 															+"<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no + "'>"
 															+"<div class='followarea'>"
@@ -328,6 +329,7 @@ width:16.66%;
 								        					+"</div>"
 								        					+"</a>");
 													count++;
+												
 										}
 										if(count == 0){
 											$(".followinglink").html($(".followinglink").html()

@@ -40,7 +40,7 @@ public class Follow_ListCountServlet extends HttpServlet {
 		/*System.out.println(listCount);*/
 		
 		JSONObject sendJSON = new JSONObject();
-		sendJSON.put("uNo", listCount);
+		sendJSON.put("listCount", listCount);
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
