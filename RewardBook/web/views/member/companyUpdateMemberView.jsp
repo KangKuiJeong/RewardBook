@@ -124,6 +124,13 @@ function test(){
 					value="<%=loginMember.getAddress_detail() %>"
 				<% } %>>
 				
+				<input type="text" id="homepage" name="homepage" 
+				<%if(loginMember.getHomepage() ==null){ //값이없을경우 %>
+					placeholder="홈페이지 URL"
+				<% }else{ 	//기존 값이 있을 경우 %>
+					value="<%=loginMember.getHomepage() %>"
+				<% } %>>
+				
 				<div id="checkBoxDiv">
 					
 					<div class="checkArea">

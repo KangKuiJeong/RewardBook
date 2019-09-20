@@ -38,7 +38,9 @@
 				<li class="iq_con">
 					<ul>
 						<li class="iq_subTitle" id="sNo"><%= i++ %></li>
-						<li class="iq_subTitle" id="sTit"><%= iq.getIq_title() %></li>
+						<li class="iq_subTitle" id="sTit">
+							<a href="/RewardBook/iq_cdetail?iq_no=<%= iq.getIq_no() %>"><%= iq.getIq_title() %></a>
+						</li>
 						<li class="iq_subTitle" id="sDate"><%= iq.getIq_date() %></li>
 						<li class="iq_subTitle" id="sYN">
 								<% if(iq.getIq_oc().equals("Y")){ %>
