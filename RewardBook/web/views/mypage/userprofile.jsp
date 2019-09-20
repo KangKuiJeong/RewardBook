@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="follow.model.vo.Follow, member.model.vo.Member, java.util.ArrayList"%>
     
-<% Member member = (Member)request.getAttribute("member"); %>
+<% Member member = (Member)request.getAttribute("member"); 
+%>
 
 <!DOCTYPE html>
 <html>
@@ -44,6 +45,15 @@
 	.tabsearch { margin-bottom:20px;}
 	.tabsearch input[type="text"] {margin-right:5px; height:30px;}
 	.tabsearch button {height:34px; padding: 0 10px}
+	
+	.category_style { font-size:16px;font-style:italic; }
+	
+	.fbtn { height:90px; width:110px; cursor:pointer;}
+	
+	
+	
+	
+	
 .tabs {
 	width:100%; height:150px;
   display: flex; 
@@ -159,16 +169,31 @@ width:33.333%;
 						<% } %>	
 			</li>
 			
-			<li class="litype">
-				<%= member.getCategory() %>
-			</li>
 			
 			<li class="litype">
-				<%= member.getIntro() %>
+				<% if(member.getIntro() == null){ %>
+					<span>안녕하세요. <%= member.getName() %> 입니다.</span>
+				<% } else {  %>
+					<%= member.getIntro() %>
+				<% } %>
 			</li>
 			
+			
 			<li class="litype">
-				<a href="<%= member.getHomepage() %>">홈페이지</a>
+				<% if(member.getCategory() == null){ %>
+					<span class="category_style">등록된 카테고리가 없습니다.</span>
+				<% } else {  %>
+					<span class="category_style"><%= member.getCategory() %></span>
+				<% } %>
+			</li>
+			
+			
+			<li class="litype">
+				<% if(member.getHomepage() == null){ %>
+					<span class="category_style">등록된 홈페이지가 없습니다.</span>
+				<% } else {  %>
+					<a href="<%= member.getHomepage() %>">홈페이지</a>
+				<% } %>
 			</li>
 			
 			<li class="litype">
@@ -181,29 +206,131 @@ width:33.333%;
 								type:"get",
 								dataType: "json",
 								success: function(data){
-									$("#flwcount").html($("#flwcount").text() + data.uNo);
+									$("#flwcount").html($("#flwcount").text() + data.listCount);
+									
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
 								}
 							});
 						});
 					</script>
 			</li>
 			
-			<li class="litype">
-				<span>팔로우</span>
-			</li>
 			
 			<li class="litype">
-				<img id="fbtn" src="/RewardBook/resources/images/mypage/fbtn.png">
+				<div id="follow_button"></div>
+				
+				<script type="text/javascript">
+					$(function(){
+						$.ajax({
+							url: "/RewardBook/flw_find",
+							data: {
+								u_no: "<%= member.getuNo() %>",
+								login_no: "<%= loginMember.getuNo() %>"
+								},
+							type: "get",
+							dataType: "json",
+							success: function(data){
+								if(data.follow_find == 0){
+									$("#follow_button").html($("#follow_button").html()
+											+ "<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn.png' onclick='followbtn()'>");
+								}else{
+									$("#follow_button").html($("#follow_button").html()
+											+ "<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn.png' onclick='unfollowbtn()'>");
+								}
+									
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus);
+							}
+						});
+					});
+				</script>
+			
+				
+				<script type="text/javascript">
+				
+					//팔로우 + 버튼 눌렀을 때
+					function followbtn(){
+						$(function(){
+							$.ajax({
+								url: "/RewardBook/flw_insert",
+								data: {
+									u_no_f: "<%= member.getuNo() %>",
+									u_no_fr: "<%= loginMember.getuNo() %>"
+									},
+								type: "get",
+								dataType: "json",
+								success: function(data){
+									if(data.following == 1){
+										alert("<%= member.getName() %>님을 팔로우 하셨습니다.");
+										if(data.following == 1){
+											$("#follow_button").html(
+													"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn.png' onclick='unfollowbtn()'>");
+										}else{
+											$("#follow_button").html(
+													"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn.png' onclick='followbtn()'>");
+										}
+									} else{
+										alert("다시 시도하여주세요.");
+									}
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					};
+					
+					</script>
+					
+					
+					
+					<script type="text/javascript">
+					//언팔로우 - 버튼 눌렀을 때
+					function unfollowbtn(){
+						$.ajax({
+							url: "/RewardBook/flw_delete",
+							data: {
+								u_no_f: "<%= member.getuNo() %>",
+								u_no_fr: "<%= loginMember.getuNo() %>"
+								},
+							type: "get",
+							dataType: "json",
+							success: function(data){
+								if(data.unfollow == 1){
+									alert("<%= member.getName() %>님을 팔로우 취소 하셨습니다.");
+									if(data.unfollow == 1){
+										$("#follow_button").html(
+												"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn.png' onclick='followbtn()'>");
+									}else{
+										$("#follow_button").html(
+												"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn.png' onclick='unfollowbtn()'>");
+									}
+								} else{
+									alert("다시 시도하여주세요.");
+								}
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus);
+							}
+						});
+					};
+					
+				</script>
+				
+				
 			</li>
 			
-			
+					
 			
 		</ul>
 	</div>
 	<div id="right">
 		<div id="myimage">
 			<!-- 이미지가 있을 때 -->
-			<%if(member.getProfileImg() != null){ %>
+			<% if(member.getProfileImg() != null){ %>
 				<img src="/RewardBook/resources/images/profileImg/<%= member.getProfileImg() %>">
 			<% }else{	//이미지가 없을때 기본이미지 보여지게함 %>
 				
@@ -279,38 +406,47 @@ width:33.333%;
 										var count = 0;
 										
 										for(var i in json.result){
-											var type = (json.result[i].u_no.charAt(0) == 'A')? "개인" : "기업";
-											
-											$(".followerlink").html($(".followerlink").html()
-													+"<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no + "'>"
-													+"<div class='followerarea'>"
-													+"<div class='flwimg'>"
-													+ 	"<img class='followerimg' src='/RewardBook/resources/images/mypage/i.jpg'>"
-					        						+ "</div>"
-						        					+ "<div class='flwname'>"
-						        					+ 	"<span class='followername'>"
-						        					+ 		decodeURIComponent(json.result[i].name)
-						        					+	"</span>"
-						        					+ "</div>"
-						        					+ "<div class='flwtype'>"
-						        					+ 	"<span class='followertype'>"
-						        					+ type
-						        					+	"</span>"
-						        					+ "</div>"
-						        					+"</div>"
-						        					+"</a>");
 											count++;
+											var uno = "<%= loginMember.getuNo() %>";
+											var str = "<a href='/RewardBook/"
+												if (json.result[i].u_no != uno){
+													str += "user_profile?u_no=" + json.result[i].u_no;
+												}else{
+													str += "views/mypage/mypage.jsp";
+												}
+											str += "'>"
+												+ "<div class='followerarea'>"
+												+ "<div class='flwimg'>"
+												+ "<img class='followerimg' src='/RewardBook/resources/images/mypage/i.jpg'>"
+							        			+ "</div>"
+								        		+ "<div class='flwname'>"
+								        		+ "<span class='followername'>"
+								        		+ decodeURIComponent(json.result[i].name)
+								        		+ "</span>"
+								        		+ "</div>"
+								        		+ "<div class='flwtype'>"
+								        		+ "<span class='followertype'>"
+								        		+ (json.result[i].u_no.charAt(0) == 'A' ? "개인" : "기업")
+								        		+ "</span>"
+								        		+ "</div>"
+								        		+ "</div>"
+								        		+ "</a>";
+
+											$(".followerlink").html($(".followerlink").html() + str);
 										}
 										if(count == 0){
 											$(".followerlink").html($(".followerlink").html()
-													+ "<br>" + "<br>"
-						        					+ "<div class='flwname'>"
-						        					+ 	"<span class='followername'>"
-						        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로워하는 친구가 없습니다."
-						        					+	"</span>"
-						        					+ "</div>"
-						        					);
+												+ "<br>" + "<br>"
+					        					+ "<div class='flwname'>"
+					        					+ "<span class='followername'>"
+					        					+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로워하는 친구가 없습니다."
+					        					+ "</span>"
+					        					+ "</div>"
+					        					);
 										}
+									},
+									error: function(jqXHR, textStatus, errorThrown){
+										console.log("error : " + textStatus);
 									}
 								});
 							});
@@ -365,7 +501,6 @@ width:33.333%;
 	<!-- 푸타부분 include -->
 	<%@ include file="../common/footer.jsp" %>
 	
-
 
 
 
