@@ -44,12 +44,14 @@ public class Inquery_ClientInsertServlet extends HttpServlet {
 
 		if (result > 0) {
 			// 글등록 성공시
+			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out= response.getWriter();
 			out.println("<script>");
-			out.println("alert('문의글을 등록하였습니다.')");
+			out.println("alert('문의글 등록이 완료되었습니다.')");
+			out.println("history.go(-2);");
 			out.println();
 			out.println("</script>");
-			response.sendRedirect("index.jsp");
+			
 			
 		} else {
 			// 실패시
