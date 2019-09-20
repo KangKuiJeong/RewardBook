@@ -172,35 +172,39 @@ public class MemberService {
 
 	
 	//관리자 페이지 멤버목록 page list 선택
-		public ArrayList<Member> pageSelect(int start, int limit, String check1, String check2, String select1, String text1) {
-			Connection conn = getConnection();
-			ArrayList<Member> list = mdao.pageSelect(conn, start, limit, check1, check2, select1, text1);
-			return list;
-		}
+	public ArrayList<Member> pageSelect(int start, int limit, String check1, String check2, String select1, String text1) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.pageSelect(conn, start, limit, check1, check2, select1, text1);
+		return list;
+	}
 
-		public int pageCount(String check1, String check2, String select1, String text1) {
-			Connection conn = getConnection();
-			int result = mdao.pageCount(conn, check1, check2, select1, text1);
-			return result;
-		}
+	public int pageCount(String check1, String check2, String select1, String text1) {
+		Connection conn = getConnection();
+		int result = mdao.pageCount(conn, check1, check2, select1, text1);
+		return result;
+	}
 
-		public Member detailMember(String u_no) {
-			Connection conn = getConnection();
-			Member member = mdao.detailMember(conn, u_no);
-			return member;
-		}
+	public Member detailMember(String u_no) {
+		Connection conn = getConnection();
+		Member member = mdao.detailMember(conn, u_no);
+		return member;
+	}
 
-		public int updateMember(Member member) {
-			Connection conn = getConnection();
-			int result = mdao.updateMember(conn, member);
-			return result;
+	public int updateMember(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMember(conn, member);
+		return result;
+	}
+
+	public int updateMember_A(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMember_A(conn, member);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
 		}
+		return result;
+	}
 		
-		
-
-
-
-		
-
-
 }

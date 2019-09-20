@@ -63,9 +63,9 @@ public class ProjectService {
 		return list;
 	}
 
-	public int updateProject(String p_no) {
+	public int updateProject(Project project) {
 		Connection conn = getConnection();
-		int result = pDao.updateProject(conn, p_no);;
+		int result = pDao.updateProject(conn, project);
 		
 		if(result > 0) {
 			commit(conn);
@@ -136,4 +136,27 @@ public class ProjectService {
 		int result = pDao.pageCount_P(conn, select1, text1);
 		return result;
 	}
+
+	public int permissionAccept(String no) {
+		Connection conn = getConnection();
+		int result = pDao.permissionAccept(conn, no);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public int permissionReturn(String no, String return_str) {
+		Connection conn = getConnection();
+		int result = pDao.permissionReturn(conn, no, return_str);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+	
 }

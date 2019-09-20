@@ -57,6 +57,7 @@
 .main_area2_section1 .close, .main_area2_section1 .update {
 	width : 100px;
 	float : right;
+	cursor : pointer;
 }
 .main_area2_section1 div div {
 	width : 80px;
@@ -180,13 +181,16 @@
 			});
 			updateFlag = true;
 		} else {
-			$(".main_area2_section1 .update div").text("수정하기");
-			$(".main_area3_section1 .info div .textarea textarea").each(function(index, item){
-				if($(item).attr("name") != "return")
-					$(item).attr("disabled", true);
-			});
-			alert("저장 하는 척만 했습니다!");
-			updateFlag = false;
+			str = 'page=project';
+			str += "&no=" + $(".main_area3_section1 .info .no .input input").val();
+			str += "&title=" + encodeURI($('.main_area3_section1 .info .title .input input').val());
+			str += "&category=" + $(".main_area3_section1 .info .category .input input").val();
+			str += "&tprice=" + $(".main_area3_section1 .info .tprice .input input").val();
+			str += "&edate=" + $(".main_area3_section1 .info .edate .input input").val();
+			str += "&ddate=" + $(".main_area3_section1 .info .ddate .input input").val();
+			str += "&story=" + $(".main_area3_section1 .info .story .textarea textarea").val();
+			str += "&info=" + $(".main_area3_section1 .info .info .textarea textarea").val();
+			location.href="/RewardBook/p_update?" + str;
 		}
 	}
 	
