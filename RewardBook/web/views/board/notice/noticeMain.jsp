@@ -274,16 +274,18 @@ label.text-hidden {
 	
 		<br><br>
 
-		<!-- 전체/공지/이벤트 탭 -->
+	
+ 	<!-- 전체/공지/이벤트 탭 -->
 		<div class="ui-tabs">
-			<ul>
+			<!-- <ul>
 				<li class="active"><a href="#">전체</a></li>
 				<li><a href="#1">공지</a></li>
 				<li><a href="#2">이벤트</a></li>
-			</ul>
+			</ul> -->
 		</div>
 
 	</div>
+
 	<!-- //all-ui-header --> <!-- //전체/공지/이벤트 탭 --> <!-- 공지사항게시판 -->
 	<div class="noticeboard">
 		<ul>

@@ -67,7 +67,7 @@ $(function() {
 			<li class="button" id="bpermission"><a id="apermission" href="/RewardBook/pp_list?page=permission&movePage=1">승인</a></li>
 			<li class="button" id="binquiry"><a id="ainquiry" href="/RewardBook/iq_list_a?page=inquiry&movePage=1">문의</a></li>
 			<li class="button" id="bdeclare"><a id="adeclare" href="/RewardBook/dc_list_a?page=declare&movePage=1">신고</a></li>
-			<li class="button" id="bstats"><a id="astats" href="#">통계</a></li>
+			<li class="button" id="bstats"><a id="astats" href="/RewardBook/views/stats/statsMain.jsp">통계</a></li>
 		</ul>
 	</div>
 </div>
