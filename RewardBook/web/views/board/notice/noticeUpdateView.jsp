@@ -165,7 +165,7 @@ form {
 							<input type="text" name="nt_title" placeholder="제목을 입력하세요" value="<%= n.getNt_title() %>"></li>
 				
 					<li class="textT"><h3 style="color: black">내용</h3>
-							<textarea  class="textarea" name="nt_text" placeholder="내용을 입력하세요"><% if( n.getNt_text().equals("null") ){ %><% }else{ %><%= n.getNt_text() %><%} %></textarea>
+							<textarea  class="textarea" name="nt_text" placeholder="내용을 입력하세요"><% if( n.getNt_text()==null ){ %><% }else{ %><%= n.getNt_text() %><%} %></textarea>
 					
 					</li>
 

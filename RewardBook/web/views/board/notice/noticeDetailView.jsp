@@ -130,7 +130,7 @@ h6{margin-top: 40px;
 
 <div class="contents"><!-- 내용부분 -->
 
-<% if(notice.getNt_text() != null && !(notice.getNt_text().equals("null"))  ){ %>
+<% if(notice.getNt_text() != null && !(notice.getNt_text().equals("null"))){ %>
 	<div class="imagebox"><%= notice.getNt_text() %></div>
 	<% } %>
 	
