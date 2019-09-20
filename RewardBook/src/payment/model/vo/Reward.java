@@ -6,6 +6,7 @@ public class Reward implements java.io.Serializable {
 
 	private String r_no;
 	private String p_no;
+	private String r_amount;
 	private String r_name;
 	private String r_detail;
 	private int r_price;
@@ -14,10 +15,11 @@ public class Reward implements java.io.Serializable {
 		super();
 	}
 
-	public Reward(String r_no, String p_no, String r_name, String r_detail, int r_price) {
+	public Reward(String r_no, String p_no,String r_amount, String r_name, String r_detail, int r_price) {
 		super();
 		this.r_no = r_no;
 		this.p_no = p_no;
+		this.r_amount = r_amount;
 		this.r_name = r_name;
 		this.r_detail = r_detail;
 		this.r_price = r_price;
@@ -37,6 +39,14 @@ public class Reward implements java.io.Serializable {
 
 	public void setP_no(String p_no) {
 		this.p_no = p_no;
+	}
+
+	public String getR_amount() {
+		return r_amount;
+	}
+
+	public void setR_amount(String r_amount) {
+		this.r_amount = r_amount;
 	}
 
 	public String getR_name() {
@@ -65,10 +75,8 @@ public class Reward implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Reward [r_no=" + r_no + ", p_no=" + p_no + ", r_name=" + r_name + ", r_detail=" + r_detail
-				+ ", r_price=" + r_price + "]";
+		return "Reward [r_no=" + r_no + ", p_no=" + p_no + ", r_amount=" + r_amount + ", r_name=" + r_name
+				+ ", r_detail=" + r_detail + ", r_price=" + r_price + "]";
 	}
-	
-	
-	
+
 }

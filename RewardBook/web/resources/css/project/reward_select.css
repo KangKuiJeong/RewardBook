@@ -1,0 +1,287 @@
+@charset "UTF-8";
+
+
+*{vertical-align: baseline;}
+
+#reward_container{
+	padding: 0;
+	margin: 0 auto;
+	width: 860px;
+}
+
+select-container{margin-bottom: 42px;}
+.select-container h3 em{display: inline-block; color: rgba(0, 0, 0, 0.84); font-size: 24px; font-weight: bold;}
+
+.reward-box {
+	border-radius: 5px;
+	background: rgba(0, 0, 0, 0.06);
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+}
+
+.reward-list > ul{
+	list-style: none;
+	padding: 0;
+}
+
+.reward-check > input{
+	width: 20px;
+}
+
+.checked-area{
+	display: none;
+}
+
+.top-area h3 em{font-size: 18px;}
+.top-area{
+	margin-bottom: 20px;
+	display: flex;
+}
+
+.top-area > h3 {margin-bottom: 10px; margin-right: 10px;}
+.top-area > p{padding: 0 5px; font-size: 14px; font-weight: 500; line-height: 18px;}
+.reward-box::after{
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.reward-box dt{
+	float: left;
+    text-align: center;
+    width: 100px;
+    padding-top: 50px;
+}
+.reward-box dt input{
+	position: absolute;
+    left: -99999px;
+    opacity: 0;
+}
+.rb-checkbox span{
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	padding-left: 24px;
+	vertical-align: top;
+}
+
+.rb-checkbox > span::before{
+	position: absolute;
+	top: 2px;
+	left: 0;
+	transition: .25s;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	background-color: #fff;
+	width: 16px;
+	height: 16px;
+	content: '';
+}
+
+.rb-checkbox > span::after{
+	display: inline-block;
+	margin-top: -.2em;
+	vertical-align: middle;
+	text-transform: none;
+	line-height: 1;
+	font-style: normal;
+	font-variant: normal;
+	content: "";
+	position: absolute;
+	top: 6px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.reward-box > dd {
+	float: left;
+    padding: 20px 10px;
+    width: 740px;
+    margin-inline-start: 40px;
+    margin: 0;
+}
+
+
+.sum{margin-bottom: 15px; font-weight: 500; font-size: 18px;}
+.number{margin-bottom: 5px; font-size: 14px; line-hieght: 17px;}
+.text{margin-bottom: 5px; font-size: 12px; line-height: 16px; color: #686868;}
+.date{font-size: 12px; line-height: 15px;}
+.reward-box dd p{    cursor: pointer;}
+.amount{float: left; width: 180px;}
+.amount .title{margin-bottom: 5px; font-size: 12px;}
+.amount .inputarea button{padding: 5px 0 0; font-size: 20px; vertical-align: middle; color: #65696B; background: none; border: none;}
+.icon-remove-box-o::before{content: "";}
+[class*="icon-"]::before {
+    display: inline-block;
+    margin-top: -.2em;
+    vertical-align: middle;
+    text-transform: none;
+    line-height: 1;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    speak: none;
+}
+
+.input-area input[type="text"] {
+    width: 70px;
+    text-align: right;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid #00cca3;
+    background: #fff;
+    border-radius: 3px;
+    box-sizing: border-box !important;
+}
+.icon-add-box-o::before{content: "";}
+.checked-area::after{content: ""; clear: both; display: block;}
+
+
+.reward-donation{margin-bottom: 42px;}
+.reward-donation::after{content: ""; clear: both; display: block;}
+.reward-donation h3{float: left; text-align: left; width: 200px;}
+.reward-donation h3{font-size: 16px;}
+.donation-content{float: left; width: 660px;}
+.donation-content .sub-text{display: inline-block; margin-bottom: 0px;     padding: 0 5px; font-size: 13px; font-weight: 500; line-height: 18px;}
+.donation-input{text-align:right; display: inline-block; position: relative; font-size: 17px;}
+.donation-input > input{
+	text-align:right; 
+	height: 48px;
+	line-height: 1.2em;
+	font-size: 17px;
+	font-weight: 300;
+	transition-property: border-color, height, padding-right, color;
+	transition-duration: 0.2s, 0s;
+	outline: none;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	background: #fff;
+	padding: 0 0.94118em;
+	width: 100%;
+	vertical-align: middle;
+	color: rgba(0, 0, 0, 0.84);
+}
+.donation-input::after{
+	display: inline-block;
+	margin-top: -.2em;
+	vertical-align: middle;
+	text-transform: none;
+	line-height: 1;
+	font-family: 'wadizicon' !important;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	speak: none;
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: scale(0);
+	transition-property: transform, opacity;
+	transition-duration: .2s;
+	opacity: 0;
+	margin-top: 0;
+	width: auto;
+	height: auto;
+	box-sizing: border-box;
+	pointer-events: none;
+	color: #00c4c4;
+	font-size: 1.41176em;
+}
+
+.viewyn-wrap h3{float: left; text-align: left; width: 200px; display: inline-block; margin-bottom: 16px;}
+.viewyn-wrap h3 em{font-size: 16px;}
+.viewyn-wrap .sub-text{display: inline-block; margin-bottom: 0px;     padding: 0 5px; font-size: 13px; font-weight: 500; line-height: 18px;}
+.viewyn-wrap .notice-text{margin-bottom: 5px; padding: 0 5px; font-size: 12px; font-weight: 500; line-height: 18px; color: rgba(0, 0, 0, .54);}
+.opencheck{float: left; width: 660px;}
+.inner-wrap{padding: 60px 0 50px 40px;}
+.inner-wrap .check-area{width: 450px; text-align: left; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px dashed #979797;}
+.check-area input[type="checkbox"]{position: absolute; left: -99999px; opacity: 0;}
+.viewyn-wrap .rb.checkbox{display: inline-block; margin: 10px 0 20px 0; width: 200px;}
+.viewyn-wrap .rb.checkbox{width: auto;}
+.rb.checkbox:first-child{display: inline-block; margin: 10px 120px 20px 0;}
+label.rb.checkbox > input{visibility: hidden;}
+label.rb.checkbox > span{display: inline-block; position: relative; cursor: pointer; padding-left: 24px; vertical-align: top;}
+label.rb.checkbox > span::before{
+	position: absolute;
+	top: 2px;
+	left: 0;
+	transition: .25s;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	background-color: #fff;
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	content: '';
+}
+label.rb.checkbox > span::after{
+	display: inline-block;
+	margin-top: -.2em;
+	vertical-align: middle;
+	text-transform: none;
+	line-height: 1;
+	font-family: 'wadizicon' !important;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	speak: none;
+	content: "";
+	position: absolute;
+	top: 6px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.example li{display: inline-block; margin-right: 20px; width: 200px; margin: 0 auto 15px; margin-right: auto; text-align: center; padding: 10px; background: #EEE; border-radius: 2px;}
+.example li .title{margin-bottom: 15px; text-align: center; font-weight: 500; font-size: 11px; color: #686868;}
+.example dl dt{float: left; height: 32px; text-align: center; padding-right: 10px;}
+.example dl dt em{display: inline-block; width: 32px; height: 32px; background: no-repeat center center #fff; background-image: none; background-size: auto; background-size: cover; border-radius: 50%;}
+.example dl dd{float: left; height: 32px; text-align: left; font-size: 10px; line-height: 14px; color: #686868;}
+.example dl::after{content: ""; clear: both; display: block;}
+.remains{padding-left: 10px; font-size: 12px;}
+.btn-wrap{text-align: center;}
+.btn-wrap .confirm{margin-bottom: 20px; font-size: 16px; font-weight: 550; line-height: 17px;}
+.btn-wrap .confirm em{text-decoration: underline; color: #00cca3;}
+.rb.button.primary{background-color: #ffb202; color: #fff; border-color: #ffb202;}
+.rb.button{
+	display: inline-block; 
+	padding-top: .07em; 
+	text-decoration: none;
+	transition-property: background-color, border-color, color, opacity;
+	transition-duration: .2s;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+    border-top-color: rgba(0, 0, 0, 0.15);
+    border-right-color: rgba(0, 0, 0, 0.15);
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+    border-left-color: rgba(0, 0, 0, 0.15);
+	border-radius: 3px;
+	background-color: #fff;
+	cursor: pointer;
+	padding: 0 1.41176em;
+    padding-top: 0px;
+	height: 48px;
+	vertical-align: middle;
+	text-decoration: none;
+	line-height: 1;
+	color: rgba(0, 0, 0, 0.54);
+	font-size: 17px;
+	font-weight: 400;
+	box-sizing: border-box !important;
+	-webkit-appearance: none;
+}
+.target_gauge{ height: 4px; background-color: #e6eaed; position: relative; width: 100%; overflow: hidden; margin-bottom: 25px;}    
+.gauge {background-color: #ffb202; height: 4px; display: block; vertical-align: baseline;}
