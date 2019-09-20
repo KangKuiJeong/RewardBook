@@ -21,7 +21,7 @@
 		<p id="iq_atitle">관리자문의</p>
 		<p id="iq_acontents">문의사항을 남겨주시면 보다 신속하게 답변드리겠습니다.</p>
 		<p id="nullMessage"><%= loginMember.getName() %>님의 <%= message %></p>
-		<div id="WritebtnArea"><button id="iq_Nullawrite">문의하기</button>
+		<div id="WritebtnArea"><button id="iq_Nullawrite" onclick="location.href='views/mypage/inquiry_insertAdmin.jsp'">문의하기</button>
 								<button id="iq_Nullawrite" onclick="location.href='index.jsp'">홈으로</button></div>
 		
 	</div>

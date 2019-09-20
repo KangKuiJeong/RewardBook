@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/*1대1문의 css*/
+#Sendcontainer { width:1240px; text-align:center; margin: 50px auto; }
+#sendContainer .click {color: #353535; border-bottom:5px solid rgb(242, 85, 85) }
+.tab { list-style: none; margin: 0; padding: 0; overflow: hidden; }
+.tab li { float: left; }
+.tab li a { display: inline-block; color: #353535; font-size:20px; font-weight:bold;
+			text-align: center; text-decoration: none; padding: 9px 16px; font-size: 17px; transition:0.3s; }
+.tabcontent { background-color:#fff; padding: 30px 0; color:#353535; }
+ul.tab li.current{ color: #353535; border-bottom:5px solid rgb(242, 85, 85) }
+.tabcontent.current { display: block; }
+#oto_awrap { width:1240px; margin: 50px auto; padding:5px; margin-bottom:100px}
+#oto_atitle { font-size:38px; font-weight:bold;}
+#oto_acontents { color:#8c8c8c; font-size:18px; padding:10px 0; display:inline-block;}
+#oto_awrap #line { width:70px; height:5px; background:#ffb202; margin-bottom:5px;}
+#oto_awrite { float:right; font-size:18px; background:#fff; color:#353535; border:1px solid #D5D5D5; padding: 5px 10px; }
+#oto_awrite:hover { background:#ffb202; color:#fff;}
+#send .iq_subTitle { float:left; line-height:50px; font-size:16px; font-weight:bold; color:#353535; padding:0 15px;}
+#send #iq_title { text-align: center; background:#f0f0f0; border-top:1px solid #BDBDBD; border-bottom:1px solid #BDBDBD; width:100%; height:50px; margin-top:5px}
+#send #sNo { width:10%}
+#send #sTit{ width:45%;}
+#send #qName { width:10%; }
+#send #sDate { width:10%;}
+#send #sYN { width:10%;}
+#send #nameCountWrap {clear:both; font-size:19px; text-align:right; display:block; margin:10px 0;}
+#send #nameCountWrap span { font-weight:bold; padding:0 5px;}
+#send .iq_con .iq_subTitle { font-weight:normal; font-size:15px;}
+#send .iq_con { border-bottom:1px solid #f1f1f1; height:50px; border-bottom:1px solid #E7E7E7; text-align:center;}
+#send #sTit a { text-decoration:none; color:#353535;}
+#send #sTit a:hover { color:#000; text-decoration:underline;}
+.messages { font-size:18px; margin:30px 0; text-align:center; color:#5d5d5d;}
+/*나에게 문의한 1:1문의 목록*/
+#oto_awrap { width:1240px; margin: 50px auto; padding:5px; margin-bottom:100px}
+#oto_atitle { font-size:38px; font-weight:bold;}
+#oto_acontents { color:#8c8c8c; font-size:18px; padding:10px 0; display:inline-block;}
+#oto_awrap #line { width:70px; height:5px; background:#ffb202; margin-bottom:5px;}
+#oto_awrite { float:right; font-size:18px; background:#fff; color:#353535; border:1px solid #D5D5D5; padding: 5px 10px; }
+#oto_awrite:hover { background:#ffb202; color:#fff;}
+.tab { list-style: none; margin: 0; padding: 0; overflow: hidden; }
+.tab li { float: left; }
+.tab li a { display: inline-block; color: #353535; font-size:20px; font-weight:bold;
+			text-align: center; text-decoration: none; padding: 9px 16px; font-size: 17px; transition:0.3s; }
+#Receivecontainer { width:1240px; text-align:center; margin: 0px auto; }
+#Receivecontainer .click {color: #353535; border-bottom:5px solid rgb(242, 85, 85) }
+#receive .iq_subTitle { float:left; line-height:50px; font-size:16px; font-weight:bold; color:#353535; padding:0 15px;}
+#receive #iq_title { text-align: center; background:#f0f0f0; border-top:1px solid #BDBDBD; border-bottom:1px solid #BDBDBD; width:100%; height:50px; margin-top:5px}
+#receive #sNo { width:10%}
+#receive #sTit{ width:45%;}
+#receive #sDate { width:10%;}
+#receive #qName { width:10%;}
+#receive #sYN { width:10%;}
+#receive #nameCountWrap {clear:both; font-size:19px; text-align:right; display:block; margin:10px 0;}
+#receive #nameCountWrap span { font-weight:bold; padding:0 5px;}
+#receive .iq_con .iq_subTitle { font-weight:normal; font-size:15px;}
+#receive .iq_con { border-bottom:1px solid #f1f1f1; height:50px; border-bottom:1px solid #E7E7E7; text-align:center;}
+#receive #sTit a { text-decoration:none; color:#353535;}
+#receive #sTit a:hover { color:#000; text-decoration:underline;}

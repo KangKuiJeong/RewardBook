@@ -5,7 +5,6 @@ import static common.JDBCTemplate.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import inquiry.model.vo.Inquiry;
@@ -86,6 +85,44 @@ public class InquiryClientDao {
 		}
 		
 		return result;
+	}
+	
+	//관리자 게시글 상세보기용 DAO
+	public Inquiry detailView(Connection conn, String iq_no) {
+		
+		Inquiry inq = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from inquiry where iq_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, iq_no);
+			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				
+				inq = new Inquiry();
+					
+				inq.setIq_no(rset.getString("IQ_NO"));
+				inq.setU_no(rset.getString("U_NO"));
+				inq.setIq_title(rset.getString("IQ_TITLE"));
+				inq.setIq_text(rset.getString("IQ_TEXT"));
+				inq.setIq_category(rset.getString("IQ_CATEGORY"));
+				inq.setIq_date(rset.getDate("IQ_DATE"));
+				inq.setIq_oc(rset.getString("IQ_OC"));
+				inq.setIq_reply(rset.getString("IQ_REPLY"));
+				inq.setIq_rdate(rset.getDate("IQ_RDATE"));
+				inq.setA_no(rset.getString("a_no"));
+			}
+		
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return inq;
 	}
 	
 	

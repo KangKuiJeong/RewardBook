@@ -31,7 +31,7 @@
 				<span class="line"> | </span> 
 				<a href="#" class="f_list">리워드서비스운영정책</a>
 				<span class="line"> | </span>  
-				<a href="#" class="f_list">공지사항</a>
+				<a href="/RewardBook/nlist" class="f_list">공지사항</a>
 				<span class="line"> | </span> 
 				<a href="/RewardBook/flist" class="f_list">자주묻는질문</a>
 

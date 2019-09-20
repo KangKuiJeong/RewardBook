@@ -52,6 +52,7 @@ public class Member_CompanyUpdateServlet extends HttpServlet {
 		member.setAddress(request.getParameter("address"));
 		member.setAddress_detail(request.getParameter("detailAddress"));
 		member.setCategory(String.join(",", request.getParameterValues("category")));
+		member.setHomepage(request.getParameter("homepage"));
 		member.setIntro(request.getParameter("intro"));
 		
 		String cryptPwd = null;

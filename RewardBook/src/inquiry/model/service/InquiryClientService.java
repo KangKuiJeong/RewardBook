@@ -1,14 +1,9 @@
 package inquiry.model.service;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-
-import board.faq.model.vo.Faq;
 import inquiry.model.dao.InquiryClientDao;
 import inquiry.model.vo.Inquiry;
 
@@ -43,5 +38,18 @@ public class InquiryClientService {
 		
 		return result;
 	}
+	
+	//관리자문의글 상세보기용
+	public Inquiry detailView(String iq_no) {
+		
+		Connection conn = getConnection();
+		Inquiry inq = iqcDao.detailView(conn, iq_no);
+		
+		close(conn);
+		
+		return inq;
+	}
+
+
 
 }

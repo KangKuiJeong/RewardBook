@@ -166,7 +166,7 @@ public class MemberDao {
 		
 		String query = "update users "
 				+ "set u_name = ?, u_pw = ?, u_phone = ?, u_post = ?, u_address = ?, u_address_detail = ?, "
-				+ "u_intro = ?, u_category = ? where u_no = ?";
+				+ "u_intro = ?, u_category = ?, u_homepage = ? where u_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);			
@@ -179,7 +179,8 @@ public class MemberDao {
 			pstmt.setString(6, member.getAddress_detail());
 			pstmt.setString(7, member.getIntro());
 			pstmt.setString(8, member.getCategory());
-			pstmt.setString(9, member.getuNo());
+			pstmt.setString(9, member.getHomepage());
+			pstmt.setString(10, member.getuNo());
 			
 			result = pstmt.executeUpdate();
 			
