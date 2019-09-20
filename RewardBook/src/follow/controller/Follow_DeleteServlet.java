@@ -1,16 +1,22 @@
 package follow.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
+import follow.model.service.FollowService;
+
 /**
  * Servlet implementation class Follow_DeleteServlet
  */
-@WebServlet("/Follow_DeleteServlet")
+@WebServlet("/flw_delete")
 public class Follow_DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +32,19 @@ public class Follow_DeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String u_no_f = (String)request.getParameter("u_no_f");
+		String u_no_fr = (String)request.getParameter("u_no_fr");
+
+		int unfollow = new FollowService().followDelete(u_no_f, u_no_fr);
+		JSONObject sendJSON = new JSONObject();
+		sendJSON.put("unfollow", unfollow);
+		
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.print(sendJSON.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 	/**

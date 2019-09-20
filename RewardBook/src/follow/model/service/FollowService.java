@@ -46,6 +46,60 @@ public class FollowService {
 
 
 
+	//팔로우 중인지 조회
+	public int followFind(String u_no, String login_no) {
+		Connection conn = getConnection();
+		int result = fdao.getfollowFind(conn, u_no, login_no);
+		close(conn);
+		return result;
+	}
+
+
+	
+	//팔로잉 추가
+	public int followInsert(String u_no_f, String u_no_fr) {
+		Connection conn = getConnection();
+		int result = fdao.getfollowInsert(conn, u_no_f, u_no_fr);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
+	//팔로우 취소 
+	public int followDelete(String u_no_f, String u_no_fr) {
+		Connection conn = getConnection();
+		int result = fdao.getfollowDelete(conn, u_no_f, u_no_fr);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+
+
 
 
 

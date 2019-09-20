@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import follow.model.service.FollowService;
+import follow.model.vo.Follow;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
