@@ -132,9 +132,40 @@ public class ProjectDao {
 		return null;
 	}
 
-	public int updateProject(Connection conn, String p_no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateProject(Connection conn, Project project) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update project set p_title=?, p_category=?, p_tprice=?, p_edate=?, p_ddate=?, p_story=?, p_info=? where p_no=?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, project.getP_title());
+			pstmt.setString(2, project.getP_category());
+			pstmt.setInt(3, project.getP_tprice());
+			pstmt.setDate(4, project.getP_edate());
+			pstmt.setDate(5, project.getP_ddate());
+			pstmt.setString(6, project.getP_story());
+			pstmt.setString(7, project.getP_info());
+			pstmt.setString(8, project.getP_no());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(project);
+			System.out.println(result);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 	public int countProject(Connection conn) {
@@ -189,14 +220,13 @@ public class ProjectDao {
 		
 		return result;
 	}
-	
 
 	public ArrayList<Project> selectNewProject(Connection conn) {
 		ArrayList<Project> list = new ArrayList<Project>();
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT p_no, p_title, u_name, p_sdate FROM PROJECT JOIN USERS USING (u_no) WHERE P_PERMISSION = 'N' ORDER BY p_no DESC";
+		String query = "SELECT p_no, p_title, u_name, p_sdate FROM PROJECT JOIN USERS USING (u_no) WHERE P_PERMISSION = 'N' AND P_RETURN = NULL OR P_RETURN = '' ORDER BY p_no DESC";
 		
 		try {
 			stmt = conn.createStatement();
@@ -424,7 +454,7 @@ public class ProjectDao {
 		PreparedStatement pstmt = null;
 		ResultSet rest = null;
 		
-		String check = "where p_permission = 'N'";
+		String check = "where p_permission = 'N' and p_return = null or p_return = ''";
 
 		if (text1 != "") {
 			
@@ -524,6 +554,54 @@ public class ProjectDao {
 		return result;
 		
 	}
-	
+
+	public int permissionAccept(Connection conn, String no) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update project set p_permission='Y', p_pdate=sysdate, p_sdate=sysdate where p_no=?";
+				
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int permissionReturn(Connection conn, String no, String return_str) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update project set p_permission='N', p_pdate=sysdate, p_return=? where p_no=?";
+				
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, return_str);
+			pstmt.setString(2, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

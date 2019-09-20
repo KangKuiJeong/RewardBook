@@ -70,7 +70,7 @@ public class InquiryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rest = null;
 		
-		String check = "where iq_category = 'inquiry'";
+		String check = "where iq_category = 'INQUIRY'";
 
 		if (check1.equals("true") || check2.equals("true")) {
 			check += " and iq_oc == ";
@@ -126,8 +126,6 @@ public class InquiryDao {
 				
 				list.add(inquiry);
 				
-				System.out.println(inquiry);
-				
 			}
 			
 		} catch (Exception e) {
@@ -148,7 +146,7 @@ public class InquiryDao {
 		Statement stmt = null;
 		ResultSet rest = null;
 
-		String check = "where iq_category = 'inquiry'";
+		String check = "where iq_category = 'INQUIRY'";
 
 		if (check1.equals("true") || check2.equals("true")) {
 			check += " and iq_oc == ";
@@ -209,7 +207,7 @@ public class InquiryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rest = null;
 
-		String check = "where iq_category = 'declare'";
+		String check = "where iq_category = 'DECLARE'";
 
 		if (check1.equals("true") || check2.equals("true")) {
 			check += " and iq_oc == ";
@@ -265,8 +263,6 @@ public class InquiryDao {
 				
 				list.add(inquiry);
 				
-				System.out.println(inquiry);
-				
 			}
 			
 		} catch (Exception e) {
@@ -287,7 +283,7 @@ public class InquiryDao {
 		Statement stmt = null;
 		ResultSet rest = null;
 
-		String check = "where iq_category = 'declare'";
+		String check = "where iq_category = 'DECLARE'";
 
 		if (check1.equals("true") || check2.equals("true")) {
 			check += " and iq_oc == ";

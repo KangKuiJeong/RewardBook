@@ -398,7 +398,6 @@ public class MemberDao {
 		
 	}
 
-	
 	public ArrayList<Member> pageSelect(Connection conn, int start, int limit, String check1, String check2, String select1, String text1) {
 
 		ArrayList<Member> list = new ArrayList<Member>();
@@ -588,9 +587,42 @@ public class MemberDao {
 		return 0;
 	}
 
-	
-	
-	
-
+	public int updateMember_A(Connection conn, Member member) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update users set u_bno=?, u_id=?, u_name=?, u_phone=?, u_intro=?, u_address=?, u_post=?, u_mileage=?, u_bank=?, u_bank_account=?, u_homepage=?, u_category=? where u_no = ?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, member.getuBno());
+			pstmt.setString(2, member.getId());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getIntro());
+			pstmt.setString(6, member.getAddress());
+			pstmt.setString(7, member.getPost());
+			pstmt.setInt(8, member.getMileage());
+			pstmt.setString(9, member.getBank());
+			pstmt.setString(10, member.getBankAccount());
+			pstmt.setString(11, member.getHomepage());
+			pstmt.setString(12, member.getCategory());
+			pstmt.setString(13, member.getuNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 
 }
