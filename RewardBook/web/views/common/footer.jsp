@@ -34,7 +34,8 @@
 				<a href="/RewardBook/nlist" class="f_list">공지사항</a>
 				<span class="line"> | </span> 
 				<a href="/RewardBook/flist" class="f_list">자주묻는질문</a>
-
+				<span class="line"> | </span> 
+				<a href="/RewardBook/mlist" class="f_list">메모</a>
 				<span id="footerSns">
 						<a href="https://facebook.com" target="_blank">
 							<img src="/RewardBook/resources/images/index/facebook48.png" width="32"></a>
