@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/RewardBook/resources/css/project/projectMain.css">
 <!-- 공통 header & footer 스타일시트 연결 -->
 <link rel="stylesheet" href="/RewardBook/resources/css/index.css">
-<link rel="stylesheet" href="/RewardBook/resources/css/MainMyPage.css">
+<link rel="stylesheet" href="/RewardBook/resources/css/mainMyPage.css">
 <script src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 
 <!-- 슬라이드 스크립트 -->

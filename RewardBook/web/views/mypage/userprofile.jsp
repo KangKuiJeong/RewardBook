@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/RewardBook/resources/css/common.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="/RewardBook/resources/css/project/projectMain.css">
 <style type="text/css">
 	a{text-decoration: none; color:#000;}		 
   	#box{margin: 0 auto; width:1140px; height:1100px;}
@@ -48,7 +48,7 @@
 	
 	.category_style { font-size:16px;font-style:italic; }
 	
-	.fbtn { height:90px; width:110px; cursor:pointer;}
+	.fbtn { width:70%; cursor:pointer;}
 	
 	
 	
@@ -94,12 +94,16 @@ width:33.333%;
 
 .tab .tabbox { margin:10px; width:100%; height:100%;}
 .tab .tabbox .boxtop { height: 40px; width:100%;  }
-.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto;}
-.tab .tabbox .boxbottom .boxarea { margin: 5px; float:left; width:30%; height: 200px; border: 1px solid gray; }
-.tab .tabbox .boxbottom .boxarea .itemimage { width: 100%; height:140px; border-bottom: 1px solid gray; }
-.tab .tabbox .boxbottom .boxarea .itemname { width: 100%; height:60px;  }
-.tab .tabbox .boxbottom .boxarea .itemname .itemname_text {width: 100%; height:40px;margin-left:2px; font-size:15px; font-weight:bold;}
-.tab .tabbox .boxbottom .boxarea .itemname .itemname_per {width: 100%; height:20px;margin-left:2px; color:blue; font-size:11px;}
+.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto; margin-left:30px;}
+.tab .tabbox .boxbottom .boxarea { margin: 5px; float:left; width:30%; height: 300px; border: 1px solid lightgray; }
+.tab .tabbox .boxbottom .boxarea .itemimage { width: 100%; height:200px; border-bottom: 1px solid gray; }
+.tab .tabbox .boxbottom .boxarea .itemname { width: 100%; height:50px;  display:block;}
+.tab .tabbox .boxbottom .boxarea .itemname .itemname_text {width: 100%; height:50px;margin-left:2px;  font-size:15px; font-weight:bold; overflow:hidden auto;}
+.tab .tabbox .boxbottom .boxarea .itemname .itemname_text span{padding:2px;}
+.tab .tabbox .boxbottom .boxarea .iteminfo {width: 100%; height:20px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
+.tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_name {float:left; font-size: 13px; color: #90949c;}
+.tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_category{float:right; font-size: 13px; color: #90949c; margin-right:5px;}
+.tab .tabbox .boxbottom .boxarea .itemper {width: 100%; height:30px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
 
 
 .boxbottom .bottomcenter{ margin: 0 auto; height:100%; width:500px;}
@@ -199,6 +203,7 @@ width:33.333%;
 			<li class="litype">
 				<span class="flwc">팔로워 : </span><span id="flwcount"></span>
 					<script type="text/javascript">
+						//총 팔로워 수 출력
 						$(function(){
 							$.ajax({
 								url:"/RewardBook/flw_listcount",
@@ -206,7 +211,7 @@ width:33.333%;
 								type:"get",
 								dataType: "json",
 								success: function(data){
-									$("#flwcount").html($("#flwcount").text() + data.listCount);
+									$("#flwcount").html($("#flwcount").val() + data.listCount);
 									
 								},
 								error: function(jqXHR, textStatus, errorThrown){
@@ -222,6 +227,7 @@ width:33.333%;
 				<div id="follow_button"></div>
 				
 				<script type="text/javascript">
+				//팔로우 상태 조회 에 따른 이미지 출력
 					$(function(){
 						$.ajax({
 							url: "/RewardBook/flw_find",
@@ -234,10 +240,10 @@ width:33.333%;
 							success: function(data){
 								if(data.follow_find == 0){
 									$("#follow_button").html($("#follow_button").html()
-											+ "<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn.png' onclick='followbtn()'>");
+											+ "<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn1.png' onclick='followbtn()'>");
 								}else{
 									$("#follow_button").html($("#follow_button").html()
-											+ "<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn.png' onclick='unfollowbtn()'>");
+											+ "<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn1.png' onclick='unfollowbtn()'>");
 								}
 									
 							},
@@ -267,11 +273,28 @@ width:33.333%;
 										alert("<%= member.getName() %>님을 팔로우 하셨습니다.");
 										if(data.following == 1){
 											$("#follow_button").html(
-													"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn.png' onclick='unfollowbtn()'>");
+													"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn1.png' onclick='unfollowbtn()'>");
 										}else{
 											$("#follow_button").html(
-													"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn.png' onclick='followbtn()'>");
+													"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn1.png' onclick='followbtn()'>");
 										}
+										//결과에 따른 총 팔로워 수 재출력
+										$(function listCount(){
+											$.ajax({
+												url:"/RewardBook/flw_listcount",
+												data:{uNo : "<%= member.getuNo() %>"},
+												type:"get",
+												dataType: "json",
+												success: function(data){
+													$("#flwcount").html($("#flwcount").val() + data.listCount);
+													
+												},
+												error: function(jqXHR, textStatus, errorThrown){
+													console.log("error : " + textStatus);
+												}
+											});
+										});
+										//
 									} else{
 										alert("다시 시도하여주세요.");
 									}
@@ -303,11 +326,28 @@ width:33.333%;
 									alert("<%= member.getName() %>님을 팔로우 취소 하셨습니다.");
 									if(data.unfollow == 1){
 										$("#follow_button").html(
-												"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn.png' onclick='followbtn()'>");
+												"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn1.png' onclick='followbtn()'>");
 									}else{
 										$("#follow_button").html(
-												"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn.png' onclick='unfollowbtn()'>");
+												"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn1.png' onclick='unfollowbtn()'>");
 									}
+									//결과에 따른 총 팔로워 수 재출력
+									$(function listCount(){
+										$.ajax({
+											url:"/RewardBook/flw_listcount",
+											data:{uNo : "<%= member.getuNo() %>"},
+											type:"get",
+											dataType: "json",
+											success: function(data){
+												$("#flwcount").html($("#flwcount").val() + data.listCount);
+												
+											},
+											error: function(jqXHR, textStatus, errorThrown){
+												console.log("error : " + textStatus);
+											}
+										});
+									});
+									//
 								} else{
 									alert("다시 시도하여주세요.");
 								}
@@ -315,10 +355,13 @@ width:33.333%;
 							error: function(jqXHR, textStatus, errorThrown){
 								console.log("error : " + textStatus);
 							}
+							
 						});
 					};
 					
 				</script>
+				
+				
 				
 				
 			</li>
@@ -357,23 +400,66 @@ width:33.333%;
 					</div>
 				</div> 
 	        	<div class="boxbottom">
-	        		<a class="boxitem" href="#">
-		        		<div class="boxarea">
-		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" width="100%" height="100%">
-		        				</div>
-		        				<div class="itemname">
-		        					<div class="itemname_text"><span>[세준] 파워뱅크 블루투스 이어폰 에어팟 짱</span></div>
-		        					<div class="itemname_per"><span>97% 달성</span></div>
-		        				</div>
-		        		</div>
-	        		</a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
+	        		<div class="myproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/up_list",
+							data:{uNo : "<%= member.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								if(json.list){
+									for(var i in json.list){
+										$(".myproject").html($(".myproject").html()
+												+"<a class='boxitem' href='#'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>"+ json.list[i].rdate +"일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".myproject").html($(".myproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 진행중인 프로젝트가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
 	        	</div>
 	        </div>
 	       
