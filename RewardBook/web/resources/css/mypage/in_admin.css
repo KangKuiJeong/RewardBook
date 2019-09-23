@@ -57,7 +57,7 @@
 #iq_acontentsDetail { font-size:17px; color:#5D5D5D; line-height:25px; padding:20px; padding:20px 20px 20px 50px}
 #qDeatil { background:#FCFCFC; padding:20px;}
 #answerDeatil { background:#FCFCFC; padding:20px; margin-top:20px;}
-#iq_answertitleDeatil { font-size:30px; font-weight:bold;}
+#iq_answertitleDeatil { font-size:30px; font-weight:bold; display:inline-block;}
 #iq_answertitleDeatil span{ font-size:40px; font-weight:bold; color:#F15F5F; margin-right:10px;} 							
 #iq_answercontentsDetail { font-size:17px; color:#5D5D5D; line-height:25px; padding:20px; padding:20px 20px 20px 50px}
 #listbtn { width:30%; margin:0 auto;}
@@ -65,4 +65,16 @@
 									width: 100%; text-align: center; padding: 10px; margin:0 5px; margin-bottom:30px;
 									margin-bottom:10px; margin-top:50px;}
 #backListBtn:hover { border:1px solid #5d5d5d;}	
-#iq_qdate { float:right; display: inline-block; margin-top: 30px; margin-right: 20px; color:#5d5d5d}								
+#iq_qdate { float:right; display: inline-block; margin-top: 30px; margin-right: 20px; color:#5d5d5d}		
+
+
+/*내가 보낸 1대1문의글 상세보기*/		
+#makerName { display:inline-block; float:right; margin-top:30px; margin-right:20px; font-size:17px; color:#5d5d5d;}	
+#makerName span { color:#353535; font-weight:bold;}			
+
+/*나에게 온 1대1문의글 상세보기*/
+.receiveLi { width: 30%; margin:0 auto; margin-top:30px;}
+#receiveBtn { width:100%; background:rgb(242, 85, 85); height:45px; font-size:22px; color:#fff; font-weight:bold;
+				border:1px solid #fff; padding:0 5px;}
+#iq_qdate span{ padding-left:5px; color:#353535; font-weight:bold;}	
+			

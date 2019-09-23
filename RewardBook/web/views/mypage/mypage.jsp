@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="follow.model.vo.Follow, member.model.vo.Member, java.util.ArrayList"%>
     
@@ -11,7 +12,7 @@
 
 <link rel="stylesheet" href="/RewardBook/resources/css/common.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="/RewardBook/resources/css/project/projectMain.css">
 <style type="text/css">
 	a{text-decoration: none; color:#000;}		 
   	#box{margin: 0 auto; width:1140px; height:1100px;}
@@ -20,9 +21,10 @@
 	#top {  height:400px; margin-bottom: 45px;}
 	
 	#myname { font-size: 45px; font-weight:bold;}
-	#point { background-color: #ffb202; border-radius: 100px; text-align: center; font-size: 13px; 
-			color: #fff; font-weight: bold; height: 10px; line-height: 10px; margin-bottom:5px;}
-	#point span{margin:5px;}
+	/* #point { background-color: #ffb202; border-radius: 100px; text-align: center; font-size: 13px; 
+			color: #fff; font-weight: bold; height: 10px; line-height: 10px; margin-bottom:5px;} */
+	#point span{background-color: #ffb202; border-radius: 100px; text-align: center; font-size: 13px; 
+			color: #fff; font-weight: bold; height: 10px; line-height: 10px; padding: 0px 15px 2px 15px;}
 	#leftul {float:left; }
 	.litype a{ font-size: 20px; font-weight:bold; color: black; text-decoration: none;}
 	#leftul li{ padding: 5px 5px;}
@@ -81,19 +83,23 @@ width:16.66%;
 
 .tab .tabbox { margin:10px; width:100%; height:100%;}
 .tab .tabbox .boxtop { height: 40px; width:100%;  }
-.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto;}
-.tab .tabbox .boxbottom .boxarea { margin: 5px; float:left; width:30%; height: 200px; border: 1px solid gray; }
-.tab .tabbox .boxbottom .boxarea .itemimage { width: 100%; height:140px; border-bottom: 1px solid gray; }
-.tab .tabbox .boxbottom .boxarea .itemname { width: 100%; height:60px;  }
-.tab .tabbox .boxbottom .boxarea .itemname .itemname_text {width: 100%; height:40px;margin-left:2px; font-size:15px; font-weight:bold;}
-.tab .tabbox .boxbottom .boxarea .itemname .itemname_per {width: 100%; height:20px;margin-left:2px; color:blue; font-size:11px;}
+.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto; margin-left:30px;}
+.tab .tabbox .boxbottom .boxarea { margin: 5px; float:left; width:30%; height: 300px; border: 1px solid lightgray; }
+.tab .tabbox .boxbottom .boxarea .itemimage { width: 100%; height:200px; border-bottom: 1px solid gray; }
+.tab .tabbox .boxbottom .boxarea .itemname { width: 100%; height:50px;  display:block;}
+.tab .tabbox .boxbottom .boxarea .itemname .itemname_text {width: 100%; height:50px;margin-left:2px; font-size:15px; font-weight:bold; overflow:hidden auto;}
+.tab .tabbox .boxbottom .boxarea .itemname .itemname_text span{padding:2px;}
+.tab .tabbox .boxbottom .boxarea .iteminfo {width: 100%; height:20px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
+.tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_name {float:left; font-size: 13px; color: #90949c;}
+.tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_category{float:right; font-size: 13px; color: #90949c;margin-right:5px;}
+.tab .tabbox .boxbottom .boxarea .itemper {width: 100%; height:30px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
 
 
-.boxbottom .bottomcenter{ margin: 0 auto; height:100%; width:500px;}
+.boxbottom .bottomcenter{ margin: 0 auto; height:100%; width:600px;}
 
-.followarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid gray;}
-#followarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid gray;}
-.followerarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid gray;}
+.followarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid lightgray;}
+#followarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid lightgray;}
+.followerarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid lightgray;}
 
 
 .flwimg {height:60px; width:60px; }
@@ -160,7 +166,7 @@ width:16.66%;
 			
 			<li class="litype"><a href="update.jsp">회원정보 수정</a></li>
 			
-			<li class="litype"><a href="inquiry_maker.jsp">1:1문의</a></li>
+			<li class="litype"><a href="/RewardBook/olist?u_no=<%= loginMember.getuNo() %>">1:1문의</a></li>
 			
 			<li class="litype"><a href="/RewardBook/iq_clist?u_no=<%= loginMember.getuNo() %>">관리자 문의</a></li>
 			
@@ -229,23 +235,72 @@ width:16.66%;
 					</div>
 				</div> 
 	        	<div class="boxbottom">
-	        		<a class="boxitem" href="#">
-		        		<div class="boxarea">
-		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" width="100%" height="100%">
-		        				</div>
-		        				<div class="itemname">
-		        					<div class="itemname_text"><span>[세준] 파워뱅크 블루투스 이어폰 에어팟 짱</span></div>
-		        					<div class="itemname_per"><span>97% 달성</span></div>
-		        				</div>
-		        		</div>
-	        		</a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
+	        	
+		        	<div class="myproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/mp_list",
+							data:{uNo : "<%= loginMember.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								if(json.list){
+									for(var i in json.list){
+										$(".myproject").html($(".myproject").html()
+												+"<a class='boxitem' href='#'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>"+ json.list[i].rdate +"일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".myproject").html($(".myproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 진행중인 프로젝트가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
+	        		
+	        		
+		        	
+	        		
+		        		
 	        	</div>
 	        </div>
 	       
@@ -262,20 +317,66 @@ width:16.66%;
 					</div>
 				</div> 
 	        	<div class="boxbottom">
-	        		<a class="boxitem" href="#">
-		        		<div class="boxarea">
-		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item2.jpg" width="100%" height="100%">
-		        				</div>
-		        				<div class="itemname">
-		        					<div class="itemname_text"><span>[승진] 고급진 색감 뿌잉</span></div>
-		        					<div class="itemname_per"><span>97% 달성</span></div>
-		        				</div>
-		        		</div>
-	        		</a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
+	        		<div class="payproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/pay_list",
+							data:{uNo : "<%= loginMember.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								if(json.list){
+									for(var i in json.list){
+										$(".payproject").html($(".payproject").html()
+												+"<a class='boxitem' href='#'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>"+ json.list[i].rdate +"일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".myproject").html($(".myproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 진행중인 프로젝트가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
 		        		
 	        	</div>
 	        </div>
@@ -432,23 +533,73 @@ width:16.66%;
 					</div>
 				</div> 
 	        	<div class="boxbottom">
-	        		<a class="boxitem" href="#">
-		        		<div class="boxarea">
-		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" width="100%" height="100%">
-		        				</div>
-		        				<div class="itemname">
-		        					<div class="itemname_text"><span>[세준] 파워뱅크 블루투스 이어폰 에어팟 짱</span></div>
-		        					<div class="itemname_per"><span>97% 달성</span></div>
-		        				</div>
-		        		</div>
-	        		</a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
+	        		
+	        		<div class="likeproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/like_plist",
+							data:{uNo : "<%= loginMember.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								if(json.list){
+									for(var i in json.list){
+										$(".likeproject").html($(".likeproject").html()
+												+"<a class='boxitem' href='#'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>"+ json.list[i].rdate +"일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".likeproject").html($(".likeproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 좋아요한 프로젝트가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
+	        		
+	        		
+	        		
+	        		
+	        		
+	        		
 	        	</div>
 	        </div>
 	      </div>  

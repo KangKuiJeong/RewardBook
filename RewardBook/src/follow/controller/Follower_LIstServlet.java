@@ -45,7 +45,6 @@ public class Follower_LIstServlet extends HttpServlet {
 		ArrayList<Member> result = fservice.followerList(uNo);
 		
 		
-		
 		JSONObject sendJSON = new JSONObject();
 		JSONArray jarr = new JSONArray();
 		

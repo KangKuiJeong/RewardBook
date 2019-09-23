@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>네비게이션 헤더 영역</title>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/RewardBook/resources/css/common.css">
 <link rel="stylesheet" href="/RewardBook/resources/css/mainMyPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

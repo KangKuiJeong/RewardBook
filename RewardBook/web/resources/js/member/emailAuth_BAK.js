@@ -69,26 +69,26 @@ function bnumAuth() {
 		joinCompanyForm.bnumber.focus();
 		return false;
 		
-	}else{
-		
+	}else if(joinCompanyForm.bnumber.value.length > 10 || joinCompanyForm.bnumber.value.length < 11){
+			
 		var regExp = /^[0-9]{10}$/; 
 		   if(!regExp.test($("#bnumber").val())) { 
 			  
 			   $('#bnumCheckbox').text('사업자번호는 10자리 숫자입니다.');
 			   $('#bnumber').css("border","1px solid rgb(242, 85, 85)"); 
 		      return false; 
-		      
-		   }else{
-			   
-				$.ajax({
-					url: "/RewardBook/m_findBnum",
-					data: {bnumber: $("#bnumber").val()},
-					type: "get",
-					success: function(data){
-						$('#bnumCheckbox').text(data.message);
-					}
-				});
-		   }
+		   }   
+	}else{
+		
+		$.ajax({
+			url: "/RewardBook/m_findBnum",
+			data: {findEmail: $("#findEmail").val()},
+			type: "get",
+			success: function(data){
+				$("#submitReturn").html($("#submitReturn").text() + "<br>"+ data);
+			}
+		});
+		
 	}
 	
 }

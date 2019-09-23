@@ -71,6 +71,7 @@
 				}else{
 						
 					var regExp = /^[0-9]{10}$/; 
+//					var regExp = /d{10}/;   
 					   if(!regExp.test($("#bnumber").val())) { 
 						  
 						   $('#bnumCheckbox').text('사업자번호는 10자리 숫자입니다.');
