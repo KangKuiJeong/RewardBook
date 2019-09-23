@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
-
+<%@ page import="memo.model.vo.Memo" %>
 <%
 	Project project = (Project)request.getAttribute("project"); 
+	Memo memo = (Memo)request.getAttribute("memo");
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
 %>
@@ -422,7 +423,17 @@ strong{font-weight: 700;}
 				<div class="rank_item">10</div>
 			</div>		
 		</div>
-		
+				<form method="post" action="/RewardBook/minsert">		
+				<input type="hidden" name="u_no" value="<%= loginMember.getuNo() %>">		
+				<input type="hidden" name="p_no" value="<%= project.getP_no() %>">			
+				<div style="border:1px solid black;">			
+				<input type="submit" style="float:right" value="저장">			
+				<h3 style="border-bottom:1px solid black;">메모</h3>		
+				<textarea name="m_text" style=" border:0; width:298px; 
+				height:150px;"placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				</div>			
+				</form>
+	
 	</div>
 </div>
 <div class="reward_select">

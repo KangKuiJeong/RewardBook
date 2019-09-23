@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import memo.model.service.MemoService;
+import memo.model.vo.Memo;
 import payment.model.service.RewardService;
 import payment.model.vo.Reward;
 import project.model.service.ProjectService;
@@ -41,8 +43,11 @@ public class Project_SelectServlet extends HttpServlet {
 			request.setAttribute("rewardList", list);
 		}
 		
-		Project project = new ProjectService().selectProject(p_no);
+		Memo memo = new MemoService().selectMemo(p_no);
+	
+		request.setAttribute("memo", memo);
 		
+		Project project = new ProjectService().selectProject(p_no);
 		RequestDispatcher view = null;
 		if(project != null) {
 			view = request.getRequestDispatcher("views/project/projectDetail.jsp");
