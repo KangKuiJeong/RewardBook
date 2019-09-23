@@ -57,6 +57,7 @@
 .main_area2_section1 .close, .main_area2_section1 .update{
 	width : 100px;
 	float : right;
+	cursor : pointer;
 }
 .main_area2_section1 div div{
 	width : 80px;
@@ -177,13 +178,22 @@
 			});
 			updateFlag = true;
 		} else {
-			$(".main_area2_section1 .update div").text("수정하기");
-			$(".main_area3_section1 .info div .input input").each(function(index, item){
-				if($(item).attr("name") != "joinDate" && $(item).attr("name") != "no")
-					$(item).attr("disabled", true);
-			});
-			alert("저장 하는 척만 했습니다!");
-			updateFlag = false;
+			str = 'page=member';
+			str += "&no=" + $(".main_area3_section1 .info .no .input input").val();
+			str += "&bno=" + $(".main_area3_section1 .info .bno .input input").val();
+			str += "&name=" + $(".main_area3_section1 .info .name .input input").val();
+			str += "&id=" + $(".main_area3_section1 .info .id .input input").val();
+			str += "&pw=" + $(".main_area3_section1 .info .pw .input input").val();
+			str += "&phone=" + $(".main_area3_section1 .info .phone .input input").val();
+			str += "&post=" + $(".main_area3_section1 .info .post .input input").val();
+			str += "&address=" + $(".main_area3_section1 .info .address .input input").val();
+			str += "&bank=" + $(".main_area3_section1 .info .bank .input input").val();
+			str += "&bankAccount=" + $(".main_area3_section1 .info .bankAccount .input input").val();
+			str += "&mileage=" + $(".main_area3_section1 .info .mileage .input input").val();
+			str += "&homepage=" + $(".main_area3_section1 .info .homepage .input input").val();
+			str += "&category=" + $(".main_area3_section1 .info .category .input input").val();
+			str += "&intro=" + $(".main_area3_section1 .info .intro .input input").val();
+			location.href="/RewardBook/m_update_a?" + str;
 		}
 	}
 	

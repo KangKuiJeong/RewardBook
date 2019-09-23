@@ -42,10 +42,12 @@ public class Declare_LIst_AdminServlet extends HttpServlet {
 		int movePage = Integer.parseInt(request.getParameter("movePage") == null ? "1" : request.getParameter("movePage"));
 		String check1 = request.getParameter("s1check1") == null ? "false" : ((String)request.getParameter("s1check1")).equals("on") ? "true" : (String)request.getParameter("s1check1");
 		String check2 = request.getParameter("s1check2") == null ? "false" : ((String)request.getParameter("s1check2")).equals("on") ? "true" : (String)request.getParameter("s1check2");
+		String check3 = request.getParameter("s1check3") == null ? "false" : ((String)request.getParameter("s1check3")).equals("on") ? "true" : (String)request.getParameter("s1check3");
+		String check4 = request.getParameter("s1check4") == null ? "false" : ((String)request.getParameter("s1check4")).equals("on") ? "true" : (String)request.getParameter("s1check4");
 		String select1 = request.getParameter("s2select1") == null ? "" : (String)request.getParameter("s2select1");
 		String text1 = request.getParameter("s2text1") == null ? "" : (String)request.getParameter("s2text1");
-		ArrayList<Inquiry> list = iqservice.pageSelect_D(movePage, limit, check1, check2, select1, text1);
-		int pageCount = iqservice.pageCount_D(check1, check2, select1, text1);
+		ArrayList<Inquiry> list = iqservice.pageSelect_D(movePage, limit, check1, check2, check3, check4, select1, text1);
+		int pageCount = iqservice.pageCount_D(check1, check2, check3, check4, select1, text1);
 		int maxPage = (int)(Math.ceil((double)pageCount / limit));
 		String page = request.getParameter("page") == null ? "" : (String)request.getParameter("page");
 
@@ -59,6 +61,8 @@ public class Declare_LIst_AdminServlet extends HttpServlet {
 		request.setAttribute("maxPage", maxPage);
 		request.setAttribute("s1check1", check1);
 		request.setAttribute("s1check2", check2);
+		request.setAttribute("s1check3", check3);
+		request.setAttribute("s1check4", check4);
 		request.setAttribute("s2select1", select1);
 		request.setAttribute("s2text1", text1);
 		request.setAttribute("page", page);

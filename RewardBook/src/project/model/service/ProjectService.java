@@ -35,9 +35,9 @@ public class ProjectService {
 		return project;
 	}
 
-	public int insertProject(String p_no) {
+	public int insertProject(Project project) {
 		Connection conn = getConnection();
-		int result = pDao.insertProject(conn, p_no);;
+		int result = pDao.insertProject(conn, project);;
 		
 		if(result > 0) {
 			commit(conn);
