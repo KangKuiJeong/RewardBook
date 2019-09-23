@@ -15,38 +15,40 @@
 <link href="/RewardBook/resources/css/project/reward_select.css"  rel="stylesheet">
 <!-- jQuery 연결 -->
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
+
 <script type="text/javascript">
 	
-	$('.reward-qty').focusout(function() {
-		  var newQty = $(this).val() * 1;
-		  if (newQty < 1) {
-		    alert('1개 이하로 수량을 선택할 수 없습니다.');
-		    $(this).val(1);
-		    return;
-		  }
+	var selectSumTotal = 0;	//최종 금액
+	var fundingPrice = 0;		//펀딩 총금액
 
-		  var rewardId = $(this).prop("id").replace("qty", "");
-		  var remainCnt = $("#remainCnt" + rewardId).val() * 1;
-		  var limitCnt = $("#limitCnt" + rewardId).val() * 1;
-		  var $label = $("#memo" + rewardId).parent();
-		  var optionSize = $label.parent().find(".reward-options-label").size();
-		  if (newQty > remainCnt) {
-		   	alert('잔여수량 내에서 수량을 선택해주세요.');
-		    $(this).val(remainCnt);
-		    _repeatSelectableUi(remainCnt - optionSize, rewardId);
-		    calculateTotal();
-		    return;
-		  }
-		  if (limitCnt === 0 && newQty > 500) {
-		    $(this).val(500);
-		    return;
-		  }
-		  if (limitCnt > 0 && optionSize > 0) {
-		    var diff = newQty - optionSize;
-		    _repeatSelectableUi(diff, rewardId);
-		    calculateTotal();
-		  }
-		});
+		 $('.reward-qty').on('focusout', function() {
+		    var newQty = $(this).val() * 1;
+		    if (newQty < 1) {
+		      wadiz.alert('1개 이하로 수량을 선택할 수 없습니다.');
+		      $(this).val(1);
+		      return;
+		    }
+
+		    var rewardId = $(this).prop("id").replace("qty","");
+		    var remainCnt = $("#remainCnt" + rewardId).val() * 1;
+		    var limitCnt = $("#limitCnt" + rewardId).val() * 1;
+		    var $label = $("#memo"+rewardId).parent();
+		    var optionSize = $label.parent().find(".reward-options-label").size();
+		    if (newQty > remainCnt) {
+		      alert('잔여수량 내에서 수량을 선택해주세요.');
+		      $(this).val(remainCnt);
+		      calculateTotal();
+		      return;
+		    }
+		    if (limitCnt === 0 && newQty > 500) {
+		      $(this).val(500);
+		      return;
+		    }
+		    if (limitCnt > 0 && optionSize > 0) {
+		      var diff = newQty - optionSize;
+		      calculateTotal();
+		    }
+		  });
 	
 	
 	function changeQty(type, rewardId){
@@ -56,7 +58,6 @@
 		if (type === 'minus') {
 			if(currentVal > 1){
 				$('#qty'+rewardId).val(currentVal*1-1);
-				selectableUI("ADD", rewardId);
 			}else{
 				alert('1개 이하로 수량을 선택할 수 없습니다.');
 			}
@@ -75,25 +76,73 @@
 		}
 		calculateTotal();
 	}
-
+	
+	/*전체 총액 계산*/
+	function calculateTotal(){
+		selectSumTotal = 0;
+		fundingPrice = 0;
+		$('.reward-check').each(function(i) {
+		   var rewardId = $(this).val();
+		   var amount = calculateReward(rewardId);
+		   fundingPrice = fundingPrice + amount;
+		});
+		var addDonation = $('#addDonation').val();
+		if(addDonation == ''){
+			addDonation = 0;
+		}
+		selectSumTotal = fundingPrice + addDonation*1;
+		$('#sumTotalNum').html(selectSumTotal.format());
+		$('#sumAmount').val(selectSumTotal);
+		console.log(typeof($('#sumAmount').val(selectSumTotal)));
+		console.log($('#sumAmount').val(selectSumTotal));
+	}
+	/*리워드별 총액 계산*/
+	function calculateReward(rewardId){
+		var amount = $('#amountRw'+rewardId).val();
+		var qty = $('#qty'+rewardId).val();
+		var sumAmount = amount*qty;
+		return sumAmount;
+	}
+	
+	
 	$(function(){
 		$('.reward-check').change(function(){
+			var rewardId = $(this).val();
 			if($(this).is(':checked')){
 				$(this).closest('dl').css("background", "rgba(255, 178, 2, 0.82)");
 				$(this).closest('dl').find('dd .checked-area').css("display", "block");
-				
+				$('#qty'+ rewardId).val(1);
 			}else{
 				$(this).closest('dl').find('dd .checked-area').css("display", "none");
 				$(this).closest('dl').css("background", "rgba(0, 0, 0, 0.06)");
-				$('#qty')
+				$('#qty'+rewardId).val(0);
 			}
+			calculateTotal();
 		});
-
+	
 		
 	})
 	
-</script>
 
+
+
+   	/*숫자 타입에서 쓸 수 있도록 format() 함수 추가*/
+   	Number.prototype.format = function(){
+   	    if(this==0) return 0;
+   	    var reg = /(^[+-]?\d+)(\d{3})/;
+   	    var n = (this + '');
+   	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+   	    return n;
+   	};
+
+   	/* 문자열 타입에서 쓸 수 있도록 format() 함수 추가*/
+   	String.prototype.format = function(){
+   	    var num = parseFloat(this);
+   	    if( isNaN(num) ) return "0";
+   	    return num.format();
+   	};
+
+</script>
 
 </head>
 <body>
@@ -101,7 +150,7 @@
 <%@ include file="/views/common/header.jsp"  %>
 
 <div id="reward_container">
-	<form action="/pm_insert" method="post">
+	<form action="/RewardBook/pm_page" method="post">
 		<div class="select-container">
 		<div class="top-area">
 					<h3><em>리워드 선택</em></h3>
@@ -113,15 +162,16 @@
 					<% for(Reward reward : list){ %>
 					<dl class="reward-box" data-rid="<%= reward.getR_no() %>">
 						<dt>
-							<label class="rb-checkbox">
+							<label class="rb checkbox">
 								<input type="checkbox" id="ckrw103382" class="reward-check" name="rewardId" value="<%= reward.getR_no() %>" /> 
 								<span></span>
 							</label>
 						</dt>
 						<dd>
-							<input type="hidden" id="amount<%= reward.getR_no() %>" value="<%= reward.getR_price() %>" /> 
+							<input type="hidden" id="amountRw<%= reward.getR_no() %>" value="<%= reward.getR_price() %>" /> 
 							<input type="hidden" id="remainCnt<%= reward.getR_no() %>" class="remain-cnt" value="<%= reward.getR_amount() %>" /> 
 							<input type="hidden" id="limitCnt<%= reward.getR_no() %>" class="limit-cnt" value="800" /> 
+							<input type="hidden" id="sumAmount" value="0">
 							<label for="ckrw103382">
 								<p class="sum"><%= reward.getR_price() %>	원 펀딩합니다.</p>
 								<p class="number">
@@ -143,7 +193,7 @@
 									<p class="title">수량</p>
 									<p class="input-area">
 										<button type="button" onclick="changeQty('minus', '<%= reward.getR_no() %>')" class="icon-remove-box-o"></button>
-										<input type="text" id="qty<%= reward.getR_no() %>" class="reward-qty" value="1" />
+										<input type="text" id="qty<%= reward.getR_no() %>" class="reward-qty" value="0" />
 										<button type="button" onclick="changeQty('plus', '<%= reward.getR_no() %>')" class="icon-add-box-o"></button>
 									</p>
 								</div>
@@ -178,11 +228,11 @@
 			<p class="notice-text">커뮤니티, 새소식 댓글 작성 시에는 비공개 여부와 상관없이 펀딩 참여자 표시가 노출됩니다.</p>
 			<div class="inner-wrap">
 				<p class="check-area">
-					<label class="rb checkbox">
+					<label class="yn rb checkbox">
 						<input type="checkbox" id="dontShowNameYn" name="dontShowNameYn" value="N">
 						<span class="nickview">이름 비공개</span>
 					</label>
-					<label class="rb checkbox">
+					<label class="yn rb checkbox">
 						<input type="checkbox" id="dontShowAmountYn" name="dontShowAmountYn" value="N">
 						<span class="nickview">금액 비공개</span>
 					</label>
@@ -203,19 +253,95 @@
 		    			</dl>
 		    		</li>
 		    	</ul>
+		    	
 			</div>
 		</div>
 	</div>	
-	</form>
+    </form>
+	
 	<div class="btn-wrap">
-    	<p class="confirm"><%= project.getP_title() %>에 <em id="sumTotalNum">29,000</em> 원을 펀딩합니다.</p>
-    	<button class="rb button primary" onclick="purchaseNextStep();">다음 단계로 <i class="icon chevron-right"></i></button>
+    	<p class="confirm"><%= project.getP_title() %>에 <em id="sumTotalNum">0</em> 원을 펀딩합니다.</p>
+    	<button class="rb button primary"  onclick="javascript:location.href='/RewardBook/views/payment/payment.jsp'">다음 단계로 <i class="icon chevron-right"></i></button>
     </div>
 </div>
 
+<script type="text/javascript">
+
+	/*공개여부*/
+	$('#dontShowNameYn').change(function(){
+		if($(this).is(':checked')){
+			$(this).val('Y');
+		}else{
+			$(this).val('N');
+		}
+	});
+	$('#dontShowAmountYn').change(function(){
+		if($(this).is(':checked')){
+			$(this).val('Y');
+		}else{
+			$(this).val('N');
+		}
+	});
+	
+	$('.reward-qty').focusout(function() {
+		  var newQty = $(this).val() * 1;
+		  if (newQty < 1) {
+		    alert('1개 이하로 수량을 선택할 수 없습니다.');
+		    $(this).val(1);
+		    return;
+		  }
+
+		  var rewardId = $(this).prop("id").replace("qty", "");
+		  var remainCnt = $("#remainCnt" + rewardId).val() * 1;
+		  var limitCnt = $("#limitCnt" + rewardId).val() * 1;
+		  var $label = $("#memo" + rewardId).parent();
+		  var optionSize = $label.parent().find(".reward-options-label").size();
+		  if (newQty > remainCnt) {
+		   	alert('잔여수량 내에서 수량을 선택해주세요.');
+		    $(this).val(remainCnt);
+		    _repeatSelectableUi(remainCnt - optionSize, rewardId);
+		    calculateTotal();
+		    return;
+		  }
+		  if (limitCnt === 0 && newQty > 500) {
+		    $(this).val(500);
+		    return;
+		  }
+		  if (limitCnt > 0 && optionSize > 0) {
+		    var diff = newQty - optionSize;
+		    _repeatSelectableUi(diff, rewardId);
+		    calculateTotal();
+		  }
+	});
+	
+	/*추가후원금*/
+	$('#addDonationTmp').focus(function () {
+		if ($("#addDonation").val() == 0) {
+			$(this).val("");
+		} else {
+			$(this).val($("#addDonation").val().format());
+		}
+	});
+   	$('#addDonationTmp').keyup(function() {
+   		setAddDonationField($(this));
+   	});
+   	$('#addDonationTmp').blur(function() {
+   		setAddDonationField($(this));
+   	});
+   	function setAddDonationField(obj) {
+		var addDonationTmp = (obj.val() == '') ? 0 : obj.val().replace(/,/g,'')*1;
+	  	$('#addDonation').val(addDonationTmp);
+		$('#addDonationTmp').val(addDonationTmp.format());
+
+	   	calculateTotal();
+   	}
+	
+</script>
+
+<%@ include file="/views/common/footer.jsp"  %>
+
 </body>
 </html>
-
 
 
 
