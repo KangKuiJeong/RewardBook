@@ -57,6 +57,7 @@
 .main_area2_section1 .close, .main_area2_section1 .update, .main_area2_section1 .return {
 	width : 100px;
 	float : right;
+	cursor : pointer;
 }
 .main_area2_section1 div div {
 	width : 80px;
@@ -168,11 +169,12 @@
 
 	var updateFlag = false;
 	function p_upload() {
-		alert("승인하였습니다.");
-		history.back(-1);
+		location.href="/RewardBook/pp_accept?page=permission&no=" + $(".main_area3_section1 .info .no .input input").val();
 	}
 	function p_return() {
-		alert("반려되었습니다.");
+		location.href="/RewardBook/pp_return?page=permission&no="
+				+ $(".main_area3_section1 .info .no .input input").val()
+				+ "&return=" + $(".main_area3_section1 .info .return .textarea textarea").val();
 	}
 	
 </script>

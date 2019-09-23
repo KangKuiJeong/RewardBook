@@ -73,9 +73,37 @@ public class ProjectDao {
 		return project;
 	}
 
-	public int insertProject(Connection conn, String p_no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertProject(Connection conn, Project project) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into project values(seq_p_no.nextval, ?, ?, ?, ?, null, ?, default, ?, sysdate, ?, 'N', ?, default, 'N', null, null)";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, project.getU_no());
+			pstmt.setString(2, project.getP_title());
+			pstmt.setString(3, project.getP_category());
+			pstmt.setString(4, project.getP_story());
+			pstmt.setString(5, project.getP_info());
+			pstmt.setInt(6, project.getP_tprice());
+			pstmt.setDate(7, project.getP_sdate());
+			pstmt.setDate(8, project.getP_ddate());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 	public ArrayList<Project> listProject(Connection conn) {

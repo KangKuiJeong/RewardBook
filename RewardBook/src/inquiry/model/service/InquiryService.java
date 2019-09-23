@@ -70,28 +70,72 @@ public class InquiryService {
 		return list;
 	}
 
-	public ArrayList<Inquiry> pageSelect(int start, int limit, String check1, String check2, String select1, String text1) {
+	public ArrayList<Inquiry> pageSelect(int start, int limit, String check1, String check2, String check3, String check4, String select1, String text1) {
 		Connection conn = getConnection();
-		ArrayList<Inquiry> list = iqDao.pageSelect(conn, start, limit, check1, check2, select1, text1);
+		ArrayList<Inquiry> list = iqDao.pageSelect(conn, start, limit, check1, check2, check3, check4, select1, text1);
 		return list;
 	}
 
-	public int pageCount(String check1, String check2, String select1, String text1) {
+	public int pageCount(String check1, String check2, String check3, String check4, String select1, String text1) {
 		Connection conn = getConnection();
-		int result = iqDao.pageCount(conn, check1, check2, select1, text1);
+		int result = iqDao.pageCount(conn, check1, check2, check3, check4, select1, text1);
 		return result;
 	}
 
-	public ArrayList<Inquiry> pageSelect_D(int start, int limit, String check1, String check2, String select1, String text1) {
+	public ArrayList<Inquiry> pageSelect_D(int start, int limit, String check1, String check2, String check3, String check4, String select1, String text1) {
 		Connection conn = getConnection();
-		ArrayList<Inquiry> list = iqDao.pageSelect_D(conn, start, limit, check1, check2, select1, text1);
+		ArrayList<Inquiry> list = iqDao.pageSelect_D(conn, start, limit, check1, check2, check3, check4, select1, text1);
 		return list;
 	}
 
-	public int pageCount_D(String check1, String check2, String select1, String text1) {
+	public int pageCount_D(String check1, String check2, String check3, String check4, String select1, String text1) {
 		Connection conn = getConnection();
-		int result = iqDao.pageCount_D(conn, check1, check2, select1, text1);
+		int result = iqDao.pageCount_D(conn, check1, check2, check3, check4, select1, text1);
 		return result;
+	}
+
+	public Inquiry detailInquiry(String iq_no) {
+		
+		Connection conn = getConnection();
+		Inquiry result = iqDao.detailInquiry(conn, iq_no);
+		close(conn);
+		
+		return result;
+		
+	}
+
+	public int replyInquiry_A(String no, String ano, String reply) {
+		
+		Connection conn = getConnection();
+		
+		int result = iqDao.replyInquiry_A(conn, no, ano, reply);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+	public void updateOC(String no) {
+		
+		Connection conn = getConnection();
+		
+		int result = iqDao.updateOC(conn, no);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
 	}
 
 }

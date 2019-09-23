@@ -3,7 +3,6 @@
 <%
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
-	
 %>          
 <!DOCTYPE html>
 <html>
@@ -23,7 +22,7 @@
 			<div id="logo"><a href="/RewardBook/index.jsp"><img src="/RewardBook/resources/images/index/sampleLogo.png" width="150" alt="logo"></a></div>
 			<ul id="project">
 				<li><a href="/RewardBook/p_list">프로젝트 둘러보기</a></li>
-				<li><a href="#">프로젝트 오픈</a></li>
+				<li><a href="/RewardBook/p_open">프로젝트 오픈</a></li>
 			</ul>
 			<!-- 로그인전 보여지는 헤더영역(관리자,회원 둘다 로그인하지 않았을때 보임) -->
 			<% if(loginMember == null && loginAdmin == null){ %>
