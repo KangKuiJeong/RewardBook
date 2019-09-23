@@ -19,16 +19,25 @@
 			<p class="title">기업회원가입</p>
 			<form action="/RewardBook/m_cenroll" method="post" id="joinCompanyForm">
 			
-				<button onclick="auth();" id="authBtn" >인증번호전송</button>
+				<input type="button" onclick="auth();" id="authBtn" value="인증번호전송">
 				<input type="text" id="userId" name="userId" placeholder="이메일 계정입력">
 				<p id="emailCheck"></p>
 				
-				<button onclick="check();" id="checkBtn" >인증하기</button> 
+				<input type="button" onclick="check();" id="checkBtn" value="인증하기">
 				<input type="text" id="authNum" name="authNum" placeholder="인증번호 입력">
 				
 				<input type="text" id="bnumber" name="bnumber" placeholder="사업자번호 10자리 -없이 입력">
-				<button id="bnumCheck" onclick="bnumAuth();">중복확인</button>
-				<p id="bnumCheckbox"></p>
+				<input type="button" onclick="bnumAuth();" id="bnumCheck" value="인증하기">
+				
+				<p id="bnumCheckbox">
+				<% if(request.getAttribute("message")==null){ %>
+				
+			    <% }else{%>
+			
+				<%= request.getAttribute("message") %>
+				</p>
+				
+			    <% } %>
 				<input type="text" id="bName" name="bName" placeholder="사업자명 입력">
 				<p id="userNameCheck"></p>
 				<input type="password" id="userPWd" name="userPWd" placeholder="비밀번호(특수문자,영문,숫자를 포함하여 8자리 이상)">

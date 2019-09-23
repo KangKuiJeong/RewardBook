@@ -13,7 +13,6 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="/RewardBook/resources/css/mypage/oto.css">
-
 </head>
 <body>
 	
@@ -21,9 +20,8 @@
 	<%@ include file="../common/header.jsp" %>
 	<div id="oto_awrap">
 		<div id="line"></div>
-		<p id="oto_atitle">내가 보낸문의</p>
+		<p id="oto_atitle">1대1문의내역</p>
 		<p id="oto_acontents">메이커에게 질문한 문의내역과 답변을 확인하실 수 있습니다.</p>
-		<button id="oto_awrite" onclick="location.href='views/mypage/inquiry_insertAdmin.jsp'">문의하기</button>
 			
 		<div id="Receivecontainer">
 			<ul class="tab">
@@ -38,7 +36,7 @@
 								<li class="iq_subTitle" id="sNo">No</li>
 								<li class="iq_subTitle" id="sTit">제목</li>
 								<li class="iq_subTitle" id="sDate">날짜</li>
-								<li class="iq_subTitle" id="qName">메이커</li>
+								<li class="iq_subTitle" id="qName">질문자</li>
 								<li class="iq_subTitle" id="sYN">답변여부</li>
 							</ul>
 						</li>
@@ -48,7 +46,7 @@
 									<ul>
 										<li class="iq_subTitle" id="sNo"><%= i++ %></li>
 										<li class="iq_subTitle" id="sTit">
-											<a href="#"><%= o.getOto_qtitle() %></a>
+											<a href="/RewardBook/ordetail?oto_no=<%= o.getOto_no() %>"><%= o.getOto_qtitle() %></a>
 										</li>
 										<li class="iq_subTitle" id="sDate"><%= o.getOto_qdate() %></li>
 										<li class="iq_subTitle" id="qName"><%= o.getOto_makerName() %></li>

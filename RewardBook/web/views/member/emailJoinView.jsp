@@ -15,16 +15,16 @@
 <body>
 	<!-- 헤더부분 include -->
 	<%@ include file="../common/header.jsp" %>
-	
+		
 		<div id="joinEmailContainer">
 			<p class="title">개인회원가입</p>
 			<form action="/RewardBook/m_penroll" method="post" id="joinForm">
 			    
-			    <button onclick="auth();" id="authBtn" >인증번호전송</button>
+			    <input type="button" onclick="auth();" id="authBtn" value="인증번호전송">
 				<input type="text" id="userId" name="userId" placeholder="이메일 계정입력">
 				<p id="emailCheck"></p>
 		
-				<button onclick="check();" id="checkBtn" >인증하기</button> 
+				<input type="button" onclick="check();" id="checkBtn" value="인증하기">
 				<input type="text" id="authNum" name="authNum" placeholder="인증번호 입력">
 				
 				<p id="authCheckText"></p>

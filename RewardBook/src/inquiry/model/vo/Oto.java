@@ -107,6 +107,8 @@ public class Oto implements Serializable{
 	public void setOto_makerName(String oto_makerName) {
 		this.oto_makerName = oto_makerName;
 	}
+	
+
 
 	@Override
 	public String toString() {
@@ -115,9 +117,6 @@ public class Oto implements Serializable{
 				+ ", oto_atitle=" + oto_atitle + ", oto_atext=" + oto_atext + ", oto_adate=" + oto_adate
 				+ ", oto_makerName=" + oto_makerName + "]";
 	}
-
-	
-	
 	
 	
 }

@@ -56,3 +56,18 @@ ul.tab li.current{ color: #353535; border-bottom:5px solid rgb(242, 85, 85) }
 #receive .iq_con { border-bottom:1px solid #f1f1f1; height:50px; border-bottom:1px solid #E7E7E7; text-align:center;}
 #receive #sTit a { text-decoration:none; color:#353535;}
 #receive #sTit a:hover { color:#000; text-decoration:underline;}
+
+/* 1대1문의 보내기 창 css */
+#otoSendWrap { width:95%; padding:5px; margin:0 auto; margin:15px;}
+#otoSendWrap #sendTitles { font-size:24px; color:#8c8c8c; text-align:center; padding-bottom:20px;} 
+#otoSendWrap #sendTitles span { color:#353535; font-weight:bold;}
+#otoSendWrap .line { height:5px; width:50px; margin:10px auto; background:#ffd202; }
+.slist { padding: 10px 0;}
+.slist p { color:#353535; font-size:18px; font-weight:bold; margin-bottom:10px;}
+.slist input[type="text"] { width:98%; margin:0 auto; height:30px; border:1px solid #d5d5d5; padding-left: 5px;}
+.slist textarea { width:98%; border:1px solid #d5d5d5; height:120px; padding:5px;}
+#sendSubmit { width:20%; margin:0 auto;}
+.slist input[type="submit"] { width:100%; height:50px; color:#fff; background-color:rgb(242, 85, 85); border:1px solid #fff;
+							  font-size:17px; /* font-weight:bold; */}
+#sendTitle	{ width:90%; margin:0 auto;}
+#sendText { width:90%; margin:0 auto;}				  

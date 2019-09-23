@@ -1,7 +1,6 @@
 package inquiry.model.service;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -36,4 +35,43 @@ public class OtoService {
 		
 	}
 	
+	//문의글 등록 Service
+	public int insertOto(Oto oto) {
+		
+		Connection conn = getConnection();
+		int result = oDao.insertOto(conn, oto);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	//내가 문의한글 상세보기
+	public Oto detailView(String oto_no) {
+		
+		Connection conn = getConnection();
+		Oto oto = oDao.detailView(conn, oto_no);
+		
+		close(conn);
+		
+		return oto;
+	}
+	
+	//나에게 문의한 글 상세보기
+	public Oto detailRecieveView(String oto_no) {
+		
+		Connection conn = getConnection();
+		Oto oto = oDao.detailReceiveView(conn, oto_no);
+		
+		close(conn);
+		
+		return oto;
+	}
+
+
 }

@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>하단부 footer 영역</title>
-<link rel="stylesheet" href="resources/css/common.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/RewardBook/resources/css/common.css">
 </head>
 <body>
 	<div id="footer">

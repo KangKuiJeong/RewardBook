@@ -63,12 +63,12 @@
 					   }
 				}
 				
-				if($('#authCheck').val() == ""){
-					alert('이메일 인증이 완료되지 않았습니다');
-					$('#authNum').focus();
-					return false;
-					
-				}
+//				if($('#authCheck').val() == ""){
+//					alert('이메일 인증이 완료되지 않았습니다');
+//					$('#authNum').focus();
+//					return false;
+//					
+//				}
 				
 				if(joinForm.userName.value == "") {
 					alert('이름이 입력되지 않았습니다.');
