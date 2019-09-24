@@ -64,4 +64,117 @@ public class LikeDao {
 	      return list;
 	   }
 
+	
+	//프로젝트 목록 갯수 조회
+	public int LikeProjectListCount(Connection conn, String p_no) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from project_like where p_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	
+	//프로젝트 좋아요 확인
+	public int LikeProjectFind(Connection conn, String uNo, String p_no) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from project_like where u_no = ? and p_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, uNo);
+			pstmt.setString(2, p_no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	//프로젝트 좋아요 추가
+	public int LikeProjectInsert(Connection conn, String p_no, String uNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into project_like(p_no, u_no, pl_date) values((select p_no from project where p_no = ?), (select u_no from users where u_no = ?), sysdate)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, p_no);
+			pstmt.setString(2, uNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	//프로젝트 좋아요 삭제
+	public int LikeProjectDelete(Connection conn, String p_no, String uNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from project_like where p_no = ? and u_no = ?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, p_no);
+			pstmt.setString(2, uNo);
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

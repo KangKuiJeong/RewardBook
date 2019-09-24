@@ -25,9 +25,18 @@ public class MypageService {
 	//유저 프로젝트 목록 조회
 	public ArrayList<Project> userPList(String uNo) {
 		Connection conn = getConnection();
-	      ArrayList<Project> list = mdao.userPList(conn, uNo);
-	      close(conn);
-	      return list;
+		ArrayList<Project> list = mdao.userPList(conn, uNo);
+		close(conn);
+		return list;
+	}
+
+
+	//후원한 프로젝트 목록 조회
+	public ArrayList<Project> payprojectList(String uNo) {
+		Connection conn = getConnection();
+		ArrayList<Project> list = mdao.payprojectList(conn, uNo);
+		close(conn);
+		return list;
 	}
 	
 	

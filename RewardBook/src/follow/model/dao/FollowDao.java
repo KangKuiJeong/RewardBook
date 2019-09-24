@@ -53,7 +53,7 @@ ArrayList<Member> result = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select u_no, u_name from users where u_no in (select u_no_fr from follow where u_no_f = ?) order by u_name";
+		String query = "select u_no, u_name, u_profile from users where u_no in (select u_no_fr from follow where u_no_f = ?) order by u_name";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -66,6 +66,7 @@ ArrayList<Member> result = new ArrayList<Member>();
 				
 				member.setuNo(rset.getString(1));
 				member.setName(rset.getString(2));
+				member.setProfileImg(rset.getString(3));
 				
 				result.add(member);
 			}
@@ -89,7 +90,7 @@ ArrayList<Member> result = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select u_no, u_name from users where u_no in (select u_no_f from follow where u_no_fr = ?) order by u_name";
+		String query = "select u_no, u_name, u_profile from users where u_no in (select u_no_f from follow where u_no_fr = ?) order by u_name";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -102,6 +103,7 @@ ArrayList<Member> result = new ArrayList<Member>();
 				
 				member.setuNo(rset.getString(1));
 				member.setName(rset.getString(2));
+				member.setProfileImg(rset.getString(3));
 				
 				result.add(member);
 			}

@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
-<%@ page import="memo.model.vo.Memo" %>
+<%@ page import="memo.model.vo.Memo, member.model.vo.Member" %>
 <%
 	Project project = (Project)request.getAttribute("project"); 
 	Memo memo = (Memo)request.getAttribute("memo");
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
+%>
+<% Member member = (Member)request.getAttribute("member");
 %>
 
 <!DOCTYPE html>
@@ -308,6 +310,12 @@ strong{font-weight: 700;}
 .target_gauge{ height: 4px; background-color: #e6eaed; position: relative; width: 100%; overflow: hidden; margin-bottom: 25px;}    
 .gauge {background-color: #ffb202; height: 4px; display: block; vertical-align: baseline;}
 
+
+.likearea { height:40px; width:220px; display:flex; border:1px solid gray;margin:5px;}
+.likearea .likebutton {height:30px; width:30px;}
+.likebtn {height:25px;width:30px;}
+.likeinfo {margin-left:10px;height:30px; width:100px; font-size:16px;}
+.likebtn { cursor:pointer;}
 </style>
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script>
@@ -390,6 +398,215 @@ strong{font-weight: 700;}
 				<p id="personCount">참여</p>
 			</div>
 			
+			
+			<!-- 로그인 정보가 있는경우 -->
+			<% if(loginMember != null){ %>
+			<!-- 좋아요  -->
+			<div class="likearea">
+				<div class="likebutton">
+						<div id="like_pbutton"></div>
+						<script type="text/javascript">
+						//좋아요 상태 조회 에 따른 이미지 출력
+						$(function(){
+							$.ajax({
+								url: "/RewardBook/like_pfind",
+								data: {
+									uNo: "<%= loginMember.getuNo() %>",
+									p_no: "<%= project.getP_no() %>"
+									},
+								type: "get",
+								dataType: "json",
+								success: function(data){
+									if(data.like_pfind == 0){
+										//좋아요를 하지 않았을 경우 null하트
+										$("#like_pbutton").html($("#like_pbutton").html()
+												+ "<img class='likebtn' src='/RewardBook/resources/images/mypage/unlike2.png' onclick='likebtn()'>");
+									}else{
+										//좋아요를 했을 경우 not null 하트
+										$("#like_pbutton").html($("#like_pbutton").html()
+												+ "<img class='likebtn' src='/RewardBook/resources/images/mypage/like2.png' onclick='unlikebtn()'>");
+									}
+										
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+						</script>
+				</div>
+				
+				<div class="likeinfo">
+					<span class="like_p">좋아요 </span><span id="like_pcount" ></span><span class="like_p">명 </span>
+					<script type="text/javascript">
+						//좋아요 갯 수 출력
+						$(function(){
+							$.ajax({
+								url:"/RewardBook/like_pcount",
+								data:{p_no : "<%= project.getP_no() %>"},
+								type:"get",
+								dataType: "json",
+								success: function(data){
+									$("#like_pcount").html($("#like_pcount").val() + data.listCount);
+									
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					</script>
+				</div>
+				
+				<script type="text/javascript">
+					//좋아요 + (null 하트) 버튼 눌렀을 때
+					function likebtn(){
+						$(function(){
+							$.ajax({
+								url: "/RewardBook/like_pinsert",
+								data: {
+									uNo: "<%= loginMember.getuNo() %>",
+									p_no: "<%= project.getP_no() %>"
+									},
+								type: "get",
+								dataType: "json",
+								success: function(data){
+									if(data.like_pinsert == 1){
+										alert("해당 리워드 상품을 좋아요 하였습니다!");
+										if(data.like_pinsert == 1){
+											$("#like_pbutton").html(
+													"<img class='likebtn' src='/RewardBook/resources/images/mypage/like2.png' onclick='unlikebtn()'>");
+										}else{
+											$("#like_pbutton").html(
+													"<img class='likebtn' src='/RewardBook/resources/images/mypage/unlike2.png' onclick='likebtn()'>");
+										}
+										//결과에 따른 총 좋아요 수 재출력
+										$(function(){
+											$.ajax({
+												url:"/RewardBook/like_pcount",
+												data:{p_no : "<%= project.getP_no() %>"},
+												type:"get",
+												dataType: "json",
+												success: function(data){
+												$("#like_pcount").html($("#like_pcount").val() + data.listCount);
+									
+												},
+												error: function(jqXHR, textStatus, errorThrown){
+													console.log("error : " + textStatus);
+												}
+											});
+										});
+										//
+									} else{
+										alert("다시 시도하여주세요.");
+									}
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					};
+					</script>
+					
+					<script type="text/javascript">
+					//좋아요 - (not null 하트) 버튼 눌렀을 때
+					function unlikebtn(){
+						$(function(){
+							$.ajax({
+								url: "/RewardBook/like_pdelete",
+								data: {
+									uNo: "<%= loginMember.getuNo() %>",
+									p_no: "<%= project.getP_no() %>"
+									},
+								type: "get",
+								dataType: "json",
+								success: function(data){
+									if(data.like_pdelete == 1){
+										alert("해당 리워드 상품을 좋아요 취소 하였습니다.");
+										if(data.like_pdelete == 1){
+											$("#like_pbutton").html(
+													"<img class='likebtn' src='/RewardBook/resources/images/mypage/unlike2.png' onclick='likebtn()'>");
+										}else{
+											$("#like_pbutton").html(
+													"<img class='likebtn' src='/RewardBook/resources/images/mypage/like2.png' onclick='unlikebtn()'>");
+										}
+										//결과에 따른 총 좋아요 수 재출력
+										$(function(){
+											$.ajax({
+												url:"/RewardBook/like_pcount",
+												data:{p_no : "<%= project.getP_no() %>"},
+												type:"get",
+												dataType: "json",
+												success: function(data){
+												$("#like_pcount").html($("#like_pcount").val() + data.listCount);
+									
+												},
+												error: function(jqXHR, textStatus, errorThrown){
+													console.log("error : " + textStatus);
+												}
+											});
+										});
+										//
+									} else{
+										alert("다시 시도하여주세요.");
+									}
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					};
+					</script>
+			</div>
+				<!-- 좋아요 -->
+			<% }else { %>
+			<!-- 로그인 정보가 없을경우 -->
+			<div class="likearea">
+				<div class="likebutton">
+						<div id="like_pbutton"> <!-- 로그인 정보 없을경우 null 하트 버튼 출력 -->
+							<img class='likebtn' src='/RewardBook/resources/images/mypage/unlike2.png' onclick='beforelogin()'>
+						</div>
+						
+				</div>
+				
+				<div class="likeinfo">
+					<span class="like_p">좋아요 </span><span id="like_pcount" ></span><span class="like_p">명 </span>
+					<script type="text/javascript">
+						//총 좋아요 수 출력
+						$(function(){
+							$.ajax({
+								url:"/RewardBook/like_pcount",
+								data:{p_no : "<%= project.getP_no() %>"},
+								type:"get",
+								dataType: "json",
+								success: function(data){
+									$("#like_pcount").html($("#like_pcount").val() + data.listCount);
+									
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					</script>
+				</div>
+				
+					<script type="text/javascript">
+						//좋아요 + (null 하트) 버튼 눌렀을 때
+						function beforelogin(){
+							if (confirm("회원 로그인 후 이용가능합니다. \n로그인 페이지로 이동하시겠습니까?") == true){    //확인
+   								location.href = "/RewardBook/views/member/mainLoginView.jsp"; //로그인페이지로 이동
+							}else{   //취소
+    							return;
+							}
+						}
+					</script>
+					
+				<!-- 좋아요 -->
+			<% } %>
+				
 			<h4 style="padding-bottom: 10px; margin-top: 20px;">메이커 정보</h4>
 			<div class="maker_box">
 				<div class="maker_info">
@@ -423,16 +640,19 @@ strong{font-weight: 700;}
 				<div class="rank_item">10</div>
 			</div>		
 		</div>
+				
+				<% if(loginMember != null) { %>
 				<form method="post" action="/RewardBook/minsert">		
-				<input type="hidden" name="u_no" value="<%= loginMember.getuNo() %>">		
-				<input type="hidden" name="p_no" value="<%= project.getP_no() %>">			
+				<input type="hidden" name="u_no" value=" <%= loginMember.getuNo() %> ">		
+				<input type="hidden" name="p_no" value=" <%= project.getP_no() %> ">			
 				<div style="border:1px solid black;">			
 				<input type="submit" style="float:right" value="저장">			
 				<h3 style="border-bottom:1px solid black;">메모</h3>		
 				<textarea name="m_text" style=" border:0; width:298px; 
-				height:150px;"placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				height:150px;"placeholder="메모하세요"> <%= (memo.getM_text() == null ? "" : memo.getM_text()) %> </textarea> &nbsp;			
 				</div>			
 				</form>
+				<% } %>
 	
 	</div>
 </div>
