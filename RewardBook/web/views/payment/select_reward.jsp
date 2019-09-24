@@ -168,7 +168,8 @@
 							</label>
 						</dt>
 						<dd>
-							<input type="hidden" id="amountRw<%= reward.getR_no() %>" value="<%= reward.getR_price() %>" /> 
+							<input type="hidden" id="amountRw<%= reward.getR_no() %>" value="<%= reward.getR_price() %>" />
+							<input type="hidden" id="nameRw<%= reward.getR_no() %>" value="<%= reward.getR_name() %>" /> 
 							<input type="hidden" id="remainCnt<%= reward.getR_no() %>" class="remain-cnt" value="<%= reward.getR_amount() %>" /> 
 							<input type="hidden" id="limitCnt<%= reward.getR_no() %>" class="limit-cnt" value="800" /> 
 							<input type="hidden" id="sumAmount" value="0">
@@ -344,10 +345,12 @@
    			var rewardId = $(this).val();
    	     	var qty = $('#qty'+rewardId).val();
          	var amount = $('#amountRw'+rewardId).val();
+         	var name = $('#nameRw'+rewardId).val();
          	
          	var sumAmount = parseInt(amount) * parseInt(qty);
          	
          	$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].rewardId" value="'+rewardId+'" />');
+         	$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].rewardName" value="'+rewardName+'" />');
     		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].qty" value="'+qty+'" />');
     		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].sumAmount" value="'+sumAmount+'" />');
     		totalSelected++;

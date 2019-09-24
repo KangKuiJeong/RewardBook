@@ -32,9 +32,6 @@
             <input type="hidden" id="addDonation" name="addDonation" value="0">
             <input type="hidden" id="dontShowNameYn" name="dontShowNameYn" value="">
             <input type="hidden" id="dontShowAmountYn" name="dontShowAmountYn" value="">
-            <input type="hidden" name="secureStateBagKey" value="ZTAwNmU1YjQtNGE0NS00ZGEwLWIxNDMtNzFlYmMxYWI2ZDA0Wmpjek4yRXlNVFl0TXpkbE5DMDBObVpoTFdJeU1UQXRaV0l5TXpWbE1ERTVaR1k0">
-            <input type="hidden" id="inputCouponKey" name="couponKey" value="">
-            <input type="hidden" id="inputCouponDiscountAmount" name="couponDiscountAmount" value="0">
             
             <div class="rbform-order">
               <div class="order-list" data-choiced-legnth="1">
@@ -48,12 +45,13 @@
                       <p class="sum"><em>수량 : 1개</em>43,000원</p>
                     </div>
                   </li>
-                  <input type="hidden" name="choiceRewards[0].rewardId" value="104508">
+                  <% for(int i = 0; i < totalSelected; i++){ %>
+                  <input type="hidden" name="<%= request.getParameter("choiceRewards["+ i +"].rewardId") %>" value="<%= request.getParameter("choiceRewards["+ i +"].rewardId") %>">
                   <input type="hidden" name="choiceRewards[0].rewardName" value="다다익선! 그 만큼 가격혜택도 커요.(무료배송)">
                   <input type="hidden" name="choiceRewards[0].qty" value="1">
                   <input type="hidden" name="choiceRewards[0].sumAmount" value="43000">
                   <input type="hidden" name="choiceRewards[0].memo" value="">
-                  
+                  <% } %>
                 </ul>
               </div>
               <div class="order-addinfo">
