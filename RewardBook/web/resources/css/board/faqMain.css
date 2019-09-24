@@ -1,91 +1,24 @@
 @charset "UTF-8";
 
-#acc {margin: 0 auto;width: 50%;}
-.ui-header .title {
-	line-height: 40px;
-	color: rgba(0, 0, 0, 0.84);
-	font-size: 48px;
-	font-weight: 700;
-	text-align: center;
-	padding: 70px;
-}
-.board-footer {padding: 0 30px 160px;text-align: center;}
-
-.prev-page {
-	background-color: #fff;
-	color: #8c8c8c;
-	border: 1px solid #fff;
-	font-size: 20px;
-}
-
-.next-page {
-	background-color: #fff;
-	color: #8c8c8c;
-	border: 1px solid #fff;
-	font-size: 20px;
-}
-
-.board-footer .search .filter-container .filter {
-	height: 38px;
-	width: 115px;
-	background-color: #fff;
-	padding: 0 0 0 10px;
-	width: 110%;
-	text-align: center;
-	color: #34383a;
-	font-size: 15px;
-	display: inline;
-}
-
-.filter-container {display: inline-block;}
-.field {display: inline-block;}
-label.text-hidden {
-	display: block;
-	margin-top: -1px;
-	height: 1px;
-	overflow: hidden;
-	text-indent: -9999px;
-}
-.search-form {
-	border: 1px solid #dadce0;
-	padding-right: 64px;
-	padding-left: 10px;
-	width: 60%;
-	line-height: 36px;
-	font-size: 15px;
-}
-
-.searchbt {
-	position: absolute;
-	border: 1px solid #dadce0;
-	background-color: #f5f7fa;
-	width: 100%;
-	max-width: 64px;
-	line-height: 36px;
-	color: #34383a;
-	font-size: 15px;
-}
-.ui-accordion ui-widget ui-helper-reset:hover{background-color:white;}
-
-#accordion:hover{background-color:white;}
-
-.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { border-top-left-radius: 0px;}
-
-.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { border-top-right-radius: 0px;}
-.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
-    border-bottom-right-radius: 0px;
-}
-
-.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {border-bottom-left-radius: 0px;}
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-border: 1px solid #ffb202 !important;background: #ffb202 !important;font-weight: normal;color: #ffffff;}
-.faqinsert input{text-align: center;float:right;padding: 8px;margin: 0px 15px 5px 3px;}
+.Faqheader{ text-align:center; padding-top: 100px; font-size: 50px; margin-bottom: 70px; }
+.faq_title:hover{ color:#ffb202; }
+.faq_text{ height:150px; padding: 50px; background-color: #ffffff; border-bottom: solid 1px #9e9e9e5c; }
+.field { display:inline-block !important;}
+.faq_title { padding: 5px; background-color: #ffffff; border-bottom: solid 1px #9e9e9e5c; padding: 10px 15px 17px 20px; margin: 10px 15px 10px 15px; }
+.faq_text { padding:20px 0px 20px 35px; display: none; }
+main { margin : 0 auto; width:50%; }
+.board-footer {padding: 0 30px 160px; text-align: center;}
+.board-footer .search 
+.filter-container .filter {height: 38px; width: 115px; background-color: #fff; padding: 0 0 0 10px; width: 110%; text-align: center; color: #34383a; font-size: 15px; display: inline; }
+.filter-container { display: inline-block; }
+.search-form { border: 1px solid #dadce0; padding-right: 64px; padding-left: 10px; 
+					width: 60%; line-height: 36px; font-size: 15px;}
+.searchbt { position: absolute; border: 1px solid #dadce0; background-color: #f5f7fa; width: 100%; max-width: 64px; line-height: 36px; color: #34383a; font-size: 15px; }
 .fdel, .fupdate{float:right;margin :4px;padding :4px;}
-.delup {float:right; margin-top:30px; padding-top:30px;}
-.delup a { text-decoration:none; padding:5px 10px; border:1px solid #ddd;}
+.delup {float:right; margin-top:30px;}
+.delup a {  background-color: white;  text-decoration: none; padding: 5px 10px;
+  			  border: 1px solid #000; color: black; }
 .delup a:hover {background:#FCFCFC;}
 .backLi { width:150px; margin:0 auto; margin-bottom:55px;}
-#back { text-align:center; text-decoration:none; font-size:15px; color:#353535; padding: 5px 10px;
-		 border:1px solid #e1e1e1;}
-#back:hover { bakcground:#e1e1e1;}		 
-		
+.faqinsert input{text-align: center;float:right;padding: 8px;margin: 0px 15px 5px 3px;}
+.faqinsert{ text-decoration: none;  padding: 10px; float:right; background-color: white; border: 1px solid black;}

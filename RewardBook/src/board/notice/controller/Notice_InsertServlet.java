@@ -62,17 +62,19 @@ public class Notice_InsertServlet extends HttpServlet {
 		
 		//전송온 값 꺼내서 변수 또는 객체에 저장하기
 		Notice notice = new Notice();
-		
 		notice.setNt_title(mrequest.getParameter("nt_title"));
 		notice.setNt_text(mrequest.getParameter("nt_text"));	
+		String nt_oc = mrequest.getParameter("nt_oc");
+		String nt_ntevent = mrequest.getParameter("nt_ntevent");
 		
 		//업로드된 원래 파일명 추출
 		String nt_img = mrequest.getOriginalFileName("nt_img");
 		// 실제 서버에 업로드 된 파일시스템 네임
+		notice.setA_no(mrequest.getParameter("a_no"));
 		
 
 		
-		int result = new NoticeService().insertNotice(notice, nt_img);
+		int result = new NoticeService().insertNotice(notice, nt_img, nt_oc, nt_ntevent);
 		
 		if(result > 0) {
 			response.sendRedirect("/RewardBook/nlist");

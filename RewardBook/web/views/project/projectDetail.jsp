@@ -7,6 +7,7 @@
 	Memo memo = (Memo)request.getAttribute("memo");
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
+	String message = (String)request.getAttribute("message");
 %>
 
 <!DOCTYPE html>
@@ -307,7 +308,12 @@ strong{font-weight: 700;}
 
 .target_gauge{ height: 4px; background-color: #e6eaed; position: relative; width: 100%; overflow: hidden; margin-bottom: 25px;}    
 .gauge {background-color: #ffb202; height: 4px; display: block; vertical-align: baseline;}
-
+/*memo*/
+.memodiv{border:1px solid black;  border: 1px solid #FF9800; border-radius: 6px; text-align: center; height:230px;margin: 20px 0px 20px 0px;}
+.memoh3{border-bottom:1px solid #FF9800; padding: 4px;}
+.m_text{border:0; width:300px; height:150px}
+.memosubmit{float:right;  padding: 5px; margin: 4px 10px; background: white;border: 1px solid #ff9800;}
+ /*//memo*/
 </style>
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script>
@@ -421,18 +427,41 @@ strong{font-weight: 700;}
 				<div class="rank_item">8</div>
 				<div class="rank_item">9</div>
 				<div class="rank_item">10</div>
-			</div>		
-		</div>
-				<form method="post" action="/RewardBook/minsert">		
-				<input type="hidden" name="u_no" value="<%= loginMember.getuNo() %>">		
-				<input type="hidden" name="p_no" value="<%= project.getP_no() %>">			
-				<div style="border:1px solid black;">			
-				<input type="submit" style="float:right" value="저장">			
-				<h3 style="border-bottom:1px solid black;">메모</h3>		
-				<textarea name="m_text" style=" border:0; width:298px; 
-				height:150px;"placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+			</div>	
+			
+				<% if(loginMember != null) { %>
+			<div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >		
+				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
+				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
+				<div class="memodiv" id="memodiv">			
+				<h3 class="memoh3">메모</h3>		
+				<textarea class="m_text"name="m_text" id="m_text" placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				<input class="memosubmit" type="submit" value="저장">			
 				</div>			
-				</form>
+				</form></div>	
+		</div>
+		<% } %>
+	<script>
+	function memoinsert(){
+	
+	$.ajax({
+		url: "/RewardBook/minsert",
+		data: { u_no: $("#u_no").val(),
+				p_no: $("#p_no").val(),
+				m_text: $("#m_text").val()
+				},
+		type: "get",
+		success: function(data){
+			
+	alert('메모가 저장되었습니다.');
+
+		
+		}
+	});
+	
+	
+}
+	</script>
 	
 	</div>
 </div>

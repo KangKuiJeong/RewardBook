@@ -77,7 +77,7 @@ public class FaqDao {
 		PreparedStatement pstmt = null;
 		
 		String query =  "UPDATE faq SET "
-				+ "faq_title= ?, faq_text= ? "
+				+ "faq_title= ?, faq_text= ?, faq_oc = ? "
 				+ "WHERE faq_no = ?";
 		
 		try {
@@ -85,7 +85,8 @@ public class FaqDao {
 
 			pstmt.setString(1, faq.getfaq_title());
 			pstmt.setString(2, faq.getFaq_text());
-			pstmt.setString(3, faq.getfaq_no());		
+			pstmt.setString(3, faq.getFaq_oc());		
+			pstmt.setString(4, faq.getfaq_no());		
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -97,7 +98,7 @@ public class FaqDao {
 		return result;
 	}
 
-	public int insertFAQ(Connection conn, Faq faq) {
+	public int insertFAQ(Connection conn, Faq faq, String faq_oc) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
@@ -111,7 +112,7 @@ public class FaqDao {
 			pstmt.setString(1, faq.getA_no());
 			pstmt.setString(2, faq.getfaq_title());
 			pstmt.setString(3, faq.getFaq_text());
-			pstmt.setString(4, "Y");
+			pstmt.setString(4, faq_oc);
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {

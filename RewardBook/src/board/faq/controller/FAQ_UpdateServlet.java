@@ -42,8 +42,9 @@ public class FAQ_UpdateServlet extends HttpServlet {
 		faq.setfaq_no(request.getParameter("faq_no"));
 		faq.setfaq_title(request.getParameter("faq_title"));
 		faq.setFaq_text(request.getParameter("faq_text"));
+		faq.setFaq_oc(request.getParameter("faq_oc"));
+
 		int result = new FaqService().updateFAQ(faq);
-		
 		if(result > 0) {
 	
 			view = request.getRequestDispatcher("views/board/faq/faqUpdateView.jsp");
