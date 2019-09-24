@@ -2,6 +2,7 @@
  * 메인 index페이지 javaScript
  */
 
+//슬라이드 영역 js
 $(document).ready(function() {
 	  slide();
 	});
@@ -119,5 +120,4 @@ $(document).ready(function() {
 	  init();
 	  slideEvent();
 	}
-	
-	
+		

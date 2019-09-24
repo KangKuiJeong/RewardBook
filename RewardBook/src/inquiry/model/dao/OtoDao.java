@@ -221,4 +221,33 @@ public class OtoDao {
 		
 	}
 	
+	//답변하기 DAO
+	public int ReceiveinsertOto(Connection conn, Oto oto) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update oto "
+				+ "set oto_atitle = ?, oto_atext = ?, oto_adate = sysdate, oto_yn = ? where oto_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);			
+			
+			pstmt.setString(1,oto.getOto_atitle());
+			pstmt.setString(2, oto.getOto_atext());
+			pstmt.setString(3, oto.getOto_yn());
+			pstmt.setString(4, oto.getOto_no());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+		
+	}
+	
 }
