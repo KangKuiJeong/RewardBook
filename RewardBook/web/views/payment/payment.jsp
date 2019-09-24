@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<% 
+	int totalSelected = Integer.parseInt(request.getParameter("totalSelected")); 
+	int fundingPrice = Integer.parseInt(request.getParameter("fundingPrice"));
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,7 @@
 <title>결제 페이지</title>
 <link rel="stylesheet" href="/RewardBook/resources/css/payment/payment.css">
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.4.min.js" type="application/javascript"></script>
 
 </head>
 <body>
@@ -18,7 +22,6 @@
 <div id="paymentWrap">
 	<div class="payment-wrap">
 		<form name="paymentForm" id="purchaseForm" method="post">
-            <input type="hidden" id="campaignId" name="campaignId" value="43983">
             <input type="hidden" id="presenteeName" name="presenteeName">
             <input type="hidden" id="contactNumber" name="contactNumber">
             <input type="hidden" id="zipCode" name="zipCode">
@@ -39,8 +42,7 @@
                   
                   <li>
                     <p class="title">[얼리버드] 우산 3개 SET</p>
-                    <p class="text">다다익선! 그 만큼 가격혜택도 커요.
-(무료배송)</p>
+                    <p class="text">다다익선! 그 만큼 가격혜택도 커요.(무료배송)</p>
                     <div class="info">
                       
                       <p class="sum"><em>수량 : 1개</em>43,000원</p>
@@ -280,53 +282,35 @@
 <%@ include file="/views/common/footer.jsp" %>
 
 <script type="text/javascript">
-<%-- IMP.init('imp06847691');
-
 function payTest(){
-	IMP.request_pay({
-		merchant_uid : 'merchant_' + new Date().getTime(),
-		name : '최초인증결제',
-		amount : 0, // 빌링키 발급만 진행하며 결제승인을 하지 않습니다.
-		customer_uid : '<%= loginMember.getId() %>', //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
-		buyer_email : 'iamport@siot.do',
-		buyer_name : '아임포트',
-		buyer_tel : '02-1234-1234'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	    	console.log(rsp);
-	    	jQuery.ajax({
-	    		url: "/RewardBook/pm_comp", //cross-domain error가 발생하지 않도록 주의해주세요
-	    		type: 'post',
-	    		dataType: 'json',
-	    		data: {
-		    		imp_uid : rsp.imp_uid,
-		    		merchant_uid : rsp.merchant_uid
-		    		//기타 필요한 데이터가 있으면 추가 전달
-	    		}
-	    	}).done(function(data) {
-	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-	    		if ( everythings_fine ) {
-	    			var msg = '결제가 완료되었습니다.';
-	    			msg += '\n고유ID : ' + rsp.imp_uid;
-	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	    			msg += '\결제 금액 : ' + rsp.paid_amount;
-	    			msg += '카드 승인번호 : ' + rsp.apply_num;
-	    			
-	    			alert(msg);
-	    		} else {
-	    			//[3] 아직 제대로 결제가 되지 않았습니다.
-	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-	    		}
-	    	});
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	        
-	        alert(msg);
-	    }
+	BootPay.request({
+		price: 0, // 0으로 해야 한다.
+		application_id: "5d5a6ed20627a800303d1951",
+		name: '정기적인 결제', //결제창에서 보여질 이름
+		pg: 'danal',
+		method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
+		show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+		user_info: {
+			username: '사용자 이름',
+			email: '사용자 이메일',
+			addr: '사용자 주소',
+			phone: '010-1234-4567'
+		},
+		order_id: 'order_id_', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+		params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+	}).error(function (data) {
+		//결제 진행시 에러가 발생하면 수행됩니다.
+		console.log(data);
+	}).cancel(function (data) {
+		//결제가 취소되면 수행됩니다.
+		console.log(data);
+	}).done(function (data) {
+		// 빌링키를 정상적으로 가져오면 해당 데이터를 불러옵니다.
+		console.log(data);
+		console.log(order_id);
+		
 	});
-} --%>
+}
 
 $('.show-list').click(function(){
     $('.delivery-list').toggle();

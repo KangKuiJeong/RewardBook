@@ -43,9 +43,9 @@ public class Project_SelectServlet extends HttpServlet {
 			request.setAttribute("rewardList", list);
 		}
 		
-		Memo memo = new MemoService().selectMemo(p_no);
+		/*Memo memo = new MemoService().selectMemo(p_no);
 	
-		request.setAttribute("memo", memo);
+		request.setAttribute("memo", memo);*/
 		
 		Project project = new ProjectService().selectProject(p_no);
 		RequestDispatcher view = null;
