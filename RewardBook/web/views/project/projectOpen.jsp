@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String memberNo = ((Member)session.getAttribute("loginMember")).getuNo();
+	String memberId = ((Member)session.getAttribute("loginMember")).getId();
 %>
 <!DOCTYPE html>
 <html>
@@ -81,8 +82,11 @@
 	display : none;
 }
 .area1 .edit .container .text[name=one] {
-	height : 2300px;
+	height : 1400px;
 	display : block;
+}
+.area1 .edit .container .text[name=three] {
+	height : 740px;
 }
 
 .area1 .edit .container .text div {
@@ -94,42 +98,145 @@
 .area1 .edit .container .text div .title {
 	width : 250px;
 	height : 100%;
-	background : yellow;
 	margin : 0px 0px 0px 0px;
 	float : left;
 	font-size : 18px;
 	font-weight : 600;
 }
 .area1 .edit .container .text div .title .subtitle {
+	width : 100%;
+	height : 30px;
 	font-size : 18px;
 	font-weight : 600;
+	margin : 0px;
 	clear : both;
 }
 .area1 .edit .container .text div .title .explain {
+	width : 100%;
+	height : 50px;
 	font-size : 16px;
 	font-weight : 500;
+	color : #6B5D4E;
+	margin : 0px;
 }
 
 .area1 .edit .container .text div .input {
-	width : 648px;
-	height : 100%;
-	border : 1px solid #E8DEDC;
-	margin : 0px 0px 0px 0px;
+	width : 566px;
+	height : 140px;
+	border : 2px solid #c9c9c9;
+	margin : 0px 0px 0px 30px;
 	float : left;
+	font-size : 16px;
+	color : #6B5D4E;
+	background : #eeeeee;
+	padding : 25px;
+}
+
+.area1 .edit .container .text div .input input[type=text] {
+	width : 400px;
+	height : 30px;
+	font-size : 18px;
+	margin : 0px 20px 0px 0px;
+	border : 2px solid #c9c9c9;
+}
+
+.area1 .edit .container .text div .input select {
+	width : 200px;
+	height : 30px;
+	font-size : 18px;
+	margin : 0px 20px 0px 0px;
+	border : 2px solid #c9c9c9;
+	padding : 0px 0px 0px 10px;
+}
+
+.area1 .edit .container .text div .input input[type=date] {
+	width : 200px;
+	height : 30px;
+	font-size : 18px;
+	margin : 0px 20px 0px 0px;
+	border : 2px solid #c9c9c9;
+	padding : 0px 0px 0px 10px;
+}
+
+.area1 .edit .container .text .part1 {
+	height : 154px;
+}
+.area1 .edit .container .text .part1 .input {
+	height : 90px;
+}
+.area1 .edit .container .text .part2 {
+	height : 124px;
+}
+.area1 .edit .container .text .part2 .input {
+	height : 60px;
+}
+.area1 .edit .container .text .part3 {
+	height : 124px;
+}
+.area1 .edit .container .text .part3 .input {
+	height : 60px;
+}
+.area1 .edit .container .text .part4 {
+	height : 124px;
+}
+.area1 .edit .container .text .part4 .input {
+	height : 60px;
+}
+.area1 .edit .container .text .part5 {
+	height : 104px;
+}
+.area1 .edit .container .text .part5 .input {
+	height : 40px;
+}
+.area1 .edit .container .text .part6 {
+	height : 244px;
+}
+.area1 .edit .container .text .part6 .input {
+	height : 180px;
+}
+.area1 .edit .container .text .part7 {
+	height : 104px;
+}
+.area1 .edit .container .text .part7 .input {
+	height : 40px;
+}
+.area1 .edit .container .text .part8 {
+	height : 104px;
+}
+.area1 .edit .container .text .part8 .input {
+	height : 40px;
+}
+
+.area1 .edit .container .text[name=three] .part2 {
+	height : 104px;
+}
+.area1 .edit .container .text[name=three] .part2 .input {
+	height : 40px;
+}
+
+.area1 .edit .container .text[name="three"] .part3 .input div {
+	width : 565px;
+	height : 310px;
+	margin : 0px;
+}
+#cke_p_content, .cke_inner.cke_reset {
+	margin : 0px;
 }
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- 슬라이드 스크립트 -->
 <script type="text/javascript" src="/RewardBook/resources/js/index.js"></script>
+<script type="text/javascript" src="/RewardBook/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
+
 function showEdit() {
 	$(".area1 .index").css("display", "none");
 	$(".area1 .edit").css("display", "block");
 };
 
 $(function() {
-	
+
 	$(".tabMenu li").on("click", function() {
 		if ($(this).index() < 5) {
 			
@@ -151,6 +258,11 @@ $(function() {
 			}
 		}
 	});
+	
+	$(".edit .container .text .part3 .input input").on("keyup", function() {
+		$(".edit .container .text .part3 .input span").text($(".edit .container .text .part3 .input input").val().length + " / 40");
+	})
+	
 });
 </script>
 </head>
@@ -169,7 +281,7 @@ $(function() {
 			<div>서포터와의 신뢰를 위해 펀딩 진행∙제품 제작∙배송 등 모든 과정에서 겪는 어려움들을 서포터에게 진솔하게 전달하고 문제를 해결합니다.</div>
 			<div onclick="showEdit()">계속하기</div>
 		</div>
-		<form method="post" action="/RewardBook/p_insert">
+		<form method="post" enctype="multipart/form-data" action="/RewardBook/p_insert">
 		<input type="hidden" name="no" value="<%= memberNo %>">
 		<div class="edit">
 			<div class="tab">
@@ -191,8 +303,9 @@ $(function() {
 							<div class="explain">리워드북 관리자와의 소통은 프로젝트 번호로 진행됩니다.</div>
 						</div>
 						<div class="input">
-							<span>???????</span>
-							<span>/RewardBook//p_sel?p_no=</span><span>???????</span><span>으로 주소가 설정되며 프로젝트 오픈 후 진입 가능합니다.</span>
+							<span style="font-size : 22px;">???????</span><br>
+							<span>"/RewardBook//p_sel?p_no=</span><span>???????</span>"<span> 으로 주소가 설정되며<br>
+									프로젝트 오픈 후 진입 가능합니다.</span>
 						</div>
 					</div>
 					<div class="part2">
@@ -201,7 +314,7 @@ $(function() {
 							<div class="explain">주요 안내를 받으실 이메일을 등록해 주세요. 정보 변경은 회원정보설정에서 가능합니다.</div>
 						</div>
 						<div class="input">
-							<span>????</span><span>인증됨</span>
+							<span style="font-size : 18px;"><%= memberId %></span><span style="font-size : 18px; font-weight : 600; color : blue; margin : 0px 0px 0px 20px">인증됨</span>
 						</div>
 					</div>
 					<div class="part3">
@@ -210,7 +323,8 @@ $(function() {
 							<div class="explain">프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</div>
 						</div>
 						<div class="input">
-							<input type="text" name="title" placeholder="40자 내외로 작성해주세요.">
+							<input type="text" name="title" placeholder="40자 내외로 작성해주세요." style="padding-left : 10px">
+							<span style="font-size : 18px;">0 / 40</span>
 						</div>
 					</div>
 					<div class="part4">
@@ -218,7 +332,7 @@ $(function() {
 							<div class="subtitle">목표 금액</div>
 						</div>
 						<div class="input">
-							<input type="text" name="tprice" value="0">원
+							<input type="text" name="tprice" value="0" style="text-align : right; padding-right : 10px">원
 						</div>
 					</div>
 					<div class="part5">
@@ -243,10 +357,10 @@ $(function() {
 							<div class="subtitle">필수 확인사항</div>
 						</div>
 						<div class="input">
-							<span>Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서 유통된 적이 있거나 현재 유통 중인가요?</span>
-							<span>선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트 취소 및 위약벌이 부과될 수 있습니다.</span>
-							<span>아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.</span>
-							<span>예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</span>
+							<span style="font-size : 18px; font-weight : 600;">Q. 리워드가 타 크라우드펀딩사 및 온라인 커머스,자사 홈페이지 등 다른<br>판매처에서 유통된 적이 있거나 현재 유통 중인가요?<br></span>
+							<div style="width : 540px; height : 48px; margin : 10px 0px 0px 0px;"><span>선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트 취소 및 위약벌이 부과될 수 있습니다.</span></div>
+							<div style="width : 560px; height : 30px; margin : 10px 0px 0px 0px;"><input type="radio" class="radio" name="radio" style="margin : 0px 5px 0px 0px"><span>아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.</span></div>
+							<div style="width : 560px; height : 30px; margin : 0px 0px 0px 0px;"><input type="radio" class="radio" name="radio" style="margin : 0px 5px 0px 0px"><span>예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</span></div>
 						</div>
 					</div>
 					<div class="part7">
@@ -270,16 +384,25 @@ $(function() {
 					<div>리워드 추가</div>
 				</div>
 				<div class="text" name="three">
-					<div class="part1">
-						<div class="title">소개 글 작성하기</div>
+					<div class="part2">
+						<div class="title">썸네일 사진</div>
 						<div class="input">
-							<input type="text" name="story">
+							<input class="thumbnail" type="file" name="thumbnail" size=40>
 						</div>
 					</div>
 					<div class="part2">
-						<div class="title">안내 글 작성하기</div>
+						<div class="title">소개 사진</div>
 						<div class="input">
-							<input type="text" name="info">
+							<input class="story" type="file" name="story" size=40>
+						</div>
+					</div>
+					<div class="part3">
+						<div class="title">안내 글 작성하기</div>
+						<div class="input" style="height : 320px;">
+							<textarea class="form-control" id="p_content" style="display : block; margin : 0px 0px 0px 0px;"></textarea>
+							<script type="text/javascript">
+								CKEDITOR.replace('p_content', {height: 200});
+							</script>
 						</div>
 					</div>
 				</div>
