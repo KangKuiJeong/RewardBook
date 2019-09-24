@@ -73,5 +73,21 @@ public class OtoService {
 		return oto;
 	}
 
+	//답변하기 insert 
+	public int receiveInsertOto(Oto oto) {
+		
+		Connection conn = getConnection();
+		int result = oDao.ReceiveinsertOto(conn, oto);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 
 }

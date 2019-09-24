@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>      
+    pageEncoding="UTF-8" import="java.util.ArrayList, project.model.vo.Project"%>         
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,118 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- 슬라이드 스크립트 -->
 <script type="text/javascript" src="/RewardBook/resources/js/index.js"></script>
+<script>
+$(function(){
+		
+	$('ul.tabs li').click(function(){
+	    var tab_id = $(this).attr('data-tab');
+	 
+	    $('ul.tabs li').removeClass('current');
+	    $('.tab-content').removeClass('current');
+	 
+	    $(this).addClass('current');
+	    $("#"+tab_id).addClass('current');
+	  })
+	  
+		//최근등록된 프로젝트
+		$.ajax({
+			url: "recentTop5",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				//객체를 문자열로 변환 처리함
+				var jsonStr = JSON.stringify(data);
+				//문자열을 배열 객체로 바꿈
+				var json = JSON.parse(jsonStr);
+				var times = 0;
+				var mins = 0;
+				var hours = 0;
+				var days = 0;
+				
+				var values = "";
+				for(var i in json.list){				
+					
+					times = json.list[i].recent_time;
+					mins = times / 60;
+					hours = mins / 60;
+					days = hours / 24;
+					times = times % 60;
+					mins = mins % 60;
+					hours = hours % 24;
+					
+					if(days > 0){
+						
+						values += "<li class='recentli'>"
+						+ decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
+						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</span></li>"	
+						
+					}else {
+						
+						values += "<li class='recentli'>"
+							+ decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
+							+"<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</li>"
+						
+					}
+				}  
+				
+				$(".recentProject").html($(".recentProject").html() + values);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error : " + jqXHR + ", " + 
+						textStatus + ", " + errorThrown);
+			}
+		});
+		
+		$.ajax({
+			url: "endTop5",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				//객체를 문자열로 변환 처리함
+				var jsonStr = JSON.stringify(data);
+				//문자열을 배열 객체로 바꿈
+				var json = JSON.parse(jsonStr);
+				var times = 0;
+				var mins = 0;
+				var hours = 0;
+				var days = 0;
+				
+				var values = "";
+				for(var i in json.list){				
+					
+					times = json.list[i].end_time;
+					mins = times / 60;
+					hours = mins / 60;
+					days = hours / 24;
+					times = times % 60;
+					mins = mins % 60;
+					hours = hours % 24;
+					
+					if(days > 0){
+						
+						values += "<li class='endli'>"
+						+ decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")
+						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</span></li>"	
+						
+					}else {
+						
+						values += "<li class='endli'>"
+							+ decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")
+							+"<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</li>"
+						
+					}
+				}  
+				
+				$(".endProject").html($(".endProject").html() + values);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error : " + jqXHR + ", " + 
+						textStatus + ", " + errorThrown);
+			}
+		});
+		
+});
+</script>
 </head>
 <body>
 
@@ -38,33 +150,175 @@
 	
 	
 	<!-- 컨텐츠 영역 -->
-	<!-- <div id="contents">
-		<table id="table1">
-			<tr>
-				<td id="pick" >
-					<p class="title">이 펀딩 어때요?</p>
-					<table id="pickContents">
-						<tr><td><img src="resources/images/index/sample1.jpg" width="293">세상에 단 120벌, 당신을 위한 수트</td>
-						<td><img src="resources/images/index/sample1.jpg" width="293">세상에 단 120벌, 당신을 위한 수트</td>
-						<td><img src="resources/images/index/sample1.jpg" width="293">세상에 단 120벌, 당신을 위한 수트</td></tr>
-						<tr><td><img src="resources/images/index/sample1.jpg" width="293">세상에 단 120벌, 당신을 위한 수트</td>
-						<td><img src="resources/images/index/sample1.jpg" width="293">세상에 단 120벌, 당신을 위한 수트</td>
-						<td><img src="resources/images/index/sample1.jpg" width="293">세상에 단 120벌, 당신을 위한 수트</td>
-					</table>
+	
+	<!--  md추천 프로젝트 -->
+	<div class="mainContent">
+		<table id="firstTable"><tr><td id="firstTd">
+		<div class="mdPick">
+			<p class="mainSubtitle">이런 프로젝트는 어때요?</p>
+			<table id="mdPickTable">
+				<tr>
+				<td>
+					<a href="/RewardBook//p_sel?p_no=1">
+					<img src="/RewardBook/resources/images/index/t1.PNG">
+					작은 사각 공간 속 빛나는 너를 위한 소망! 탄생석 주얼리 세트
+					</a>
 				</td>
-				<td id="ranking">
-					<p class="title">실시간랭킹 TOP5</p>
-					<ul id="rankingUl">
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
+				<td>
+					<a href="/RewardBook//p_sel?p_no=2">
+					<img src="/RewardBook/resources/images/index/t3.PNG">
+					[MD추천]직장인강추아이템! 간편한 비타민D 솔루션으로 건강하게! - 비타마우스
+					</a>
 				</td>
-			</tr>
-		</table>
-	</div> -->
+				<td>
+					<a href="/RewardBook//p_sel?p_no=4">
+					<img src="/RewardBook/resources/images/index/t2.PNG">
+					당신의 손목은 소중하니까! 당신의 소중한 손목을 보호해줄 OFM팜레스트
+					</a>
+				</td>
+				</tr>
+				<tr id="tdline2">
+				<td>
+					<a href="#">
+					<img src="/RewardBook/resources/images/index/t4.PNG">
+					하나의 보조배터리로 다양한 스마트 디바이스를 충전할 수 있는 올인원 무선 충전 보조배터리!
+					</a>
+				</td>
+				<td colspan="2" id="tdline2Right">
+					<a href="#">
+					<img src="/RewardBook/resources/images/index/t5.png">
+					★초음파렌즈세척기★ 지금까지 렌즈관리 어떻게 하셨나요? 주머니 쏙~!! 렌즈 관리하기 어려운 당신에게 추천드리는 단 하나의 솔루션!
+					</a>
+				</td>				
+				</tr>
+			</table>
+		</div>
+		</td>
+		<td>
+		<!--  실시간 랭킹  -->
+		<div class="rankTop5">
+			<p class="mainSubtitle" id="top5TabsTtile">실시간 랭킹 TOP5</p>
+			 <div class="tabContainer">
+ 
+			  <ul class="tabs">
+			    <li class="tab-link current" data-tab="tab-1">조회수</li>
+			    <li class="tab-link" data-tab="tab-2">좋아요</li>
+			  </ul>
+ 
+			  <div id="tab-1" class="tab-content current">
+				<ul>
+					<li class="rankingList">
+						<p class="rankNum">1</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">2</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">3</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">4</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">4</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+				</ul>
+			  </div>
+			  <div id="tab-2" class="tab-content">
+			  <ul>
+					<li class="rankingList">
+						<p class="rankNum">1</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">2</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">3</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">4</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+					<li class="rankingList">
+						<p class="rankNum">4</p>
+						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
+					</li>
+				</ul>
+			  </div>
+			</div>
+		</div>
+		</td></tr></table>
+		
+		<!-- 최근등록된 프로젝트 -->
+		<div class="recentProject">
+			<p class="mainSubtitle">최근 등록된 프로젝트</p>
+			<p id="projectMore"><a href="/RewardBook/p_list">더보기 ></a></p>
+			<ul>
+				<li class="recentli">
+					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="recentli">
+					<img src="/RewardBook/resources/images/index/t2.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="recentli">
+					<img src="/RewardBook/resources/images/index/t3.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="recentli">
+					<img src="/RewardBook/resources/images/index/t4.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="recentli">
+					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					<p></p>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- 마감임박프로젝트 -->
+			<div class="endProject">
+			<p class="mainSubtitle">마감임박 프로젝트</p>
+			<p id="projectMore"><a href="/RewardBook/p_list">더보기 ></a></p>
+			<ul>
+				<li class="endli">
+					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="endli">
+					<img src="/RewardBook/resources/images/index/t2.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="endli">
+					<img src="/RewardBook/resources/images/index/t3.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="endli">
+					<img src="/RewardBook/resources/images/index/t4.PNG" class="liImg">
+					<p></p>
+				</li>
+				<li class="endli">
+					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					<p></p>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- 배너영역 -->
+		<div class="bannerArea">
+			<img src="/RewardBook/resources/images/index/mainBanner1.png">
+		</div>
+	</div>
+	
 	
 	<!-- 푸터부분 include -->
 	<%@ include file="views/common/footer.jsp" %>
