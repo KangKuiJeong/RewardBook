@@ -25,6 +25,7 @@ public class Project implements java.io.Serializable {
 	private String p_return;
 	private int p_rdate;
 	private String u_name;
+	private int time;
 	
 	public Project() {
 		super();
@@ -32,7 +33,7 @@ public class Project implements java.io.Serializable {
 
 	public Project(String p_no, String u_no, String p_title, String p_category, String p_story,String p_img, String p_info,
 			int p_nprice, int p_tprice, Date p_sdate, Date p_edate, String p_secondary, Date p_ddate, int p_count,
-			String p_permission, Date p_pdate, String p_return, int p_rdate, String u_name) {
+			String p_permission, Date p_pdate, String p_return, int p_rdate, String u_name, int time) {
 		super();
 		this.p_no = p_no;
 		this.u_no = u_no;
@@ -53,6 +54,7 @@ public class Project implements java.io.Serializable {
 		this.p_return = p_return;
 		this.p_rdate = p_rdate;
 		this.u_name = u_name;
+		this.time = time;
 	}
 
 	public String getP_no() {
@@ -206,6 +208,15 @@ public class Project implements java.io.Serializable {
 	   public void setU_name(String u_name) {
 	      this.u_name = u_name;
 	   }
+	     
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
 
 	@Override
 	public String toString() {
@@ -214,8 +225,10 @@ public class Project implements java.io.Serializable {
 				+ ", p_tprice=" + p_tprice + ", p_sdate=" + p_sdate + ", p_edate=" + p_edate + ", p_secondary="
 				+ p_secondary + ", p_ddate=" + p_ddate + ", p_count=" + p_count + ", p_permission=" + p_permission
 				+ ", p_pdate=" + p_pdate + ", p_return=" + p_return + ", p_rdate=" + p_rdate + ", u_name=" + u_name
-				+ "]";
+				+ ", time=" + time + "]";
 	}
+
+	
 
 	
 }

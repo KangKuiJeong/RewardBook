@@ -49,7 +49,7 @@ public class Oto_InsertServlet extends HttpServlet {
 			PrintWriter out= response.getWriter();
 			out.println("<script>");
 			out.println("alert('문의글 등록이 완료되었습니다.')");
-			out.println("history.go(-2);");
+			out.println("self.close();");
 			out.println();
 			out.println("</script>");
 			

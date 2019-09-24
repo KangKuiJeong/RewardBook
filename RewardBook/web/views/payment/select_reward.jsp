@@ -150,7 +150,7 @@
 <%@ include file="/views/common/header.jsp"  %>
 
 <div id="reward_container">
-	<form action="/RewardBook/pm_page" method="post">
+	<form id="purchaseForm" name="purchaseForm" method="post">
 		<div class="select-container">
 		<div class="top-area">
 					<h3><em>리워드 선택</em></h3>
@@ -261,7 +261,7 @@
 	
 	<div class="btn-wrap">
     	<p class="confirm"><%= project.getP_title() %>에 <em id="sumTotalNum">0</em> 원을 펀딩합니다.</p>
-    	<button class="rb button primary"  onclick="javascript:location.href='/RewardBook/views/payment/payment.jsp'">다음 단계로 <i class="icon chevron-right"></i></button>
+    	<button class="rb button primary"  onclick="purchaseNextStep();">다음 단계로 <i class="icon chevron-right"></i></button>
     </div>
 </div>
 
@@ -335,6 +335,40 @@
 
 	   	calculateTotal();
    	}
+   	
+   	/*다음 단계로*/
+   	function purchaseNextStep(){
+   		var totalSelected = 0;
+   		var isValidation_memo = true;
+   		$("input[name=rewardId]:checked").each(function(idx, item) {
+   			var rewardId = $(this).val();
+   	     	var qty = $('#qty'+rewardId).val();
+         	var amount = $('#amountRw'+rewardId).val();
+         	
+         	var sumAmount = parseInt(amount) * parseInt(qty);
+         	
+         	$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].rewardId" value="'+rewardId+'" />');
+    		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].qty" value="'+qty+'" />');
+    		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].sumAmount" value="'+sumAmount+'" />');
+    		totalSelected++;
+   	    });
+   		var errorMessage;
+
+   		if (totalSelected == 0) {
+   	    errorMessage = "최소 1개 이상의 리워드를 선택해주세요.";
+   	  }
+
+   		if (errorMessage) {
+   	    $("#purchaseForm input[name*='choiceRewards']").remove();
+   	    alert(errorMessage);
+   	  } else {
+   			$('#purchaseForm').append('<input type="hidden" name="fundingPrice" value="'+fundingPrice+'" />');
+   			$('#purchaseForm').append('<input type="hidden" name="totalSelected" value="'+totalSelected+'" />');
+   			$('#purchaseForm').attr('action', '/RewardBook/views/payment/payment.jsp');
+   			$("#purchaseForm").submit();
+   		}
+   	}
+
 	
 </script>
 
