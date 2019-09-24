@@ -22,13 +22,13 @@ import project.model.vo.Project;
  * Servlet implementation class Like_List_ProjectServlet
  */
 @WebServlet("/like_plist")
-public class Like_List_ProjectServlet extends HttpServlet {
+public class Like_Project_List_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Like_List_ProjectServlet() {
+    public Like_Project_List_Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -68,6 +68,7 @@ public class Like_List_ProjectServlet extends HttpServlet {
 				job.put("nprice", project.getP_nprice());
 				job.put("tprice", project.getP_tprice());
 				job.put("name", URLEncoder.encode( project.getU_name(), "UTF-8"));
+				job.put("img", project.getP_img());
 
 	            jarr.add(job);
 	            System.out.println();

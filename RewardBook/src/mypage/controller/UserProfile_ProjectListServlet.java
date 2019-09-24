@@ -65,6 +65,7 @@ public class UserProfile_ProjectListServlet extends HttpServlet {
 				job.put("nprice", project.getP_nprice());
 				job.put("tprice", project.getP_tprice());
 				job.put("name", URLEncoder.encode( project.getU_name(), "UTF-8"));
+				job.put("img", project.getP_img());
 
 	            jarr.add(job);
 	         

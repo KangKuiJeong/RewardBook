@@ -83,7 +83,8 @@ width:16.66%;
 
 .tab .tabbox { margin:10px; width:100%; height:100%;}
 .tab .tabbox .boxtop { height: 40px; width:100%;  }
-.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto; margin-left:30px;}
+.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto; overflow-sytyle:none; margin-left:30px;}
+.boxbottom::-webkit-scrollbar { display: none; }
 .tab .tabbox .boxbottom .boxarea { margin: 5px; float:left; width:30%; height: 300px; border: 1px solid lightgray; }
 .tab .tabbox .boxbottom .boxarea .itemimage { width: 100%; height:200px; border-bottom: 1px solid gray; }
 .tab .tabbox .boxbottom .boxarea .itemname { width: 100%; height:50px;  display:block;}
@@ -93,7 +94,7 @@ width:16.66%;
 .tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_name {float:left; font-size: 13px; color: #90949c;}
 .tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_category{float:right; font-size: 13px; color: #90949c;margin-right:5px;}
 .tab .tabbox .boxbottom .boxarea .itemper {width: 100%; height:30px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
-
+.p_image { width:100%; height:100%; }
 
 .boxbottom .bottomcenter{ margin: 0 auto; height:100%; width:600px;}
 
@@ -169,6 +170,8 @@ width:16.66%;
 			<li class="litype"><a href="/RewardBook/olist?u_no=<%= loginMember.getuNo() %>">1:1문의</a></li>
 			
 			<li class="litype"><a href="/RewardBook/iq_clist?u_no=<%= loginMember.getuNo() %>">관리자 문의</a></li>
+			
+			<li class="litype"><a href="/RewardBook/mlist?u_no=<%= loginMember.getuNo() %>">MY메모</a></li>
 			
 			<li class="litype">
 				<span class="flwc">팔로워 : </span><span id="flwcount"></span>
@@ -251,10 +254,10 @@ width:16.66%;
 								if(json.list){
 									for(var i in json.list){
 										$(".myproject").html($(".myproject").html()
-												+"<a class='boxitem' href='#'>"
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' class='p_image'>"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -332,10 +335,10 @@ width:16.66%;
 								if(json.list){
 									for(var i in json.list){
 										$(".payproject").html($(".payproject").html()
-												+"<a class='boxitem' href='#'>"
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' class='p_image' >"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -358,12 +361,12 @@ width:16.66%;
 									}
 								}
 								else if(json.result){
-									$(".myproject").html($(".myproject").html()
+									$(".payproject").html($(".payproject").html()
 											+ "<div class='bottomcenter'>"
 											+ "<br><br>"
 				        					+ "<div class='flwname'>"
 				        					+ 	"<span class='followername'>"
-				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 진행중인 프로젝트가 없습니다."
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 후원중인 프로젝트가 없습니다."
 				        					+	"</span>"
 				        					+ "</div></div>"
 				        					);
@@ -415,7 +418,7 @@ width:16.66%;
 															+"<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no + "'>"
 															+"<div class='followarea'>"
 															+"<div class='flwimg'>"
-															+ 	"<img class='followimg' src='/RewardBook/resources/images/mypage/i.jpg'>"
+															+ 	json.result[i].u_profile
 							        						+ "</div>"
 								        					+ "<div class='flwname'>"
 								        					+ 	"<span class='followname'>"
@@ -434,7 +437,7 @@ width:16.66%;
 										}
 										if(count == 0){
 											$(".followinglink").html($(".followinglink").html()
-													+ "<br>" + "<br>"
+													+ "<br><br>"
 						        					+ "<div class='flwname'>"
 						        					+ 	"<span class='followname'>"
 						        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로잉하는 친구가 없습니다."
@@ -503,7 +506,7 @@ width:16.66%;
 										}
 										if(count == 0){
 											$(".followerlink").html($(".followerlink").html()
-													+ "<br>" + "<br>"
+													+ "<br><br>"
 						        					+ "<div class='flwname'>"
 						        					+ 	"<span class='followername'>"
 						        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로워하는 친구가 없습니다."
@@ -552,7 +555,7 @@ width:16.66%;
 												+"<a class='boxitem' href='#'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' class='p_image'>"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -618,7 +621,7 @@ width:16.66%;
 	        		<a class="boxitem" href="#">
 		        		<div class="boxarea">
 		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" width="100%" height="100%">
+		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" class="p_image">
 		        				</div>
 		        				<div class="itemname">
 		        					<div class="itemname_text"><span>[세준] 파워뱅크 블루투스 이어폰 에어팟 짱</span></div>

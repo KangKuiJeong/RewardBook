@@ -52,6 +52,7 @@ public class Follower_LIstServlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 			job.put("u_no",member.getuNo());
 			job.put("name", URLEncoder.encode(member.getName(), "UTF-8"));
+			job.put("u_profile", member.getProfileImg());
 
 			jarr.add(job);
 		}

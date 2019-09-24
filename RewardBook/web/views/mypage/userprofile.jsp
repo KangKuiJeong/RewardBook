@@ -94,7 +94,8 @@ width:33.333%;
 
 .tab .tabbox { margin:10px; width:100%; height:100%;}
 .tab .tabbox .boxtop { height: 40px; width:100%;  }
-.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto; margin-left:30px;}
+.tab .tabbox .boxbottom { height: 420px; width:100%; overflow:auto; overflow-sytyle:none; margin-left:30px;}
+.boxbottom::-webkit-scrollbar { display: none; }
 .tab .tabbox .boxbottom .boxarea { margin: 5px; float:left; width:30%; height: 300px; border: 1px solid lightgray; }
 .tab .tabbox .boxbottom .boxarea .itemimage { width: 100%; height:200px; border-bottom: 1px solid gray; }
 .tab .tabbox .boxbottom .boxarea .itemname { width: 100%; height:50px;  display:block;}
