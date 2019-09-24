@@ -38,7 +38,7 @@ public class Notice_SearchServlet extends HttpServlet {
 		ArrayList<Notice> list = null;
 
 		list = new NoticeService().SearchNT(searchbt, nt_search);
-		System.out.println(searchbt + nt_search);
+		
 		RequestDispatcher view = null;
 		response.setContentType("text/html; charset=utf-8");
 

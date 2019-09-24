@@ -59,6 +59,8 @@ public class Notice_UpdateServlet extends HttpServlet {
 		notice.setNt_no(mrequest.getParameter("nt_no"));
 		notice.setNt_title(mrequest.getParameter("nt_title"));
 		notice.setNt_text(mrequest.getParameter("nt_text"));	
+		String nt_oc = mrequest.getParameter("nt_oc");
+		String nt_ntevent = mrequest.getParameter("nt_ntevent");
 		
 		//삭제여부값 추출
 		String delflag = mrequest.getParameter("delflag");
@@ -77,7 +79,7 @@ public class Notice_UpdateServlet extends HttpServlet {
 			
 					}
 				
-		int result = new NoticeService().updateNotice(notice);
+		int result = new NoticeService().updateNotice(notice, nt_oc, nt_ntevent);
 		
 		if(result > 0 ) {
 			

@@ -1,7 +1,6 @@
 package memo.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import memo.model.service.MemoService;
-import memo.model.vo.Memo;
-import project.model.service.ProjectService;
-import project.model.vo.Project;
 
 /**
- * Servlet implementation class Memo_listServlet
+ * Servlet implementation class Memo_deleteServlet
  */
-@WebServlet("/mlist")
-public class Memo_listServlet extends HttpServlet {
+@WebServlet("/mdelete")
+public class Memo_deleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Memo_listServlet() {
+    public Memo_deleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +30,18 @@ public class Memo_listServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	int result = new ProjectService().countProject();
+
+		String p_no = request.getParameter("p_no");
+
+		int result = new MemoService().deleteMemo(p_no);
 		
 		if(result > 0) {
-			ArrayList<Project> list = new ProjectService().listProject();
-			
-			RequestDispatcher view = null;
-			if(list.size() > 0) {
-				view = request.getRequestDispatcher("views/memo/memoList.jsp");
-				request.setAttribute("list", list);
-				request.setAttribute("result", result);
-				view.forward(request, response);
-			}else {
-				view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message", "프로젝트 메인 조회 실패!");
-				view.forward(request, response);
-			}
-		
+			response.sendRedirect("/RewardBook/mlist");
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/Error.jsp");
+			view.forward(request, response);
 		}
+		
 	}
 
 	/**

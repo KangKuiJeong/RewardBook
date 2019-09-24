@@ -42,6 +42,11 @@ public class Project_SelectServlet extends HttpServlet {
 		if(list.size() > 0) {
 			request.setAttribute("rewardList", list);
 		}
+    
+		ArrayList<Memo> mlist = new MemoService().listMemo();
+		Memo memo = new MemoService().selectMemo(p_no);
+	
+		request.setAttribute("listm", memo);
 		
 		/*Memo memo = new MemoService().selectMemo(p_no);
 	

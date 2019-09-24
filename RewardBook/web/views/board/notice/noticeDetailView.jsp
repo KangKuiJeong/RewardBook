@@ -1,106 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="board.notice.model.vo.Notice, java.util.ArrayList, member.model.vo.Member"  %>
-
-
+    pageEncoding="UTF-8"  import="java.util.ArrayList, member.model.vo.Member"  %>
+<%@ page import="board.notice.model.vo.Notice" %>
  <%
-	Notice notice = 
-		(Notice)request.getAttribute("notice");
-    
-        ArrayList<Notice> list = 
-    			(ArrayList<Notice>)request.getAttribute("list");
-	
-        String resultMessage = (String)session.getAttribute("result");
-	
-        session.removeAttribute("result");
-	
+	Notice notice = (Notice)request.getAttribute("notice");
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	String resultMessage = (String)session.getAttribute("result");
+    session.removeAttribute("result");
 %>   	
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RewardBook</title>
+<title>공지사항 상세페이지</title>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
-<style type="text/css">
-
-	.main{
-	 margin: 0 auto !important;
-	width:60%;
-	
-	}
-	.udbt{
-    margin: 30px;
-    float: right;
-
-	}
-	.delbt{
-	
-    color: black;
-    text-decoration: none;
-    padding: 8px;
-    border: 1px solid black;
-    margin-left: 5px;
-    text-align: center;
-  
-	}
-	
-	.upbt{
-    color: black;
-    text-decoration: none;
-    padding: 8px;
-    border: 1px solid black;
-    margin-left: 5px;
-    text-align: center;
-}
-
- h2
-  {
-    border-bottom: 1px solid;
-    padding-bottom: 20px;
-}
- .beforebt{
-    padding: 10px;
-    margin: 30px 0px;
-    background-color: white;
-    border: 1px solid black;
-    
-}
-.nlistbt{
-    text-decoration: none;
-    padding: 15px;
-    margin: 20px;
-    border: 1px solid black;
-    color: black;
-       margin-left: 390px;
-}
-.d1 {
-    margin-top: 130px;
-    margin-bottom: 130px;
-   
-}
-.ricon{margin: 10px 0px 10px 0px;}
-.ind{
-display:inline-flex;
-}
-h6{margin-top: 40px;
-    font-size: 15px;
-    margin-right: 10px;
-
-    }
-    
-    .tobbar { margin-bottom: 50px;}
-  .contents {
-    padding-bottom: 50px;
-    border-bottom: 1px solid black;
-}
-</style>
-		
-
+<link rel="stylesheet" href="resources/css/board/noticeDetailView.css">
 </head>
 <body>
 <!-- 헤더부분 include -->
    <%@ include file="../../../views/common/header.jsp" %>
+   
 <div class="main">
 	
 	<div><input class="beforebt" type='button' value="<이전으로" onclick="location.href='/RewardBook/nlist'"></div>
@@ -142,13 +61,6 @@ h6{margin-top: 40px;
 	<a class="nlistbt" href="/RewardBook/nlist">목록으로 돌아가기</a>
 </div>
 	</div>
-
-
-
-
-
-	
-	
 </div>
 <%@ include file="../../../views/common/footer.jsp" %>
 </body>

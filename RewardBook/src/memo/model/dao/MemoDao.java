@@ -4,13 +4,47 @@ import static common.JDBCTemplate.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import memo.model.vo.Memo;
 
 public class MemoDao {
 
 	public MemoDao() {}
-	
+	public ArrayList<Memo> listMEMO(Connection conn) {
+		ArrayList<Memo> list = new ArrayList<Memo>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from memo";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Memo  memo = new Memo();
+				
+				memo.setM_no(rset.getString("m_no"));
+				memo.setP_no(rset.getString("p_no"));
+				memo.setU_no(rset.getString("u_no"));
+				memo.setM_text(rset.getString("m_text"));
+				memo.setM_date(rset.getDate("m_date"));
+		
+				list.add(memo);
+			
+			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+	} 
 	public int updateMemo(Connection conn, Memo memo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -90,6 +124,28 @@ public class MemoDao {
 			e.printStackTrace();
 		}
 		return memo;
+	}
+	public int deleteMemo(Connection conn, String p_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from memo where p_no = ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_no);		
+		
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+		}		
+		
+		return result;
 	}
 
 
