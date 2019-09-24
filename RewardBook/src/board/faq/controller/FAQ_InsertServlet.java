@@ -51,9 +51,9 @@ public class FAQ_InsertServlet extends HttpServlet {
 				faq.setA_no(request.getParameter("a_no"));
 				faq.setfaq_title(request.getParameter("faq_title"));
 				faq.setFaq_text(request.getParameter("faq_text"));
-				
+				String faq_oc = request.getParameter("faq_oc");
 	
-				int result = new FaqService().insertFAQ(faq);
+				int result = new FaqService().insertFAQ(faq,faq_oc);
 				
 				if(result > 0) {
 					response.sendRedirect("/RewardBook/flist");

@@ -4,7 +4,7 @@
 	/*헤더 css*/
 	*{ margin:0; padding:0; font-family: 'Noto Sans KR', sans-serif;}
 	li {list-style:none !important;}
-	header{ margin:0; padding:0; width:100%; padding-top: 5px; border-bottom:1px solid #f0f2f5; background:#fff;}
+	header{ margin:0; padding:0; width:100%; padding-top: 5px; border-bottom:1px solid #f0f2f5; background:#fff; }
 	header #headLine { width:1240px; margin:0 auto; heigth:75px; }
 	header #headLine ul { list-style:none; display:inline; display: inline-block; font-size:18px; font-weight:bold;}
 	header #headLine ul li{padding: 0 5px; float:left}

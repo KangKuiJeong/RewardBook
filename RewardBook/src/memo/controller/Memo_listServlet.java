@@ -39,7 +39,7 @@ public class Memo_listServlet extends HttpServlet {
 		
 		if(result > 0) {
 			ArrayList<Project> list = new ProjectService().listProject();
-		
+			
 			RequestDispatcher view = null;
 			if(list.size() > 0) {
 				view = request.getRequestDispatcher("views/memo/memoList.jsp");

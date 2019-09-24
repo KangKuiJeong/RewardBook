@@ -5,134 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RewardBook</title>
-<style type="text/css">
-body {
-	background-color: #ffc107;
-}
-
-h1 {
-	padding: 100px;
-	color: black;
-}
-
-h3 {
-	padding: 0px 0px 0px 15px;
-}
-
-.submitdiv {
-	float: right;
-	padding: 10px 15px 10px 1px;
-}
-
-.insertT {
-	border: 2px solid black !important;
-}
-
-.insertT input[type="text"] {
-	border: 1px solid #fff;
-	width: 90%;
-	height: 30px
-}
-
-.insertT textarea {
-	border: 1px solid #fff;
-	width: 95%;
-	height: 300px;
-	font-size: 15px;
-	margin: 0px 0px 5px 15px;
-}
-
-.insertT ul {
-	margin: 0px;
-	padding: 0px;
-}
-
-.insertT {
-	margin: 0 auto;
-	width: 50%;
-}
-
-li {
-	list-style: none;
-}
-
-.button {
-	float: right;
-	margin: 15px 5px 15px 5px;
-}
-
-.textT input[type="text"]::placeholder {
-	font-size: 16px;
-	color: #8c8c8c;
-	padding-left: 5px;
-}
-
-.textT textarea::placeholder {
-	font-size: 16px;
-	color: #8c8c8c;
-	padding-left: 5px;
-}
-
-.textT textarea {
-	font-size: 18px;
-	margin: 5px 0px 5px 15px;
-}
-
-.textT input {
-	font-size: 18px;
-}
-
-.textT {
-	padding: 15px;
-	background-color: #grey;
-}
-
-.textT input {
-	font-size: 18px;
-	margin-left: 10px;
-}
-
-li.textT {
-	padding: 15px
-}
-
-.bt1, .bt2 {
-	background-color: white;
-	border: 0;
-	padding: 10px 11px 10px 11px;
-	margin-top: 15px;
-}
-
-.filebt {
-	border: 0;
-	padding: 10px 0px 30px 29px;
-}
-
-.nt_ntevent {
-	float: right;
-	padding: 5px 5px 10px 5px;
-	text-align: center;
-	margin: 15px;
-}
-
-.nt_oc {
-
-	text-align: center;
-	margin: 15px;
-	padding: 7px 5px 12px 10px;
-}
-
-form {
-	margin-bottom: 300px;
-}
-
-
-</style>
-
+<title>공지사항 등록 </title>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../resources/css/board/noticeInsertView.css">
 </head>
-
 <body>
+   <%@ include file="../../../views/common/header.jsp" %>
 	<main id="noticemain">
 
 	<div class=noticeinsert-ui-header-all>
@@ -144,13 +22,13 @@ form {
 
 		<form method="post" enctype="multipart/form-data"
 			action="/RewardBook/ninsert">
-
+		<input type="hidden" name="a_no" value="<%= loginAdmin.getaNo() %>">
 
 			<div class="insertT">
 				<ul>
 					<select id="nt_ntevent" class="nt_ntevent" name="nt_ntevent">
-						<option value="ntnt">공지사항</option>
-						<option value="ntevent">이벤트</option>
+						<option value="NOTICE">공지사항</option>
+						<option value="EVENT">이벤트</option>
 					</select>
 					<li class="textT"><h3 style="color: black">
 							제목
@@ -164,8 +42,8 @@ form {
 
 					<li class="button"><select id="ntoc" class="nt_oc"
 						name="nt_oc">
-							<option value="nto">공개</option>
-							<option value="ntx">비공개</option>
+							<option value="Y">공개</option>
+							<option value="N">비공개</option>
 					</select> <input class="bt1" type="submit" value="등록">&nbsp; <input
 						class="bt2" type="reset" value="취소"
 						OnClick="javascript:history.back(-1)"></li>
@@ -175,6 +53,6 @@ form {
 
 		</form>
 	</main>
-
+<%@ include file="../../../views/common/footer.jsp" %>
 </body>
 </html>

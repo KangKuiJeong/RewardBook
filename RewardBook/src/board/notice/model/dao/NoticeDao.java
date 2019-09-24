@@ -37,7 +37,7 @@ public class NoticeDao {
 	
 	}
 
-	public int insertNotice(Connection conn, Notice notice,String nt_img) {
+	public int insertNotice(Connection conn, Notice notice,String nt_img, String nt_oc,String nt_ntevent) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -50,12 +50,10 @@ public class NoticeDao {
 			pstmt.setString(1, notice.getNt_title());
 			pstmt.setString(2, notice.getNt_text());
 			pstmt.setString(3, nt_img);
-			pstmt.setString(4, "Y");
-			pstmt.setString(5, "NOTICE");
-			pstmt.setString(6, "C0000103");
-
-
-			
+			pstmt.setString(4, nt_oc);
+			pstmt.setString(5, nt_ntevent);
+			pstmt.setString(6, notice.getA_no());
+		
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -67,13 +65,13 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int updateNotice(Connection conn, Notice notice) {
+	public int updateNotice(Connection conn, Notice notice, String nt_oc, String nt_ntevent) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String query = "update notice set nt_title = ?, "
 				+ "nt_text = ?, nt_date = sysdate, "
-				+ "nt_img = ? "
+				+ "nt_img = ?, nt_oc = ?, nt_type = ? "
 				+ "where nt_no = ?";
 		
 		try {
@@ -82,7 +80,9 @@ public class NoticeDao {
 			pstmt.setString(1, notice.getNt_title() );
 			pstmt.setString(2, notice.getNt_text());
 			pstmt.setString(3, notice.getNt_img());
-			pstmt.setString(4, notice.getNt_no() );		
+			pstmt.setString(4, nt_oc);
+			pstmt.setString(5, nt_ntevent);
+			pstmt.setString(6, notice.getNt_no() );		
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {

@@ -1,6 +1,7 @@
 package memo.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +44,7 @@ public class Memo_InsertServlet extends HttpServlet {
 		memo.setP_no(p_no);
 		memo.setU_no(request.getParameter("u_no"));
 		memo.setM_text(request.getParameter("m_text"));
-
+		
 		Memo memoCheck = new MemoService().selectMemo(p_no);
 		
 		if (memoCheck.getM_text() == null) {
@@ -53,9 +54,11 @@ public class Memo_InsertServlet extends HttpServlet {
 		}
 		
 		if(result > 0) {
-	
+			
+			response.setContentType("text/html;charset=utf-8");
 			view = request.getRequestDispatcher("//p_sel?p_no"+ p_no);
-			view.forward(request, response);
+			view.forward(request, response);		
+			
 		}else {
 			view = request.getRequestDispatcher("views/common/Error.jsp");
 			request.setAttribute("message", "Faq 수정 등록 실패!");

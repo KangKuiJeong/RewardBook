@@ -21,12 +21,43 @@
 	.next { position: absolute; width: 50px; height: 50px;  top: 50%; transform: translateY(-50%); right: 10%; cursor: pointer; color:#fff; font-size:60px;}
 	
 	/*contents 영역*/
-	#contents{ width:1140px; margin:0 auto; margin-top:13px; margin-bottom:100px;}
-	#contents #table1{ width:1140px; margin:0 auto;}
-	#contents #table1 #pick { width:66%; padding-right:25px;}
-	#contents #table1 #ranking { width:33%;}
-	#contents #table1 .title{ font-size:30px; font-weight:bold; margin-top:15px; margin-bottom:20px;}
-	#pickContents{ width:500px;}
-	#pickContents tr > td{ width:30%; font-size:12px; margin:0 30px;}
-	
-	
+	.mainContent{ width:1280px; margin:0 auto; margin:0px auto; margin-bottom:100px;}
+	.mainContent .mdPick { width:93%; height:450px; display:inline-block; border-right:1px solid #d5d5d5; padding-right:50px;}
+	.mainContent .rankTop5 { width:83%; height:450px; display:inline-block; margin-left:20px;}
+	.mainContent .mainSubtitle {font-size:28px; font-weight:bold; margin-bottom:20px; padding-left:10px; float:left; display:inline-block}
+	.mainContent #top5TabsTtile {font-size:28px; font-weight:bold; margin-bottom:10px; padding-left:10px; float:left; display:inline-block}
+	#mdPickTable a { text-decoration:none; color:#353535;  border-collapse: separate; border-spacing: 10px;}
+	#mdPickTable { width:95%; background:#fff;}
+	#mdPickTable tr td { padding:0 0 0 10px; width:30%; font-size:12px; color:#353535; font-weight:bold; width:250px; height:153px;}
+	#mdPickTable tr td img { width:240px; height:132px; display:block; margin-bottom:5px;}
+	#tdline2 {margin-top:10px;}
+	#tdline2Right img{ width:500px !important; height:132px;}
+	.recentProject { clear:both; margin-top:10px; width:100%;}
+	.recentProject ul { clear:both;}
+	.liImg { display:inline-block; width:230px !important; height:128px;}
+	#projectMore { display:inline-block; float:right; font-size:16px; font-weight:bold; padding-right:20px; padding-top:5px;}
+	#projectMore a { color:#353535; text-decoration:none;}
+	#projectMore a:hover { color:#ffb202}
+	.recentli { padding:0 20px; list-style:none; width:16%; display:inline-block; font-size:15px; color:#353535;
+				font-weight:bold; margin-top:5px;}
+	.recentli span { color:rgb(242, 85, 85); font-size:14px; font-weight:bold;}
+	.endProject { clear:both; margin-top:50px; width:100%;}
+	.endProject ul { clear:both;}
+	.endli { padding:0 20px; list-style:none; width:16%; display:inline-block; font-size:15px; color:#353535;
+				font-weight:bold; margin-top:5px;}
+	.endli span { color:rgb(242, 85, 85); font-size:14px; font-weight:bold;}
+	.mainSubtitle span { clear:both;color:#8c8c8c; font-size:14px;}
+	.bannerArea { width:98%; margin:0 auto; text-align:center; margin-top:40px;}
+	.bannerArea img { width:100%;}
+	.tabContainer{ margin: 0 auto;}
+	.firstLine { width:100%;}
+ 	#firstTd { width:60% !important;}
+ 	.tabs{ margin: 0px; padding: 0px; list-style: none; clear:both; }
+	.tabs li{ background: none; color: #222; font-size:15px; display: inline-block; padding: 0px 10px; padding-bottom:10px; cursor: pointer; }
+ 	.tabs li.current{ color:#353535; font-size:15px; text-decoration:underline; font-weight:bold;}
+ 	.tab-content{ display: none; padding: 15px; }
+ 	.tab-content.current{ display: inherit; height:295px; }
+ 	.rankingList .rankp { width:80% !important;}
+ 	.rankingList .rankNum { width:5%; padding: 10px 10px 10px 0; color:#ffb202; font-size:22px; font-weight:bold;}
+ 	.rankingList p { display:inline-block};
+ 	

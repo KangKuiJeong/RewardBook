@@ -32,9 +32,6 @@ public class FAQ_listServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String title = request.getParameter("faq_title");
-		String text = request.getParameter("faq_text");
 		
 		ArrayList<Faq> list = new FaqService().listFAQ();
 		

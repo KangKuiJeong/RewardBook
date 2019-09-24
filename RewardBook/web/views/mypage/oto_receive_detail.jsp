@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="inquiry.model.vo.Oto"%>
+    pageEncoding="UTF-8" import="inquiry.model.vo.Oto,javax.servlet.http.HttpSession"%>
 <% 
 	Oto o = (Oto)request.getAttribute("oto");
 %>
@@ -11,23 +11,14 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/RewardBook/resources/css/mypage/in_admin.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/RewardBook/resources/css/mypage/oto.css">
 <script>
 	function back(){
 		
 		history.back();
 	}
-	
-	function goReceive(){
-		
-		var url = "/RewardBook/views/mypage/oto_receive.jsp";
-	    var name = "답변하기";
-	    var option = "width = 600, height = 500, top = 200, left = 800, location = no";
-	    		
-		window.open(url, name, option);
-		
-	}
 </script>
-</script>
+
 </head>
 <body>
 		<!-- 헤더부분 -->
@@ -65,9 +56,34 @@
 			</p>
 		</div>
 		<% }else { %>
+			<div id="otoSendWrap">
+			<form action="/RewardBook/oreceive" method="post">
+			<div class="line"></div>
+			<p id="sendTitles"><span><%= o.getOto_makerName() %></span>님에게 답변하기</p>
 			<ul>
-				<li class="receiveLi"><button onclick="goReceive();" id="receiveBtn">답변하기</button></li>
+				<li class="slist" id="sendTitle">
+					<p>제목</p>
+					<input type="text" id="sendTitleInput" name="receiveTitleInput">
+				</li>
+				<li class="slist" id="sendText">
+					<p>내용</p>
+					<textarea id="sendTextInput" name="receiveTextInput"></textarea>
+				</li>
+				<li class="slist" id="sendSubmit">
+					<input type="submit" id="sendSubmitBtn" value="답변하기">
+					<!--  답변 여부 'Y'으로 넘김 -->
+					<input type="hidden" value="Y" name="yn">
+					<!-- 작성자 회원번호 넘김 -->
+					<input type="hidden" value="<%= loginMember.getuNo() %>" name="answer_no">
+					<!-- 답변할 회원번호 넘김 -->
+					<input type="hidden" value="<%= o.getU_no() %>" name="u_no">
+					<!-- 글번호 넘김 -->
+					<input type="hidden" value="<%= o.getOto_no() %>" name="oto_no">
+					
+				</li>	
 			</ul>
+		</form>
+	</div>
 			
 		<% } %>
 		<div id="listbtn"><button id="backListBtn" onclick="back();">문의목록으로</button></div>
