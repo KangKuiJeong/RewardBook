@@ -16,20 +16,125 @@
 <title>Insert title here</title>
 <style type="text/css">
 
+body, h1, h2, h3, h4, h5, h6, p, em, div {margin: 0; padding: 0; border: 0;}
+body a {text-decoration: none; color: rgba(0, 0, 0, 0.84);}
+a {text-decoration: none; outline: none; color: #676363;}
+.RatingFaq_container__UmFxX {display: block; padding: 0 16px; letter-spacing: -.3px; color: #44484b;}
+.RatingFaq_container__UmFxX {padding: 0;}
+.RatingFaq_wrapper__22DMi {margin-bottom: 40px; font-size: 13px;}
+.RatingFaq_wrapper__22DMi .RatingFaq_info__2yYzv {line-height: 24px; word-break: keep-all; color: #1d2129; font-size: 17px;}
+.RatingFaq_wrapper__22DMi {margin-bottom: 40px; font-size: 13px;}
+.RatingFaq_wrapper__22DMi .RatingFaq_explanation__2eyt1 {margin-bottom: 4px;}
+.RatingFaq_wrapper__22DMi h2 {margin-bottom: 24px; color: rgba(0,0,0,.84); font-size: 19px;}
+.RewardFaqList_faqList__3WVn4 .RewardFaqList_itemList__3fF3A {margin-bottom: 12px;}
+.RewardFaqItem_faqItem__1QzuM {border-bottom: 1px solid rgba(0,0,0,.06);}
+.RewardFaqItem_faqItem__1QzuM .RewardFaqItem_title__3LNEW {position: relative; cursor: pointer; padding: 11px 0;}
+.RewardFaqItem_faqItem__1QzuM .RewardFaqItem_title__3LNEW .wz.icon {position: absolute; right: 0;}
+.RewardFaqItem_faqItem__1QzuM .RewardFaqItem_content__34K-8 {display: none;}
+.RewardFaqItem_faqItem__1QzuM.active .RewardFaqItem_content__34K-8 {display: block; width: 100%; overflow: hidden; line-height: 1.62;}
+.RatingFaq_container__UmFxX .RatingFaq_messageBox__3S4na {background-color: #f5f7fa; padding: 16px; line-height: 1.38; color: rgba(0,0,0,.54); box-sizing: border-box;}
+i.icon.expand-more::before, .icon-expand-more::before {content: "";}
+i.wadizicon, i.icon::before, [class*="icon-"]::before {
+    display: inline-block;
+    margin-top: -.2em;
+    vertical-align: middle;
+    text-transform: none;
+    line-height: 1;
+    font-family: 'wadizicon' !important;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    speak: none;
+}
+.CommentUserWrapper_container__2TCsu {position: relative; padding: 0 0 0 56px; padding-bottom: 0px;}
+.RewardFaqHelpCenter_helpCenter__ia4ow {position: relative; border-bottom: 1px solid #dadce0; padding-bottom: 60px;}
+.CommentUserWrapper_container__2TCsu .CommentUserWrapper_avatar__3LN-8 {position: absolute; top: 0; left: 0;}
+.Avatar_wrap__1H4VB {display: inline-block; position: relative; border-radius: 50%; background: url() no-repeat 50%/cover; vertical-align: middle;}
+.Avatar_wrap__1H4VB::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(.5);
+    transform-origin: 0 0;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 50%;
+    width: 200%;
+    height: 200%;
+    box-sizing: border-box;
+}
+.Avatar_wrap__1H4VB.Avatar_border__3FglJ::before {content: "";}
+.Avatar_wrap__1H4VB .Avatar_picture__2CRnL {display: block; transition: opacity .15s ease-out; opacity: 0; border-radius: 50%; background: #fff no-repeat 50%/cover; background-image: none; width: 100%; height: 100%;}
+.CommentUserWrapper_container__2TCsu .CommentUserWrapper_main__3QYIJ {position: relative;}
+.RewardFaqHelpCenter_centerInfo__zXOmy {display: inline-block; margin-right: 70px;}
+.RewardFaqHelpCenter_centerInfo__zXOmy p {line-height: 1.33; word-break: break-all; font-size: 15px;}
+.RewardFaqHelpCenter_centerInfo__zXOmy p.RewardFaqHelpCenter_timeWrapper__uFTSR {color: rgba(0,0,0,.54); font-size: 13px;}
+.RewardFaqHelpCenter_centerInfo__zXOmy p.RewardFaqHelpCenter_timeWrapper__uFTSR .RewardFaqHelpCenter_time__lRVuM {color: #00a2a2;}
+.wz.button {
+    transition-property: background-color, border-color, color, opacity;
+    transition-duration: .2s;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+        border-top-color: rgba(0, 0, 0, 0.15);
+        border-right-color: rgba(0, 0, 0, 0.15);
+        border-bottom-color: rgba(0, 0, 0, 0.15);
+        border-left-color: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 0 1.41176em;
+    height: 48px;
+    vertical-align: middle;
+    text-decoration: none;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 17px;
+    font-weight: 400;
+    box-sizing: border-box !important;
+    -webkit-appearance: none;
+}
+.wz.button {
+    display: inline-block;
+    padding-top: .07em;
+    text-decoration: none;
+}
+.wz.button.dense {
+    padding: 0 16px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    height: 36px;
+    line-height: 34px;
+    font-size: 15px;
+}
+.wz.button.circular {
+    border-radius: 3em;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.wz.button.primary, .wz.button.primary-outline {border-color: #00c4c4;}
+.wz.button.primary-outline {color: #00c4c4; background-color: transparent;}
+.RewardFaqHelpCenter_helpCenter__ia4ow .wz.button {position: absolute; top: 0; width: 160px;}
+.RewardFaqHelpCenter_helpCenter__ia4ow .wz.button::before {display: inline; margin-right: 9px; vertical-align: top; font-family: wadizicon; font-size: 17px; content: "\E92E";}
+
 .detail_Container{
 	max-width: 1707.33px;
 }
 
-.detail_Header{
-	height: 100px;
-	padding: 50px 0 37px;
-	
+.detail_header {
+
+   display: block;
+    position: relative;
+    padding: 60px 0 55px;
+    overflow: hidden;
+    background: #001328 !important;
+
 }
 
-.bg {
-	height:250px;
-	position: absolute;
-    top: 5px;
+.detail_header .bg {
+
+    display: block;
+    position: absolute;
+    top: -20px;
     right: -20px;
     bottom: -20px;
     left: -20px;
@@ -37,10 +142,26 @@
     background-repeat: no-repeat;
     background-position: 50% 30%;
     background-size: cover;
+    -webkit-filter: blur(10px);
 }
 
-.detail_Header > p {
-	position: relative;
+.detail_header::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    clear: both;
+    z-index: 2;
+    margin-bottom: 0;
+    background: linear-gradient(0deg,rgba(0,0,0,.1),rgba(0,0,0,.4));
+    width: 100%;
+    height: 100%;
+    content: "";
+}
+
+.detail_header .title-info {
+
+    position: relative;
     z-index: 4;
     margin-bottom: 20px;
     text-align: center;
@@ -48,17 +169,24 @@
     color: #fff;
     font-size: 16px;
     font-weight: 400;
+
 }
 
-.detail_Header > h2{
-	position: relative;
+.detail_header .title {
+    position: relative;
     z-index: 3;
     padding-right: 30px;
     padding-left: 30px;
     text-align: center;
     line-height: 42px;
+    color: #fff;
     font-size: 36px;
     font-weight: 500;
+}
+
+.detail_Menu{
+	background: #fff;
+	cursor: pointer;
 }
 
 .detail_Menu > ul{
@@ -66,6 +194,10 @@
 	width: 1707.3px;
 	height: 70px;
 	justify-content: center;
+	position: relative;
+	z-index: 99;
+	background: #fff;
+	
 }
 
 .detail_Menu > ul > li{
@@ -75,6 +207,7 @@
 	display: block;
 	font-size: 12pt;
 	font-weight: bold;
+	background: #fff;
 }
 
 .detail_Menu > ul > li > a{
@@ -103,7 +236,7 @@
 	margin-top: 40px;
 }
 
-.detail_Contents.content{
+.detail_Nav{
 	width: 69%;
 	margin-right: 30px;
 }
@@ -308,9 +441,43 @@ strong{font-weight: 700;}
 .target_gauge{ height: 4px; background-color: #e6eaed; position: relative; width: 100%; overflow: hidden; margin-bottom: 25px;}    
 .gauge {background-color: #ffb202; height: 4px; display: block; vertical-align: baseline;}
 
+.menu{display: none;}
+.menu:first-child{display: block;}
+
+.CommunityComment_container__hdKhk {display: block; padding: 0 16px; letter-spacing: -.3px; color: #44484b;}
+.CommunityComment_container__hdKhk {padding: 0;}
+.CommunityCommentTitle_commentTitle__srmGL {margin-bottom: 24px;}
+.CommentTitle_container__3aa7m {position: relative; margin-bottom: 8px; line-height: 24px; color: rgba(0,0,0,.84); font-size: 19px; font-weight: 700;}
+.CommentTitle_container__3aa7m > p {margin: 0;}
+.CommentTitle_container__3aa7m .CommentTitle_count__3jfoJ {margin-left: 4px; color: #00b2b2; font-style: normal;}
+.CommunityCommentTitle_commentTitle__srmGL p.CommunityCommentTitle_explanation__1fMjM {color: rgba(0,0,0,.54); font-size: 13px;}
+.CommunityCommentWriteButton_button__1Ou6f {display: block; margin-bottom: 24px; width: 100%;}
+.CommunityCommentWriteButton_button__1Ou6f {width: 343px;}
+.wz.button.gray, .wz.button.gray-outline {border-color: #90949c;}
+.wz.button.gray {background-color: #90949c; color: #fff;}
+.CommunityCommentItem_container__13cs_ {position: relative; padding-top: 16px; padding-bottom: 16px;}
+.CommentUserWrapper_container__2TCsu {position: relative; padding: 0 0 0 56px;}
+.CommentUserWrapper_container__2TCsu .CommentUserWrapper_avatar__3LN-8 {position: absolute; top: 0; left: 0;}
+.CommentUserWrapper_container__2TCsu .CommentUserWrapper_main__3QYIJ {position: relative;}
+.CommentUserInfo_container__O9ACk {min-height: 44px; line-height: 36px; box-sizing: border-box;}
+.CommentTextContent_container__3dH_P {line-height: 24px; color: #44484b; font-size: 15px;}
+.CommentTextContent_container__3dH_P .CommentTextContent_contentBox__5dJa1 {word-break: break-all;}
+.CommentTextContent_container__3dH_P a.CommentTextContent_link__1lkyb {display: inline; text-decoration: underline; word-break: break-all; color: #4d5256;}
+.CommentUserInfo_container__O9ACk .CommentUserInfo_badge__3x37f {
+    display: inline-block;
+    padding: 0 4px;
+    line-height: 18px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+}
+.CommentUserInfo_container__O9ACk .CommentUserInfo_badge__3x37f.CommentUserInfo_supporter__MY651 {background: #557cf2;}
+
 </style>
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script>
+	var itemFlag = true;
+	
       $(function() {
         var menuOffset = $( '.detail_Menu' ).offset();
         $( window ).scroll( function() {
@@ -341,12 +508,29 @@ strong{font-weight: 700;}
         
       });
      
-      $(function(){
-    	  
-    	  
-    	  
-      });
-      
+      function changeNav(s){
+  		if(s == 'content'){
+  			$('.detail_Nav').each(function(){
+  				$('.menu').css('display', 'none');
+  				$('.content').css('display', 'block');
+  			});
+  		}else if(s == 'funding_info'){
+  			$('.menu').css('display', 'none');
+  			$('.funding_info').css('display', 'block');
+  		}else if(s == 'project_news'){
+  			$('.menu').css('display', 'none');
+  			$('.project_news').css('display', 'block');
+  		}else if(s == 'community'){
+  			$('.menu').css('display', 'none');
+  			$('.community').css('display', 'block');
+  		}else if(s == 'supporter'){
+  			$('.menu').css('display', 'none');
+  			$('.supporter').css('display', 'block');
+  		}else if(s == 'review'){
+  			$('.menu').css('display', 'none');
+  			$('.review').css('display', 'block');
+  		}
+  	}  
       
 </script>
 
@@ -357,29 +541,201 @@ strong{font-weight: 700;}
 
 <!-- detail Header영역 -->
 <div class="detail_Container">
-	<div class="detail_Header">
+	<div class="detail_header">
 		<div class="bg" style="background-image: url(/RewardBook/resources/images/bgimg.jpg)"></div>
-		<p>
+		<p class="title-info">
 			<%= project.getP_category() %> 
 		</p>
-		<h2><%= project.getP_title() %></h2>
+		<h2 class="title"><%= project.getP_title() %></h2>
 	</div>
 	
 	<!-- 메뉴 네비게이션 -->
 	<div class="detail_Menu">
 		<ul>
-			<li><a href="/RewardBook/p_sel?p_no=<%= project.getP_no() %>">스토리</a></li>
-			<li><a href="#">펀딩 안내</a></li>
-			<li><a href="#">새소식</a></li>
-			<li><a href="#">커뮤니티</a></li>
-			<li><a href="#">서포터</a></li>
-			<li><a href="#">리뷰</a></li>
+			<li><a onclick="changeNav('content');">스토리</a></li>
+			<li><a onclick="changeNav('funding_info');">펀딩 안내</a></li>
+			<li><a onclick="changeNav('project_news');">새소식</a></li>
+			<li><a onclick="changeNav('community');">커뮤니티</a></li>
+			<li><a onclick="changeNav('supporter');">서포터</a></li>
+			<li><a onclick="changeNav('review');">리뷰</a></li>
 		</ul>
 	</div>
 	<div class="detail_Content">
+		<div class="detail_Nav">
+			<div class="menu content"><%= project.getP_story() %></div>
+			<div class="menu funding_info">펀딩안내</div>
+			<div class="menu project_news">새소식</div>
+			<div class="menu community">
+				<div class="RewardCommunityPage_wrapper__28sk6">
+					<div>
+						<div class="RatingFaq_container__UmFxX">
+							<div class="RatingFaq_wrapper__22DMi">
+								<p class="RatingFaq_info__2yYzv">
+									서포터님!<br>처음 <strong>메이커의 열정과 가치에 공감</strong>
+									해주셨듯, 마지막까지 <strong>메이커를 응원</strong>해주세요.
+								</p>
+							</div>
+							<div class="RatingFaq_wrapper__22DMi">
+								<p class="RatingFaq_explanation__2eyt1">
+									와디즈에서 펀딩하는 방법이 궁금하다면?
+								</p>
+								<h2>FAQ</h2>
+							</div>
+							<div class="RatingFaq_wrapper__22DMi">
+								<div class="RewardFaqList_faqList__3WVn4">
+									<div class="RewardFaqList_itemList__3fF3A">
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												펀딩 했어요. 결제는 언제, 어떻게 진행되나요?<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												펀딩기간 중에는 결제 예약 상태이며, 프로젝트 종료 후 다음 1영업일 5시에 결제가 진행됩니다. 
+												이때, 결제 실패된 건에 한하여 종료일+4영업일동안 매일 5시에 결제가 진행됩니다. 
+												(펀딩 종료일+4영업일 오후 5시 4차 최종 결제 진행)
+											</div>
+										</div>
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												결제 실패 알림을 받았어요. 어떻게 해야하나요?<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												카드 잔고 부족이나 한도 초과, 거래 정지된 카드인 경우 결제가 진행되지 않습니다. 
+												최종 결제일 16시 30분 전까지 다른 카드로 결제 정보를 변경해주세요. 
+												최종 결제일까지 매 영업일 5시마다 결제가 진행됩니다.
+												・ 결제정보 변경은 로그인 - [나의 리워드] - [펀딩 내역] - [참여 프로젝트]에서 결제 정보를 변경할 수 있습니다.
+												・ 반드시 참여한 프로젝트 펀딩 상세 내역 페이지에서 결제 정보를 변경해주세요. 
+												나의 리워드 - 간편결제 정보 변경하면 해당 카드로 결제가 진행되지 않습니다!
+											</div>
+										</div>
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												카드 결제가 진행된 후, 다른 카드로 변경할 수 있나요?<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												결제 예약으로 진행되는 크라우드 펀딩 특성상 이미 종료된 프로젝트는 취소 후 재펀딩이 불가능하니, 
+												결제 전 등록한 카드정보가 맞는지 확인해주세요.
+											</div>
+										</div>
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												배송지나 옵션을 변경하고 싶어요.<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												프로젝트 진행 중에는 [나의 리워드] - [펀딩내역]에서 직접 변경이 가능합니다.
+												펀딩이 종료된 이후에는 직접 변경이 불가능하니, 아래 [메이커에게 문의하기]를 통해 문의해주세요.
+											</div>
+										</div>
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												리워드 배송은 언제되나요? 해외 배송도 가능한가요?<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												크라우드 펀딩은 프로젝트 종료 후 기재된 배송 예정일에 배송되며, 
+												배송 예정일은 프로젝트 상세페이지에서 확인할 수 있습니다. 
+												펀딩 참여 후에는 [나의 리워드] - [펀딩내역]에서 확인할 수 있습니다.
+												결제 예약 시 국내 주소만 입력이 가능하니, 해외배송은 메이커에게 문의 후 진행해주세요.
+											</div>
+										</div>
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												교환/환불/AS는 어디로 문의해야하나요?<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												해당 프로젝트의 교환/환불/AS 기준은 프로젝트 상단 [펀딩안내]탭을 확인해주세요.
+											</div>
+										</div>
+										<div class="RewardFaqItem_faqItem__1QzuM">
+											<div class="RewardFaqItem_title__3LNEW">
+												펀딩 취소는 어떻게 하나요? 부분 취소도 가능한가요?<i class="wz icon expand-more"></i>
+											</div>
+											<div class="RatingFaq_messageBox__3S4na RewardFaqItem_content__34K-8">
+												프로젝트 종료 후에는 메이커가 서포터를 위해 리워드 제작을 시작한 상태입니다. 
+												따라서 프로젝트 종료 이후에는 펀딩 취소가 불가하니, 종료 이전에 취소해주세요.
+												프로젝트가 종료되기 이전에는 [나의 리워드]에서 펀딩 취소가 가능합니다.
+												부분 취소는 여러 개의 리워드를 결제 예약한 경우 불가능합니다. 전체 취소 후 재펀딩해주세요.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="RatingFaq_wrapper__22DMi">
+								<p class="RatingFaq_explanation__2eyt1">
+									리워드, 배송 등 펀딩에 대해 궁금한 사항이 있다면?
+								</p>
+								<h2>메이커에게 문의하기</h2>
+								<div class="CommentUserWrapper_container__2TCsu RewardFaqHelpCenter_helpCenter__ia4ow">
+									<div class="CommentUserWrapper_avatar__3LN-8">
+										<a href="/web/wmypage/myprofile/fundinglist/undefined">
+											<span style="width: 36px; height: 36px;" class="Avatar_wrap__1H4VB Avatar_border__3FglJ">
+												<span class="Avatar_picture__2CRnL Avatar_visible__1GVUZ" style="background-image: url(&quot;https://cdn.wadiz.kr/wwwwadiz/green001/2019/0620/20190620172324274_21544.png/wadiz/format/jpg/quality/80/optimize&quot;);"></span>
+											</span>
+										</a>
+									</div>
+									<div class="CommentUserWrapper_main__3QYIJ">
+										<div class="RewardFaqHelpCenter_centerInfo__zXOmy">
+											<p class="RewardFaqHelpCenter_userName__3oJKL">해피밀리</p>
+											<p class="RewardFaqHelpCenter_timeWrapper__uFTSR">
+												평균 응답 시간 <span class="RewardFaqHelpCenter_time__lRVuM">2시간 이내</span>
+											</p>
+										</div>
+										<button type="button" class="wz button circular primary-outline dense">문의하기</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="menu supporter">서포터</div>
+			<div class="menu review">
+				<div class="CommunityComment_container__hdKhk">
+					<div class="CommunityCommentTitle_commentTitle__srmGL">
+						<div class="CommentTitle_container__3aa7m">
+							<p>응원·의견<em class="CommentTitle_count__3jfoJ">8</em></p>
+						</div>
+						<p class="CommunityCommentTitle_explanation__1fMjM">펀딩 종료 후에 남긴 응원·의견입니다.</p>
+					</div>
+					<div>
+						<div>
+							<button class="wz button gray CommunityCommentWriteButton_button__1Ou6f"  type="button">글남기기</button>
+						</div>
+					</div>
+					<div class="CommunityCommentItem_container__13cs_">
+						<div class="CommentUserWrapper_container__2TCsu CommunityCommentContent_container__2qU3A">
+							<div class="CommentUserWrapper_avatar__3LN-8">
+								<a href="#">
+									<span class="Avatar_wrap__1H4VB Avatar_border__3FglJ" style="width: 36px; height: 36px;">
+										<span class="Avatar_picture__2CRnL Avatar_visible__1GVUZ" style="background-image: url();"></span>
+									</span>
+								</a>
+							</div>
+							<div class="CommentUserWrapper_main__3QYIJ">
+								<div class="CommentUserInfo_container__O9ACk">
+									<span class="CommentUserInfo_name__2GoPA">
+										<a href="#">
+											<strong>최연영</strong>
+										</a>
+									</span>
+									<span class="CommentUserInfo_badge__3x37f CommentUserInfo_supporter__MY651">펀딩 참여자</span>
+									<span class="CommentUserInfo_date__ccohg">응원 | ??분전</span>
+								</div>
+								<div>
+									<div class="CommentTextContent_container__3dH_P">
+										<div class="CommentTextContent_contentBox__5dJa1">
+											 펀딩 및 지지서명 완료했어요.<br> 차선이탈경보장치가 있지만 아날로그 감성으로<br>펀딩합니다.
+											 <br><br>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-		<div class="detail_Contents content"><%= project.getP_story() %></div>
-	
 		<div class="detail_Contents info">
 		
 			<div class="info_project">
@@ -423,7 +779,7 @@ strong{font-weight: 700;}
 				<div class="rank_item">10</div>
 			</div>		
 		</div>
-				<form method="post" action="/RewardBook/minsert">		
+				<%-- <form method="post" action="/RewardBook/minsert">		
 				<input type="hidden" name="u_no" value="<%= loginMember.getuNo() %>">		
 				<input type="hidden" name="p_no" value="<%= project.getP_no() %>">			
 				<div style="border:1px solid black;">			
@@ -432,7 +788,7 @@ strong{font-weight: 700;}
 				<textarea name="m_text" style=" border:0; width:298px; 
 				height:150px;"placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
 				</div>			
-				</form>
+				</form> --%>
 	
 	</div>
 </div>
@@ -472,6 +828,18 @@ strong{font-weight: 700;}
 </div>
 
 <%@ include file="/views/common/footer.jsp" %>
+
+<script type="text/javascript">
+	$('.RewardFaqItem_faqItem__1QzuM').click(function(){
+	if (itemFlag) {
+		$(this).addClass('active');
+		itemFlag = false;
+	} else {
+		$(this).removeClass('active');
+		itemFlag = true;
+	}
+});
+</script>
 
 </body>
 </html>
