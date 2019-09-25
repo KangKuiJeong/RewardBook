@@ -24,7 +24,7 @@ import project.model.vo.Project;
  */
 @WebServlet("/p_sel")
 public class Project_SelectServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -61,23 +61,21 @@ public class Project_SelectServlet extends HttpServlet {
 		if(project != null) {
 			view = request.getRequestDispatcher("views/project/projectDetail.jsp");
 			request.setAttribute("project", project);
-
 			view.forward(request, response);
-	
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("error", "페이지 조회 실패");
 			view.forward(request, response);
 		}
-		
+ 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

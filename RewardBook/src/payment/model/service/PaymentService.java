@@ -28,9 +28,17 @@ public class PaymentService {
 		return result;
 	}
 
-	public int insertPaymemt(String p_no) {
+	public ArrayList<Payment> listPayment() {
 		Connection conn = getConnection();
-		int result = pDao.insertPayment(conn, p_no);;
+		ArrayList<Payment> list = pDao.listPayment(conn);
+		close(conn);
+		
+		return list;
+	}
+
+	public int updatePaymemt(String p_no) {
+		Connection conn = getConnection();
+		int result = pDao.updatePayment(conn, p_no);;
 		
 		if(result > 0) {
 			commit(conn);
@@ -42,16 +50,17 @@ public class PaymentService {
 		return result;
 	}
 
-	public ArrayList<Payment> listPayment() {
+	public Payment selectPayment(String u_no) {
 		Connection conn = getConnection();
-		ArrayList<Payment> list = pDao.listPayment(conn);
+		Payment payment = pDao.selectPayment(conn, u_no);
+		close(conn);
 		
-		return list;
+		return payment;
 	}
 
-	public int updatePaymemt(String p_no) {
+	public int insertPayment(Payment pay) {
 		Connection conn = getConnection();
-		int result = pDao.updatePayment(conn, p_no);;
+		int result = pDao.insertPayment(conn, pay);;
 		
 		if(result > 0) {
 			commit(conn);

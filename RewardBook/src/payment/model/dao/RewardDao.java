@@ -69,10 +69,10 @@ public class RewardDao {
 				
 				reward.setR_no(rset.getString("R_NO"));
 				reward.setP_no(rset.getString("P_NO"));
-				reward.setR_amount(rset.getString("R_AMOUNT"));
 				reward.setR_name(rset.getString("R_NAME"));
 				reward.setR_detail(rset.getString("R_DETAIL"));
 				reward.setR_price(rset.getInt("R_PRICE"));
+				reward.setR_amount(rset.getString("R_AMOUNT"));
 				
 				list.add(reward);
 			}
@@ -93,5 +93,27 @@ public class RewardDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	//결제요청했을때 리워드의 수량 감소용 메소드
+	public int updateReward(Connection conn, String r_no, String string) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update reward set r_amount = (r_amount - ?) where r_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, string);
+			pstmt.setString(2, r_no);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 
 }

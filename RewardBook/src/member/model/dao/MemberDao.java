@@ -5,6 +5,7 @@ import static common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class MemberDao {
 				member.setCategory(rset.getString("U_CATEGORY"));
 				member.setAddress_detail(rset.getString("U_ADDRESS_DETAIL"));
 				member.setJob(rset.getString("U_JOB"));
+				member.setP_billing(rset.getString("P_BILLING"));
 				
 			}
 		} catch (Exception e) {
@@ -331,6 +333,7 @@ public class MemberDao {
 				member.setCategory(rset.getString("U_CATEGORY"));
 				member.setAddress_detail(rset.getString("U_ADDRESS_DETAIL"));
 				member.setJob(rset.getString("U_JOB"));
+				member.setP_billing(rset.getString("P_BILLING"));
 				
 			}
 			
@@ -623,6 +626,28 @@ public class MemberDao {
 		
 		return result;
 		
+	}
+
+	public int insertBilling(Connection conn, String u_no, String billing) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update users set p_billing=? where u_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, billing);
+			pstmt.setString(2, u_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

@@ -122,7 +122,7 @@ public class MemberService {
 	}
 	
 	
-	public Object selectOne(String uNo) {
+	public Member selectOne(String uNo) {
 		Connection conn = getConnection();
 		Member member = mdao.selectOne(conn, uNo);
 		close(conn);
@@ -198,6 +198,17 @@ public class MemberService {
 	public int updateMember_A(Member member) {
 		Connection conn = getConnection();
 		int result = mdao.updateMember_A(conn, member);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public int insertBilling(String u_no, String billing) {
+		Connection conn = getConnection();
+		int result = mdao.insertBilling(conn, u_no, billing);
 		if (result > 0) {
 			commit(conn);
 		} else {

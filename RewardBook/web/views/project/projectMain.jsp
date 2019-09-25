@@ -96,7 +96,7 @@
 		<form action="" method="get">
 			<input type="text" name="search"  placeholder="검색">
 		</form>
-		<div>ddd</div>
+		<div><button onclick="javascript:location.href='/RewardBook/views/payment/complete.jsp'">검색</button></div>
 		</div>
 	</div>
 	<div class="invest_list">
