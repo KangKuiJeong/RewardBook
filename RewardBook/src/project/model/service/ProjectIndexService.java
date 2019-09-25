@@ -29,4 +29,20 @@ public class ProjectIndexService {
 		return list;
 	}
 
+	public ArrayList<Project> hitTop5() {
+		// 인덱스 조회수 top5 service
+		Connection conn = getConnection();
+		ArrayList<Project> list = pidao.hitTop5(conn);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Project> likeTop5() {
+		// like top5 service
+		Connection conn = getConnection();
+		ArrayList<Project> list = pidao.likeTop5(conn);
+		close(conn);
+		return list;
+	}
+
 }
