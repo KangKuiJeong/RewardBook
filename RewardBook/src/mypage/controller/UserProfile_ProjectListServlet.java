@@ -58,6 +58,7 @@ public class UserProfile_ProjectListServlet extends HttpServlet {
 	            JSONObject job = new JSONObject();
 	            
 	            job.put("no", project.getP_no());
+	            job.put("p_no", project.getP_no());
 				job.put("title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 				job.put("category", URLEncoder.encode(project.getP_category(), "UTF-8"));
 				job.put("content", URLEncoder.encode(project.getP_story(), "UTF-8"));

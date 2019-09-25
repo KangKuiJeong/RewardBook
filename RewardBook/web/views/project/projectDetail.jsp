@@ -474,10 +474,10 @@ strong{font-weight: 700;}
 }
 .CommentUserInfo_container__O9ACk .CommentUserInfo_badge__3x37f.CommentUserInfo_supporter__MY651 {background: #557cf2;}
 
-.likearea { height:40px; width:220px; display:flex; border:1px solid gray;margin:5px;}
+.likearea { height:40px; width:220px; display:flex;}
 .likearea .likebutton {height:30px; width:30px;}
 .likebtn {height:25px;width:30px;}
-.likeinfo {margin-left:10px;height:30px; width:100px; font-size:16px;}
+.likeinfo {margin-left:10px;height:30px; width:100px; font-size:16px; font-weight:bold;}
 .likebtn { cursor:pointer;}
 
 .memodiv{border:1px solid black;  border: 1px solid #FF9800; border-radius: 6px; text-align: center; height:230px;margin: 20px 0px 20px 0px;}
@@ -833,7 +833,7 @@ strong{font-weight: 700;}
 								dataType: "json",
 								success: function(data){
 									if(data.like_pinsert == 1){
-										alert("해당 리워드 상품을 좋아요 하였습니다!");
+										/* alert("해당 리워드 상품을 좋아요 하였습니다!"); */
 										if(data.like_pinsert == 1){
 											$("#like_pbutton").html(
 													"<img class='likebtn' src='/RewardBook/resources/images/mypage/like2.png' onclick='unlikebtn()'>");
@@ -884,7 +884,7 @@ strong{font-weight: 700;}
 								dataType: "json",
 								success: function(data){
 									if(data.like_pdelete == 1){
-										alert("해당 리워드 상품을 좋아요 취소 하였습니다.");
+										/* alert("해당 리워드 상품을 좋아요 취소 하였습니다."); */
 										if(data.like_pdelete == 1){
 											$("#like_pbutton").html(
 													"<img class='likebtn' src='/RewardBook/resources/images/mypage/unlike2.png' onclick='likebtn()'>");
@@ -964,7 +964,7 @@ strong{font-weight: 700;}
 							}
 						}
 					</script>
-					
+				</div>	
 				<!-- 좋아요 -->
 			<% } %>
 
