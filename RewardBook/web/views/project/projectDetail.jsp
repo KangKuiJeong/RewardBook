@@ -474,10 +474,10 @@ strong{font-weight: 700;}
 }
 .CommentUserInfo_container__O9ACk .CommentUserInfo_badge__3x37f.CommentUserInfo_supporter__MY651 {background: #557cf2;}
 
-.likearea { height:40px; width:220px; display:flex; border:1px solid gray;margin:5px;}
+.likearea { height:40px; width:220px; display:flex;}
 .likearea .likebutton {height:30px; width:30px;}
 .likebtn {height:25px;width:30px;}
-.likeinfo {margin-left:10px;height:30px; width:100px; font-size:16px;}
+.likeinfo {margin-left:10px;height:30px; width:100px; font-size:16px; font-weight:bold;}
 .likebtn { cursor:pointer;}
 
 .memodiv{border:1px solid black;  border: 1px solid #FF9800; border-radius: 6px; text-align: center; height:230px;margin: 20px 0px 20px 0px;}
@@ -833,7 +833,7 @@ strong{font-weight: 700;}
 								dataType: "json",
 								success: function(data){
 									if(data.like_pinsert == 1){
-										alert("해당 리워드 상품을 좋아요 하였습니다!");
+										/* alert("해당 리워드 상품을 좋아요 하였습니다!"); */
 										if(data.like_pinsert == 1){
 											$("#like_pbutton").html(
 													"<img class='likebtn' src='/RewardBook/resources/images/mypage/like2.png' onclick='unlikebtn()'>");
@@ -884,7 +884,7 @@ strong{font-weight: 700;}
 								dataType: "json",
 								success: function(data){
 									if(data.like_pdelete == 1){
-										alert("해당 리워드 상품을 좋아요 취소 하였습니다.");
+										/* alert("해당 리워드 상품을 좋아요 취소 하였습니다."); */
 										if(data.like_pdelete == 1){
 											$("#like_pbutton").html(
 													"<img class='likebtn' src='/RewardBook/resources/images/mypage/unlike2.png' onclick='likebtn()'>");
@@ -964,7 +964,7 @@ strong{font-weight: 700;}
 							}
 						}
 					</script>
-					
+				</div>	
 				<!-- 좋아요 -->
 			<% } %>
 
@@ -990,32 +990,32 @@ strong{font-weight: 700;}
 				<div class="declaration">신고하기</div>
 			</div>
 			<div class="rank">
-				<h3>인기 프로젝트</h3>
-				<div class="rank_item">1</div>
-				<div class="rank_item">2</div>
-				<div class="rank_item">3</div>
-				<div class="rank_item">4</div>
-				<div class="rank_item">5</div>
-				<div class="rank_item">6</div>
-				<div class="rank_item">7</div>
-				<div class="rank_item">8</div>
-				<div class="rank_item">9</div>
-				<div class="rank_item">10</div>
-			</div>		
-		</div>
-				<% if(loginMember != null) { %>
-			<div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >		
-				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
-				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
-				<div class="memodiv" id="memodiv">			
-				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
-				<input class="memosubmit" type="submit" value="저장">			
-				</div>			
-				</form></div>	
-		</div>
-		<% } %>
-	<script>
+            <h3>인기 프로젝트</h3>
+            <div class="rank_item">1</div>
+            <div class="rank_item">2</div>
+            <div class="rank_item">3</div>
+            <div class="rank_item">4</div>
+            <div class="rank_item">5</div>
+            <div class="rank_item">6</div>
+            <div class="rank_item">7</div>
+            <div class="rank_item">8</div>
+            <div class="rank_item">9</div>
+            <div class="rank_item">10</div>
+         </div>      
+            <% if(loginMember != null) { %>
+         <div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >      
+            <input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">      
+            <input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">         
+            <div class="memodiv" id="memodiv">         
+            <h3 class="memoh3">메모</h3>      
+            <textarea class="m_text"name="m_text" id="m_text" placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;         
+            <input class="memosubmit" type="submit" value="저장">         
+            </div>         
+            </form></div>   
+      </div>
+      <% } %>
+      </div>
+   <script>
 	function memoinsert(){
 	
 	$.ajax({

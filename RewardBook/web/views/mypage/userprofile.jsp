@@ -48,7 +48,7 @@
 	
 	.category_style { font-size:16px;font-style:italic; }
 	
-	.fbtn { width:70%; cursor:pointer;}
+	.fbtn { width:200px; cursor:pointer;}
 	
 	
 	
@@ -105,7 +105,8 @@ width:33.333%;
 .tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_name {float:left; font-size: 13px; color: #90949c;}
 .tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_category{float:right; font-size: 13px; color: #90949c; margin-right:5px;}
 .tab .tabbox .boxbottom .boxarea .itemper {width: 100%; height:30px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
-
+.profile_image{width:100%; height:100%; border-radius:50%;}
+.project_image{width:100%; height:100%;}
 
 .boxbottom .bottomcenter{ margin: 0 auto; height:100%; width:500px;}
 
@@ -271,7 +272,7 @@ width:33.333%;
 								dataType: "json",
 								success: function(data){
 									if(data.following == 1){
-										alert("<%= member.getName() %>님을 팔로우 하셨습니다.");
+										<%-- alert("<%= member.getName() %>님을 팔로우 하셨습니다."); --%>
 										if(data.following == 1){
 											$("#follow_button").html(
 													"<img class='fbtn' src='/RewardBook/resources/images/mypage/unfbtn1.png' onclick='unfollowbtn()'>");
@@ -324,7 +325,7 @@ width:33.333%;
 							dataType: "json",
 							success: function(data){
 								if(data.unfollow == 1){
-									alert("<%= member.getName() %>님을 팔로우 취소 하셨습니다.");
+									<%-- alert("<%= member.getName() %>님을 팔로우 취소 하셨습니다."); --%>
 									if(data.unfollow == 1){
 										$("#follow_button").html(
 												"<img class='fbtn' src='/RewardBook/resources/images/mypage/fbtn1.png' onclick='followbtn()'>");
@@ -396,8 +397,8 @@ width:33.333%;
 	        <div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						<!-- <input type="text" placeholder="검색어를 입력하세요.">
+						<button>검색</button> -->
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -413,13 +414,15 @@ width:33.333%;
 								var jsonStr = JSON.stringify(data);
 								//string => json 객체로 바꿈
 								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
 								if(json.list){
 									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
 										$(".myproject").html($(".myproject").html()
-												+"<a class='boxitem' href='#'>"
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' width='100%' height='100%'>"
+				        						+ "<img src='/RewardBook/resources/images/project/" + thumbnail + "' class='project_image'>"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -472,8 +475,7 @@ width:33.333%;
 				<div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -491,9 +493,11 @@ width:33.333%;
 										//string => json 객체로 바꿈
 										var json = JSON.parse(jsonStr);
 										var count = 0;
+										var image = null;
 										
 										for(var i in json.result){
 											count++;
+											if(json.result[i].u_profile == null){image = "i.png"}else{image = json.result[i].u_profile}
 											var uno = "<%= loginMember.getuNo() %>";
 											var str = "<a href='/RewardBook/"
 												if (json.result[i].u_no != uno){
@@ -501,10 +505,13 @@ width:33.333%;
 												}else{
 													str += "views/mypage/mypage.jsp";
 												}
+											
 											str += "'>"
 												+ "<div class='followerarea'>"
 												+ "<div class='flwimg'>"
-												+ "<img class='followerimg' src='/RewardBook/resources/images/mypage/i.jpg'>"
+												+ "<img class='followerimg' src='/RewardBook/resources/images/profileImg/" 
+												+ image
+												+ "' class='profile_image'>"
 							        			+ "</div>"
 								        		+ "<div class='flwname'>"
 								        		+ "<span class='followername'>"
@@ -552,28 +559,74 @@ width:33.333%;
 	      <div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
-	        		<a class="boxitem" href="#">
-		        		<div class="boxarea">
-		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" width="100%" height="100%">
-		        				</div>
-		        				<div class="itemname">
-		        					<div class="itemname_text"><span>[세준] 파워뱅크 블루투스 이어폰 에어팟 짱</span></div>
-		        					<div class="itemname_per"><span>97% 달성</span></div>
-		        				</div>
-		        		</div>
-	        		</a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
+	        		<div class="reviewproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/mr_list",
+							data:{uNo : "<%= member.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
+								if(json.list){
+									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
+										$(".reviewproject").html($(".reviewproject").html()
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ thumbnail
+				        						+ "' class='project_image'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>" + json.list[i].rdate + "일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".reviewproject").html($(".reviewproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 남겨진 리뷰가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
 	        	</div>
 	        </div>
 	      </div>          

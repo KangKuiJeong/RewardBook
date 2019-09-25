@@ -40,7 +40,8 @@ public class Mypage_ProjectListServlet extends HttpServlet {
 				String uNo = request.getParameter("uNo");
 				MypageService mypageservice = new MypageService();
 			         
-			         ArrayList<Project> list = mypageservice.myprojectList(uNo);
+			         ArrayList<Project> list = mypageservice.myreviewList(uNo);
+			         
 			    
 			         JSONObject sendJSON = new JSONObject();
 			         if(list.size() == 0) {

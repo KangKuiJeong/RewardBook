@@ -94,7 +94,8 @@ width:16.66%;
 .tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_name {float:left; font-size: 13px; color: #90949c;}
 .tab .tabbox .boxbottom .boxarea .iteminfo .iteminfo_category{float:right; font-size: 13px; color: #90949c;margin-right:5px;}
 .tab .tabbox .boxbottom .boxarea .itemper {width: 100%; height:30px;margin-left:2px; color:blue; font-size:11px; overflow:hidden;}
-.p_image { width:100%; height:100%; }
+.profile_image { width:100%; height:100%; border-radius:50%;}
+.project_image{width:100%; height:100%;}
 
 .boxbottom .bottomcenter{ margin: 0 auto; height:100%; width:600px;}
 
@@ -103,7 +104,7 @@ width:16.66%;
 .followerarea {height:60px; width:100%; align:left;  display: flex; margin:10px 0px; padding:10px 0px; border-bottom:1px solid lightgray;}
 
 
-.flwimg {height:60px; width:60px; }
+.flwimg {height:60px; width:80px; }
 .followimg {border-radius:50%;height:60px; width:60px; }
 .followerimg {border-radius:50%;height:60px; width:60px; }
 #followingimg {border-radius:50%;height:60px; width:60px; }
@@ -233,8 +234,8 @@ width:16.66%;
 	        <div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						<!-- <input type="text" placeholder="검색어를 입력하세요.">
+						<button>검색</button> -->
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -251,13 +252,17 @@ width:16.66%;
 								var jsonStr = JSON.stringify(data);
 								//string => json 객체로 바꿈
 								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
 								if(json.list){
 									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
 										$(".myproject").html($(".myproject").html()
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' class='p_image'>"
+				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ thumbnail
+				        						+ "' class='project_image'>"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -315,8 +320,7 @@ width:16.66%;
 	      		<div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -332,13 +336,17 @@ width:16.66%;
 								var jsonStr = JSON.stringify(data);
 								//string => json 객체로 바꿈
 								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
 								if(json.list){
 									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
 										$(".payproject").html($(".payproject").html()
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' class='p_image' >"
+				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ thumbnail
+				        						+ "' class='project_image' >"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -371,8 +379,6 @@ width:16.66%;
 				        					+ "</div></div>"
 				        					);
 								}
-									
-								
 							},
 							error: function(jqXHR, textStatus, errorThrown){
 								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
@@ -391,8 +397,7 @@ width:16.66%;
 	            <div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -411,14 +416,15 @@ width:16.66%;
 										//string => json 객체로 바꿈
 										var json = JSON.parse(jsonStr);
 										var count = 0;
+										var profile = null;
 										for(var i in json.result){
 											var type = (json.result[i].u_no.charAt(0) == 'A')? "개인" : "기업";
-												
+											if(json.result[i].u_profile == null){profile = "i.png"}else{profile = json.result[i].u_profile}
 													$(".followinglink").html($(".followinglink").html()
 															+"<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no + "'>"
 															+"<div class='followarea'>"
 															+"<div class='flwimg'>"
-															+ 	json.result[i].u_profile
+															+ "<img src='/RewardBook/resources/images/profileImg/" + profile + "' class='profile_image' >"
 							        						+ "</div>"
 								        					+ "<div class='flwname'>"
 								        					+ 	"<span class='followname'>"
@@ -433,7 +439,6 @@ width:16.66%;
 								        					+"</div>"
 								        					+"</a>");
 													count++;
-												
 										}
 										if(count == 0){
 											$(".followinglink").html($(".followinglink").html()
@@ -461,8 +466,7 @@ width:16.66%;
 				<div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -480,40 +484,41 @@ width:16.66%;
 										//string => json 객체로 바꿈
 										var json = JSON.parse(jsonStr);
 										var count = 0;
-										
+										var profile = null;
 										for(var i in json.result){
 											var type = (json.result[i].u_no.charAt(0) == 'A')? "개인" : "기업";
-											
-											$(".followerlink").html($(".followerlink").html()
-													+"<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no + "'>"
-													+"<div class='followerarea'>"
-													+"<div class='flwimg'>"
-													+ 	"<img class='followerimg' src='/RewardBook/resources/images/mypage/i.jpg'>"
-					        						+ "</div>"
-						        					+ "<div class='flwname'>"
-						        					+ 	"<span class='followername'>"
-						        					+ 		decodeURIComponent(json.result[i].name)
-						        					+	"</span>"
-						        					+ "</div>"
-						        					+ "<div class='flwtype'>"
-						        					+ 	"<span class='followertype'>"
-						        					+ type
-						        					+	"</span>"
-						        					+ "</div>"
-						        					+"</div>"
-						        					+"</a>");
-											count++;
+											if(json.result[i].u_profile == null){profile = "i.png"}else{profile = json.result[i].u_profile}
+												$(".followerlink").html($(".followerlink").html()
+														+"<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no + "'>"
+														+"<div class='followerarea'>"
+														+"<div class='flwimg'>"
+														+ "<img src='/RewardBook/resources/images/profileImg/" + profile + "' class='profile_image' >"
+						        						+ "</div>"
+							        					+ "<div class='flwname'>"
+							        					+ 	"<span class='followername'>"
+							        					+ 		decodeURIComponent(json.result[i].name)
+							        					+	"</span>"
+							        					+ "</div>"
+							        					+ "<div class='flwtype'>"
+							        					+ 	"<span class='followertype'>"
+							        					+ type
+							        					+	"</span>"
+							        					+ "</div>"
+							        					+"</div>"
+							        					+"</a>");
+												count++;
 										}
-										if(count == 0){
-											$(".followerlink").html($(".followerlink").html()
-													+ "<br><br>"
-						        					+ "<div class='flwname'>"
-						        					+ 	"<span class='followername'>"
-						        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로워하는 친구가 없습니다."
-						        					+	"</span>"
-						        					+ "</div>"
-						        					);
-										}
+											if(count == 0){
+												$(".followerlink").html($(".followerlink").html()
+														+ "<br><br>"
+							        					+ "<div class='flwname'>"
+							        					+ 	"<span class='followername'>"
+							        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로워하는 친구가 없습니다."
+							        					+	"</span>"
+							        					+ "</div>"
+							        					);
+											}
+										
 									}
 								});
 							});
@@ -531,8 +536,7 @@ width:16.66%;
 	      <div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
@@ -549,13 +553,17 @@ width:16.66%;
 								var jsonStr = JSON.stringify(data);
 								//string => json 객체로 바꿈
 								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
 								if(json.list){
 									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
 										$(".likeproject").html($(".likeproject").html()
-												+"<a class='boxitem' href='#'>"
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/mypage/item1.jpg' class='p_image'>"
+				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ thumbnail
+				        						+ "' class='project_image'>"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"
@@ -613,28 +621,75 @@ width:16.66%;
 	      <div class="tabbox">
 			    <div class="boxtop">   	
 			       	<div class="tabsearch">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<button>검색</button>
+						
 					</div>
 				</div> 
 	        	<div class="boxbottom">
-	        		<a class="boxitem" href="#">
-		        		<div class="boxarea">
-		        				<div class="itemimage">
-		        					<img src="/RewardBook/resources/images/mypage/item1.jpg" class="p_image">
-		        				</div>
-		        				<div class="itemname">
-		        					<div class="itemname_text"><span>[세준] 파워뱅크 블루투스 이어폰 에어팟 짱</span></div>
-		        					<div class="itemname_per"><span>97% 달성</span></div>
-		        				</div>
+		        	<div class="reviewproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/mr_list",
+							data:{uNo : "<%= loginMember.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
+								if(json.list){
+									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
+										$(".reviewproject").html($(".reviewproject").html()
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ thumbnail
+				        						+ "' class='project_image'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'> "+ json.list[i].rdate +"일 남음 </span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".reviewproject").html($(".reviewproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 남겨진 리뷰가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
 		        		</div>
-	        		</a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
-		        		<a class="boxitem"  href="#"><div class="boxarea"></div></a>
 	        	</div>
 	        </div>
 	      </div>          

@@ -38,6 +38,14 @@ public class MypageService {
 		close(conn);
 		return list;
 	}
+
+
+	public ArrayList<Project> myreviewList(String uNo) {
+		Connection conn = getConnection();
+		ArrayList<Project> list = mdao.myreviewList(conn, uNo);
+		close(conn);
+		return list;
+	}
 	
 	
 
