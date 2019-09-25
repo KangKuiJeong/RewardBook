@@ -990,32 +990,32 @@ strong{font-weight: 700;}
 				<div class="declaration">신고하기</div>
 			</div>
 			<div class="rank">
-				<h3>인기 프로젝트</h3>
-				<div class="rank_item">1</div>
-				<div class="rank_item">2</div>
-				<div class="rank_item">3</div>
-				<div class="rank_item">4</div>
-				<div class="rank_item">5</div>
-				<div class="rank_item">6</div>
-				<div class="rank_item">7</div>
-				<div class="rank_item">8</div>
-				<div class="rank_item">9</div>
-				<div class="rank_item">10</div>
-			</div>		
-		</div>
-				<% if(loginMember != null) { %>
-			<div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >		
-				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
-				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
-				<div class="memodiv" id="memodiv">			
-				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
-				<input class="memosubmit" type="submit" value="저장">			
-				</div>			
-				</form></div>	
-		</div>
-		<% } %>
-	<script>
+            <h3>인기 프로젝트</h3>
+            <div class="rank_item">1</div>
+            <div class="rank_item">2</div>
+            <div class="rank_item">3</div>
+            <div class="rank_item">4</div>
+            <div class="rank_item">5</div>
+            <div class="rank_item">6</div>
+            <div class="rank_item">7</div>
+            <div class="rank_item">8</div>
+            <div class="rank_item">9</div>
+            <div class="rank_item">10</div>
+         </div>      
+            <% if(loginMember != null) { %>
+         <div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >      
+            <input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">      
+            <input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">         
+            <div class="memodiv" id="memodiv">         
+            <h3 class="memoh3">메모</h3>      
+            <textarea class="m_text"name="m_text" id="m_text" placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;         
+            <input class="memosubmit" type="submit" value="저장">         
+            </div>         
+            </form></div>   
+      </div>
+      <% } %>
+      </div>
+   <script>
 	function memoinsert(){
 	
 	$.ajax({

@@ -11,8 +11,8 @@ public class Payment implements java.io.Serializable {
 	private String p_no;
 	private String r_no;
 	private String pm_option;
-	private int pm_quantity;
-	private String pm_info;
+	private String pm_quantity;
+	private String pm_oid;
 	private int pm_price;
 	private int pm_price_plus;
 	private int pm_mileage;
@@ -24,8 +24,8 @@ public class Payment implements java.io.Serializable {
 		super();
 	}
 
-	public Payment(String pm_no, String u_no, String p_no, String r_no, String pm_option, int pm_quantity,
-			String pm_info, int pm_price, int pm_price_plus, int pm_mileage, Date pm_date, String pm_nopen,
+	public Payment(String pm_no, String u_no, String p_no, String r_no, String pm_option, String pm_quantity,
+			String pm_oid, int pm_price, int pm_price_plus, int pm_mileage, Date pm_date, String pm_nopen,
 			String pm_popen) {
 		super();
 		this.pm_no = pm_no;
@@ -34,7 +34,7 @@ public class Payment implements java.io.Serializable {
 		this.r_no = r_no;
 		this.pm_option = pm_option;
 		this.pm_quantity = pm_quantity;
-		this.pm_info = pm_info;
+		this.pm_oid = pm_oid;
 		this.pm_price = pm_price;
 		this.pm_price_plus = pm_price_plus;
 		this.pm_mileage = pm_mileage;
@@ -83,20 +83,20 @@ public class Payment implements java.io.Serializable {
 		this.pm_option = pm_option;
 	}
 
-	public int getPm_quantity() {
+	public String getPm_quantity() {
 		return pm_quantity;
 	}
 
-	public void setPm_quantity(int pm_quantity) {
+	public void setPm_quantity(String pm_quantity) {
 		this.pm_quantity = pm_quantity;
 	}
 
-	public String getPm_info() {
-		return pm_info;
+	public String getPm_oid() {
+		return pm_oid;
 	}
 
-	public void setPm_info(String pm_info) {
-		this.pm_info = pm_info;
+	public void setPm_oid(String pm_oid) {
+		this.pm_oid = pm_oid;
 	}
 
 	public int getPm_price() {
@@ -150,11 +150,9 @@ public class Payment implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Payment [pm_no=" + pm_no + ", u_no=" + u_no + ", p_no=" + p_no + ", r_no=" + r_no + ", pm_option="
-				+ pm_option + ", pm_quantity=" + pm_quantity + ", pm_info=" + pm_info + ", pm_price=" + pm_price
+				+ pm_option + ", pm_quantity=" + pm_quantity + ", pm_oid=" + pm_oid + ", pm_price=" + pm_price
 				+ ", pm_price_plus=" + pm_price_plus + ", pm_mileage=" + pm_mileage + ", pm_date=" + pm_date
 				+ ", pm_nopen=" + pm_nopen + ", pm_popen=" + pm_popen + "]";
 	}
-	
-	
-	
+
 }

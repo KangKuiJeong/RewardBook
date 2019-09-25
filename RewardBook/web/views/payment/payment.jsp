@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="payment.model.vo.Payment, java.util.ArrayList, payment.model.vo.Reward" %>
 <% 
-	int totalSelected = Integer.parseInt(request.getParameter("totalSelected")); 
+	Payment pay = (Payment)request.getAttribute("pay");
+	ArrayList<Reward> list = (ArrayList<Reward>)request.getAttribute("list");
 	int fundingPrice = Integer.parseInt(request.getParameter("fundingPrice"));
-	
+	int donation = Integer.parseInt(request.getParameter("addDonation"));
+	int sumPrice = fundingPrice + donation;
 %>
 <!DOCTYPE html>
 <html>
@@ -38,30 +41,28 @@
                 <ul>
                   
                   <li>
-                    <p class="title">[얼리버드] 우산 3개 SET</p>
-                    <p class="text">다다익선! 그 만큼 가격혜택도 커요.(무료배송)</p>
+                  	<% for(Reward reward : list){ %>
+                  		
+                    <p class="title"><%= reward.getR_name() %></p>
+                    <p class="text"><%= reward.getR_detail() %></p>
                     <div class="info">
                       
-                      <p class="sum"><em>수량 : 1개</em>43,000원</p>
+                      <p class="sum"><em>수량 : <%= reward.getR_amount() %>개</em><%= reward.getR_price() %>원</p>
                     </div>
+                    <% } %>
                   </li>
-                  <% for(int i = 0; i < totalSelected; i++){ %>
-                  <input type="hidden" name="<%= request.getParameter("choiceRewards["+ i +"].rewardId") %>" value="<%= request.getParameter("choiceRewards["+ i +"].rewardId") %>">
-                  <input type="hidden" name="choiceRewards[0].rewardName" value="다다익선! 그 만큼 가격혜택도 커요.(무료배송)">
-                  <input type="hidden" name="choiceRewards[0].qty" value="1">
-                  <input type="hidden" name="choiceRewards[0].sumAmount" value="43000">
-                  <input type="hidden" name="choiceRewards[0].memo" value="">
+                  <% for(int i = 0; i < list.size(); i++){ %>
+                  <input type="hidden" name="choiceRewards[<%= i %>].rewardId" value="<%= list.get(i).getR_no() %>">
+                  <input type="hidden" name="choiceRewards[<%= i %>].rewardName" value="<%= list.get(i).getR_name() %>">
+                  <input type="hidden" name="choiceRewards[<%= i %>].qty" valu="<%= list.get(i).getR_amount() %>">
+                  <input type="hidden" name="choiceRewards[<%= i %>].sumAmount" value="<%= list.get(i).getR_price() %>">
                   <% } %>
                 </ul>
               </div>
               <div class="order-addinfo">
                 <dl>
                   <dt>추가 후원금</dt>
-                  <dd>0원</dd>
-                </dl>
-                <dl>
-                  <dt>배송비</dt>
-                  <dd>0원</dd>
+                  <dd><%= donation %>원</dd>
                 </dl>
                 <div class="point">
                   <dl>
@@ -82,7 +83,7 @@
                   <dt>펀딩금액</dt>
                   <dd>
                     <span id="fundingPrice">
-                      43,000
+                      <%= fundingPrice %>
                     </span>원
                   </dd>
                 </dl>
@@ -92,16 +93,14 @@
                 </dl>
                 <dl>
                   <dt>추가 후원금</dt>
-                  <dd>0원</dd>
-                </dl>
-                <dl>
-                  <dt>배송비</dt>
-                  <dd>0원</dd>
+                  <dd><%= donation %>원</dd>
                 </dl>
                 <dl class="total">
                   <dt>최종결제금액</dt>
                   <dd><input type="hidden" id="totalPrice" value="43000">
-                  <em id="totalPriceView">43,000</em>원</dd>
+                  <em id="totalPriceView">
+                  
+                  </em><%= sumPrice %>원</dd>
                 </dl>
               </div>
             </div>
@@ -112,15 +111,15 @@
                 <div class="wpurchase-input-box">
                   <dl>
                     <dt>이름</dt>
-                    <dd>하쵸</dd>
+                    <dd><%= loginMember.getName() %></dd>
                   </dl>
                   <dl>
                     <dt>이메일</dt>
-                    <dd>osj901@naver.com</dd>
+                    <dd><%= loginMember.getId() %></dd>
                   </dl>
                   <dl class="supporter-phone-number">
                     <dt>휴대폰 번호</dt>
-                    <dd>01077058069</dd>
+                    <dd><%= loginMember.getPhone() %></dd>
                   </dl>
                 </div>
               </div>
@@ -138,8 +137,8 @@
                       <dd>
                         <label for="rddv1">
                           <p>최근 배송지</p>
-                          <p><strong>오세준 010-7705-8069</strong></p>
-                          <p>[16943] 경기 용인시 수지구 광교마을로 90 (상현동, 광교마을휴먼시아41단지) 4101동2102호</p>
+                          <p><strong><%= loginMember.getName() %> <%= loginMember.getPhone() %></strong></p>
+                          <p><%= loginMember.getAddress_detail() %></p>
                         </label>
                       </dd>
                     </dl>
@@ -264,12 +263,16 @@
             </div>
           </div>
           <div class="btn-wrap">
-            <button type="button" id="btn-submit" onclick="purchaseReservation()" class="wz primary button">결제 예약하기</button>
+          <% if(loginMember.getP_billing() != null){ %>
+            <button type="button" id="btn-submit" onclick="payTest()" class="wz primary button">결제 예약하기</button>
+          <% }else{ %>
+          	<button type="button" id="btn-submit"  onclick="isbilling()" class="wz primary button">결제 예약하기</button>
+          <% } %> 
+         
           </div>
 		
 		
 		
-		<button onclick="payTest();">결제</button>
 	</div>
 </div>
 
@@ -280,6 +283,8 @@
 <%@ include file="/views/common/footer.jsp" %>
 
 <script type="text/javascript">
+console.log('<%= request.getParameter("dontShowNameYn") %>');
+console.log('<%= request.getParameter("dontShowAmountYn") %>');
 function payTest(){
 	BootPay.request({
 		price: 0, // 0으로 해야 한다.
@@ -289,12 +294,12 @@ function payTest(){
 		method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
 		show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 		user_info: {
-			username: '사용자 이름',
-			email: '사용자 이메일',
-			addr: '사용자 주소',
-			phone: '010-1234-4567'
+			username: '<%= loginMember.getName() %>',
+			email: '<%= loginMember.getId() %>',
+			addr: '<%= loginMember.getAddress() %>',
+			phone: '<%= loginMember.getPhone() %>'
 		},
-		order_id: 'order_id_', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+		order_id: 'order_id_'+'<%= pay.getP_no() %>' + '<%= loginMember.getuNo() %>', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 		params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
 	}).error(function (data) {
 		//결제 진행시 에러가 발생하면 수행됩니다.
@@ -304,11 +309,112 @@ function payTest(){
 		console.log(data);
 	}).done(function (data) {
 		// 빌링키를 정상적으로 가져오면 해당 데이터를 불러옵니다.
-		console.log(data);
-		console.log(order_id);
+		var r_no = "";
+		<% for(int i = 0; i < list.size(); i++){ %>
+			<% if(i == (list.size()-1)){ %>
+				r_no += "<%= list.get(i).getR_no() %>"
+			<% }else{ %>
+				r_no += ",<%= list.get(i).getR_no() %>"
+			<% } %>
+		<% } %>
 		
+		var r_price = "";
+		<% for(int i = 0; i < list.size(); i++){ %>
+			<% if(i == (list.size()-1)){ %>
+				r_price += "<%= list.get(i).getR_price() %>"
+			<% }else{ %>
+				r_price += ",<%= list.get(i).getR_price() %>"
+			<% } %>
+		<% } %>
+		
+		var r_amount = "";
+		<% for(int i = 0; i < list.size(); i++){ %>
+			<% if(i == (list.size()-1)){ %>
+				r_amount += "<%= list.get(i).getR_amount() %>"
+			<% }else{ %>
+				r_amount += ",<%= list.get(i).getR_amount() %>"
+			<% } %>
+		<% } %>
+		
+		
+		$.ajax({
+			url: '/RewardBook/pm_comp',
+			data: {
+				billing_key : data.billing_key,
+				order_id : 'order_id_'+'<%= pay.getP_no() %>' + '<%= loginMember.getuNo() %>',
+				p_no : "<%= request.getParameter("p_no") %>",
+				u_no : "<%= loginMember.getuNo() %>",
+				r_no : r_no,
+				r_price : r_price,
+				r_amount : r_amount,
+				donation : "<%= donation %>",
+				nopen : "<%= request.getParameter("dontShowNameYn") %>",
+				popen : <%= request.getParameter("dontShowAmountYn") %>
+			},
+			type: 'POST',
+			success: function(){
+				location.href="/RewardBook/views/payment/complete.jsp";
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error : " + textStatus);
+			},
+		});
 	});
 }
+
+function isbilling(){
+	var r_no = "";
+	<% for(int i = 0; i < list.size(); i++){ %>
+		<% if(i == (list.size()-1)){ %>
+			r_no += "<%= list.get(i).getR_no() %>"
+		<% }else{ %>
+			r_no += ",<%= list.get(i).getR_no() %>"
+		<% } %>
+	<% } %>
+	
+	var r_price = "";
+	<% for(int i = 0; i < list.size(); i++){ %>
+		<% if(i == (list.size()-1)){ %>
+			r_price += "<%= list.get(i).getR_price() %>"
+		<% }else{ %>
+			r_price += ",<%= list.get(i).getR_price() %>"
+		<% } %>
+	<% } %>
+	
+	var r_amount = "";
+	<% for(int i = 0; i < list.size(); i++){ %>
+		<% if(i == (list.size()-1)){ %>
+			r_amount += "<%= list.get(i).getR_amount() %>"
+		<% }else{ %>
+			r_amount += ",<%= list.get(i).getR_amount() %>"
+		<% } %>
+	<% } %>
+	
+	
+	$.ajax({
+		url: '/RewardBook/pm_ins',
+		data: {
+			order_id : "order_id_" + "<%= pay.getP_no() %>",
+			p_no : "<%= request.getParameter("p_no") %>",
+			u_no : "<%= loginMember.getuNo() %>",
+			r_no : r_no,
+			r_price : r_price,
+			r_amount : r_amount,
+			donation : "<%= donation %>",
+			nopen : "<%= request.getParameter("dontShowNameYn") %>",
+			popen : <%= request.getParameter("dontShowAmountYn") %>
+		},
+		type: 'POST',
+		success: function(){
+			location.href="/RewardBook/views/payment/complete.jsp";
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			console.log("error : " + textStatus);
+		},
+	});
+});
+}
+
 
 $('.show-list').click(function(){
     $('.delivery-list').toggle();

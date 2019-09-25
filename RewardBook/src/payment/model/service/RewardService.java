@@ -75,4 +75,19 @@ public class RewardService {
 		return result;
 	}
 
+	public int updateReward(String r_no, String string) {
+		Connection conn = getConnection();
+		int result = rDao.updateReward(conn, r_no, string);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

@@ -28,11 +28,12 @@ public class Member implements Serializable{
 	private String category;	//카테고리
 	private String address_detail;	//추가 : 상세주소
 	private String job;	//추가 : 직업
+	private String p_billing;//추가 : 빌링키
 	
 	//매개변수 있는 생성자
 	public Member(String uNo, String uBno, String id, String name, String pw, Date joinDate, String phone,
 			String profileImg, String intro, String address, String post, int mileage, String bank, String bankAccount,
-			String homepage, String category, String address_detail, String job) {
+			String homepage, String category, String address_detail, String job, String p_billing) {
 		super();
 		this.uNo = uNo;
 		this.uBno = uBno;
@@ -52,6 +53,7 @@ public class Member implements Serializable{
 		this.category = category;
 		this.address_detail = address_detail;
 		this.job = job;
+		this.p_billing = p_billing;
 	}
 	
 	//getters & setters
@@ -201,19 +203,21 @@ public class Member implements Serializable{
 		this.job = job;
 	}
 	
-	
-	//toString()
+	public String getP_billing() {
+		return p_billing;
+	}
+
+	public void setP_billing(String p_billing) {
+		this.p_billing = p_billing;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [uNo=" + uNo + ", uBno=" + uBno + ", id=" + id + ", name=" + name + ", pw=" + pw + ", joinDate="
 				+ joinDate + ", phone=" + phone + ", profileImg=" + profileImg + ", intro=" + intro + ", address="
 				+ address + ", post=" + post + ", mileage=" + mileage + ", bank=" + bank + ", bankAccount="
 				+ bankAccount + ", homepage=" + homepage + ", category=" + category + ", address_detail="
-				+ address_detail + ", job=" + job + "]";
+				+ address_detail + ", job=" + job + ", p_billing=" + p_billing + "]";
 	}
-
-	
-	
-
 	
 }

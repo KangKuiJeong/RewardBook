@@ -22,7 +22,7 @@ import project.model.vo.Project;
  */
 @WebServlet("/p_sel")
 public class Project_SelectServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,46 +32,41 @@ public class Project_SelectServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String p_no = request.getParameter("p_no");
-		
-		ArrayList<Reward> list = new RewardService().listReward(p_no);
-		if(list.size() > 0) {
-			request.setAttribute("rewardList", list);
-		}
-    
-		ArrayList<Memo> mlist = new MemoService().listMemo();
-		Memo memo = new MemoService().selectMemo(p_no);
-	
-		request.setAttribute("listm", memo);
-		
-		/*Memo memo = new MemoService().selectMemo(p_no);
-	
-		request.setAttribute("memo", memo);*/
-		
-		Project project = new ProjectService().selectProject(p_no);
-		RequestDispatcher view = null;
-		if(project != null) {
-			view = request.getRequestDispatcher("views/project/projectDetail.jsp");
-			request.setAttribute("project", project);
-			view.forward(request, response);
-		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("error", "페이지 조회 실패");
-			view.forward(request, response);
-		}
-		
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String p_no = request.getParameter("p_no");
+      
+      ArrayList<Reward> list = new RewardService().listReward(p_no);
+      if(list.size() > 0) {
+         request.setAttribute("rewardList", list);
+      }
+      
+      Memo memo = new MemoService().selectMemo(p_no);
+   
+      request.setAttribute("memo", memo);
+      
+      Project project = new ProjectService().selectProject(p_no);
+      RequestDispatcher view = null;
+      if(project != null) {
+         view = request.getRequestDispatcher("views/project/projectDetail.jsp");
+         request.setAttribute("project", project);
+         view.forward(request, response);
+      }else {
+         view = request.getRequestDispatcher("views/common/error.jsp");
+         request.setAttribute("error", "페이지 조회 실패");
+         view.forward(request, response);
+      }
+      
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

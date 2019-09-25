@@ -163,16 +163,19 @@
 					<dl class="reward-box" data-rid="<%= reward.getR_no() %>">
 						<dt>
 							<label class="rb checkbox">
-								<input type="checkbox" id="ckrw103382" class="reward-check" name="rewardId" value="<%= reward.getR_no() %>" /> 
+								<input type="checkbox" id="ckrw103382" class="reward-check" name="rewardId" value="<%= reward.getR_no() %>" />
+								<input type="hidden" name="p_no" value="<%= project.getP_no() %>">
 								<span></span>
 							</label>
 						</dt>
 						<dd>
+							<input type="hidden" name="u_no" value="<%= loginMember.getuNo() %>">
+							<input type="hidden" id="priceRw<%= reward.getR_no() %>" value="<%= reward.getR_price() %>" />
 							<input type="hidden" id="amountRw<%= reward.getR_no() %>" value="<%= reward.getR_price() %>" />
+							<input type="hidden" id="detailRw<%= reward.getR_no() %>" value="<%= reward.getR_detail() %>" />
 							<input type="hidden" id="nameRw<%= reward.getR_no() %>" value="<%= reward.getR_name() %>" /> 
 							<input type="hidden" id="remainCnt<%= reward.getR_no() %>" class="remain-cnt" value="<%= reward.getR_amount() %>" /> 
 							<input type="hidden" id="limitCnt<%= reward.getR_no() %>" class="limit-cnt" value="800" /> 
-							<input type="hidden" id="sumAmount" value="0">
 							<label for="ckrw103382">
 								<p class="sum"><%= reward.getR_price() %>	원 펀딩합니다.</p>
 								<p class="number">
@@ -346,12 +349,16 @@
    	     	var qty = $('#qty'+rewardId).val();
          	var amount = $('#amountRw'+rewardId).val();
          	var name = $('#nameRw'+rewardId).val();
+         	var detail = $('#detailRw'+rewardId).val();
+         	var price = $('#priceRw'+rewardId).val();
          	
          	var sumAmount = parseInt(amount) * parseInt(qty);
          	
          	$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].rewardId" value="'+rewardId+'" />');
-         	$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].rewardName" value="'+rewardName+'" />');
+         	$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].rewardName" value="'+name+'" />');
     		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].qty" value="'+qty+'" />');
+    		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].detail" value="'+detail+'" />');
+    		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].price" value="'+price+'" />');
     		$('#purchaseForm').append('<input type="hidden" name="choiceRewards[' + idx + '].sumAmount" value="'+sumAmount+'" />');
     		totalSelected++;
    	    });
@@ -367,7 +374,7 @@
    	  } else {
    			$('#purchaseForm').append('<input type="hidden" name="fundingPrice" value="'+fundingPrice+'" />');
    			$('#purchaseForm').append('<input type="hidden" name="totalSelected" value="'+totalSelected+'" />');
-   			$('#purchaseForm').attr('action', '/RewardBook/views/payment/payment.jsp');
+   			$('#purchaseForm').attr('action', '/RewardBook/pm_page');
    			$("#purchaseForm").submit();
    		}
    	}
