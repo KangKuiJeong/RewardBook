@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList, project.model.vo.Project" %>
  <%
 	Project list = (Project)request.getAttribute("list"); 
-   Memo memo = (Memo)request.getAttribute("list");
+   Memo memo = (Memo)request.getAttribute("memo");
 %>   
 <!DOCTYPE html>
 <html>
@@ -32,15 +32,15 @@ li{ list-style: none; }
 <div class="detailmain">
 	<div class="dform">
 		<ul>
-			<li class="detail_title">내가 작성한 메모</li>
+			<li class="detail_title">내가 등록한 메모</li>
 			<li class="line"></li>
-			<li class="p_name">프로젝트명 : 프로젝트이름받아오기</li>
-			<li class="m_text">메모내용입니다!</li>
+			
+			<li class="m_text"><%= memo.getM_text() %>메모내용입니다!</li>
 			</li>
 		</ul>
 		<div class="btbt">
 			<div class="bt">
-			<input class="mupbt"  type="button" value="수정">
+	
 			<a class="mdelbt" onclick="confirm('정말 삭제하시겠습니까?');">삭제</a>
 			<input class="resetbt" type="reset" value="취소" onclick="window.close();">
 			</div>

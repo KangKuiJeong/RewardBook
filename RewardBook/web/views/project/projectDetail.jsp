@@ -1002,7 +1002,6 @@ strong{font-weight: 700;}
 				<div class="rank_item">9</div>
 				<div class="rank_item">10</div>
 			</div>		
-		</div>
 				<% if(loginMember != null) { %>
 			<div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >		
 				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
@@ -1015,6 +1014,7 @@ strong{font-weight: 700;}
 				</form></div>	
 		</div>
 		<% } %>
+		</div>
 	<script>
 	function memoinsert(){
 	
