@@ -9,15 +9,16 @@ import java.util.ArrayList;
 
 import memo.model.dao.MemoDao;
 import memo.model.vo.Memo;
+import project.model.vo.Project;
 
 public class MemoService {
 	
 	private MemoDao dDao = new MemoDao();
 	
 	public MemoService() {}
-	public ArrayList<Memo> listMemo(){
+	public ArrayList<Memo> listMemo(String u_no){
 		Connection conn = getConnection();
-		ArrayList<Memo> list = dDao.listMEMO(conn);
+		ArrayList<Memo> list = dDao.listMEMO(conn, u_no);
 				
 		close(conn);
 		return list;
@@ -48,9 +49,9 @@ public class MemoService {
 		
 		return result;
 	}
-	public Memo selectMemo(String p_no) {
+	public Memo selectMemo(String p_no, String u_no) {
 		Connection conn = getConnection();
-		Memo memo = dDao.selectMemo(conn, p_no);
+		Memo memo = dDao.selectMemo(conn, p_no, u_no);
 		
 		close(conn);
 		
@@ -69,5 +70,17 @@ public class MemoService {
 		
 		return result;
 	}
-
+	public int countMemo() {
+		Connection conn = getConnection();
+		int result = dDao.countMemo(conn);;
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 }

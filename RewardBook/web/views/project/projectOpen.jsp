@@ -3,6 +3,8 @@
 <%
 	String memberNo = ((Member)session.getAttribute("loginMember")).getuNo();
 	String memberId = ((Member)session.getAttribute("loginMember")).getId();
+	String memberBno = ((Member)session.getAttribute("loginMember")).getuBno();
+	int rewardCount = 1;
 %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +39,7 @@
 	margin : 20px 0px 0px 10px;
 }
 .area1 .edit ul li, .area1 .edit ul li input[type=submit] {
-	width : 130px;
+	width : 150px;
 	height : 40px;
 	border-top : 1px solid #E8DEDC;
 	border-bottom : 1px solid #E8DEDC;
@@ -50,25 +52,26 @@
 	cursor : pointer;
 }
 .area1 .edit ul li[name=one] {
+	background : #C9C1B5;
 	border-top-left-radius : 5px;
 	border-bottom-left-radius : 5px;
 }
-.area1 .edit ul li[name=five] {
+.area1 .edit ul li[name=four] {
 	border-right : 1px solid #E8DEDC;
 	border-top-right-radius : 5px;
 	border-bottom-right-radius : 5px;
 }
-.area1 .edit ul li[name=six] {
-	background : gray;
-	margin : 0px 0px 0px 30px;
+.area1 .edit ul li[name=five] {
+	background : #bdbdbd;
+	margin : 0px 0px 0px 32px;
 	border-right : 1px solid #E8DEDC;
 	border-radius : 5px;
 }
-.area1 .edit ul li[name=seven] {
-	margin : 0px 0px 0px 30px;
+.area1 .edit ul li[name=six] {
+	margin : 0px 0px 0px 32px;
 	border : none;
 }
-.area1 .edit ul li[name=seven] input[type=submit] {
+.area1 .edit ul li[name=six] input[type=submit] {
 	height : 42px;
 	background : #FFB202;
 	border-right : 1px solid #E8DEDC;
@@ -77,13 +80,16 @@
 
 .area1 .edit .container .text {
 	width : 100%;
-	height : 500px;
+	height : 430px;
 	border : 1px solid #E8DEDC;
 	display : none;
 }
 .area1 .edit .container .text[name=one] {
 	height : 1400px;
 	display : block;
+}
+.area1 .edit .container .text[name=two] {
+	height : 520px;
 }
 .area1 .edit .container .text[name=three] {
 	height : 740px;
@@ -94,6 +100,108 @@
 	height : 200px;
 	margin: 30px 5% 0px 5%;
 }
+.area1 .edit .container .text[name=two] .rewardList {
+	width : 600px;
+	height : 420px;
+	clear : both;
+	margin: 0px 200px 0px 200px;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward {
+	width : 550px;
+	height : 330px;
+	border : 2px solid #c9c9c9;
+	float : left;
+	font-size : 16px;
+	color : #6B5D4E;
+	background : #eeeeee;
+	padding : 25px;
+	margin : 30px 0px 0px 0px;
+}
+.area1 .edit .container .text[name=two] .rewardButton {
+	width : 200px;
+	height : 50px;
+	margin : 20px auto 0px auto;
+}
+.area1 .edit .container .text[name=two] .rewardButton .button {
+	width : 200px;
+	height : 50px;
+	border-radius : 5px;
+	margin : auto;
+	background : #FFB202;
+	font-size : 20px;
+	font-weight : 600;
+	text-align : center;
+	line-height : 50px;
+	color : #6B5D4E;
+	cursor : pointer;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward .r_index {
+	width : 275px;
+	height : 50px;
+	margin: 0px;
+	font-size : 18px;
+	font-weight : 500;
+	color : #6B5D4E;
+	clear : both;
+}
+ .area1 .edit .container .text[name=two] .rewardList .reward .r_price,  .area1 .edit .container .text[name=two] .rewardList .reward .r_amount {
+	width : 275px;
+	height : 50px;
+	margin: 0px;
+	float : left;
+	font-size : 18px;
+	font-weight : 500;
+	color : #6B5D4E;
+	text-align : right;
+ }
+.area1 .edit .container .text[name=two] .rewardList .reward .r_title {
+	width : 550px;
+	height : 80px;
+	margin: 0px;
+	font-size : 18px;
+	font-weight : 500;
+	color : #6B5D4E;
+	clear : both;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward .r_detail {
+	width : 550px;
+	height : 150px;
+	margin: 0px;
+	font-size : 18px;
+	font-weight : 500;
+	color : #6B5D4E;
+	clear : both;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward .r_index {
+	font-size : 18px;
+	font-weight : 600;
+	color : black;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward .r_price input, .area1 .edit .container .text[name=two] .rewardList .reward .r_amount input {
+	width : 150px;
+	height : 30px;
+	font-size : 18px;
+	margin : 0px 10px 0px 20px;
+	border : 2px solid #c9c9c9;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward .r_title input {
+	width : 546px;
+	height : 30px;
+	font-size : 18px;
+	margin : 0px 0px 0px 0px;
+	border : 2px solid #c9c9c9;
+}
+.area1 .edit .container .text[name=two] .rewardList .reward .r_detail textarea {
+	width : 546px;
+	height : 120px;
+	font-size : 18px;
+	margin : 0px 0px 0px 0px;
+	border : 2px solid #c9c9c9;
+}
+#cke_p_content, .cke_inner.cke_reset {
+	margin : 0px;
+}
+
 
 .area1 .edit .container .text div .title {
 	width : 250px;
@@ -207,6 +315,12 @@
 	height : 40px;
 }
 
+.area1 .edit .container .text[name=three] .part1 {
+	height : 104px;
+}
+.area1 .edit .container .text[name=three] .part1 .input {
+	height : 40px;
+}
 .area1 .edit .container .text[name=three] .part2 {
 	height : 104px;
 }
@@ -219,8 +333,21 @@
 	height : 310px;
 	margin : 0px;
 }
-#cke_p_content, .cke_inner.cke_reset {
-	margin : 0px;
+
+.area1 .edit .container .text[name=three] .part1 .input input, .area1 .edit .container .text[name=three] .part2 .input input {
+	font-size : 18px;
+}
+
+.area1 .edit .container .text[name="four"] .part1 {
+	height : 220px;
+}
+.area1 .edit .container .text[name="four"] .part1 .input {
+	height : 170px;
+}
+.area1 .edit .container .text[name="four"] .part1 .input div {
+	width : 550px;
+	height : 30px;
+	margin : 15px 0px 0px 0px;
 }
 
 </style>
@@ -235,8 +362,41 @@ function showEdit() {
 	$(".area1 .edit").css("display", "block");
 };
 
+function addReward() {
+	var count = $(".area1 input[name=rewardcount]").val() * 1 + 1;
+	var str = "<div class='reward'>" + 
+			"<div class='r_index'>리워드 #" + count + "</div>" + 
+			"<div class='r_price'>금액<input type='text' name='r_price[" + count + "]' value='0' style='text-align : right; padding-right : 10px'>원</div>" +
+			"<div class='r_amount'>수량<input type='text' name='r_amount[" + count + "]' value='0' style='text-align : right; padding-right : 10px'>개</div>" + 
+			"<div class='r_title'>리워드 제목<input type='text' name='r_title[" + count + "]' placeholder='리워드를 간단히 설명할 수 있는 제목을 작성해주세요.' style='padding-left : 10px'></div>" +
+			"<div class='r_detail'>리워드 설명<textarea name='r_detail[" + count + "]' placeholder='리워드의 구성품, 특성 등 자세한 설명을 작성해주세요.' style='padding-left : 10px'></textarea></div>" +
+			"</div>";
+	$(".area1 .edit .container .text[name=two] .rewardList").append(str);
+	var height1 = 414 * count + 100;
+	$(".area1 .edit .container .text[name=two]").css("height", height1);
+	var height2 = 414 * count;
+	$(".area1 .edit .container .text[name=two] .rewardList").css("height", height2);
+	$(".area1 input[name=rewardcount]").val(count);
+}
+
 $(function() {
 
+	$.ajax({
+		url: "/RewardBook/p_getseq",
+		type: "get",
+		dataType: "json",
+		success: function(data){
+
+			var val = data.projectNo * 1 + 1;
+			
+			$(".area1 .edit .container .text .part1 .input .projectNo").text(val);
+			
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			console.log("error");
+		}
+	});
+	
 	$(".tabMenu li").on("click", function() {
 		if ($(this).index() < 5) {
 			
@@ -259,8 +419,8 @@ $(function() {
 		}
 	});
 	
-	$(".edit .container .text .part3 .input input").on("keyup", function() {
-		$(".edit .container .text .part3 .input span").text($(".edit .container .text .part3 .input input").val().length + " / 40");
+	$(".edit .container .text[name=one] .part3 .input input").on("keyup", function() {
+		$(".edit .container .text[name=one] .part3 .input span").text($(".edit .container .text[name=one] .part3 .input input").val().length + " / 40");
 	})
 	
 });
@@ -283,16 +443,16 @@ $(function() {
 		</div>
 		<form method="post" enctype="multipart/form-data" action="/RewardBook/p_insert">
 		<input type="hidden" name="no" value="<%= memberNo %>">
+		<input type="hidden" name="rewardcount" value="1">
 		<div class="edit">
 			<div class="tab">
 				<ul class="tabMenu">
 					<li name="one">기본정보</li>
 					<li name="two">리워드</li>
 					<li name="three">스토리</li>
-					<li name="four">메이커정보</li>
-					<li name="five">정산</li>
-					<li name="six">미리보기</li>
-					<li name="seven"><input type="submit" value="신청하기"></li>
+					<li name="four">정산</li>
+					<li name="five">미리보기</li>
+					<li name="six"><input type="submit" value="신청하기"></li>
 				</ul>
 			</div>
 			<div class="container">
@@ -303,9 +463,8 @@ $(function() {
 							<div class="explain">리워드북 관리자와의 소통은 프로젝트 번호로 진행됩니다.</div>
 						</div>
 						<div class="input">
-							<span style="font-size : 22px;">???????</span><br>
-							<span>"/RewardBook//p_sel?p_no=</span><span>???????</span>"<span> 으로 주소가 설정되며<br>
-									프로젝트 오픈 후 진입 가능합니다.</span>
+							<span style="font-size : 22px;">"/RewardBook/p_sel?p_no=<span class="projectNo"></span>"</span><br>
+							<span style="font-size : 18px; line-height : 40px;">위 주소로 프로젝트 주소가 설정되며 프로젝트 오픈 후 진입 가능합니다.</span>
 						</div>
 					</div>
 					<div class="part2">
@@ -381,25 +540,46 @@ $(function() {
 					</div>
 				</div>
 				<div class="text" name="two">
-					<div>리워드 추가</div>
+					<div class="rewardList">
+						<div class="reward">
+							<div class="r_index">
+								리워드 #1
+							</div>
+							<div class="r_price">
+								금액<input type="text" name="r_price[1]" value="0" style="text-align : right; padding-right : 10px">원
+							</div>
+							<div class="r_amount">
+								수량<input type="text" name="r_amount[1]" value="0" style="text-align : right; padding-right : 10px">개
+							</div>
+							<div class="r_title">
+								리워드 제목<input type="text" name="r_title[1]" placeholder="리워드를 간단히 설명할 수 있는 제목을 작성해주세요." style="padding-left : 10px">
+							</div>
+							<div class="r_detail">
+								리워드 설명<textarea name="r_detail[1]" placeholder="리워드의 구성품, 특성 등 자세한 설명을 작성해주세요." style="padding-left : 10px"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="rewardButton">
+						<div class="button" onclick="addReward();">추가하기</div>
+					</div>
 				</div>
 				<div class="text" name="three">
-					<div class="part2">
+					<div class="part1">
 						<div class="title">썸네일 사진</div>
 						<div class="input">
-							<input class="thumbnail" type="file" name="thumbnail" size=40>
+							<input type="file" name="thumbnail" size=40>
 						</div>
 					</div>
 					<div class="part2">
-						<div class="title">소개 사진</div>
+						<div class="title">스토리 사진</div>
 						<div class="input">
-							<input class="story" type="file" name="story" size=40>
+							<input type="file" name="story" size=40>
 						</div>
 					</div>
 					<div class="part3">
 						<div class="title">안내 글 작성하기</div>
 						<div class="input" style="height : 320px;">
-							<textarea class="form-control" id="p_content" style="display : block; margin : 0px 0px 0px 0px;"></textarea>
+							<textarea class="form-control" id="p_content" name="info" style="display : block; margin : 0px 0px 0px 0px;"></textarea>
 							<script type="text/javascript">
 								CKEDITOR.replace('p_content', {height: 200});
 							</script>
@@ -407,10 +587,24 @@ $(function() {
 					</div>
 				</div>
 				<div class="text" name="four">
-					메이커정보
-				</div>
-				<div class="text" name="five">
-					정산
+					<div class="part1">
+						<div class="title">수수료</div>
+						<div class="input" style="font-size : 18px;">
+							<div style="margin : 0px 0px 0px 0px;">리워드 오픈 수수료는 7%(VAT별도)입니다.</div>
+							<div>・ 부가 서비스 이용 시, 추가 수수료가 발생될 수 있습니다.</div>
+							<div>・ 리워드가 없는 기부후원 프로젝트의 경우, 수수료가 다르게 적용됩니다.</div>
+							<div>・ 자세한 내용은 리워드북 수수료 정책을 확인해주세요.</div>
+						</div>
+					</div>
+					<div class="part2">
+						<div class="title">
+							<div class="subtitle">사업자 정보</div>
+							<div class="explain">정보 변경은 회원정보설정에서 가능합니다.</div>
+						</div>
+						<div class="input">
+							<span style="font-size : 18px;"><%= (memberBno == null ? "정보가 없습니다." : memberBno) %></span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
