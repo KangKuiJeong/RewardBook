@@ -25,6 +25,68 @@ $(function(){
 	    $("#"+tab_id).addClass('current');
 	  })
 	  
+	  	//조회수 랭킹 top5
+		$.ajax({
+			url: "hipTop5",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				//객체를 문자열로 변환 처리함
+				var jsonStr = JSON.stringify(data);
+				//문자열을 배열 객체로 바꿈
+				var json = JSON.parse(jsonStr);
+				var j = 1;
+				var values = "";
+				for(var i in json.list){				
+					
+					values += "<li class='rankingList'><p class='rankNum'>"
+						+ (j++) +"</p><p class='rankp'>" + decodeURIComponent(json.list[i].hit5_title).replace(/\+/gi, " ") 
+						+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].hit5_category).replace(/\+/gi, " ") + 
+						"</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>&nbsp;&nbsp;" + 
+						"<span class='hitcount'><img src='/RewardBook/resources/images/index/hitcount.png' width='12'>&nbsp;&nbsp;" + parseInt(json.list[i].hit_count) + "<span></p></li>"	
+						
+						
+				}  
+				
+				$("#tab-1>ul").html($("#tab-1>ul").html() + values);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error : " + jqXHR + ", " +  
+						textStatus + ", " + errorThrown);
+			}
+		});
+		
+		//좋아요 랭킹 top5
+		$.ajax({
+			url: "likeTop5",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+				//객체를 문자열로 변환 처리함
+				var jsonStr = JSON.stringify(data);
+				//문자열을 배열 객체로 바꿈
+				var json = JSON.parse(jsonStr);
+				var j = 1;
+				var values = "";
+				for(var i in json.list){				
+					
+					values += "<li class='rankingList'><p class='rankNum'>"
+						+ (j++) +"</p><p class='rankp'>" + decodeURIComponent(json.list[i].like_title).replace(/\+/gi, " ") 
+						+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].like_category).replace(/\+/gi, " ") + "</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>"+
+						"<span class='likeNum'>&nbsp;&nbsp;" +
+						"<img src='/RewardBook/resources/images/mypage/like2.png' width='12'> " + json.list[i].like_count +"<span></p></li>"	
+						
+						
+				}  
+				
+				$("#tab-2>ul").html($("#tab-2>ul").html() + values);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error : " + jqXHR + ", " +  
+						textStatus + ", " + errorThrown);
+			}
+		});
+		
 		//최근등록된 프로젝트
 		$.ajax({
 			url: "recentTop5",
@@ -52,10 +114,11 @@ $(function(){
 					hours = hours % 24;
 					
 					if(days > 0){
-						
-						values += "<li class='recentli'>"
+						values += "<a href='/RewardBook//p_sel?p_no=" 
+							+ json.list[i].recent_no + "'>" + 
+							"<li class='recentli'>"
 						+ decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
-						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</span></li>"	
+						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</span></li></a>"	
 						
 					}else {
 						
@@ -74,6 +137,7 @@ $(function(){
 			}
 		});
 		
+		//마감 임박 프로젝트
 		$.ajax({
 			url: "endTop5",
 			type: "get",
@@ -101,9 +165,11 @@ $(function(){
 					
 					if(days > 0){
 						
-						values += "<li class='endli'>"
+						values += "<a href='/RewardBook//p_sel?p_no=" 
+							+ json.list[i].end_no + "'>" + 
+						"<li class='endli'>"
 						+ decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")
-						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</span></li>"	
+						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</span></li></a>"	
 						
 					}else {
 						
@@ -207,50 +273,12 @@ $(function(){
  
 			  <div id="tab-1" class="tab-content current">
 				<ul>
-					<li class="rankingList">
-						<p class="rankNum">1</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">2</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">3</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">4</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">4</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
+					
 				</ul>
 			  </div>
 			  <div id="tab-2" class="tab-content">
 			  <ul>
-					<li class="rankingList">
-						<p class="rankNum">1</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">2</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">3</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">4</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
-					<li class="rankingList">
-						<p class="rankNum">4</p>
-						<p class="rankp">마진0%!마진 0%! 백팩의 새로운 역사를 쓸 2만원대 백팩</p>
-					</li>
+				
 				</ul>
 			  </div>
 			</div>
@@ -315,7 +343,9 @@ $(function(){
 		
 		<!-- 배너영역 -->
 		<div class="bannerArea">
-			<img src="/RewardBook/resources/images/index/mainBanner1.png">
+			<a href="/RewardBook/views/project/projectOpenIntro.jsp">
+				<img src="/RewardBook/resources/images/index/mainBanner1.png">
+			</a>	
 		</div>
 	</div>
 	

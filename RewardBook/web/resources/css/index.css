@@ -23,7 +23,7 @@
 	/*contents 영역*/
 	.mainContent{ width:1280px; margin:0 auto; margin:0px auto; margin-bottom:100px;}
 	.mainContent .mdPick { width:93%; height:450px; display:inline-block; border-right:1px solid #d5d5d5; padding-right:50px;}
-	.mainContent .rankTop5 { width:83%; height:450px; display:inline-block; margin-left:20px;}
+	.mainContent .rankTop5 { width:100%; height:450px; display:inline-block; margin-left:20px;}
 	.mainContent .mainSubtitle {font-size:28px; font-weight:bold; margin-bottom:20px; padding-left:10px; float:left; display:inline-block}
 	.mainContent #top5TabsTtile {font-size:28px; font-weight:bold; margin-bottom:10px; padding-left:10px; float:left; display:inline-block}
 	#mdPickTable a { text-decoration:none; color:#353535;  border-collapse: separate; border-spacing: 10px;}
@@ -52,12 +52,18 @@
 	.tabContainer{ margin: 0 auto;}
 	.firstLine { width:100%;}
  	#firstTd { width:60% !important;}
- 	.tabs{ margin: 0px; padding: 0px; list-style: none; clear:both; }
+ 	.tabs{ margin: 0px; padding: 0px; list-style: none; clear:both; margin-bottom:8px }
 	.tabs li{ background: none; color: #222; font-size:15px; display: inline-block; padding: 0px 10px; padding-bottom:10px; cursor: pointer; }
  	.tabs li.current{ color:#353535; font-size:15px; text-decoration:underline; font-weight:bold;}
- 	.tab-content{ display: none; padding: 15px; }
+ 	.tab-content{ display: none; padding: 0px 10px 10px 10px; }
  	.tab-content.current{ display: inherit; height:295px; }
- 	.rankingList .rankp { width:80% !important;}
- 	.rankingList .rankNum { width:5%; padding: 10px 10px 10px 0; color:#ffb202; font-size:22px; font-weight:bold;}
+ 	.rankingList .rankp { width:65% !important; font-size:15px; color:#353535;}
  	.rankingList p { display:inline-block};
+ 	.rankImg {display: inline-block; }
+ 	.rankingList .rankNum { width: 5%; padding-right: 10px; color: #ffb202; font-size: 28px; font-weight: bold;
+    						line-height: 26px; height:50px; }
+    .hitCategory { color:#000; font-size:12px; font-weight:bold;}	
+    .percent { color:#445fe2; font-size:12px; font-weight:bold; }
+    .likeNum { color:rgb(242, 85, 85); font-size:12px; font-weight:bold; }	
+    .hitcount { color : #413328; font-size:12px; font-weight:bold;}				
  	

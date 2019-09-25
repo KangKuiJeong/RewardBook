@@ -27,9 +27,9 @@ public class RewardService {
 		return result;
 	}
 
-	public int insertReward() {
+	public int insertReward(Reward reward) {
 		Connection conn = getConnection();
-		int result = rDao.insertReward(conn);
+		int result = rDao.insertReward(conn, reward);
 		
 		if(result > 0) {
 			commit(conn);
