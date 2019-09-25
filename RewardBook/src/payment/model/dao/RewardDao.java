@@ -16,9 +16,34 @@ public class RewardDao {
 		return 0;
 	}
 
-	public int insertReward(Connection conn) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReward(Connection conn, Reward reward) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into reward values(to_char(seq_r_no.nextval), ?, ?, ?, ?, ?)";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, reward.getP_no());
+			pstmt.setString(2, reward.getR_amount());
+			pstmt.setString(3, reward.getR_name());
+			pstmt.setString(4, reward.getR_detail());
+			pstmt.setInt(5, reward.getR_price());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 	public ArrayList<Reward> listReward(Connection conn) {

@@ -2,13 +2,22 @@ package project.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Enumeration;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import payment.model.service.RewardService;
+import payment.model.vo.Reward;
 import project.model.service.ProjectService;
 import project.model.vo.Project;
 
@@ -32,34 +41,80 @@ public class Project_InsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		
-		try {
+		RequestDispatcher view = null;
 
-			String no = request.getParameter("no");
-			String title = request.getParameter("title");
-			int tprice = Integer.parseInt(request.getParameter("tprice"));
-			String category = request.getParameter("category");
-			Date sdate = Date.valueOf((String)request.getParameter("sdate"));
-			Date ddate = Date.valueOf((String)request.getParameter("ddate"));
-			String story = request.getParameter("story");
-			String info = request.getParameter("info");
+		Project project = null;
 
-			Project project = new Project();
+		if (ServletFileUpload.isMultipartContent(request)) {
 			
+			project = new Project();
+
+			int maxSize = 1024 * 1024 * 10;
+			
+			String filePath = request.getSession().getServletContext().getRealPath("/resources/upfiles/project");
+			MultipartRequest mrequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+
+			String no = mrequest.getParameter("no");
+			String title = mrequest.getParameter("title");
+			int tprice = Integer.parseInt(mrequest.getParameter("tprice"));
+			String category = mrequest.getParameter("category");
+			Date sdate = Date.valueOf((String)mrequest.getParameter("sdate"));
+			Date ddate = Date.valueOf((String)mrequest.getParameter("ddate"));
+			String info = mrequest.getParameter("info");
+
 			project.setU_no(no);
 			project.setP_title(title);
 			project.setP_tprice(tprice);
 			project.setP_category(category);
 			project.setP_sdate(sdate);
 			project.setP_ddate(ddate);
-			project.setP_story(story);
 			project.setP_info(info);
 			
-			int result = new ProjectService().insertProject(project);
+			Enumeration files = mrequest.getFileNames();
+			while(files.hasMoreElements()){
+			    String name = (String)files.nextElement();
+			    String filename = mrequest.getFilesystemName(name);
+			    
+			    if (name.equals("story"))
+					project.setP_story(filename);
+			    else if (name.equals("thumbnail"))
+					project.setP_img(filename);
+
+			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+			int projectResult = new ProjectService().insertProject(project);
+			
+			int rewardCount = Integer.parseInt(mrequest.getParameter("rewardcount"));
+			
+			RewardService rservice = new RewardService();
+			
+			for (int a = 1; a <= rewardCount; a++) {
+				Reward reward = new Reward();
+				
+				String r_title = mrequest.getParameter("r_title[" + a + "]");
+				String r_detail = mrequest.getParameter("r_detail[" + a + "]");
+				int r_price = Integer.parseInt(mrequest.getParameter("r_price[" + a + "]"));
+				String r_amount = mrequest.getParameter("r_amount[" + a + "]");
+				
+				if (r_title != null && r_title.equals("") && r_detail != null && r_detail.equals("") && r_price > 0) {
+					
+					reward.setP_no(String.valueOf(projectResult));
+					reward.setR_name(r_title);
+					reward.setR_detail(r_detail);
+					reward.setR_amount(r_amount.equals("0") ? "무제한" : r_amount);
+					reward.setR_price(r_price);
+					
+					rservice.insertReward(reward);
+				}
+				
+			}
+			
+			if (projectResult > 0 && projectResult > 0) {
+				System.out.println("성공적");
+			}
+
+		} else {
+			// 에러페이지
 		}
 		
 	}

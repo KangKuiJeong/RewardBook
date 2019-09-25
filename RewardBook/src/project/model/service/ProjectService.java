@@ -157,5 +157,11 @@ public class ProjectService {
 		}
 		return result;
 	}
+
+	public int getCurrentSequence() {
+		Connection conn = getConnection();
+		int result = pDao.getCurrentSequence(conn);
+		return result;
+	}
 	
 }

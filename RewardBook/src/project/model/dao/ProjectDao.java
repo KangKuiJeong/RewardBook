@@ -79,7 +79,7 @@ public class ProjectDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into project values(seq_p_no.nextval, ?, ?, ?, ?, null, ?, default, ?, sysdate, ?, 'N', ?, default, 'N', null, null)";
+		String query = "insert into project values(TO_CHAR(SEQ_P_NO.nextval), ?, ?, ?, ?, ?, ?, default, ?, sysdate, ?, 'N', ?, default, 'N', null, null)";
 		
 		try {
 			
@@ -89,10 +89,11 @@ public class ProjectDao {
 			pstmt.setString(2, project.getP_title());
 			pstmt.setString(3, project.getP_category());
 			pstmt.setString(4, project.getP_story());
-			pstmt.setString(5, project.getP_info());
-			pstmt.setInt(6, project.getP_tprice());
-			pstmt.setDate(7, project.getP_sdate());
-			pstmt.setDate(8, project.getP_ddate());
+			pstmt.setString(5, project.getP_img());
+			pstmt.setString(6, project.getP_info());
+			pstmt.setInt(7, project.getP_tprice());
+			pstmt.setDate(8, project.getP_sdate());
+			pstmt.setDate(9, project.getP_ddate());
 			
 			result = pstmt.executeUpdate();
 			
@@ -630,6 +631,35 @@ public class ProjectDao {
 		}
 		
 		return result;
+	}
+
+	public int getCurrentSequence(Connection conn) {
+		
+		int result = 0;
+		
+		Statement stmt = null;
+		ResultSet rest = null;
+		
+		String query = "SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_P_NO'";
+		
+		try {
+			
+			stmt = conn.createStatement();
+			rest = stmt.executeQuery(query);
+			
+			if (rest.next()) {
+				result = rest.getInt("LAST_NUMBER");
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rest);
+			close(stmt);
+		}
+		
+		return result;
+		
 	}
 	
 }
