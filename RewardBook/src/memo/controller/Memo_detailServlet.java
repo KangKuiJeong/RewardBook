@@ -9,21 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import memo.model.service.MemoService;
 import memo.model.vo.Memo;
 
 /**
- * Servlet implementation class Memo_InsertServlet
+ * Servlet implementation class Memo_detailServlet
  */
-@WebServlet("/minsert")
-public class Memo_InsertServlet extends HttpServlet {
+@WebServlet("/mdetail")
+public class Memo_detailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Memo_InsertServlet() {
+    public Memo_detailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,41 +34,25 @@ public class Memo_InsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = null;		
-		request.setCharacterEncoding("utf-8");
-
-		int result = 0;
-	
-		//전송온 값 꺼내서 변수 또는 객체에 저장하기
-		Memo memo = new Memo();
-
+		HttpSession session = request.getSession();
 		String p_no = request.getParameter("p_no");
-		memo.setP_no(p_no);
-		String u_no = request.getParameter("u_no");
-		memo.setU_no(u_no);
-		memo.setM_text(request.getParameter("m_text"));
-		
-		Memo memoCheck = new MemoService().selectMemo(p_no,u_no);
-		
+		String u_no = ((Member)session.getAttribute("loginMember")).getuNo();
 	
-		
-		if (memoCheck.getM_text() == null) {
-			result = new MemoService().insertMemo(memo);
-		} else {
-			result = new MemoService().updateMemo(memo);
-		}
-		
-		if(result > 0) {
+		 Memo memo = new MemoService().selectMemo(p_no, u_no);
+
+			RequestDispatcher view = null;
+			response.setContentType("text/html; charset=utf-8");
+			if(memo != null) {
+				view = request.getRequestDispatcher("views/memo/memoDetail.jsp");
+				request.setAttribute("memo", memo);
+				view.forward(request, response);
 			
-			response.setContentType("text/html;charset=utf-8");
-			view = request.getRequestDispatcher("//p_sel?p_no"+ p_no);
-			view.forward(request, response);		
-			
-		}else {
-			view = request.getRequestDispatcher("views/common/Error.jsp");
-			request.setAttribute("message", "Faq 수정 등록 실패!");
-			view.forward(request, response);
-		}
+			}else {
+				view = request.getRequestDispatcher("views/common/Error.jsp");
+				request.setAttribute("message","상세조회 실패!");
+				view.forward(request, response);
+			}
+		
 	}
 
 	/**
