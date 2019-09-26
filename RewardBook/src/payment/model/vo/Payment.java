@@ -19,6 +19,7 @@ public class Payment implements java.io.Serializable {
 	private java.sql.Date pm_date;
 	private String pm_nopen;
 	private String pm_popen;
+	private String pm_success;
 	
 	public Payment() {
 		super();
@@ -26,7 +27,7 @@ public class Payment implements java.io.Serializable {
 
 	public Payment(String pm_no, String u_no, String p_no, String r_no, String pm_option, String pm_quantity,
 			String pm_oid, int pm_price, int pm_price_plus, int pm_mileage, Date pm_date, String pm_nopen,
-			String pm_popen) {
+			String pm_popen, String pm_success) {
 		super();
 		this.pm_no = pm_no;
 		this.u_no = u_no;
@@ -41,6 +42,7 @@ public class Payment implements java.io.Serializable {
 		this.pm_date = pm_date;
 		this.pm_nopen = pm_nopen;
 		this.pm_popen = pm_popen;
+		this.pm_success = pm_success;
 	}
 
 	public String getPm_no() {
@@ -147,12 +149,20 @@ public class Payment implements java.io.Serializable {
 		this.pm_popen = pm_popen;
 	}
 
+	public String getPm_success() {
+		return pm_success;
+	}
+
+	public void setPm_success(String pm_success) {
+		this.pm_success = pm_success;
+	}
+
 	@Override
 	public String toString() {
 		return "Payment [pm_no=" + pm_no + ", u_no=" + u_no + ", p_no=" + p_no + ", r_no=" + r_no + ", pm_option="
 				+ pm_option + ", pm_quantity=" + pm_quantity + ", pm_oid=" + pm_oid + ", pm_price=" + pm_price
 				+ ", pm_price_plus=" + pm_price_plus + ", pm_mileage=" + pm_mileage + ", pm_date=" + pm_date
-				+ ", pm_nopen=" + pm_nopen + ", pm_popen=" + pm_popen + "]";
+				+ ", pm_nopen=" + pm_nopen + ", pm_popen=" + pm_popen + ", pm_success=" + pm_success + "]";
 	}
 
 }

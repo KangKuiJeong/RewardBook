@@ -1,13 +1,15 @@
 package payment.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import payment.model.vo.Payment;
-import static common.JDBCTemplate.*;
 
 public class PaymentDao {
 
@@ -138,6 +140,66 @@ public class PaymentDao {
 		}
 		
 		
+		
+		return result;
+	}
+
+	public ArrayList<Payment> selectPay(Connection conn) {
+		ArrayList<Payment> list = new ArrayList<Payment>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from payment where pm_success = 'N'";
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				Payment payment = new Payment();
+				
+				payment.setPm_no(rset.getString("PM_NO"));
+				payment.setU_no(rset.getString("U_NO"));
+				payment.setP_no(rset.getString("P_NO"));
+				payment.setR_no(rset.getString("R_NO"));
+				payment.setPm_option(rset.getString("PM_OPTION"));
+				payment.setPm_price(rset.getInt("PM_PRICE"));
+				payment.setPm_price_plus(rset.getInt("PM_PRICE_PLUS"));
+				payment.setPm_quantity(rset.getString("PM_QUANTITY"));
+				payment.setPm_nopen(rset.getString("PM_NOPEN"));
+				payment.setPm_popen(rset.getString("PM_POPEN"));
+				payment.setPm_oid(rset.getString("PM_OID"));
+				
+				list.add(payment);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+	}
+
+	public int insertPayment(Connection conn, String pm_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update payment set pm_success = 'Y' where pm_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pm_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return result;
 	}

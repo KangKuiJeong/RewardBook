@@ -42,19 +42,19 @@ public class Project_SelectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String p_no = request.getParameter("p_no");
-		String u_no = ((Member)session.getAttribute("loginMember")).getuNo();
 		
-	
+		if(session.getAttribute("loginMember") != null) {
+
+			String u_no = ((Member)session.getAttribute("loginMember")).getuNo();
+			Memo memo = new MemoService().selectMemo(p_no, u_no);
+			request.setAttribute("memo", memo);
+		}
 		
 		ArrayList<Reward> list = new RewardService().listReward(p_no);
 		if(list.size() > 0) {
 			request.setAttribute("rewardList", list);
 		}
 		
-		Memo memo = new MemoService().selectMemo(p_no, u_no);
-		
-		request.setAttribute("memo", memo);
-
 		Project project = new ProjectService().selectProject(p_no);
 
 		RequestDispatcher view = null;

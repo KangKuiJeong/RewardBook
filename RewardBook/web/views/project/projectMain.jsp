@@ -86,6 +86,24 @@
 				<span class="imageName">여행</span>
 			</span>
 		</a>
+		<a class="category concertIcon" href="#">
+			<span class="categoryIcon">
+				<span class="iconImage concert"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="imageName">공연,예술</span>
+			</span>
+		</a>
+		<a class="category beautyIcon" href="#">
+			<span class="categoryIcon">
+				<span class="iconImage beauty"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="imageName">뷰티</span>
+			</span>
+		</a>
+		<a class="category travalIcon" href="#">
+			<span class="categoryIcon">
+				<span class="iconImage traval"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png";></span><br>
+				<span class="imageName">여행</span>
+			</span>
+		</a>
 	</div>
 </div>
 

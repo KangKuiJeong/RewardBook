@@ -123,6 +123,7 @@
                   </dl>
                 </div>
               </div>
+              <% if(loginMember.getAddress() != null){ %>
               <div class="wpurchase-delivery">
                 <h3><em>리워드 배송지</em></h3>
                 <button type="button" class="show-list"><i class="wadizicon wa-expand-more" aria-hidden="true"></i>최근 배송지 보기</button>
@@ -183,6 +184,46 @@
                   </div>
                 </div>
               </div>
+              <% }else{ %>
+				<div class="wpurchase-delivery">
+                <h3><em>리워드 배송지</em></h3>
+                <button type="button" class="show-list"><i class="wadizicon wa-expand-more" aria-hidden="true"></i>최근 배송지 보기</button>
+                <div class="deliver-new">
+                  <dl>
+                    <dt>
+                      <label class="wz radio">
+                        <input type="radio" id="rddvNew" name="delivery">
+                        <span></span>
+                      </label>
+                    </dt>
+                    <dd>
+                      <label for="rddvNew">
+                        <p><strong>새로입력</strong></p>
+                      </label>
+                    </dd>
+                  </dl>
+                <div class="input-area">
+                  <p class="title">이름</p>
+                  <input type="text" id="newPresenteeName">
+                  <p class="title">휴대폰 번호</p>
+                  <input type="tel" id="newContactNumber" maxlength="13">
+                  <em class="error-message" id="errorPhoneNum">휴대폰 번호를 정확히 입력해주세요.</em>
+                  <p class="title">주소</p>
+                  <button type="button" onclick="findPostCode()">우편번호 검색</button>
+                  <p class="text" id="newAddress"></p>
+                  <input type="text" maxlength="96" id="newAddressDetails" placeholder="상세주소">
+                  <input type="hidden" id="newZipCode">
+                </div>
+                </div>
+                <div class="delivery-shippingMemo">
+                  <div class="input-area">
+                  <p class="title">배송 시 요청사항 (선택)</p>
+                  <input type="text" id="shippingMemo" name="shippingMemo" maxlength="50" placeholder="ex) 부재시 경비실에 보관해주세요.">
+                  <p class="subtext">해당 요청사항은 배송에 관련된 내용만 적어주세요.</p>
+                  </div>
+                </div>
+              </div>              
+              <%	} %>
             </div>
           </form>
 		<div class="wpurchase-terms wpurchase-terms-section">
@@ -283,9 +324,10 @@
 <%@ include file="/views/common/footer.jsp" %>
 
 <script type="text/javascript">
-console.log('<%= request.getParameter("dontShowNameYn") %>');
-console.log('<%= request.getParameter("dontShowAmountYn") %>');
+
 function payTest(){
+	var d = new Date;
+	
 	BootPay.request({
 		price: 0, // 0으로 해야 한다.
 		application_id: "5d5a6ed20627a800303d1951",
@@ -299,7 +341,7 @@ function payTest(){
 			addr: '<%= loginMember.getAddress() %>',
 			phone: '<%= loginMember.getPhone() %>'
 		},
-		order_id: 'order_id_'+'<%= pay.getP_no() %>' + '<%= loginMember.getuNo() %>', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+		order_id: 'order_id_'+ d.getTime() + '<%= loginMember.getuNo() %>', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 		params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
 	}).error(function (data) {
 		//결제 진행시 에러가 발생하면 수행됩니다.
@@ -412,7 +454,6 @@ function isbilling(){
 			console.log("error : " + textStatus);
 		},
 	});
-});
 }
 
 
