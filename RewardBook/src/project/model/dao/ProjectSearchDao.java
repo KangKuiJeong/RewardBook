@@ -23,7 +23,7 @@ public class ProjectSearchDao {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			
-			String query = "select * from project where p_title like '%' || ? || '%' ";
+			String query = "select * from project where p_title like '%' || ? || '%' and p_permission = 'Y' ";
 			
 			try {
 				

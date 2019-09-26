@@ -21,9 +21,10 @@ public class Inquiry implements java.io.Serializable{
 	private Date iq_rdate;
 	private String u_name;
 	private String a_name;
+	private String iq_target;
 	
 	public Inquiry(String iq_no, String u_no, String iq_title, String iq_text, String iq_category, String iq_dcategory,
-			Date iq_date, String iq_oc, String a_no, String iq_reply, Date iq_rdate) {
+			Date iq_date, String iq_oc, String a_no, String iq_reply, Date iq_rdate, String iq_target) {
 		super();
 		this.iq_no = iq_no;
 		this.u_no = u_no;
@@ -36,7 +37,8 @@ public class Inquiry implements java.io.Serializable{
 		this.a_no = a_no;
 		this.iq_reply = iq_reply;
 		this.iq_rdate = iq_rdate;
-
+		this.iq_target = iq_target;
+		
 	}
 
 
@@ -164,14 +166,26 @@ public class Inquiry implements java.io.Serializable{
 	}
 
 
+	public String getIq_target() {
+		return iq_target;
+	}
+
+
+	public void setIq_target(String iq_target) {
+		this.iq_target = iq_target;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Inquiry [iq_no=" + iq_no + ", u_no=" + u_no + ", iq_title=" + iq_title + ", iq_text=" + iq_text
 				+ ", iq_category=" + iq_category + ", iq_dcategory=" + iq_dcategory + ", iq_date=" + iq_date
 				+ ", iq_oc=" + iq_oc + ", a_no=" + a_no + ", iq_reply=" + iq_reply + ", iq_rdate=" + iq_rdate
-				+ ", u_name=" + u_name + ", a_name=" + a_name + "]";
+				+ ", u_name=" + u_name + ", a_name=" + a_name + ", iq_target=" + iq_target + "]";
 	}
 
+
+	
 	
 	
 }

@@ -49,6 +49,7 @@ public class LikeTop5Servlet extends HttpServlet {
 					JSONObject job = new JSONObject();
 					// json 에서 한글 깨짐 막으려면,
 					// java.net.URLEncoder 의 encode() 로 인코딩함
+					job.put("like_no", project.getP_no());
 					job.put("like_title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 					job.put("like_category", URLEncoder.encode(project.getP_category(), "UTF-8"));
 					job.put("like_nprice", project.getP_nprice());

@@ -33,7 +33,7 @@
 		<div id="line"></div>
 		<p id="oto_atitle">1대1문의내역</p>
 		<p id="oto_acontents">메이커에게 질문한 문의내역과 답변을 확인하실 수 있습니다.</p>
-		<button id="oto_awrite" onclick="goOto();">문의하기</button>
+		
 			
 		<div id="sendContainer">
 			<ul class="tab">

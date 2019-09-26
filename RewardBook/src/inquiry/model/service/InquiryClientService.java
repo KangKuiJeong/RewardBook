@@ -49,6 +49,23 @@ public class InquiryClientService {
 		
 		return inq;
 	}
+	
+	//신고글 등록하기용
+	public int insertReportInquiry(Inquiry inq) {
+		
+		Connection conn = getConnection();
+		int result = iqcDao.insertReportInquiry(conn, inq);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
+	}
 
 
 

@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import inquiry.model.service.OtoService;
-import inquiry.model.vo.Oto;
+import inquiry.model.service.InquiryClientService;
+import inquiry.model.vo.Inquiry;
 
 /**
- * Servlet implementation class Oto_SendServlet
+ * Servlet implementation class Inquery_ReportSendServlet
  */
-@WebServlet("/osend")
-public class Oto_InsertServlet extends HttpServlet {
+@WebServlet("/reportsend")
+public class Inquery_ReportSendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Oto_InsertServlet() {
+    public Inquery_ReportSendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +31,15 @@ public class Oto_InsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1대1문의 등록용 컨트롤러
+		// 메이커 신고하기 용 컨트롤러
 		request.setCharacterEncoding("utf-8");
 		
-		Oto oto = new Oto();
-		oto.setU_no(request.getParameter("u_no"));
-		oto.setU_no_answer(request.getParameter("maker_no"));
-		oto.setOto_qtitle(request.getParameter("inqtitle"));
-		oto.setOto_qtext(request.getParameter("inqtext"));
-		oto.setOto_yn(request.getParameter("yn"));
-		
-		int result = new OtoService().insertOto(oto);
+		Inquiry inq = new Inquiry();
+		inq.setU_no(request.getParameter("u_no"));
+		inq.setIq_title(request.getParameter("reportTitle"));
+		inq.setIq_text(request.getParameter("reportText"));
+		inq.setIq_target(request.getParameter("maker_no"));
+		int result = new InquiryClientService().insertReportInquiry(inq);
 
 		if (result > 0) {
 			// 글등록 성공시
@@ -49,7 +47,7 @@ public class Oto_InsertServlet extends HttpServlet {
 			PrintWriter out= response.getWriter();
 			out.println("<script>");
 			out.println("alert('문의글 등록이 완료되었습니다.')");
-			out.println("history.back(-2);");
+			out.println("history.go(-1);");
 			out.println();
 			out.println("</script>");
 			
@@ -59,8 +57,8 @@ public class Oto_InsertServlet extends HttpServlet {
 			response.setContentType("text/html;charset=utf-8"); // 어떤 타입으로 출력할것인지 명시하였다.
 			PrintWriter out= response.getWriter();
 			out.println("<script>");
-			out.println("alert('문의 보내기에 실패하였습니다.다시 시도해주세요.')");
-			out.println("history.back(-2);");
+			out.println("alert('관리자문의글 등록에 실패하였습니다.다시 시도해주세요.')");
+			out.println("history.back();");
 			out.println();
 			out.println("</script>");
 		}

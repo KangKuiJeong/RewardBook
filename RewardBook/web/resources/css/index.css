@@ -41,7 +41,7 @@
 	.recentli { padding:0 20px; list-style:none; width:16%; display:inline-block; font-size:15px; color:#353535;
 				font-weight:bold; margin-top:5px;}
 	.recentli span { color:rgb(242, 85, 85); font-size:14px; font-weight:bold;}
-	.endProject { clear:both; margin-top:50px; width:100%;}
+	.endProject { clear:both; margin-top:50px; width:100%; padding-top:75px;}
 	.endProject ul { clear:both;}
 	.endli { padding:0 20px; list-style:none; width:16%; display:inline-block; font-size:15px; color:#353535;
 				font-weight:bold; margin-top:5px;}
@@ -57,13 +57,15 @@
  	.tabs li.current{ color:#353535; font-size:15px; text-decoration:underline; font-weight:bold;}
  	.tab-content{ display: none; padding: 0px 10px 10px 10px; }
  	.tab-content.current{ display: inherit; height:295px; }
- 	.rankingList .rankp { width:65% !important; font-size:15px; color:#353535;}
+ 	.rankingList .rankp { width:88% !important; font-size:15px; color:#353535;}
  	.rankingList p { display:inline-block};
  	.rankImg {display: inline-block; }
- 	.rankingList .rankNum { width: 5%; padding-right: 10px; color: #ffb202; font-size: 28px; font-weight: bold;
+ 	.rankingList .rankNum { width: 5%; padding-right: 10px; color: #353535; font-size: 28px; font-weight: bold;
     						line-height: 26px; height:50px; }
     .hitCategory { color:#000; font-size:12px; font-weight:bold;}	
     .percent { color:#445fe2; font-size:12px; font-weight:bold; }
     .likeNum { color:rgb(242, 85, 85); font-size:12px; font-weight:bold; }	
     .hitcount { color : #413328; font-size:12px; font-weight:bold;}				
- 	
+ 	.indexCategory { width:98%; margin:80px auto;}
+ 	.indexCategory ul { margin:10px;}
+ 	.indexCategory ul li{ float:left; width:31%; border:1px solid #d5d5d5; margin:0 10px; text-align:center;}

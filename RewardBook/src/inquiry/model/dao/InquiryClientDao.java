@@ -65,7 +65,7 @@ public class InquiryClientDao {
 		PreparedStatement pstmt = null;
 
 		String query = "insert into inquiry values ("
-				+"TO_CHAR(SEQ_IQ_NO.nextval), ?, ?, ?, null, default, null, sysdate, default, null, sysdate, null)";
+				+"TO_CHAR(SEQ_IQ_NO.nextval), ?, ?, ?, null, default, null, sysdate, default, null, sysdate, null, null)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -123,6 +123,37 @@ public class InquiryClientDao {
 		}
 		
 		return inq;
+	}
+	
+	//신고글 등록용 DAO
+	public int insertReportInquiry(Connection conn, Inquiry inq) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "insert into inquiry values ("
+				+"TO_CHAR(SEQ_IQ_NO.nextval), ?, ?, ?, null, 'DECLARE', null, sysdate, default , null, sysdate, null, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+
+			pstmt.setString(1, inq.getU_no());
+			pstmt.setString(2, inq.getIq_title());
+			pstmt.setString(3, inq.getIq_text());
+			pstmt.setString(4, inq.getIq_target());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 	
 	

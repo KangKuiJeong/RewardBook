@@ -52,6 +52,7 @@ public class EndProjectServlet extends HttpServlet {
 					// java.net.URLEncoder 의 encode() 로 인코딩함
 					job.put("end_title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 					job.put("end_time", project.getTime());
+					job.put("end_img", URLEncoder.encode(project.getP_img(), "UTF-8"));
 					jarr.add(job);
 				}
 
