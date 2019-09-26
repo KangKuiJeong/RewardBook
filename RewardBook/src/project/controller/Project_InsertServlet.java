@@ -44,7 +44,7 @@ public class Project_InsertServlet extends HttpServlet {
 		RequestDispatcher view = null;
 
 		Project project = null;
-
+		
 		if (ServletFileUpload.isMultipartContent(request)) {
 			
 			project = new Project();
@@ -56,7 +56,7 @@ public class Project_InsertServlet extends HttpServlet {
 
 			String no = mrequest.getParameter("no");
 			String title = mrequest.getParameter("title");
-			int tprice = Integer.parseInt(mrequest.getParameter("tprice"));
+			int tprice = Integer.parseInt(((String)mrequest.getParameter("tprice")).replace(",", ""));
 			String category = mrequest.getParameter("category");
 			Date sdate = Date.valueOf((String)mrequest.getParameter("sdate"));
 			Date ddate = Date.valueOf((String)mrequest.getParameter("ddate"));
@@ -85,6 +85,8 @@ public class Project_InsertServlet extends HttpServlet {
 			int projectResult = new ProjectService().insertProject(project);
 			
 			int rewardCount = Integer.parseInt(mrequest.getParameter("rewardcount"));
+			String projectno = mrequest.getParameter("projectno");
+			int rewardResult = 0;
 			
 			RewardService rservice = new RewardService();
 			
@@ -93,24 +95,28 @@ public class Project_InsertServlet extends HttpServlet {
 				
 				String r_title = mrequest.getParameter("r_title[" + a + "]");
 				String r_detail = mrequest.getParameter("r_detail[" + a + "]");
-				int r_price = Integer.parseInt(mrequest.getParameter("r_price[" + a + "]"));
+				int r_price = Integer.parseInt(((String)mrequest.getParameter("r_detail[" + a + "]")).replace(",", ""));
 				String r_amount = mrequest.getParameter("r_amount[" + a + "]");
 				
-				if (r_title != null && r_title.equals("") && r_detail != null && r_detail.equals("") && r_price > 0) {
-					
-					reward.setP_no(String.valueOf(projectResult));
+				if (r_title != null && !r_title.equals("") && r_detail != null && !r_detail.equals("") && r_price > 0) {
+
+					reward.setP_no(projectno);
 					reward.setR_name(r_title);
 					reward.setR_detail(r_detail);
 					reward.setR_amount(r_amount.equals("0") ? "무제한" : r_amount);
 					reward.setR_price(r_price);
 					
-					rservice.insertReward(reward);
+					rewardResult = rservice.insertReward(reward);
+					
+					if (rewardResult <= 0)
+						break;
 				}
 				
 			}
 			
-			if (projectResult > 0 && projectResult > 0) {
-				System.out.println("성공적");
+			if (projectResult > 0 && rewardResult > 0) {
+				view = request.getRequestDispatcher("/views/project/projectOpenSuccess.jsp");
+				view.forward(request, response);
 			}
 
 		} else {

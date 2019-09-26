@@ -30,7 +30,6 @@ public class ProjectDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-
 		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return, u_name from project  join users using(u_no) where p_no = ? and p_permission = 'Y';";
 		
 		try {
@@ -95,7 +94,7 @@ public class ProjectDao {
 			pstmt.setInt(7, project.getP_tprice());
 			pstmt.setDate(8, project.getP_sdate());
 			pstmt.setDate(9, project.getP_ddate());
-			
+
 			result = pstmt.executeUpdate();
 			
 		} catch(Exception e) {

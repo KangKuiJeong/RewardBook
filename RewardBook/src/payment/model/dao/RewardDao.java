@@ -22,7 +22,7 @@ public class RewardDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into reward values(to_char(seq_r_no.nextval), ?, ?, ?, ?, ?)";
+		String query = "insert into reward values(to_char(SEQ_R_NO.nextval), ?, ?, ?, ?, ?)";
 		
 		try {
 			

@@ -30,13 +30,14 @@ public class Memo_deleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String u_no = request.getParameter("u_no");
 		String p_no = request.getParameter("p_no");
-
+	
 		int result = new MemoService().deleteMemo(p_no);
 		
 		if(result > 0) {
-			response.sendRedirect("/RewardBook/mlist");
+			response.sendRedirect("/RewardBook/mlist" + "?u_no=" + u_no);
+			
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/Error.jsp");
 			view.forward(request, response);

@@ -4,7 +4,6 @@
 	String memberNo = ((Member)session.getAttribute("loginMember")).getuNo();
 	String memberId = ((Member)session.getAttribute("loginMember")).getId();
 	String memberBno = ((Member)session.getAttribute("loginMember")).getuBno();
-	int rewardCount = 1;
 %>
 <!DOCTYPE html>
 <html>
@@ -19,16 +18,75 @@
 }
 .area1 .index {
 	width : 800px;
-	height : 1000px;
-	background : green;
-	margin : auto;
-	display : none; /* 지울 것 */
+	height : 500px;
+	margin : 0px auto 0px auto;
+}
+.area1 .index .container {
+	width : 100%;
+	height : 400px;
+	margin : 100px 0px 0px 0px;
+}
+.area1 .index .container .title {
+	width : 100%;
+	height : 50px;
+	font-size : 20px;
+}
+.area1 .index .container .line {
+	width : 100%;
+	height : 50px;
+	font-size : 20px;
+	line-height : 30px;
+	float : left;
+	cursor : pointer;
+}
+.area1 .index .container .line[name=one] {
+	margin : 20px 0px 0px 0px;
+}
+.area1 .index .container .line[name=five] {
+	height : 80px;
+}
+.area1 .index .container div .check {
+	width : 30px;
+	height : 30px;
+	float : left;
+	margin : 2px 0px 0px 0px;
+}
+.area1 .index .container div .check img {
+	width : 100%;
+	height : 100%;
+}
+.area1 .index .container div .text {
+	width : 750px;
+	height : 50px;
+	float : left;
+	margin : 0px 0px 0px 20px;
+	color : black;
+}
+.area1 .index .container .line[name=five] .text {
+	width : 750px;
+	height : 80px;
+	float : left;
+	margin : 0px 0px 0px 20px;
+}
+.area1 .index .container .continue {
+	width : 120px;
+	height : 40px;
+	margin : 30px auto 0px auto;
+	text-align : center;
+	line-height : 40px;
+	font-size : 20px;
+	font-weight : 550;
+	clear : both;
+	background : #FFB202;
+	border-radius : 5px;
+	color : white;
+	cursor : pointer;
 }
 
 .area1 .edit {
 	width : 1000px;
 	margin : auto;
-	/* display : none; */
+	display : none;
 }
 .area1 .edit .tab {
 	width : 100%;
@@ -71,7 +129,7 @@
 	margin : 0px 0px 0px 32px;
 	border : none;
 }
-.area1 .edit ul li[name=six] input[type=submit] {
+.area1 .edit ul li[name=six] .submit {
 	height : 42px;
 	background : #FFB202;
 	border-right : 1px solid #E8DEDC;
@@ -357,13 +415,24 @@
 <script type="text/javascript" src="/RewardBook/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 
+var check1 = false;
+var check2 = false;
+var check3 = false;
+var check4 = false;
+var check5 = false;
+
 function showEdit() {
-	$(".area1 .index").css("display", "none");
-	$(".area1 .edit").css("display", "block");
+	if (check1 && check2 && check3 && check4 && check5) {
+		$(".area1 .index").css("display", "none");
+		$(".area1 .edit").css("display", "block");
+	} else {
+		alert("약관에 모두 동의해주세요.");
+	}
 };
 
 function addReward() {
 	var count = $(".area1 input[name=rewardcount]").val() * 1 + 1;
+	alert(count);
 	var str = "<div class='reward'>" + 
 			"<div class='r_index'>리워드 #" + count + "</div>" + 
 			"<div class='r_price'>금액<input type='text' name='r_price[" + count + "]' value='0' style='text-align : right; padding-right : 10px'>원</div>" +
@@ -379,17 +448,96 @@ function addReward() {
 	$(".area1 input[name=rewardcount]").val(count);
 }
 
-$(function() {
+function submit() {
+	
+	var alertText = "";
+	
+	if ($(".edit .container .text[name=one] .part3 .input input").val() == "") {
+		alertText = "프로젝트 제목이 올바르지 않습니다.";
+	} else if ($(".edit .container .text[name=one] .part4 .input input").val() == "0") {
+		alertText = "프로젝트 목표 금액이 올바르지 않습니다.";
+	} else if (!$(".edit .container .text[name=one] .part6 .input div .radio2").is(":checked")) {
+		alertText = "필수 확인사항을 확인해주세요.";
+	} else if ($(".edit .container .text[name=one] .part7 .input input").val() == null) {
+		alertText = "프로젝트 종료일이 올바르지 않습니다.";
+	} else if ($(".edit .container .text[name=one] .part8 .input input").val() == null) {
+		alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
+	}
+	
+	if (alertText == "") {
+		$(".projectForm").submit();
+	}
+	else {
+		alert(alertText);
+	}
+}
 
+//3자리 단위마다 콤마 생성
+function addCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
+//모든 콤마 제거
+function removeCommas(x) {
+    if(!x || x.length == 0) return "";
+    else return x.split(",").join("");
+}
+
+$(function() {
+	
+	$(".area1 .index .container .line").on("click", function() {
+		var change = false;
+		if ($(this).index() == 1) {
+			if (check1) {
+				change = check1 = false;
+			} else {
+				change = check1 = true;
+			}
+		}
+		if ($(this).index() == 2) {
+			if (check2) {
+				change = check2 = false;
+			} else {
+				change = check2 = true;
+			}
+		}
+		if ($(this).index() == 3) {
+			if (check3) {
+				change = check3 = false;
+			} else {
+				change = check3 = true;
+			}
+		}
+		if ($(this).index() == 4) {
+			if (check4) {
+				change = check4 = false;
+			} else {
+				change = check4 = true;
+			}
+		}
+		if ($(this).index() == 5) {
+			if (check5) {
+				change = check5 = false;
+			} else {
+				change = check5 = true;
+			}
+		}
+		if (change)
+			$(this).children(".check").children("img").attr("src", "/RewardBook/resources/images/project/Check_on1.png");
+		else
+			$(this).children(".check").children("img").attr("src", "/RewardBook/resources/images/project/Check_off.png");
+	});
+	
 	$.ajax({
 		url: "/RewardBook/p_getseq",
 		type: "get",
 		dataType: "json",
 		success: function(data){
 
-			var val = data.projectNo * 1 + 1;
+			var val = data.projectNo;
 			
 			$(".area1 .edit .container .text .part1 .input .projectNo").text(val);
+			$(".area1 input[name=projectno]").val(val);
 			
 		},
 		error: function(jqXHR, textStatus, errorThrown){
@@ -398,7 +546,7 @@ $(function() {
 	});
 	
 	$(".tabMenu li").on("click", function() {
-		if ($(this).index() < 5) {
+		if ($(this).index() < 4) {
 			
 			$(".tabMenu li").each(function(index, item) {
 				if (index < 5){
@@ -420,9 +568,28 @@ $(function() {
 	});
 	
 	$(".edit .container .text[name=one] .part3 .input input").on("keyup", function() {
+		if ($(this).val().length > 40) {
+			$(this).val($(this).val().substring(0, 40))
+		}
 		$(".edit .container .text[name=one] .part3 .input span").text($(".edit .container .text[name=one] .part3 .input input").val().length + " / 40");
 	})
 	
+	$(".edit .container .text[name=one] .part4 .input input").on("focus", function() {
+    	var x = $(this).val();
+    	x = removeCommas(x);
+    	$(this).val(x);
+	}).on("focusout", function() {
+    	var x = $(this).val();
+    	if(x && x.length > 0) {
+			if(!$.isNumeric(x)) {
+				x = x.replace(/[^0-9]/g,"");
+			}
+        	x = addCommas(x);
+			$(this).val(x);
+		}
+	}).on("keyup", function() {
+    	$(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
 });
 </script>
 </head>
@@ -433,17 +600,35 @@ $(function() {
 	
 	<div class="area1">
 		<div class="index">
-			<div><h2>몇 가지 세부사항을 미리 확인하고, 프로젝트를 시작하세요.</h2></div>
-			<div>펀딩 진행 중에는 제공할 리워드를 다른 온∙오프라인에서 펀딩하거나 판매하지 않습니다.</div>
-			<div>제공할 리워드는 현금, 지분 등의 수익이 아닌 제품 또는 서비스입니다.</div>
-			<div>진행할 프로젝트가 지적 재산권을 침해하지 않습니다.</div>
-			<div>서포터에게 프로젝트 진행 과정을 안내하고, 배송 약속을 지킬 수 있습니다.</div>
-			<div>서포터와의 신뢰를 위해 펀딩 진행∙제품 제작∙배송 등 모든 과정에서 겪는 어려움들을 서포터에게 진솔하게 전달하고 문제를 해결합니다.</div>
-			<div onclick="showEdit()">계속하기</div>
+			<div class="container">
+				<div class="title"><h2>몇 가지 세부사항을 미리 확인하고, 프로젝트를 시작하세요.</h2></div>
+				<div class="line" name="one">
+					<div class="check"><img src="/RewardBook/resources/images/project/Check_off.png"></div>
+					<div class="text">펀딩 진행 중에는 제공할 리워드를 다른 온∙오프라인에서 펀딩하거나 판매하지 않습니다.</div>
+				</div>
+				<div class="line" name="two">
+					<div class="check"><img src="/RewardBook/resources/images/project/Check_off.png"></div>
+					<div class="text">제공할 리워드는 현금, 지분 등의 수익이 아닌 제품 또는 서비스입니다.</div>
+				</div>
+				<div class="line" name="three">
+					<div class="check"><img src="/RewardBook/resources/images/project/Check_off.png"></div>
+					<div class="text">진행할 프로젝트가 지적 재산권을 침해하지 않습니다.</div>
+				</div>
+				<div class="line" name="four">
+					<div class="check"><img src="/RewardBook/resources/images/project/Check_off.png"></div>
+					<div class="text">서포터에게 프로젝트 진행 과정을 안내하고, 배송 약속을 지킬 수 있습니다.</div>
+				</div>
+				<div class="line" name="five">
+					<div class="check"><img src="/RewardBook/resources/images/project/Check_off.png"></div>
+					<div class="text">서포터와의 신뢰를 위해 펀딩 진행∙제품 제작∙배송 등 모든 과정에서 겪는 어려움들을 서포터에게 진솔하게 전달하고 문제를 해결합니다.</div>
+				</div>
+				<div class="continue" onclick="showEdit()">계속하기</div>
+			</div>
 		</div>
-		<form method="post" enctype="multipart/form-data" action="/RewardBook/p_insert">
+		<form class="projectForm" method="post" enctype="multipart/form-data" action="/RewardBook/p_insert">
 		<input type="hidden" name="no" value="<%= memberNo %>">
 		<input type="hidden" name="rewardcount" value="1">
+		<input type="hidden" name="projectno" value="0">
 		<div class="edit">
 			<div class="tab">
 				<ul class="tabMenu">
@@ -452,7 +637,7 @@ $(function() {
 					<li name="three">스토리</li>
 					<li name="four">정산</li>
 					<li name="five">미리보기</li>
-					<li name="six"><input type="submit" value="신청하기"></li>
+					<li name="six"><div class="submit" onclick="submit();">신청하기</div></li>
 				</ul>
 			</div>
 			<div class="container">
@@ -482,7 +667,7 @@ $(function() {
 							<div class="explain">프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</div>
 						</div>
 						<div class="input">
-							<input type="text" name="title" placeholder="40자 내외로 작성해주세요." style="padding-left : 10px">
+							<input type="text" name="title" placeholder="40자 이내로 작성해주세요." style="padding-left : 10px">
 							<span style="font-size : 18px;">0 / 40</span>
 						</div>
 					</div>
@@ -518,8 +703,8 @@ $(function() {
 						<div class="input">
 							<span style="font-size : 18px; font-weight : 600;">Q. 리워드가 타 크라우드펀딩사 및 온라인 커머스,자사 홈페이지 등 다른<br>판매처에서 유통된 적이 있거나 현재 유통 중인가요?<br></span>
 							<div style="width : 540px; height : 48px; margin : 10px 0px 0px 0px;"><span>선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트 취소 및 위약벌이 부과될 수 있습니다.</span></div>
-							<div style="width : 560px; height : 30px; margin : 10px 0px 0px 0px;"><input type="radio" class="radio" name="radio" style="margin : 0px 5px 0px 0px"><span>아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.</span></div>
-							<div style="width : 560px; height : 30px; margin : 0px 0px 0px 0px;"><input type="radio" class="radio" name="radio" style="margin : 0px 5px 0px 0px"><span>예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</span></div>
+							<div style="width : 560px; height : 30px; margin : 10px 0px 0px 0px;"><input type="radio" class="radio1" name="radio" style="margin : 0px 5px 0px 0px" checked><span>아니요. 다른 곳에서 유통한 적이 없는 처음 선보이는 제품입니다.</span></div>
+							<div style="width : 560px; height : 30px; margin : 0px 0px 0px 0px;"><input type="radio" class="radio2" name="radio" style="margin : 0px 5px 0px 0px"><span>예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</span></div>
 						</div>
 					</div>
 					<div class="part7">
