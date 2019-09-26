@@ -27,7 +27,7 @@ a{text-decoration: none;align: center; color: black;}
     grid-template-columns: repeat(3,calc(33.33333% - 30px));
     grid-row-gap: 40px;
     grid-column-gap: 30px;}
-.invest_box {display: inline-block; vartical-align: baseline; width:313.33px;  padding-bottom:30px;border-radius:5px; }
+.invest_box {display: inline-block; vartical-align: baseline; width:313.33px;  border-radius:5px; }
 .invest_box.invest_item1 {margin-left:0}
 .txt_center {text-align:center}
 .invest_plus {display:inline-block; width:180px; height:48px; line-height:46px; background-color:#f2849e; color:#fff; border-radius:5px; margin-bottom: 30px; }
@@ -53,6 +53,11 @@ a{text-decoration: none;align: center; color: black;}
 .invest_info{font-size: 14px; font-weight: 500; color: #90949c; display: inline-block; line-height: 24px; }
 .nowprice{float: left; padding: 2px 2px 2px 10px;}   
 .enddate{float: right;}
-.memobt{ margin-top: 5px;padding: 10px 146px 10px 145px;background: #FFb202;border: 1px solid #ffb202;border-radius: 3px;color: white;}    
+.memobt{margin-top: 5px; padding: 10px; background: #FFb202; border: 1px solid #ffb202; border-radius: 3px; color: white; width: 313.3px; height: 40px;margin-bottom: 10px; }    
 .investap{width:313.33px; height:48px;}
 .invest_name{width:313.33px;}
+.memotext{border-bottom: 1px solid gray;  padding: 10px 10px 10px 10px; width: 294px;  height: 180px;}
+.mar{width:100%; height:30px}
+.upbt{  border: 1px solid #000000; padding: 5px 10px 5px 10px;font-size: 15px; background: #ffffff;color: black;	}
+.delbt{  padding: 3.4px 10px 5px 10px; border: 1px solid black;}
+.btbt{    float: right; margin: 8px; }

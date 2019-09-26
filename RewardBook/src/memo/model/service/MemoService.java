@@ -70,9 +70,9 @@ public class MemoService {
 		
 		return result;
 	}
-	public int countMemo() {
+	public int countMemo(String u_no) {
 		Connection conn = getConnection();
-		int result = dDao.countMemo(conn);;
+		int result = dDao.countMemo(conn,u_no);
 		
 		if(result > 0) {
 			commit(conn);
