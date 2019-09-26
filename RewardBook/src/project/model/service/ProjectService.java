@@ -41,7 +41,7 @@ public class ProjectService {
 		
 		if(result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
