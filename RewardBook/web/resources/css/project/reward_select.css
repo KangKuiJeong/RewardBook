@@ -62,7 +62,7 @@ select-container{margin-bottom: 42px;}
 
 label.rb.checkbox {display: block; }
 label.rb.checkbox > input {position: absolute; visibility: hidden; opacity: 0; }
-label.rb.checkbox > input::before, label.wz.checkbox > input::after { display: none; }
+label.rb.checkbox > input::before, label.rb.checkbox > input::after { display: none; }
 label.rb.checkbox > input:focus + span::before,
 label.rb.checkbox > input:hover + span::before {border-color: rgb(255, 178, 2); }
 label.rb.checkbox > input:disabled + span::before {opacity: .5;border-color: inherit; }
@@ -98,7 +98,7 @@ label.rb.checkbox > span::after {
       font-style: normal;
       font-variant: normal;
       speak: none;
-      content: "  ";
+      content: "";
       position: absolute;
       top: 2.9px;
       left: -1.1px;

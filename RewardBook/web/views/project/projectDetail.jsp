@@ -1044,8 +1044,9 @@ strong{font-weight: 700;}
 	<div class="option" >리워드 선택</div>
 	<div class="option_list">
 		<div class="option_item">
-			<% for(Reward reward : rewardList){ %>
-			<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/r_list?p_no=<%= project.getP_no() %>'">
+			<% if(loginMember == null){ %>
+				<% for(Reward reward : rewardList){ %>
+			<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/views/member/mainLoginView.jsp'">
 				<div class="reward item_left">
 					<div class="reward item_price">
 						<%= reward.getR_price() %> 원 펀딩
@@ -1070,6 +1071,36 @@ strong{font-weight: 700;}
 					
 				</div>
 			</div>
+			<% } %>
+			
+			<% }else{ %>
+				<% for(Reward reward : rewardList){ %>
+				<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/r_list?p_no=<%= project.getP_no() %>'">
+				<div class="reward item_left">
+					<div class="reward item_price">
+						<%= reward.getR_price() %> 원 펀딩
+					</div>
+					<div class="reward item_amount">
+					<% if(reward.getR_amount().equals("무제한")){ %>
+						<span><strong><%= reward.getR_amount() %></strong></span>
+							<span style="opacity: 0.5;">  |  10개 펀딩</span>
+					<%}else{ %>
+						<strong><%= reward.getR_amount() %>개 남음</strong>
+						<span style="opacity: 0.5;">  |  10개 펀딩</span>
+					<% } %>
+					</div>
+				</div>
+				<div class="reward item_content">
+					<div class="reward item_title"><%= reward.getR_name() %></div>
+					<div class="reward item_detail"><%= reward.getR_detail() %></div>
+				</div>
+				<div class="reward item_ddate">
+					<span class="ddate"><strong>예상배송일</strong></span>
+					<span> <%= project.getP_ddate() %></span>
+					
+				</div>
+			</div>
+			<% } %>
 			<% } %>
 		</div>
 	</div>

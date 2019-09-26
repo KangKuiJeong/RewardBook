@@ -35,6 +35,10 @@ public class Payment_RealPayServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
+		
+		
 		BootpayApi pay = new BootpayApi("5d5a6ed20627a800303d1954", "/5Qc/8x1aqIjmW0DoloUMMr1SNvoPYNN9K0dT7Lh9nI=");
 		SubscribeBilling bill = new SubscribeBilling();
 		

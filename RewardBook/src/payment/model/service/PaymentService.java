@@ -72,4 +72,27 @@ public class PaymentService {
 		return result;
 	}
 
+	public ArrayList<Payment> selectPay() {
+		Connection conn = getConnection();
+		ArrayList<Payment> payment = pDao.selectPay(conn);
+		close(conn);
+		
+		return payment;
+	}
+
+	//결제가 성공했을때 pm_success를 y로 바꾸는 메소드
+	public int SuccessPay(String pm_no) {
+		Connection conn = getConnection();
+		int result = pDao.insertPayment(conn, pm_no);;
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 }

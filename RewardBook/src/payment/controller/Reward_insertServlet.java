@@ -30,7 +30,6 @@ public class Reward_insertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int result = new RewardService().insertReward();
 	}
 
 	/**
