@@ -175,16 +175,18 @@ public class MemoDao {
 	}
 
 
-	public int countMemo(Connection conn) {
+	public int countMemo(Connection conn,String u_no) {
 		int result = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = " select count(p_no) from memo";
-		
+		String query = " select count(p_no) from memo where u_no = ? ";
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, u_no);
+			
+			rset = pstmt.executeQuery();
 	
 			if(rset.next()) {
 				result = rset.getInt(1);
@@ -195,7 +197,7 @@ public class MemoDao {
 		}finally {
 		
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 
 	return 	result;

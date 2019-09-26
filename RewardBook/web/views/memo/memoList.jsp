@@ -20,8 +20,19 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- 프로젝트 메인 스타일시트 연결 -->
 <link rel="stylesheet" href="/RewardBook/resources/css/memo/memoList.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".memotext").hide();
+	//content 클래스를 가진 div를 표시/숨김(토글)
+	$(".memobt").click(function()
+	{
+	$(this).next(".memotext").slideToggle(500);
+	});
+	});
 
+</script>
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
@@ -52,16 +63,49 @@
 			<span class="percentage"><%= percent %>%</span>
 			<span class="invest_info nowprice"><%= m.getP_nprice() %>원</span>
 			<span class="invest_info enddate"><%= m.getP_rdate() %>일 남음</span>
-		<a  class="memobt" href="/RewardBook/mdetail?p_no=<%= m.getP_no() %>&u_no=<%= m.getU_no() %> ">메모</a>
-		<!-- 	<input class="memobt" type="button" value="메모" onclick="showPopup();"> -->
+		<button  class="memobt">메모</button>			
+			<div class="memotext">
+			<form onsubmit="upfunc();">
+				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
+				<input type="hidden" id="p_no" name="p_no" value="<%= m.getP_no() %>">		
+			<textarea id="m_text" name="m_text" class="mtext" style="width: 100%;
+    height: 130px;"><%= m.getM_text() %></textarea>
+			<div class="btbt">
+			<input class="upbt" id="upbt"type="submit" value="저장">
+			<a class="delbt" href="/RewardBook/mdelete?p_no=<%= m.getP_no() %>&u_no=<%= loginMember.getuNo() %>">삭제</a>
+			</div>
+			</form>	
+			</div>
 		</div>
 	
 			<% } %>
 </div>
+<script>
+	function upfunc(){
+	
+	$.ajax({
+		url: "/RewardBook/minsert",
+		data: { u_no: $("#u_no").val(),
+				p_no: $("#p_no").val(),
+				m_text: $("#m_text").val()
+				},
+		type: "get",
+		success: function(data){
+			
+	alert('메모가 저장되었습니다.');
+
+		
+		}
+	});
+	
+	
+}
 
 
+	</script>
+	
 
-
+<div class="mar"></div>
 </div>
 <%@ include file="../common/footer.jsp" %>
 </body>

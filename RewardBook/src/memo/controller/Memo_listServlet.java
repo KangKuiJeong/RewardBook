@@ -40,7 +40,7 @@ public class Memo_listServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String u_no = request.getParameter("u_no");
 
-		int result = new MemoService().countMemo();
+		int result = new MemoService().countMemo(u_no);
 
 		if (result > 0) {
 
@@ -51,12 +51,15 @@ public class Memo_listServlet extends HttpServlet {
 				request.setAttribute("listm", list);
 				request.setAttribute("result", result);
 				view.forward(request, response);
+
 			} else {
-				view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message", "프로젝트 메인 조회 실패!");
+				view = request.getRequestDispatcher("views/memo/memoNull.jsp");	
 				view.forward(request, response);
 			}
 
+		}else {
+			view = request.getRequestDispatcher("views/memo/memoNull.jsp");	
+			view.forward(request, response);
 		}
 	}
 
