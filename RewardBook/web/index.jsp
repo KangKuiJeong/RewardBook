@@ -39,15 +39,35 @@ $(function(){
 				var values = "";
 				for(var i in json.list){				
 					
-					values += "<li class='rankingList'><p class='rankNum'>"
-						+ (j++) +"</p><p class='rankp'>" + decodeURIComponent(json.list[i].hit5_title).replace(/\+/gi, " ") 
-						+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].hit5_category).replace(/\+/gi, " ") + 
-						"</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>&nbsp;&nbsp;" + 
-						"<span class='hitcount'><img src='/RewardBook/resources/images/index/hitcount.png' width='12'>&nbsp;&nbsp;" + parseInt(json.list[i].hit_count) + "<span></p></li>"	
+					var stringTitle_length = Object.keys(decodeURIComponent(json.list[i].hit5_title).replace(/\+/gi, " ")).length;
+					
+					if(stringTitle_length > 28){
 						
+						var cutTitle = (decodeURIComponent(json.list[i].hit5_title).replace(/\+/gi, " ")).substr(0,28);
+						console.log(cutTitle);
+						values += 
+							"<a href='/RewardBook//p_sel?p_no=" 
+								+ json.list[i].hit5_no + "'>" + 
+							"<li class='rankingList'><p class='rankNum'>"
+							+ (j++) +"</p><p class='rankp'>" + cutTitle + ".." 
+							+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].hit5_category).replace(/\+/gi, " ") + 
+							"</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>&nbsp;&nbsp;" + 
+							"<span class='hitcount'><img src='/RewardBook/resources/images/index/hitcount.png' width='12'>&nbsp;&nbsp;" + parseInt(json.list[i].hit_count) + "<span></p></li></a>"	
+							 
 						
-				}  
-				
+					}else{
+						
+						values += 
+							"<a href='/RewardBook//p_sel?p_no=" 
+								+ json.list[i].hit5_no + "'>" + 
+							"<li class='rankingList'><p class='rankNum'>"
+							+ (j++) +"</p><p class='rankp'>" + decodeURIComponent(json.list[i].hit5_title).replace(/\+/gi, " ")
+							+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].hit5_category).replace(/\+/gi, " ") + 
+							"</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>&nbsp;&nbsp;" + 
+							"<span class='hitcount'><img src='/RewardBook/resources/images/index/hitcount.png' width='12'>&nbsp;&nbsp;" + parseInt(json.list[i].hit_count) + "<span></p></li></a>"
+						
+					}	
+				}	
 				$("#tab-1>ul").html($("#tab-1>ul").html() + values);
 			},
 			error: function(jqXHR, textStatus, errorThrown){
@@ -68,14 +88,36 @@ $(function(){
 				var json = JSON.parse(jsonStr);
 				var j = 1;
 				var values = "";
-				for(var i in json.list){				
+				for(var i in json.list){
 					
-					values += "<li class='rankingList'><p class='rankNum'>"
-						+ (j++) +"</p><p class='rankp'>" + decodeURIComponent(json.list[i].like_title).replace(/\+/gi, " ") 
-						+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].like_category).replace(/\+/gi, " ") + "</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>"+
-						"<span class='likeNum'>&nbsp;&nbsp;" +
-						"<img src='/RewardBook/resources/images/mypage/like2.png' width='12'> " + json.list[i].like_count +"<span></p></li>"	
+					var stringTitle_length = Object.keys(decodeURIComponent(json.list[i].like_title).replace(/\+/gi, " ")).length;
+					if(stringTitle_length > 28){
 						
+						var cutTitle = (decodeURIComponent(json.list[i].like_title).replace(/\+/gi, " ")).substr(0,28);
+						console.log(cutTitle);	
+						
+						values += 
+						"<a href='/RewardBook//p_sel?p_no=" 
+						+ json.list[i].like_no + "'>" + 
+						"<li class='rankingList'><p class='rankNum'>"
+						+ (j++) +"</p><p class='rankp'>" + cutTitle + ".." + 
+						"<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].like_category).replace(/\+/gi, " ") + "</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>"+
+						"<span class='likeNum'>&nbsp;&nbsp;" +
+						"<img src='/RewardBook/resources/images/mypage/like2.png' width='12'> " + json.list[i].like_count +"<span></p></li></a>"	
+					
+					}else{
+						
+						values += 
+							"<a href='/RewardBook//p_sel?p_no=" 
+							+ json.list[i].like_no + "'>" + 
+							"<li class='rankingList'><p class='rankNum'>"
+							+ (j++) +"</p><p class='rankp'>" + decodeURIComponent(json.list[i].like_title).replace(/\+/gi, " ") 
+							+ "<br><span class='hitCategory'>" + decodeURIComponent(json.list[i].like_category).replace(/\+/gi, " ") + "</span>&nbsp;&nbsp;<span class='percent'>" + json.list[i].percent + "% 달성</span>"+
+							"<span class='likeNum'>&nbsp;&nbsp;" +
+							"<img src='/RewardBook/resources/images/mypage/like2.png' width='12'> " + json.list[i].like_count +"<span></p></li></a>"
+						
+						
+					}	
 						
 				}  
 				
@@ -101,30 +143,66 @@ $(function(){
 				var mins = 0;
 				var hours = 0;
 				var days = 0;
-				
 				var values = "";
+				
 				for(var i in json.list){				
 					
-					times = json.list[i].recent_time;
-					mins = times / 60;
-					hours = mins / 60;
-					days = hours / 24;
-					times = times % 60;
-					mins = mins % 60;
-					hours = hours % 24;
 					
-					if(days > 0){
-						values += "<a href='/RewardBook//p_sel?p_no=" 
-							+ json.list[i].recent_no + "'>" + 
-							"<li class='recentli'>"
-						+ decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
-						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</span></li></a>"	
+					var stringTitle_length = 
+						Object.keys(decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")).length;
+					
+					if(stringTitle_length > 36){
 						
-					}else {
+						var cutTitle = (decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")).substr(0,36);
+						console.log(cutTitle);	
+						times = json.list[i].recent_time;
+						mins = times / 60;
+						hours = mins / 60;
+						days = hours / 24;
+						times = times % 60;
+						mins = mins % 60;
+						hours = hours % 24;
 						
-						values += "<li class='recentli'>"
-							+ decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
-							+"<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</li>"
+						if(days > 0){
+							values += "<a href='/RewardBook//p_sel?p_no=" 
+								+ json.list[i].recent_no + "'>" +
+								"<li class='recentli'>" + "<img src='/RewardBook/resources/upfiles/project/" + decodeURIComponent(json.list[i].recent_img) + "' width='240' height='132' class='liImg'><br>" +
+							cutTitle + ".." +
+							"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</span></li></a>"	
+							
+							console.log(decodeURIComponent(json.list[i].recent_img));
+						}else {
+							
+							values += "<li class='recentli'>"
+								+ cutTitle + "<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</li>"
+							
+						}
+					
+					}else{
+						
+						times = json.list[i].recent_time;
+						mins = times / 60;
+						hours = mins / 60;
+						days = hours / 24;
+						times = times % 60;
+						mins = mins % 60;
+						hours = hours % 24;
+						
+						if(days > 0){
+							values += "<a href='/RewardBook//p_sel?p_no=" 
+								+ json.list[i].recent_no + "'>" +
+								"<li class='recentli'>" + "<img src='/RewardBook/resources/upfiles/project/" + decodeURIComponent(json.list[i].recent_img) + "' width='240' height='132' class='liImg'><br>" +
+							decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
+							+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</span></li></a>"	
+							
+							console.log(decodeURIComponent(json.list[i].recent_img));
+						}else {
+							
+							values += "<li class='recentli'>"
+								+ decodeURIComponent(json.list[i].recent_title).replace(/\+/gi, " ")
+								+"<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분전 등록" + "</li>"
+							
+						}	
 						
 					}
 				}  
@@ -155,6 +233,13 @@ $(function(){
 				var values = "";
 				for(var i in json.list){				
 					
+					var stringTitle_length = 
+						Object.keys(decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")).length;
+					
+					if(stringTitle_length > 36){
+						
+					var cutTitle = (decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")).substr(0,36);
+					console.log(cutTitle);	
 					times = json.list[i].end_time;
 					mins = times / 60;
 					hours = mins / 60;
@@ -167,8 +252,32 @@ $(function(){
 						
 						values += "<a href='/RewardBook//p_sel?p_no=" 
 							+ json.list[i].end_no + "'>" + 
-						"<li class='endli'>"
-						+ decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")
+						"<li class='endli'>" + "<img src='/RewardBook/resources/upfiles/project/" + decodeURIComponent(json.list[i].end_img) + "' width='240' height='132' class='liImg'><br>" +
+						cutTitle + ".."
+						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</span></li></a>"	
+						
+					}else {
+						
+						values += "<li class='endli'>"
+							+ cutTitle + ".." + "<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</li>"
+						
+					}
+				}else{
+					
+					times = json.list[i].end_time;
+					mins = times / 60;
+					hours = mins / 60;
+					days = hours / 24;
+					times = times % 60;
+					mins = mins % 60;
+					hours = hours % 24;
+					
+					if(days > 0){
+						
+						values += "<a href='/RewardBook//p_sel?p_no=" 
+							+ json.list[i].end_no + "'>" + 
+						"<li class='endli'>" + "<img src='/RewardBook/resources/upfiles/project/" + decodeURIComponent(json.list[i].end_img) + "' width='240' height='132' class='liImg'><br>" +
+						decodeURIComponent(json.list[i].end_title).replace(/\+/gi, " ")
 						+"<br> <span>" + parseInt(days) + "일 " + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</span></li></a>"	
 						
 					}else {
@@ -178,7 +287,10 @@ $(function(){
 							+"<br>" + parseInt(hours) +"시간 " + parseInt(mins) + "분후 마감" + "</li>"
 						
 					}
-				}  
+
+				}
+					
+				}	
 				
 				$(".endProject").html($(".endProject").html() + values);
 			},
@@ -291,24 +403,39 @@ $(function(){
 			<p id="projectMore"><a href="/RewardBook/p_list">더보기 ></a></p>
 			<ul>
 				<li class="recentli">
-					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="recentli">
-					<img src="/RewardBook/resources/images/index/t2.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="recentli">
-					<img src="/RewardBook/resources/images/index/t3.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="recentli">
-					<img src="/RewardBook/resources/images/index/t4.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="recentli">
-					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					
 					<p></p>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- 카테고리별 글 보기 -->
+		<div class="indexCategory">
+			<ul>
+				<li>
+					<img src="/RewardBook/resources/images/index/categoryIT.png">
+				</li>
+				<li>
+					<img src="/RewardBook/resources/images/index/categoryIT.png">
+				</li>
+				<li>
+					<img src="/RewardBook/resources/images/index/categoryIT.png"> 
 				</li>
 			</ul>
 		</div>
@@ -319,23 +446,21 @@ $(function(){
 			<p id="projectMore"><a href="/RewardBook/p_list">더보기 ></a></p>
 			<ul>
 				<li class="endli">
-					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="endli">
-					<img src="/RewardBook/resources/images/index/t2.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="endli">
-					<img src="/RewardBook/resources/images/index/t3.PNG" class="liImg">
+					
 					<p></p>
 				</li>
 				<li class="endli">
-					<img src="/RewardBook/resources/images/index/t4.PNG" class="liImg">
 					<p></p>
 				</li>
 				<li class="endli">
-					<img src="/RewardBook/resources/images/index/t1.PNG" class="liImg">
 					<p></p>
 				</li>
 			</ul>

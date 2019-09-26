@@ -49,15 +49,16 @@ public class HitTop5Servlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 			// json 에서 한글 깨짐 막으려면,
 			// java.net.URLEncoder 의 encode() 로 인코딩함
+			job.put("hit5_no", project.getP_no());
 			job.put("hit5_title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 			job.put("hit5_category", URLEncoder.encode(project.getP_category(), "UTF-8"));
 			job.put("hit5_nprice", project.getP_nprice());
 			job.put("hit5_tprice", project.getP_tprice());
 			job.put("hit_count", project.getP_count());
 			percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
-			
 			job.put("percent",percent);
 			jarr.add(job);
+			
 		}
 
 		// 전송용 객체에 배열 저장

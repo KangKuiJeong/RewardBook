@@ -15,6 +15,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/RewardBook/resources/css/project/projectDetail.css">
 <style type="text/css">
 
 body, h1, h2, h3, h4, h5, h6, p, em, div {margin: 0; padding: 0; border: 0;}
@@ -118,7 +119,7 @@ i.wadizicon, i.icon::before, [class*="icon-"]::before {
 .RewardFaqHelpCenter_helpCenter__ia4ow .wz.button::before {display: inline; margin-right: 9px; vertical-align: top; font-family: wadizicon; font-size: 17px; content: "\E92E";}
 
 .detail_Container{
-	max-width: 1707.33px;
+	max-width: 100%;
 }
 
 .detail_header {
@@ -198,6 +199,7 @@ i.wadizicon, i.icon::before, [class*="icon-"]::before {
 	position: relative;
 	z-index: 99;
 	background: #fff;
+	margin:0 auto;
 	
 }
 
@@ -551,7 +553,63 @@ strong{font-weight: 700;}
 <body>
 
 <%@ include file="/views/common/header.jsp" %>
-
+				<div id="inquryFormDiv">
+						<button id="closeBtn" onclick="inqclose();">X</button>
+						<form action="/RewardBook/osend" id="inqForm" method="post">
+							<p class="inqTitle"><%= project.getU_name() %>님에게 문의하기</p>
+							<p class="inqSub_Title">제목</p>
+							<input type="text" name="inqtitle" id="inqtitle">
+							<p class="inqSub_Title">내용</p>
+							<textarea name="inqtext" id="inqtext"></textarea>
+							<!--  답변 여부 'N'으로 넘김 -->
+							<input type="hidden" value="N" name="yn">
+							<!-- 작성자 회원번호 넘김 -->
+							<input type="hidden" value="<%= loginMember.getuNo() %>" name="u_no">
+							<!-- 메이커 회원번호 넘김 -->
+							<input type="hidden" value="<%= project.getU_no() %>" name="maker_no">
+							<div class="inqBtnArea"><input type="submit" value="문의하기"></div>				
+							
+						</form>
+					</div>
+					<div id="reportFormDiv">
+						<button id="closeBtn" onclick="reportclose();">X</button>
+						<form action="/RewardBook/reportsend" id="reportForm" method="post">
+							<p class="inqTitle">메이커 신고하기</p>
+							<p class="inqSub_Title">제목</p>
+							<input type="text" name="reportTitle" id="reportTitle">
+							<p class="inqSub_Title">내용</p>
+							<textarea name="reportText" id="reportText"></textarea>
+							<!-- 작성자 회원번호 넘김 -->
+							<input type="hidden" value="<%= loginMember.getuNo() %>" name="u_no">
+							<!-- 신고대상 회원번호 넘김 -->
+							<input type="hidden" value="<%= project.getU_no() %>" name="maker_no">
+							<div class="inqBtnArea"><input type="submit" value="신고하기"></div>				
+						</form>
+					</div>
+					<script>
+						function inquryModal(){
+							
+							$('#inquryFormDiv').css("display","block");
+							
+							
+						}
+						
+						function inqclose(){
+							
+							$('#inquryFormDiv').css("display","none");
+						}
+						function reportModal(){
+							
+							$('#reportFormDiv').css("display","block");
+							
+							
+						}
+						
+						function reportclose(){
+							
+							$('#reportFormDiv').css("display","none");
+						}
+					</script>			
 <!-- detail Header영역 -->
 <div class="detail_Container">
 	<div class="detail_header">
@@ -983,11 +1041,12 @@ strong{font-weight: 700;}
 					</div>
 				</div>
 				<div class="maker_qustion">
-					<div>메이커에게 문의</div>
+					<div><p onclick="inquryModal();">메이커에게 문의</p></div>
 				</div>
+				
 			</div>
 			<div class="maker_declaration">
-				<div class="declaration">신고하기</div>
+				<div class="declaration"><p onclick="reportModal();">신고하기</p></div>
 			</div>
 			<div class="rank">
 				<h3>인기 프로젝트</h3>
@@ -1105,6 +1164,8 @@ strong{font-weight: 700;}
 		</div>
 	</div>
 </div>
+
+
 
 <%@ include file="/views/common/footer.jsp" %>
 

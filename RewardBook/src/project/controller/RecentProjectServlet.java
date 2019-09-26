@@ -52,6 +52,7 @@ public class RecentProjectServlet extends HttpServlet {
 			// java.net.URLEncoder 의 encode() 로 인코딩함
 			job.put("recent_title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 			job.put("recent_time", project.getTime());
+			job.put("recent_img", URLEncoder.encode(project.getP_img(), "UTF-8"));
 			jarr.add(job);
 		}
 
