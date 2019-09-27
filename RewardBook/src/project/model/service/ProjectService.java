@@ -163,5 +163,10 @@ public class ProjectService {
 		int result = pDao.getCurrentSequence(conn);
 		return result;
 	}
+
+	public void updateOC(String p_no) {
+		Connection conn = getConnection();
+		int result = pDao.updateOC(conn, p_no);
+	}
 	
 }

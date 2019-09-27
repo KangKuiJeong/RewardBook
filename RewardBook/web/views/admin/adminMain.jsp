@@ -103,8 +103,7 @@
 <script type="text/javascript">
 	$(function() {
 		setInterval("count1()", 1000);
-		setInterval("count2()", 3500);
-		setInterval("count3()", 6000);
+		setInterval("count2()", 1000);
 
 		$.ajax({
 			url: "/RewardBook/p_unchecked",
@@ -186,23 +185,14 @@
 
 	});
 	
-	var c1 = 0;
 	function count1() {
-		c1++;
-		$(".main_area1_section1 .s1Count").html(c1 + " 명");
+		
 	};
 
-	var c2 = 0;
 	function count2() {
-		c2++;
-		$(".main_area1_section2 .s2Count").html(c2 + " 명");
+		
 	};
 
-	var c3 = 0;
-	function count3() {
-		c3++;
-		$(".main_area1_section3 .s3Count").html(c3 + " 명");
-	};
 </script>
 </head>
 <body>
@@ -216,9 +206,6 @@
 			</div>
 			<div class="main_area1_section2">
 				<span class="s2Text">오늘 총 가입자 수</span><span class="s2Count">0 명</span>
-			</div>
-			<div class="main_area1_section3">
-				<span class="s3Text">오늘 총 탈퇴자 수</span><span class="s3Count">0 명</span>
 			</div>
 		</div>
 		<div class="main_area2">
