@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, memo.model.vo.Memo" %>
-<%@ page import="java.util.ArrayList, project.model.vo.Project" %>
-<% 
 
+<% 
 	ArrayList<Memo> listm = (ArrayList<Memo>)request.getAttribute("listm");
 	int result = ((Integer)request.getAttribute("result")).intValue();
-
-
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -68,8 +64,7 @@ $(document).ready(function() {
 			<form onsubmit="upfunc();">
 				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
 				<input type="hidden" id="p_no" name="p_no" value="<%= m.getP_no() %>">		
-			<textarea id="m_text" name="m_text" class="mtext" style="width: 100%;
-    height: 130px;"><%= m.getM_text() %></textarea>
+			<textarea id="m_text" name="m_text" class="mtext" required style="width: 100%; height: 130px;" ><%= m.getM_text() %></textarea>
 			<div class="btbt">
 			<input class="upbt" id="upbt"type="submit" value="저장">
 			<a class="delbt" href="/RewardBook/mdelete?p_no=<%= m.getP_no() %>&u_no=<%= loginMember.getuNo() %>">삭제</a>
@@ -93,17 +88,11 @@ $(document).ready(function() {
 		success: function(data){
 			
 	alert('메모가 저장되었습니다.');
-
-		
 		}
 	});
-	
-	
 }
 
-
 	</script>
-	
 
 <div class="mar"></div>
 </div>

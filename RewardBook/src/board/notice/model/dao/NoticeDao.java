@@ -134,9 +134,9 @@ public class NoticeDao {
 		
 		String query = "select * from ( "
 				+ "select rownum rnum, nt_no, nt_title, "
-				+ "nt_text, nt_img, nt_date, nt_oc, nt_type, a_no from (select * from notice order by nt_no desc)) "
+				+ "nt_text, nt_img, nt_date, nt_oc, nt_type, a_no from (select * from notice order by nt_date desc)) "
 				+ "where rnum >= ? and rnum <= ?";
-		
+
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
 	

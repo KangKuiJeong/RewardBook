@@ -38,10 +38,6 @@ public class Notice_InsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// 공지사항 새 글 등록 처리용 컨트롤러
-		// 첨부파일 전송기능이 있음. (multipart 방식으로 인코딩되어서 전송왔음)
-		
-		//enctype="multipart/form-data" 로 전송했는지 확인
 		RequestDispatcher view = null;
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			view = request.getRequestDispatcher("views/common/Error.jsp");
@@ -53,12 +49,9 @@ public class Notice_InsertServlet extends HttpServlet {
 		int maxSize = 1024 * 1024 * 10;
 		//2. 업로드되는 파일의 저장 폴더 지정하기
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/noticeimg");
-		//System.out.println(savePath);
-		
+
 		//request 를 MultipartRequest 로 변환함
-		MultipartRequest mrequest = new MultipartRequest(
-				request, savePath, maxSize, "UTF-8", 
-				new DefaultFileRenamePolicy());
+		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
 		//전송온 값 꺼내서 변수 또는 객체에 저장하기
 		Notice notice = new Notice();
@@ -66,22 +59,18 @@ public class Notice_InsertServlet extends HttpServlet {
 		notice.setNt_text(mrequest.getParameter("nt_text"));	
 		String nt_oc = mrequest.getParameter("nt_oc");
 		String nt_ntevent = mrequest.getParameter("nt_ntevent");
+		notice.setA_no(mrequest.getParameter("a_no"));
 		
 		//업로드된 원래 파일명 추출
 		String nt_img = mrequest.getOriginalFileName("nt_img");
 		// 실제 서버에 업로드 된 파일시스템 네임
-		notice.setA_no(mrequest.getParameter("a_no"));
-		
 
-		
 		int result = new NoticeService().insertNotice(notice, nt_img, nt_oc, nt_ntevent);
 		
 		if(result > 0) {
 			response.sendRedirect("/RewardBook/nlist");
 		}else {
-			view = request.getRequestDispatcher("views/common/Error.jsp");
-			request.setAttribute("message", "새 공지글 등록 실패!");
-			view.forward(request, response);
+			//에러페이지
 		}
 
 	}

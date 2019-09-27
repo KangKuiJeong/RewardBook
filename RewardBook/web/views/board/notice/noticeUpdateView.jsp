@@ -46,9 +46,11 @@
 						</textarea></li>
 
 					<li>
-						<% if(n.getNt_img() != null){ %> <input class="filebt" type="file"
-						name="nt_img" size=40><%= n.getNt_img()  %> <% }else{ %> <input
-						class="filebt" type="file" name="nt_img" size=40> <% } %>
+						<% if(n.getNt_img() != null){ %>
+						<input class="filebt" type="file" name="nt_img" size=40><%= n.getNt_img()  %>
+						<% }else{ %>
+						<input class="filebt" type="file" name="nt_img" size=40>
+						<% } %>
 					</li>
 					<li class="button"><select id="ntoc" class="nt_oc"
 						name="nt_oc">
