@@ -38,25 +38,50 @@ public class Project_ListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String category = request.getParameter("category");
 		
-		int result = new ProjectService().countProject();
-		
-		if(result > 0) {
-			ArrayList<Project> list = new ProjectService().listProject();
-		
-			RequestDispatcher view = null;
-			if(list.size() > 0) {
-				view = request.getRequestDispatcher("views/project/projectMain.jsp");
-				request.setAttribute("list", list);
-				request.setAttribute("result", result);
-				view.forward(request, response);
-			}else {
-				view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message", "프로젝트 메인 조회 실패!");
-				view.forward(request, response);
+		if(category == null) {
+
+			int result = new ProjectService().countProject();
+			
+			if(result > 0) {
+				ArrayList<Project> list = new ProjectService().listProject();
+			
+				RequestDispatcher view = null;
+				if(list.size() > 0) {
+					view = request.getRequestDispatcher("views/project/projectMain.jsp");
+					request.setAttribute("list", list);
+					request.setAttribute("result", result);
+					view.forward(request, response);
+				}else {
+					view = request.getRequestDispatcher("views/common/error.jsp");
+					request.setAttribute("message", "프로젝트 메인 조회 실패!");
+					view.forward(request, response);
+				}
+			
 			}
-		
+		}else {
+
+			int result = new ProjectService().countProject();
+			
+			if(result > 0) {
+				ArrayList<Project> list = new ProjectService().listProject(category);
+			
+				RequestDispatcher view = null;
+				if(list.size() > 0) {
+					view = request.getRequestDispatcher("views/project/category/"+category+".jsp");
+					request.setAttribute("list", list);
+					request.setAttribute("result", result);
+					view.forward(request, response);
+				}else {
+					view = request.getRequestDispatcher("views/common/error.jsp");
+					request.setAttribute("message", "프로젝트 메인 조회 실패!");
+					view.forward(request, response);
+				}
+			
+			}
 		}
+		
 	}
 	
 

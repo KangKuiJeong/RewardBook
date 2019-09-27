@@ -30,14 +30,15 @@ public class ProjectService {
 
 	public Project selectProject(String p_no) {
 		Connection conn = getConnection();
-		Project project = pDao.selectProject(conn, p_no);;
+		Project project = pDao.selectProject(conn, p_no);
+		close(conn);
 		
 		return project;
 	}
 
 	public int insertProject(Project project) {
 		Connection conn = getConnection();
-		int result = pDao.insertProject(conn, project);;
+		int result = pDao.insertProject(conn, project);
 		
 		if(result > 0) {
 			commit(conn);
@@ -52,6 +53,7 @@ public class ProjectService {
 	public ArrayList<Project> listProject() {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.listProject(conn);
+		close(conn);
 		
 		return list;
 	}
@@ -65,7 +67,7 @@ public class ProjectService {
 
 	public int updateProject(Project project) {
 		Connection conn = getConnection();
-		int result = pDao.updateProject(conn, project);;
+		int result = pDao.updateProject(conn, project);
 		
 		if(result > 0) {
 			commit(conn);
@@ -79,7 +81,7 @@ public class ProjectService {
 
 	public int countProject() {
 		Connection conn = getConnection();
-		int result = pDao.countProject(conn);;
+		int result = pDao.countProject(conn);
 		
 		if(result > 0) {
 			commit(conn);
@@ -103,36 +105,48 @@ public class ProjectService {
 	public ArrayList<Project> selectNewProject() {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.selectNewProject(conn);
+		close(conn);
+		
 		return list;
 	}
 
 	public ArrayList<Project> pageSelect(int start, int limit, String check1, String check2, String check3, String select1, String text1) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.pageSelect(conn, start, limit, check1, check2, check3, select1, text1);
+		close(conn);
+		
 		return list;
 	}
 
 	public int pageCount(String check1, String check2, String check3, String select1, String text1) {
 		Connection conn = getConnection();
 		int result = pDao.pageCount(conn, check1, check2, check3, select1, text1);
+		close(conn);
+		
 		return result;
 	}
 
 	public Project detailProject(String p_no) {
 		Connection conn = getConnection();
 		Project project = pDao.detailProject(conn, p_no);
+		close(conn);
+		
 		return project;
 	}
 
 	public ArrayList<Project> pageSelect_P(int start, int limit, String select1, String text1) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.pageSelect_P(conn, start, limit, select1, text1);
+		close(conn);
+		
 		return list;
 	}
 
 	public int pageCount_P(String select1, String text1) {
 		Connection conn = getConnection();
 		int result = pDao.pageCount_P(conn, select1, text1);
+		close(conn);
+		
 		return result;
 	}
 
@@ -144,6 +158,8 @@ public class ProjectService {
 		} else {
 			rollback(conn);
 		}
+		close(conn);
+		
 		return result;
 	}
 
@@ -155,13 +171,25 @@ public class ProjectService {
 		} else {
 			rollback(conn);
 		}
+		close(conn);
+		
 		return result;
 	}
 
 	public int getCurrentSequence() {
 		Connection conn = getConnection();
 		int result = pDao.getCurrentSequence(conn);
+		close(conn);
+		
 		return result;
+	}
+
+	public ArrayList<Project> listProject(String category) {
+		Connection conn = getConnection();
+		ArrayList<Project> list = pDao.listProject(conn, category);
+		close(conn);
+		
+		return list;
 	}
 	
 }

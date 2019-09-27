@@ -1,7 +1,10 @@
 package payment.controller;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import kr.co.bootpay.javaApache.BootpayApi;
 import kr.co.bootpay.javaApache.model.request.SubscribeBilling;
@@ -10,12 +13,11 @@ import member.model.vo.Member;
 import payment.model.service.PaymentService;
 import payment.model.vo.Payment;
 
-public class Payment_RealPay extends TimerTask {
+public class Payment_RealPay implements Job {
 
 	@Override
-	public void run() {
-		
-		BootpayApi pay = new BootpayApi("5d5a6ed20627a800303d1954", "/5Qc/8x1aqIjmW0DoloUMMr1SNvoPYNN9K0dT7Lh9nI=");
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		/*BootpayApi pay = new BootpayApi("5d5a6ed20627a800303d1954", "/5Qc/8x1aqIjmW0DoloUMMr1SNvoPYNN9K0dT7Lh9nI=");
 		SubscribeBilling bill = new SubscribeBilling();
 		
 		ArrayList<Payment> payCount = new PaymentService().selectPay();
@@ -44,6 +46,11 @@ public class Payment_RealPay extends TimerTask {
 					}
 				}
 			}
-		}
+		}*/
+		
+		System.out.println("Quartz test");
+		
 	}
+
+	
 }
