@@ -109,7 +109,7 @@
 
 <div id="projectListWrap">
 	<div class="projectListHeader">
-		<div class="categoryName"><h2>전체보기</h2></div>
+		<div class="categoryName"><h2>패션</h2></div>
 		<div class="categorySearch">
 		<form action="" method="get">
 			<input type="text" name="search"  placeholder="검색">
@@ -122,7 +122,7 @@
 			<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
 		<div class="invest_box invest_item<%= i+1 %>">
 			<div class="invest_img">
-				<a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
+				<a class="invest_imgtag" href="/RewardBook/p_sel?category=fashion&p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
 			<div class="invest_title">
 				<a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
 				<div class="invest_name">
@@ -169,7 +169,7 @@
 					$(".invest_list").append(
 						"<div class='invest_box invest_item'>"
 						+ "<div class='invest_img'>"
-						+ "<a class='invest_imgtag' href='/RewardBook//p_sel?p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
+						+ "<a class='invest_imgtag' href='/RewardBook/p_sel?category=fashion&p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
 						+ "<div class='invest_title'>"
 						+ "<a href='/RewardBook//p_sel?p_no="+ json.list[count].no +"' class='invest_titlelink'><p>"+ decodeURIComponent(json.list[count].title).replace(/\+/gi, " ") +"</p></a>"
 						+ "<div class='invest_name'>"
