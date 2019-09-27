@@ -1092,7 +1092,7 @@ strong{font-weight: 700;}
 				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
 				<div class="memodiv" id="memodiv">			
 				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
 				<input class="memosubmit" type="submit" value="저장">			
 				</div>			
 				</form></div>	
