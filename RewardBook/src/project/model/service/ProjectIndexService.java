@@ -38,9 +38,34 @@ public class ProjectIndexService {
 	}
 
 	public ArrayList<Project> likeTop5() {
-		// like top5 service
+		// 인덱스 like top5 service
 		Connection conn = getConnection();
 		ArrayList<Project> list = pidao.likeTop5(conn);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Project> itTop3() {
+		// 인덱스 it new top3 service
+		Connection conn = getConnection();
+		ArrayList<Project> list = pidao.itTop3(conn);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Project> BeautyTop3() {
+		// 인덱스 beauty new top3 service
+		Connection conn = getConnection();
+		ArrayList<Project> list = pidao.BeautyTop3(conn);
+		close(conn);
+		return list;
+	}
+
+
+	public ArrayList<Project> FashionTop3() {
+		// 인덱스 fashion new top3 service
+		Connection conn = getConnection();
+		ArrayList<Project> list = pidao.FashionTop3(conn);
 		close(conn);
 		return list;
 	}

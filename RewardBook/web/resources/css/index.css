@@ -39,12 +39,12 @@
 	#projectMore a { color:#353535; text-decoration:none;}
 	#projectMore a:hover { color:#ffb202}
 	.recentli { padding:0 20px; list-style:none; width:16%; display:inline-block; font-size:15px; color:#353535;
-				font-weight:bold; margin-top:5px;}
+				font-weight:bold; margin-top:-15px;}
 	.recentli span { color:rgb(242, 85, 85); font-size:14px; font-weight:bold;}
 	.endProject { clear:both; margin-top:50px; width:100%; padding-top:75px;}
 	.endProject ul { clear:both;}
 	.endli { padding:0 20px; list-style:none; width:16%; display:inline-block; font-size:15px; color:#353535;
-				font-weight:bold; margin-top:5px;}
+				font-weight:bold; margin-top:-15px;}
 	.endli span { color:rgb(242, 85, 85); font-size:14px; font-weight:bold;}
 	.mainSubtitle span { clear:both;color:#8c8c8c; font-size:14px;}
 	.bannerArea { width:98%; margin:0 auto; text-align:center; margin-top:40px;}
@@ -67,5 +67,19 @@
     .likeNum { color:rgb(242, 85, 85); font-size:12px; font-weight:bold; }	
     .hitcount { color : #413328; font-size:12px; font-weight:bold;}				
  	.indexCategory { width:98%; margin:80px auto;}
- 	.indexCategory ul { margin:10px;}
+ 	.indexCategory .indexUl { margin:10px;}
  	.indexCategory ul li{ float:left; width:31%; border:1px solid #d5d5d5; margin:0 10px; text-align:center;}
+ 	.cateBack { width:100%; height:182px; }
+ 	#cateBackIt{ background-image: url( "/RewardBook/resources/images/index/categoryIT.png"); }
+ 	#cateBackBu{ background-image: url( "/RewardBook/resources/images/index/categoryAc.png"); }
+ 	#cateBackFa{ background-image: url( "/RewardBook/resources/images/index/categoryFa.png"); }
+ 	.cateTitle { float:right; font-weight:bold; font-size:40px; position: relative; margin-top: 105px; 
+ 				 margin-right: 25px; color:#fff;}
+ 	.newList { width:100% !important; margin:0 !important; border:none !important; z-index:-999;}
+ 	.newList .rankList { width:100% !important; font-size:13px; color:#353535; text-align: left;
+    					 padding: 9px; padding-left: 20px;}
+    .percentList { color:rgb(242, 85, 85); font-size:12px; font-weight:bold; float:right; margin-right:35px; }	
+    .top3Listbtn { width:100%; height:33px; background:#fff; border:none; border-top:1px solid #d5d5d5; 
+    			   margin-top:10px; }
+    .newCategoryTitle{ padding-bottom:30px; text-align:center; font-size:30px; font-weight:bold;}			   				 
+ 				 

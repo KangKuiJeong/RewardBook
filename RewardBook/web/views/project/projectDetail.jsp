@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title><%= project.getP_title() %></title>
 <link rel="stylesheet" href="/RewardBook/resources/css/project/projectDetail.css">
 <style type="text/css">
 
@@ -553,6 +553,7 @@ strong{font-weight: 700;}
 <body>
 
 <%@ include file="/views/common/header.jsp" %>
+				<% if(loginMember != null) {%>
 				<div id="inquryFormDiv">
 						<button id="closeBtn" onclick="inqclose();">X</button>
 						<form action="/RewardBook/osend" id="inqForm" method="post">
@@ -586,6 +587,7 @@ strong{font-weight: 700;}
 							<div class="inqBtnArea"><input type="submit" value="신고하기"></div>				
 						</form>
 					</div>
+					<% } %>
 					<script>
 						function inquryModal(){
 							
@@ -608,6 +610,18 @@ strong{font-weight: 700;}
 						function reportclose(){
 							
 							$('#reportFormDiv').css("display","none");
+						}
+						
+						function loginFunction(){
+							
+							var confirms = confirm('회원로그인 후 이용가능합니다. 로그인하시겠습니까?');
+							if(confirms == true){
+								
+								location.href='/RewardBook/views/member/mainLoginView.jsp';
+							}else {
+								
+								return false;
+							}
 						}
 					</script>			
 <!-- detail Header영역 -->
@@ -1040,14 +1054,25 @@ strong{font-weight: 700;}
 						<a href="#">메이커 홈페이지 주소</a>
 					</div>
 				</div>
+				
 				<div class="maker_qustion">
+					<% if( loginMember != null ){%>
 					<div><p onclick="inquryModal();">메이커에게 문의</p></div>
+					<% }else { %>
+					<div><p onclick="loginFunction();">메이커에게 문의</p></div>
+					<% } %>
 				</div>
 				
 			</div>
+			
 			<div class="maker_declaration">
-				<div class="declaration"><p onclick="reportModal();">신고하기</p></div>
+				<% if( loginMember != null ){%>
+					<div class="declaration"><p onclick="reportModal();">신고하기</p></div>
+				<% }else{ %>
+					<div class="declaration"><p onclick="loginFunction();">신고하기</p></div>
+				<% } %>
 			</div>
+			
 			<div class="rank">
 				<h3>인기 프로젝트</h3>
 				<div class="rank_item">1</div>
