@@ -170,5 +170,131 @@ public class ProjectIndexDao {
 		return list;
 		
 	}
+	
+	//인덱스 it new top3 DAO
+	public ArrayList<Project> itTop3(Connection conn) {
+		
+		ArrayList<Project> list = new ArrayList<Project>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * " + 
+						"from(select * " + 
+						"from(select * " + 
+						"from project " + 
+						"where p_category = 'IT' and p_permission = 'Y') " + 
+						"order by to_number(p_no) desc) " + 
+						"where rownum >=1 and rownum <= 3";
+		
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Project project = new Project();
+				project.setP_no(rset.getString("p_no"));
+				project.setP_title(rset.getString("p_title"));
+				project.setP_category(rset.getString("p_category"));
+				project.setP_nprice(rset.getInt("p_nprice"));
+				project.setP_tprice(rset.getInt("p_tprice"));
+				list.add(project);
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+		
+	}
+	
+	//인덱스 beauty top3 DAO
+	public ArrayList<Project> BeautyTop3(Connection conn) {
+		
+		ArrayList<Project> list = new ArrayList<Project>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * " + 
+						"from(select * " + 
+						"from(select * " + 
+						"from project " + 
+						"where p_category = '악세서리' and p_permission = 'Y') " + 
+						"order by to_number(p_no) desc) " + 
+						"where rownum >=1 and rownum <= 3";
+		
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Project project = new Project();
+				project.setP_no(rset.getString("p_no"));
+				project.setP_title(rset.getString("p_title"));
+				project.setP_category(rset.getString("p_category"));
+				project.setP_nprice(rset.getInt("p_nprice"));
+				project.setP_tprice(rset.getInt("p_tprice"));
+				list.add(project);
+
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+		
+		
+	}
+	
+	//인덱스 fashion top3 DAO
+	public ArrayList<Project> FashionTop3(Connection conn) {
+		
+		ArrayList<Project> list = new ArrayList<Project>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * " + 
+						"from(select * " + 
+						"from(select * " + 
+						"from project " + 
+						"where p_category = '의류' and p_permission = 'Y') " + 
+						"order by to_number(p_no) desc) " + 
+						"where rownum >=1 and rownum <= 3";
+		
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Project project = new Project();
+				project.setP_no(rset.getString("p_no"));
+				project.setP_title(rset.getString("p_title"));
+				project.setP_category(rset.getString("p_category"));
+				project.setP_nprice(rset.getInt("p_nprice"));
+				project.setP_tprice(rset.getInt("p_tprice"));
+				list.add(project);
+
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+		
+	}
 
 }
