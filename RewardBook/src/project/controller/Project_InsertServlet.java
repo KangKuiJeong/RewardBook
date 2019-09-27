@@ -92,12 +92,12 @@ public class Project_InsertServlet extends HttpServlet {
 			
 			for (int a = 1; a <= rewardCount; a++) {
 				Reward reward = new Reward();
-				
+
 				String r_title = mrequest.getParameter("r_title[" + a + "]");
 				String r_detail = mrequest.getParameter("r_detail[" + a + "]");
-				int r_price = Integer.parseInt(((String)mrequest.getParameter("r_detail[" + a + "]")).replace(",", ""));
+				int r_price = Integer.parseInt(((String)mrequest.getParameter("r_price[" + a + "]")).replace(",", ""));
 				String r_amount = mrequest.getParameter("r_amount[" + a + "]");
-				
+
 				if (r_title != null && !r_title.equals("") && r_detail != null && !r_detail.equals("") && r_price > 0) {
 
 					reward.setP_no(projectno);

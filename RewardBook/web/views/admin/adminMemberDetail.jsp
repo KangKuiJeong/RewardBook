@@ -105,7 +105,7 @@
 	height : 180px;
 	margin : 0px 9px 9px 9px;
 	border : 1px solid gray;
-	border-radius : 8px;
+	border-radius : 50%;
 }
 .main_area3_section1 .info div .input input[name=name], .main_area3_section1 .info div .input input[name=id], .main_area3_section1 .info div .input input[name=pw], .main_area3_section1 .info div .input input[name=phone], .main_area3_section1 .info div .input input[name=address], .main_area3_section1 .info div .input input[name=bankAccount], .main_area3_section1 .info div .input input[name=mileage], .main_area3_section1 .info div .input input[name=homepage], .main_area3_section1 .info div .input input[name=category] {
 	width : 300px;
@@ -226,7 +226,7 @@
 			<div class="main_area3_section1">
 				<div class="info">
 					<div class="profile">
-						<div name="picture"></div>
+						<div name="picture"><img src="/RewardBook/resources/images/profileImg/<%= memberDetail.getProfileImg() == null ? "i.png" : memberDetail.getuNo() %>" style="width:100%; height:100%; border-radius:50%;"></div>
 					</div>
 					<div class="no">
 						<div class="text"><span>회원 번호</span></div>

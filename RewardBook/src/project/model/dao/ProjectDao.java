@@ -79,7 +79,7 @@ public class ProjectDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into project values(TO_CHAR(SEQ_P_NO.nextval), ?, ?, ?, ?, ?, ?, default, ?, sysdate, ?, 'N', ?, default, 'N', null, null)";
+		String query = "insert into project values(TO_CHAR(SEQ_P_NO.nextval), ?, ?, ?, ?, ?, ?, default, ?, sysdate, ?, 'N', ?, default, 'N', null, null, default)";
 		
 		try {
 			
@@ -233,9 +233,6 @@ public class ProjectDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(project);
-			System.out.println(result);
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -304,7 +301,7 @@ public class ProjectDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT p_no, p_title, u_name, p_sdate FROM PROJECT JOIN USERS USING (u_no) WHERE P_PERMISSION = 'N' AND P_RETURN = NULL OR P_RETURN = '' ORDER BY p_no DESC";
+		String query = "SELECT p_no, p_title, u_name, p_sdate FROM PROJECT JOIN USERS USING (u_no) WHERE P_OC = 'N' ORDER BY p_no DESC";
 		
 		try {
 			stmt = conn.createStatement();
@@ -525,6 +522,30 @@ public class ProjectDao {
 		return project;
 	}
 
+	public int updateOC(Connection conn, String p_no) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "update project set p_oc = 'Y' where p_no = ?"; 
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	public ArrayList<Project> pageSelect_P(Connection conn, int start, int limit, String select1, String text1) {
 
 		ArrayList<Project> list = new ArrayList<Project>();
@@ -532,7 +553,7 @@ public class ProjectDao {
 		PreparedStatement pstmt = null;
 		ResultSet rest = null;
 		
-		String check = "where p_permission = 'N' and p_return = null or p_return = ''";
+		String check = "where p_permission = 'N' and p_pdate is null and p_return is null";
 
 		if (text1 != "") {
 			

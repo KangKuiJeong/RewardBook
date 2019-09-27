@@ -155,10 +155,7 @@
 
 	var updateFlag = false;
 	function p_reply() {
-		location.href="/RewardBook/iq_reply_a?page=inquiry&no="
-				+ $(".main_area3_section1 .info .no .input input").val()
-				+ "&reply=" + $(".main_area3_section1 .info .reply .textarea textarea").val()
-				+ "&ano=" + '<%= a_no %>';
+		$(".submitForm").submit();
 	}
 	
 </script>
@@ -186,6 +183,10 @@
 				</div>
 			</div>
 		</div>
+		<form class="submitForm" method="post" action="/RewardBook/iq_reply_a">
+		<input type="hidden" name="page" value="declare">
+		<input type="hidden" name="ano" value="<%= a_no %>">
+		<input type="hidden" name="no" value="<%= inquiryDetail.getIq_no() == null ? "-" : inquiryDetail.getIq_no() %>">
 		<div class="main_area3">
 			<div class="main_area3_section1">
 				<div class="info">
@@ -224,6 +225,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 </div>
 </body>

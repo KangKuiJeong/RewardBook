@@ -432,7 +432,6 @@ function showEdit() {
 
 function addReward() {
 	var count = $(".area1 input[name=rewardcount]").val() * 1 + 1;
-	alert(count);
 	var str = "<div class='reward'>" + 
 			"<div class='r_index'>리워드 #" + count + "</div>" + 
 			"<div class='r_price'>금액<input type='text' name='r_price[" + count + "]' value='0' style='text-align : right; padding-right : 10px'>원</div>" +
@@ -458,12 +457,18 @@ function submit() {
 		alertText = "프로젝트 목표 금액이 올바르지 않습니다.";
 	} else if (!$(".edit .container .text[name=one] .part6 .input div .radio2").is(":checked")) {
 		alertText = "필수 확인사항을 확인해주세요.";
-	} else if ($(".edit .container .text[name=one] .part7 .input input").val() == null) {
+	} else if ($(".edit .container .text[name=one] .part7 .input input").val() == "") {
 		alertText = "프로젝트 종료일이 올바르지 않습니다.";
-	} else if ($(".edit .container .text[name=one] .part8 .input input").val() == null) {
+	} else if ($(".edit .container .text[name=one] .part8 .input input").val() == "") {
 		alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
+	} else if ($(".edit .container .text[name=one] .part8 .input input").val() == "") {
+		alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
+	} else if ($(".edit .container .text[name=three] .part1 .input input").val() == "") {
+		alertText = "썸네일 파일이 지정되지 않았습니다.";
+	} else if ($(".edit .container .text[name=three] .part2 .input input").val() == "") {
+		alertText = "스토리 파일이 지정되지 않았습니다.";
 	}
-	
+
 	if (alertText == "") {
 		$(".projectForm").submit();
 	}

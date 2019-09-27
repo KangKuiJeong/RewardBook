@@ -39,7 +39,7 @@ public class InquiryDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT iq_no, iq_title, u_name, iq_date FROM Inquiry JOIN USERS USING (u_no) WHERE iq_category = 'INQUIRY' ORDER BY iq_no DESC";
+		String query = "SELECT iq_no, iq_title, u_name, iq_date FROM Inquiry JOIN USERS USING (u_no) WHERE iq_category = 'INQUIRY' AND iq_oc='N' ORDER BY iq_no DESC";
 		
 		try {
 			stmt = conn.createStatement();
