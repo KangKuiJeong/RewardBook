@@ -28,9 +28,9 @@ public class ProjectNewsService {
 		return result;
 	}
 
-	public int insertProjectNews(String pn_no) {
+	public int insertProjectNews(ProjectNews pn) {
 		Connection conn = getConnection();
-		int result = pnDao.insertProjectNews(conn, pn_no);;
+		int result = pnDao.insertProjectNews(conn, pn);
 		
 		if(result > 0) {
 			commit(conn);
@@ -49,9 +49,15 @@ public class ProjectNewsService {
 		return projectNews;
 	}
 
-	public ArrayList<ProjectNews> listProjectNews() {
+	public ArrayList<ProjectNews> listProjectNews(String p_no) {
 		Connection conn = getConnection();
-		ArrayList<ProjectNews> list = pnDao.listProjectNews(conn);
+		ArrayList<ProjectNews> list = pnDao.listProjectNews(conn, p_no);
+		if( list.size() > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
 		
 		return list;
 	}

@@ -34,7 +34,7 @@
       <br>
     
    <!-- 전체/공지/이벤트 탭 -->
-      <div class="ui-tabs">
+      <!-- <div class="ui-tabs">
         <ul>
         
           <li class="active">
@@ -51,7 +51,7 @@
           
           
         </ul>
-      </div>
+      </div> -->
   
      </div><!-- //all-ui-header -->
       <!-- //전체/공지/이벤트 탭 -->

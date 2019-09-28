@@ -10,14 +10,14 @@ public class ProjectNews implements java.io.Serializable {
 	private String p_no;
 	private String pn_title;
 	private String pn_text;
-	private java.sql.Date pn_date;
+	private String pn_date;
 	private int pn_count;
 	
 	public ProjectNews() {
 		super();
 	}
 
-	public ProjectNews(String pn_no, String p_no, String pn_title, String pn_text, Date pn_date, int pn_count) {
+	public ProjectNews(String pn_no, String p_no, String pn_title, String pn_text, String pn_date, int pn_count) {
 		super();
 		this.pn_no = pn_no;
 		this.p_no = p_no;
@@ -59,11 +59,11 @@ public class ProjectNews implements java.io.Serializable {
 		this.pn_text = pn_text;
 	}
 
-	public java.sql.Date getPn_date() {
+	public String getPn_date() {
 		return pn_date;
 	}
 
-	public void setPn_date(java.sql.Date pn_date) {
+	public void setPn_date(String pn_date) {
 		this.pn_date = pn_date;
 	}
 

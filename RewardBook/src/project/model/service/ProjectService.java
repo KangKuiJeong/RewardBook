@@ -187,7 +187,7 @@ public class ProjectService {
 	public void updateOC(String p_no) {
 		Connection conn = getConnection();
 		int result = pDao.updateOC(conn, p_no);
-
+    
 		if (result > 0) {
 			commit(conn);
 		} else {
