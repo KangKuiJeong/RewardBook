@@ -1130,7 +1130,7 @@ strong{font-weight: 700;}
 		<div class="option_item">
 			<% if(loginMember == null){ %>
 				<% for(Reward reward : rewardList){ %>
-			<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/views/member/mainLoginView.jsp'">
+			<div class="reward option_iteminfo" onclick="loginFunction();">
 				<div class="reward item_left">
 					<div class="reward item_price">
 						<%= reward.getR_price() %> 원 펀딩
