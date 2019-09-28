@@ -16,7 +16,46 @@
 <link rel="stylesheet" href="/RewardBook/resources/css/payment/payment.css">
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.4.min.js" type="application/javascript"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+function findPostCode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
 
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('newZipCode').value = data.zonecode;
+            document.getElementById("newAddress").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("newAddressDetails").focus();
+        }
+    }).open();
+}
+</script>
 </head>
 <body>
 
@@ -25,16 +64,7 @@
 <div id="paymentWrap">
 	<div class="payment-wrap">
 		<form name="paymentForm" id="purchaseForm" method="post">
-            <input type="hidden" id="presenteeName" name="presenteeName">
-            <input type="hidden" id="contactNumber" name="contactNumber">
-            <input type="hidden" id="zipCode" name="zipCode">
-            <input type="hidden" id="address" name="address">
-            <input type="hidden" id="addressDetails" name="addressDetails">
-            <input type="hidden" id="applyPoint" name="applyPoint" value="0">
-            <input type="hidden" id="email" name="email" value="osj901@naver.com">
-            <input type="hidden" id="addDonation" name="addDonation" value="0">
-            <input type="hidden" id="dontShowNameYn" name="dontShowNameYn" value="">
-            <input type="hidden" id="dontShowAmountYn" name="dontShowAmountYn" value="">
+            <input type="hidden" name="u_no" value="<%= loginMember.getuNo() %>">
             
             <div class="rbform-order">
               <div class="order-list" data-choiced-legnth="1">
@@ -139,15 +169,15 @@
                         <label for="rddv1">
                           <p>최근 배송지</p>
                           <p><strong><%= loginMember.getName() %> <%= loginMember.getPhone() %></strong></p>
-                          <p><%= loginMember.getAddress_detail() %></p>
+                          <p><%= loginMember.getAddress() %> <%= loginMember.getAddress_detail() %></p>
                         </label>
                       </dd>
                     </dl>
-                    <input type="hidden" id="presenteeName1" value="오세준">
-                    <input type="hidden" id="contactNumber1" value="010-7705-8069">
-                    <input type="hidden" id="zipCode1" value="16943">
-                    <input type="hidden" id="address1" value="[16943] 경기 용인시 수지구 광교마을로 90 (상현동, 광교마을휴먼시아41단지)">
-                    <input type="hidden" id="addressDetails1" value="4101동2102호">
+                    <input type="hidden" id="presenteeName1" value="<%= loginMember.getName() %>">
+                    <input type="hidden" id="contactNumber1" value="<%= loginMember.getPhone() %>">
+                    <input type="hidden" id="zipCode1" value="<%= loginMember.getPost() %>">
+                    <input type="hidden" id="address1" value="<%= loginMember.getAddress() %>">
+                    <input type="hidden" id="addressDetails1" value="<%= loginMember.getAddress_detail() %>">
                 </div>
                 <div class="deliver-new">
                   <dl>
@@ -172,6 +202,7 @@
                   <p class="title">주소</p>
                   <button type="button" onclick="findPostCode()">우편번호 검색</button>
                   <p class="text" id="newAddress"></p>
+                  <input type="text" maxlength="96" id="newAddress" placeholder="주소">
                   <input type="text" maxlength="96" id="newAddressDetails" placeholder="상세주소">
                   <input type="hidden" id="newZipCode">
                 </div>
@@ -210,7 +241,8 @@
                   <em class="error-message" id="errorPhoneNum">휴대폰 번호를 정확히 입력해주세요.</em>
                   <p class="title">주소</p>
                   <button type="button" onclick="findPostCode()">우편번호 검색</button>
-                  <p class="text" id="newAddress"></p>
+                  <p class="text" id="newAddresses"></p>
+                  <input type="text" maxlength="96" id="newAddress"  placeholder="주소">
                   <input type="text" maxlength="96" id="newAddressDetails" placeholder="상세주소">
                   <input type="hidden" id="newZipCode">
                 </div>
@@ -305,9 +337,9 @@
           </div>
           <div class="btn-wrap">
           <% if(loginMember.getP_billing() != null){ %>
-            <button type="button" id="btn-submit" onclick="payTest()" class="wz primary button">결제 예약하기</button>
-          <% }else{ %>
           	<button type="button" id="btn-submit"  onclick="isbilling()" class="wz primary button">결제 예약하기</button>
+          <% }else{ %>
+            <button type="button" id="btn-submit" onclick="payTest()" class="wz primary button">결제 예약하기</button>
           <% } %> 
          
           </div>
@@ -378,12 +410,11 @@ function payTest(){
 			<% } %>
 		<% } %>
 		
-		
 		$.ajax({
 			url: '/RewardBook/pm_comp',
 			data: {
 				billing_key : data.billing_key,
-				order_id : 'order_id_'+'<%= pay.getP_no() %>' + '<%= loginMember.getuNo() %>',
+				order_id : 'order_id_' + d.getTime() + '<%= loginMember.getuNo() %>'v,
 				p_no : "<%= request.getParameter("p_no") %>",
 				u_no : "<%= loginMember.getuNo() %>",
 				r_no : r_no,
@@ -391,20 +422,65 @@ function payTest(){
 				r_amount : r_amount,
 				donation : "<%= donation %>",
 				nopen : "<%= request.getParameter("dontShowNameYn") %>",
-				popen : <%= request.getParameter("dontShowAmountYn") %>
+				popen : <%= request.getParameter("dontShowAmountYn") %>,
 			},
 			type: 'POST',
 			success: function(){
-				location.href="/RewardBook/views/payment/complete.jsp";
+				var presenteeName = "";
+				var contactNumber = "";
+				var zipCode = "";
+				var address = "";
+				var addressDetail = "";
+				
+				if($('#presenteeName1').val() == null){
+					presenteeName = $('#newPresenteeName').val();
+				}else{
+					presenteeName= $('#presenteeName1').val();
+				}
+				
+				if($('#contactNumber1').val() == null){
+					contactNumber = $('#newContactNumber').val();
+				}else{
+					contactNumber = $('#contactNumber1').val();
+				}
+				
+				if($('#zipCode1').val() == null){
+					zipCode = $('#newZipCode').val();
+				}else{
+					zipCode = $('#zipCode1').val();
+				}
+				
+				if($('#address1').val() == null){
+					address = $('#newAddress').val();
+				}else{
+					address = $('#address1').val();
+				}
+				
+				if($('#addressDetails1').val() == null){
+					addressDetail = $('#newAddressDetails').val();
+				}else{
+					addressDetail = $('#addressDetails1').val();
+				}
+				
+				$('#purchaseForm').append('<input type="hidden" name="presenteeName" value="'+presenteeName+'" />');
+				$('#purchaseForm').append('<input type="hidden" name="contactNumber" value="'+contactNumber+'" />');
+				$('#purchaseForm').append('<input type="hidden" name="zipcode" value="'+zipCode+'" />');
+				$('#purchaseForm').append('<input type="hidden" name="address" value="'+address+'" />');
+				$('#purchaseForm').append('<input type="hidden" name="addressDetail" value="'+addressDetail+'" />');
+				$('#purchaseForm').attr('action', '/RewardBook/postInsert');
+				$('#purchaseForm').submit();
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log("error : " + textStatus);
 			},
 		});
 	});
+	
 }
 
 function isbilling(){
+	var d = new Date;
+	
 	var r_no = "";
 	<% for(int i = 0; i < list.size(); i++){ %>
 		<% if(i == (list.size()-1)){ %>
@@ -436,7 +512,7 @@ function isbilling(){
 	$.ajax({
 		url: '/RewardBook/pm_ins',
 		data: {
-			order_id : "order_id_" + "<%= pay.getP_no() %>",
+			order_id : "order_id_" + d.getTime() + "<%= loginMember.getuNo() %>",
 			p_no : "<%= request.getParameter("p_no") %>",
 			u_no : "<%= loginMember.getuNo() %>",
 			r_no : r_no,
@@ -448,12 +524,55 @@ function isbilling(){
 		},
 		type: 'POST',
 		success: function(){
-			location.href="/RewardBook/views/payment/complete.jsp";
+			var presenteeName = "";
+			var contactNumber = "";
+			var zipCode = "";
+			var address = "";
+			var addressDetail = "";
+			
+			if($('#presenteeName1').val() == null){
+				presenteeName = $('#newPresenteeName').val();
+			}else{
+				presenteeName= $('#presenteeName1').val();
+			}
+			
+			if($('#contactNumber1').val() == null){
+				contactNumber = $('#newContactNumber').val();
+			}else{
+				contactNumber = $('#contactNumber1').val();
+			}
+			
+			if($('#zipCode1').val() == null){
+				zipCode = $('#newZipCode').val();
+			}else{
+				zipCode = $('#zipCode1').val();
+			}
+			
+			if($('#address1').val() == null){
+				address = $('#newAddress').val();
+			}else{
+				address = $('#address1').val();
+			}
+			
+			if($('#addressDetails1').val() == null){
+				addressDetail = $('#newAddressDetails').val();
+			}else{
+				addressDetail = $('#addressDetails1').val();
+			}
+			
+			$('#purchaseForm').append('<input type="hidden" name="presenteeName" value="'+presenteeName+'" />');
+			$('#purchaseForm').append('<input type="hidden" name="contactNumber" value="'+contactNumber+'" />');
+			$('#purchaseForm').append('<input type="hidden" name="zipcode" value="'+zipCode+'" />');
+			$('#purchaseForm').append('<input type="hidden" name="address" value="'+address+'" />');
+			$('#purchaseForm').append('<input type="hidden" name="addressDetail" value="'+addressDetail+'" />');
+			$('#purchaseForm').attr('action', '/RewardBook/postInsert');
+			$('#purchaseForm').submit();
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log("error : " + textStatus);
 		},
 	});
+	
 }
 
 

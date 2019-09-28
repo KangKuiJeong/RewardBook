@@ -17,7 +17,7 @@ import payment.model.vo.Payment;
 /**
  * Servlet implementation class Payment_InsertServlet
  */
-@WebServlet("/Payment_InsertServlet")
+@WebServlet("/pm_ins")
 public class Payment_InsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

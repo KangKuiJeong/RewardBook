@@ -195,11 +195,26 @@ public class ProjectService {
 		}
 		close(conn);
 	}
-  
 
 	public ArrayList<Project> listProject(String category) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.listProject(conn, category);
+		close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Project> payList(){
+		Connection conn = getConnection();
+		ArrayList<Project> list = pDao.payList(conn);
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Project> searchKeyward(String keyward) {
+		Connection conn = getConnection();
+		ArrayList<Project> list = pDao.searchKeyward(conn, keyward);
 		close(conn);
 		
 		return list;

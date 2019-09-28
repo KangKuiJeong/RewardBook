@@ -72,9 +72,9 @@ public class PaymentService {
 		return result;
 	}
 
-	public ArrayList<Payment> selectPay() {
+	public ArrayList<Payment> selectPay(String p_no) {
 		Connection conn = getConnection();
-		ArrayList<Payment> payment = pDao.selectPay(conn);
+		ArrayList<Payment> payment = pDao.selectPay(conn, p_no);
 		close(conn);
 		
 		return payment;

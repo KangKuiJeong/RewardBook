@@ -662,4 +662,29 @@ public class MemberDao {
 		return result;
 	}
 
+	public int insertPost(Connection conn, String phone, String zipCode, String address, String addressDetail, String u_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update users set u_phone = ?, u_address = ?, u_post = ?, u_address_detail = ? where u_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, address);
+			pstmt.setString(3, zipCode);
+			pstmt.setString(4, addressDetail);
+			pstmt.setString(5, u_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
