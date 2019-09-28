@@ -112,7 +112,7 @@ public class ProjectDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project where p_permission = 'Y'";
+		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return, u_name from project join users using(u_no) where p_permission = 'Y'";
 		
 		try {
 			stmt = conn.createStatement();
@@ -139,6 +139,7 @@ public class ProjectDao {
 				project.setP_pdate(rset.getDate("P_PDATE"));
 				project.setP_return(rset.getString("P_RETURN"));
 				project.setP_rdate(rset.getInt(1));
+				project.setU_name(rset.getString("U_NAME"));
 				
 				list.add(project);
 				
@@ -161,7 +162,7 @@ public class ProjectDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project where p_category = ? and p_permission = 'Y'";
+		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project join users using(u_no) where p_category = ? and p_permission = 'Y'";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -190,6 +191,7 @@ public class ProjectDao {
 				project.setP_pdate(rset.getDate("P_PDATE"));
 				project.setP_return(rset.getString("P_RETURN"));
 				project.setP_rdate(rset.getInt(1));
+				project.setU_name(rset.getString("U_NAME"));
 				
 				list.add(project);
 				
@@ -216,7 +218,14 @@ public class ProjectDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "update project set p_title=?, p_category=?, p_tprice=?, p_edate=?, p_ddate=?, p_story=?, p_info=? where p_no=?";
+		String query = "update project set p_title=?, p_category=?, p_tprice=?, p_edate=?, p_ddate=?, p_info=?";
+		
+		if (project.getP_story() != null)
+			query += ", p_story=?";
+		if (project.getP_img() != null)
+			query += ", p_img=?";
+		
+		query += " where p_no=?";
 		
 		try {
 			
@@ -227,9 +236,21 @@ public class ProjectDao {
 			pstmt.setInt(3, project.getP_tprice());
 			pstmt.setDate(4, project.getP_edate());
 			pstmt.setDate(5, project.getP_ddate());
-			pstmt.setString(6, project.getP_story());
-			pstmt.setString(7, project.getP_info());
-			pstmt.setString(8, project.getP_no());
+			pstmt.setString(6, project.getP_info());
+			
+			if (project.getP_story() != null && project.getP_img() != null) {
+				pstmt.setString(7, project.getP_story());
+				pstmt.setString(8, project.getP_img());
+				pstmt.setString(9, project.getP_no());
+			} else if (project.getP_story() != null) {
+				pstmt.setString(7, project.getP_story());
+				pstmt.setString(8, project.getP_no());
+			} else if (project.getP_img() != null) {
+				pstmt.setString(7, project.getP_img());
+				pstmt.setString(8, project.getP_no());
+			} else {
+				pstmt.setString(7, project.getP_no());
+			}
 			
 			result = pstmt.executeUpdate();
 			
@@ -497,6 +518,7 @@ public class ProjectDao {
 				project.setU_name(rest.getString("u_name"));
 				project.setP_title(rest.getString("p_title"));
 				project.setP_category(rest.getString("p_category"));
+				project.setP_img(rest.getString("p_img"));
 				project.setP_story(rest.getString("p_story"));
 				project.setP_info(rest.getString("p_info"));
 				project.setP_nprice(rest.getInt("p_nprice"));
@@ -730,6 +752,60 @@ public class ProjectDao {
 		
 		return result;
 		
+	}
+
+	public ArrayList<Project> payList(Connection conn) {
+		ArrayList<Project> list = new ArrayList<Project>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select p_no from project where p_edate < sysdate and p_nprice > p_tprice";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Project project = new Project();
+				
+				project.setP_no(rset.getString("P_NO"));
+				
+				list.add(project);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Project> searchKeyward(Connection conn, String keyward) {
+		ArrayList<Project> list = new ArrayList<Project>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select p_title from project where p_title like ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  "%"+keyward+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Project project = new Project();
+				
+				project.setP_title(rset.getString("P_TITLE"));
+				
+				list.add(project);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 }

@@ -74,7 +74,7 @@ public class PaymentDao {
 		PreparedStatement pstmt = null;
 		String query = null;
 		if(pay.getPm_nopen() != "N" && pay.getPm_popen() == "N") {
-			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, ?, default, ?, ?)";
+			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, default, ?, ?, ?, default)";
 			
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -84,9 +84,9 @@ public class PaymentDao {
 				pstmt.setString(3, pay.getR_no());
 				pstmt.setInt(4, pay.getPm_price());
 				pstmt.setInt(5, pay.getPm_price_plus());
-				pstmt.setString(6, pay.getPm_quantity());
 				pstmt.setString(7, pay.getPm_popen());
 				pstmt.setString(8, pay.getPm_oid());
+				pstmt.setString(6, pay.getPm_quantity());
 
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -95,7 +95,7 @@ public class PaymentDao {
 				close(pstmt);
 			}
 		}else if(pay.getPm_popen() != "N" && pay.getPm_nopen() == "N") {
-			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, ?, ?, default, ?)";
+			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, ?, default, ?, ?, default)";
 			
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -105,9 +105,9 @@ public class PaymentDao {
 				pstmt.setString(3, pay.getR_no());
 				pstmt.setInt(4, pay.getPm_price());
 				pstmt.setInt(5, pay.getPm_price_plus());
-				pstmt.setString(6, pay.getPm_quantity());
-				pstmt.setString(7, pay.getPm_nopen());
-				pstmt.setString(8, pay.getPm_oid());
+				pstmt.setString(6, pay.getPm_nopen());
+				pstmt.setString(7, pay.getPm_oid());
+				pstmt.setString(8, pay.getPm_quantity());
 
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -116,7 +116,7 @@ public class PaymentDao {
 				close(pstmt);
 			}
 		}else if(pay.getPm_popen() == "N" && pay.getPm_nopen() == "N"){
-			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, ?, ?, ?, ?)";
+			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, ?, ?, ?, ?, default)";
 			
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -126,10 +126,30 @@ public class PaymentDao {
 				pstmt.setString(3, pay.getR_no());
 				pstmt.setInt(4, pay.getPm_price());
 				pstmt.setInt(5, pay.getPm_price_plus());
-				pstmt.setString(6, pay.getPm_quantity());
-				pstmt.setString(7, pay.getPm_nopen());
-				pstmt.setString(8, pay.getPm_popen());
-				pstmt.setString(9, pay.getPm_oid());
+				pstmt.setString(6, pay.getPm_nopen());
+				pstmt.setString(7, pay.getPm_popen());
+				pstmt.setString(8, pay.getPm_oid());
+				pstmt.setString(9, pay.getPm_quantity());
+
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		}else if(pay.getPm_popen() != "N" && pay.getPm_nopen() != "N") {
+			query = "insert into payment values(TO_CHAR(SEQ_PM_NO.nextval), ?, ?, ?, null, ?, ?,default, default, default, ?, ?, default)";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, pay.getU_no());
+				pstmt.setString(2, pay.getP_no());
+				pstmt.setString(3, pay.getR_no());
+				pstmt.setInt(4, pay.getPm_price());
+				pstmt.setInt(5, pay.getPm_price_plus());
+				pstmt.setString(6, pay.getPm_oid());
+				pstmt.setString(7, pay.getPm_quantity());
 
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -139,24 +159,23 @@ public class PaymentDao {
 			}
 		}
 		
-		
-		
 		return result;
 	}
 
-	public ArrayList<Payment> selectPay(Connection conn) {
+	public ArrayList<Payment> selectPay(Connection conn, String p_no) {
 		ArrayList<Payment> list = new ArrayList<Payment>();
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from payment where pm_success = 'N'";
+		String query = "select * from payment where p_no = ? and pm_success = 'N'";
 		
 		try {
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_no);
 			
-			rset = stmt.executeQuery(query);
+			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				Payment payment = new Payment();
 				
 				payment.setPm_no(rset.getString("PM_NO"));
@@ -179,7 +198,7 @@ public class PaymentDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return list;

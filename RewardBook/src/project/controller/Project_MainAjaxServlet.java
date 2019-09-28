@@ -36,35 +36,39 @@ public class Project_MainAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-ArrayList<Project> list = new ProjectService().listProject();
 		
-		JSONObject sendJSON = new JSONObject();
+		ArrayList<Project> list = new ProjectService().listProject();
 		
-		JSONArray jarr = new JSONArray();
-		
-		for(Project project : list) {
-			//객체 저장용 json 객체 생성
-			JSONObject job = new JSONObject();
+		if(list.size() > 0) {
+			JSONObject sendJSON = new JSONObject();
 			
-			job.put("no", project.getP_no());
-			job.put("title", URLEncoder.encode(project.getP_title(), "UTF-8"));
-			job.put("category", URLEncoder.encode(project.getP_category(), "UTF-8"));
-			job.put("content", URLEncoder.encode(project.getP_story(), "UTF-8"));
-			job.put("rdate", project.getP_rdate());
-			job.put("nprice", project.getP_nprice());
-			job.put("tprice", project.getP_tprice());
+			JSONArray jarr = new JSONArray();
 			
-			//배열에 저장
-			jarr.add(job);
+			for(Project project : list) {
+				//객체 저장용 json 객체 생성
+				JSONObject job = new JSONObject();
+				
+				job.put("no", project.getP_no());
+				job.put("title", URLEncoder.encode(project.getP_title(), "UTF-8"));
+				job.put("category", URLEncoder.encode(project.getP_category(), "UTF-8"));
+				job.put("content", URLEncoder.encode(project.getP_story(), "UTF-8"));
+				job.put("rdate", project.getP_rdate());
+				job.put("nprice", project.getP_nprice());
+				job.put("tprice", project.getP_tprice());
+				job.put("name", URLEncoder.encode(project.getU_name(), "UTF-8"));
+				
+				//배열에 저장
+				jarr.add(job);
+			}
+			
+			sendJSON.put("list", jarr);
+			
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			out.print(sendJSON.toJSONString());
+			out.flush();
+			out.close();
 		}
-		
-		sendJSON.put("list", jarr);
-		
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		out.print(sendJSON.toJSONString());
-		out.flush();
-		out.close();
 	}
 
 	/**

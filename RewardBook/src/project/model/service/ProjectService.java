@@ -187,10 +187,34 @@ public class ProjectService {
 	public void updateOC(String p_no) {
 		Connection conn = getConnection();
 		int result = pDao.updateOC(conn, p_no);
+    
+		if (result > 0) {
+			commit(conn);
+		} else {
+			commit(conn);
+		}
+		close(conn);
 	}
+
 	public ArrayList<Project> listProject(String category) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.listProject(conn, category);
+		close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Project> payList(){
+		Connection conn = getConnection();
+		ArrayList<Project> list = pDao.payList(conn);
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Project> searchKeyward(String keyward) {
+		Connection conn = getConnection();
+		ArrayList<Project> list = pDao.searchKeyward(conn, keyward);
 		close(conn);
 		
 		return list;

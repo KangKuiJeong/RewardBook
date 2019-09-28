@@ -76,7 +76,7 @@ public class MemberDao {
 		
 		String query = "insert into users values "
 				+ "('A0000'|| TO_CHAR(SEQ_U_PNO.nextval), null, ?, ?, ?, sysdate, null, null,"
-				+ "null, null, null, 0, null, null, null, null, null, null)";
+				+ "null, null, null, 0, null, null, null, null, null, null, null)";
 	
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -104,7 +104,7 @@ public class MemberDao {
 		
 		String query = "insert into users values "
 				+ "('B0000'|| TO_CHAR(SEQ_U_CNO.nextval), ?, ?, ?, ?, sysdate, null, null,"
-				+ "null, null, null, 0, null, null, null, ?, null, null)";
+				+ "null, null, null, 0, null, null, null, ?, null, null, null)";
 	
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -596,7 +596,14 @@ public class MemberDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "update users set u_bno=?, u_id=?, u_name=?, u_phone=?, u_intro=?, u_address=?, u_post=?, u_mileage=?, u_bank=?, u_bank_account=?, u_homepage=?, u_category=? where u_no = ?";
+		String query = "update users set u_bno=?, u_id=?, u_name=?, u_phone=?, u_intro=?, u_address=?, u_post=?, u_mileage=?, u_bank=?, u_bank_account=?, u_homepage=?, u_category=?";
+
+		System.out.println("이미지 링크 : " + member.getProfileImg());
+		
+		if (member.getProfileImg() != null)
+			query += ", u_profile=?";
+		
+		query += " where u_no = ?";
 		
 		try {
 			
@@ -614,9 +621,14 @@ public class MemberDao {
 			pstmt.setString(10, member.getBankAccount());
 			pstmt.setString(11, member.getHomepage());
 			pstmt.setString(12, member.getCategory());
-			pstmt.setString(13, member.getuNo());
+
+			if (member.getProfileImg() != null)
+				pstmt.setString(13, member.getProfileImg());
 			
+			pstmt.setString(14, member.getuNo());
+
 			result = pstmt.executeUpdate();
+			System.out.println("결과 : " + result);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -638,6 +650,31 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, billing);
 			pstmt.setString(2, u_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertPost(Connection conn, String phone, String zipCode, String address, String addressDetail, String u_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update users set u_phone = ?, u_address = ?, u_post = ?, u_address_detail = ? where u_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, address);
+			pstmt.setString(3, zipCode);
+			pstmt.setString(4, addressDetail);
+			pstmt.setString(5, u_no);
 			
 			result = pstmt.executeUpdate();
 			

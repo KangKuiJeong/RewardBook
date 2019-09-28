@@ -60,5 +60,19 @@ public class ReviewService {
 		
 		return result;
 	}
+
+	public int ReviewCount(String uNo) {
+		Connection conn = getConnection();
+		int result = rvDao.ReviewCount(conn, uNo);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Review> reviewList(String p_no) {
+		Connection conn = getConnection();
+		ArrayList<Review> list = rvDao.reviewList(conn, p_no);
+		close(conn);
+		return list;
+	}
 	
 }

@@ -40,9 +40,19 @@ public class MypageService {
 	}
 
 
+	//내가 남긴 리뷰 목록 조회
 	public ArrayList<Project> myreviewList(String uNo) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = mdao.myreviewList(conn, uNo);
+		close(conn);
+		return list;
+	}
+
+
+	//유저에게 남겨진 목록 조회
+	public ArrayList<Project> userRList(String uNo) {
+		Connection conn = getConnection();
+		ArrayList<Project> list = mdao.userRList(conn, uNo);
 		close(conn);
 		return list;
 	}

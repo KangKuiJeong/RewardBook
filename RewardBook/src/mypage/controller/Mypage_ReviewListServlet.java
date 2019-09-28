@@ -39,10 +39,10 @@ public class Mypage_ReviewListServlet extends HttpServlet {
 		String uNo = request.getParameter("uNo");
 		MypageService mypageservice = new MypageService();
 	         
-	         ArrayList<Project> list = mypageservice.myprojectList(uNo);
+	         ArrayList<Project> list = mypageservice.myreviewList(uNo);
 	         JSONObject sendJSON = new JSONObject();
 	         if(list.size() == 0) {
-	        	 sendJSON.put("result", "펀딩한 프로젝트가 없습니다.");
+	        	 sendJSON.put("result", "남긴 리뷰가 없습니다.");
 	        	 
 	        	 response.setContentType("application/json");
 		         PrintWriter out = response.getWriter();

@@ -54,7 +54,7 @@ public class Payment_CompleteServlet extends HttpServlet {
 			String[] aarr = r_amount.split(",");
 			String[] parr = r_price.split(",");
 			
-			int price= 0;
+			int price = 0;
 			for(int i = 0; i < parr.length; i++) {
 				price += (Integer.parseInt(parr[i]) * Integer.parseInt(aarr[i]));
 			}

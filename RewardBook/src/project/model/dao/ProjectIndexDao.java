@@ -223,7 +223,7 @@ public class ProjectIndexDao {
 						"from(select * " + 
 						"from(select * " + 
 						"from project " + 
-						"where p_category = '악세서리' and p_permission = 'Y') " + 
+						"where p_category = '뷰티' and p_permission = 'Y') " + 
 						"order by to_number(p_no) desc) " + 
 						"where rownum >=1 and rownum <= 3";
 		
@@ -266,7 +266,7 @@ public class ProjectIndexDao {
 						"from(select * " + 
 						"from(select * " + 
 						"from project " + 
-						"where p_category = '의류' and p_permission = 'Y') " + 
+						"where p_category = '패션' and p_permission = 'Y') " + 
 						"order by to_number(p_no) desc) " + 
 						"where rownum >=1 and rownum <= 3";
 		

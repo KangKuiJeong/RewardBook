@@ -109,12 +109,14 @@
 
 <div id="projectListWrap">
 	<div class="projectListHeader">
-		<div class="categoryName"><h2>전체보기</h2></div>
-		<div class="categorySearch">
-		<form action="" method="get">
-			<input type="text" name="search"  placeholder="검색">
-		</form>
-		<div><button onclick="javascript:location.href='/RewardBook/views/payment/complete.jsp'">검색</button></div>
+		<div class="searchArea">
+			<h3 class="categoryName">전체보기</h3>
+			<form class="searchForm" action="/RewardBook/indexSearch">
+				<label for="searchProject">
+					<input id="searchProject"  type="text" name="searchText"  placeholder="검색" >
+				<button class="searchButton" type="submit"><i class="icon search"></i></button>
+				</label>
+			</form>
 		</div>
 	</div>
 	<div class="invest_list">
@@ -122,12 +124,12 @@
 			<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
 		<div class="invest_box invest_item<%= i+1 %>">
 			<div class="invest_img">
-				<a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
+				<a class="invest_imgtag" href="/RewardBook/p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
 			<div class="invest_title">
 				<a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
 				<div class="invest_name">
 					<span class="invest_category"><%= list.get(i).getP_category() %></span>
-					<span class="invest_maker">IT세준</span>
+					<span class="invest_maker"><%= list.get(i).getU_name() %></span>
 				</div>
 			</div>
 			<div class="target_gauge"><span class="gauge" style="width:<%= percent %>%;"></span></div>
@@ -169,12 +171,12 @@
 					$(".invest_list").append(
 						"<div class='invest_box invest_item'>"
 						+ "<div class='invest_img'>"
-						+ "<a class='invest_imgtag' href='/RewardBook//p_sel?p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
+						+ "<a class='invest_imgtag' href='/RewardBook/p_sel?p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
 						+ "<div class='invest_title'>"
 						+ "<a href='/RewardBook//p_sel?p_no="+ json.list[count].no +"' class='invest_titlelink'><p>"+ decodeURIComponent(json.list[count].title).replace(/\+/gi, " ") +"</p></a>"
 						+ "<div class='invest_name'>"
 						+ "<span class='invest_category'>"+ decodeURIComponent(json.list[count].category).replace(/\+/gi, " ") +"</span>"
-						+ "<span class='invest_maker'>IT세준</span>"
+						+ "<span class='invest_maker'>"+ decodeURIComponent(json.list[count].name).replace(/\+/gi, " ") +"</span>"
 						+ "</div></div>"
 						+ "<div class='target_gauge'><span class='gauge' style='width:" + (json.list[count].nprice / json.list[count].tprice) * 100 + "%'></span></div>"
 						+ "<span class='percentage'>"+ parseInt((json.list[count].nprice / json.list[count].tprice) * 100) +"%</span>"
@@ -196,6 +198,8 @@
 			}
 		});
 	});
+	
+	
 
 </script>	
 
