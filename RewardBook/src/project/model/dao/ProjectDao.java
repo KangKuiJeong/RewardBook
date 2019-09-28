@@ -216,7 +216,14 @@ public class ProjectDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String query = "update project set p_title=?, p_category=?, p_tprice=?, p_edate=?, p_ddate=?, p_story=?, p_info=? where p_no=?";
+		String query = "update project set p_title=?, p_category=?, p_tprice=?, p_edate=?, p_ddate=?, p_info=?";
+		
+		if (project.getP_story() != null)
+			query += ", p_story=?";
+		if (project.getP_img() != null)
+			query += ", p_img=?";
+		
+		query += " where p_no=?";
 		
 		try {
 			
@@ -227,9 +234,21 @@ public class ProjectDao {
 			pstmt.setInt(3, project.getP_tprice());
 			pstmt.setDate(4, project.getP_edate());
 			pstmt.setDate(5, project.getP_ddate());
-			pstmt.setString(6, project.getP_story());
-			pstmt.setString(7, project.getP_info());
-			pstmt.setString(8, project.getP_no());
+			pstmt.setString(6, project.getP_info());
+			
+			if (project.getP_story() != null && project.getP_img() != null) {
+				pstmt.setString(7, project.getP_story());
+				pstmt.setString(8, project.getP_img());
+				pstmt.setString(9, project.getP_no());
+			} else if (project.getP_story() != null) {
+				pstmt.setString(7, project.getP_story());
+				pstmt.setString(8, project.getP_no());
+			} else if (project.getP_img() != null) {
+				pstmt.setString(7, project.getP_img());
+				pstmt.setString(8, project.getP_no());
+			} else {
+				pstmt.setString(7, project.getP_no());
+			}
 			
 			result = pstmt.executeUpdate();
 			
@@ -497,6 +516,7 @@ public class ProjectDao {
 				project.setU_name(rest.getString("u_name"));
 				project.setP_title(rest.getString("p_title"));
 				project.setP_category(rest.getString("p_category"));
+				project.setP_img(rest.getString("p_img"));
 				project.setP_story(rest.getString("p_story"));
 				project.setP_info(rest.getString("p_info"));
 				project.setP_nprice(rest.getInt("p_nprice"));

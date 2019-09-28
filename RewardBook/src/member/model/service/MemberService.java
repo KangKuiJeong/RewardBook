@@ -174,24 +174,28 @@ public class MemberService {
 	public ArrayList<Member> pageSelect(int start, int limit, String check1, String check2, String select1, String text1) {
 		Connection conn = getConnection();
 		ArrayList<Member> list = mdao.pageSelect(conn, start, limit, check1, check2, select1, text1);
+		close(conn);
 		return list;
 	}
 
 	public int pageCount(String check1, String check2, String select1, String text1) {
 		Connection conn = getConnection();
 		int result = mdao.pageCount(conn, check1, check2, select1, text1);
+		close(conn);
 		return result;
 	}
 
 	public Member detailMember(String u_no) {
 		Connection conn = getConnection();
 		Member member = mdao.detailMember(conn, u_no);
+		close(conn);
 		return member;
 	}
 
 	public int updateMember(Member member) {
 		Connection conn = getConnection();
 		int result = mdao.updateMember(conn, member);
+		close(conn);
 		return result;
 	}
 
@@ -203,6 +207,7 @@ public class MemberService {
 		} else {
 			rollback(conn);
 		}
+		close(conn);
 		return result;
 	}
 
@@ -214,6 +219,7 @@ public class MemberService {
 		} else {
 			rollback(conn);
 		}
+		close(conn);
 		return result;
 	}
 		
