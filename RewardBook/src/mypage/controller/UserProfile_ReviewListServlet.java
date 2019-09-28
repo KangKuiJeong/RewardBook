@@ -18,16 +18,16 @@ import mypage.model.service.MypageService;
 import project.model.vo.Project;
 
 /**
- * Servlet implementation class Mypage_ReviewListServlet
+ * Servlet implementation class UserProfile_ReviewListServlet
  */
-@WebServlet("/mr_list")
-public class Mypage_ReviewListServlet extends HttpServlet {
+@WebServlet("/ur_list")
+public class UserProfile_ReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Mypage_ReviewListServlet() {
+    public UserProfile_ReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +39,10 @@ public class Mypage_ReviewListServlet extends HttpServlet {
 		String uNo = request.getParameter("uNo");
 		MypageService mypageservice = new MypageService();
 	         
-	         ArrayList<Project> list = mypageservice.myreviewList(uNo);
+	         ArrayList<Project> list = mypageservice.userRList(uNo);
 	         JSONObject sendJSON = new JSONObject();
 	         if(list.size() == 0) {
-	        	 sendJSON.put("result", "남긴 리뷰가 없습니다.");
+	        	 sendJSON.put("result", "남겨진 리뷰가 없습니다.");
 	        	 
 	        	 response.setContentType("application/json");
 		         PrintWriter out = response.getWriter();
