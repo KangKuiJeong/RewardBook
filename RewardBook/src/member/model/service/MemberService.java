@@ -175,7 +175,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		ArrayList<Member> list = mdao.pageSelect(conn, start, limit, check1, check2, select1, text1);
 		close(conn);
-		
+
 		return list;
 	}
 
@@ -183,7 +183,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		int result = mdao.pageCount(conn, check1, check2, select1, text1);
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -191,7 +191,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		Member member = mdao.detailMember(conn, u_no);
 		close(conn);
-		
+
 		return member;
 	}
 
@@ -199,7 +199,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		int result = mdao.updateMember(conn, member);
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -212,7 +212,7 @@ public class MemberService {
 			rollback(conn);
 		}
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -225,6 +225,7 @@ public class MemberService {
 			rollback(conn);
 		}
 		close(conn);
+
 		
 		return result;
 	}
@@ -239,6 +240,7 @@ public class MemberService {
 		}
 		close(conn);
 		
+
 		return result;
 	}
 		

@@ -208,10 +208,10 @@
 											json.list[i].recent_title).replace(
 											/\+/gi, " ")).length;
 
-							if (stringTitle_length > 36) {
+							if (stringTitle_length > 34) {
 
 								var cutTitle = (decodeURIComponent(json.list[i].recent_title)
-										.replace(/\+/gi, " ")).substr(0, 36);
+										.replace(/\+/gi, " ")).substr(0, 34);
 								
 								times = json.list[i].recent_time;
 								mins = times / 60;
@@ -330,10 +330,10 @@
 											json.list[i].end_title).replace(
 											/\+/gi, " ")).length;
 
-							if (stringTitle_length > 36) {
+							if (stringTitle_length > 34) {
 
 								var cutTitle = (decodeURIComponent(json.list[i].end_title)
-										.replace(/\+/gi, " ")).substr(0, 36);
+										.replace(/\+/gi, " ")).substr(0, 34);
 						
 								times = json.list[i].end_time;
 								mins = times / 60;
@@ -642,17 +642,17 @@
 						<p class="mainSubtitle">이런 프로젝트는 어때요?</p>
 						<table id="mdPickTable">
 							<tr>
-								<td><a href="/RewardBook//p_sel?p_no=1"> <img
-										src="/RewardBook/resources/images/index/t1.PNG"> 작은 사각
-										공간 속 빛나는 너를 위한 소망! 탄생석 주얼리 세트
+								<td><a href="/RewardBook//p_sel?p_no=34"> <img
+										src="/RewardBook/resources/upfiles/project/pSample4.jpg">
+										[앵콜펀딩]나만을 위한 맞춤 큐레이션 샐러드 정기구독 서비스
 								</a></td>
-								<td><a href="/RewardBook//p_sel?p_no=2"> <img
-										src="/RewardBook/resources/images/index/t3.PNG">
-										[MD추천]직장인강추아이템! 간편한 비타민D 솔루션으로 건강하게! - 비타마우스
+								<td><a href="/RewardBook//p_sel?p_no=42"> <img
+										src="/RewardBook/resources/upfiles/project/t8.PNG">
+										영화관을 집으로, 빔프로젝터의 새로운 기준, 10만원대 '올뷰 시네마'
 								</a></td>
-								<td><a href="/RewardBook//p_sel?p_no=4"> <img
-										src="/RewardBook/resources/images/index/t2.PNG"> 당신의 손목은
-										소중하니까! 당신의 소중한 손목을 보호해줄 OFM팜레스트
+								<td><a href="/RewardBook//p_sel?p_no=35"> <img
+										src="/RewardBook/resources/upfiles/project/pSample5.PNG">
+										[리워드북 MD추천]실제로 모르는 사람이 물어봤어요 , 랫어릿 섬유향수
 								</a></td>
 							</tr>
 							<tr id="tdline2">
@@ -740,7 +740,7 @@
 				</li>
 				<li>
 					<div class="cateBack" id="cateBackBu">
-						<p class="cateTitle">Accessories</p>
+						<p class="cateTitle">Beauty</p>
 					</div>
 					<ul id="beList">
 					</ul>

@@ -29,10 +29,10 @@ public class RewardDao {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setString(1, reward.getP_no());
-			pstmt.setString(2, reward.getR_amount());
-			pstmt.setString(3, reward.getR_name());
-			pstmt.setString(4, reward.getR_detail());
-			pstmt.setInt(5, reward.getR_price());
+			pstmt.setString(5, reward.getR_amount());
+			pstmt.setString(2, reward.getR_name());
+			pstmt.setString(3, reward.getR_detail());
+			pstmt.setInt(4, reward.getR_price());
 			
 			result = pstmt.executeUpdate();
 			

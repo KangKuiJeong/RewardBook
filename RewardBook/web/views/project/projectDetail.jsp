@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
-<%@ page import="memo.model.vo.Memo" %>
+<%@ page import="memo.model.vo.Memo, review.model.vo.Review" %>
 <%
 	Project project = (Project)request.getAttribute("project"); 
 	Memo memo = (Memo)request.getAttribute("memo");
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
 	String message = (String)request.getAttribute("message");
+	Review review = (Review)request.getAttribute("review");
 %>
 
 <!DOCTYPE html>
@@ -66,6 +67,7 @@ i.wadizicon, i.icon::before, [class*="icon-"]::before {
     height: 200%;
     box-sizing: border-box;
 }
+.Avatar_profile{width:40px; height:40px; border-radius:50%; border:1px solid whitesmoke;}
 .Avatar_wrap__1H4VB.Avatar_border__3FglJ::before {content: "";}
 .Avatar_wrap__1H4VB .Avatar_picture__2CRnL {display: block; transition: opacity .15s ease-out; opacity: 0; border-radius: 50%; background: #fff no-repeat 50%/cover; background-image: none; width: 100%; height: 100%;}
 .CommentUserWrapper_container__2TCsu .CommentUserWrapper_main__3QYIJ {position: relative;}
@@ -458,7 +460,7 @@ strong{font-weight: 700;}
 .CommunityCommentWriteButton_button__1Ou6f {width: 343px;}
 .wz.button.gray, .wz.button.gray-outline {border-color: #90949c;}
 .wz.button.gray {background-color: #90949c; color: #fff;}
-.CommunityCommentItem_container__13cs_ {position: relative; padding-top: 16px; padding-bottom: 16px;}
+.CommunityCommentItem_container__13cs_ {position: relative; padding-top: 16px; padding-bottom: 16px; border-bottom: 1px solid lightgray;}
 .CommentUserWrapper_container__2TCsu {position: relative; padding: 0 0 0 56px;}
 .CommentUserWrapper_container__2TCsu .CommentUserWrapper_avatar__3LN-8 {position: absolute; top: 0; left: 0;}
 .CommentUserWrapper_container__2TCsu .CommentUserWrapper_main__3QYIJ {position: relative;}
@@ -487,6 +489,7 @@ strong{font-weight: 700;}
 .m_text{border:0; width:300px; height:150px}
 .memosubmit{float:right;  padding: 5px; margin: 4px 10px; background: white;border: 1px solid #ff9800;}
 
+#more_review{display:none; width:550px; height:auto; border:1px solid lightgray; padding:5px; overflow: auto; word-break:break-all}
 
 </style>
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
@@ -773,52 +776,238 @@ strong{font-weight: 700;}
 			</div>
 			
 			<div class="menu supporter">서포터</div>
+			
+			
 			<div class="menu review">
-				<div class="CommunityComment_container__hdKhk">
+			<!-- 리뷰  -->
+			<div class="CommunityComment_container__hdKhk">
 					<div class="CommunityCommentTitle_commentTitle__srmGL">
 						<div class="CommentTitle_container__3aa7m">
-							<p>응원·의견<em class="CommentTitle_count__3jfoJ">8</em></p>
+							<p>리뷰<em class="CommentTitle_count__3jfoJ">8</em></p>
 						</div>
 						<p class="CommunityCommentTitle_explanation__1fMjM">펀딩 종료 후에 남긴 응원·의견입니다.</p>
 					</div>
 					<div>
 						<div>
-							<button class="wz button gray CommunityCommentWriteButton_button__1Ou6f"  type="button">글남기기</button>
-						</div>
-					</div>
-					<div class="CommunityCommentItem_container__13cs_">
-						<div class="CommentUserWrapper_container__2TCsu CommunityCommentContent_container__2qU3A">
-							<div class="CommentUserWrapper_avatar__3LN-8">
-								<a href="#">
-									<span class="Avatar_wrap__1H4VB Avatar_border__3FglJ" style="width: 36px; height: 36px;">
-										<span class="Avatar_picture__2CRnL Avatar_visible__1GVUZ" style="background-image: url();"></span>
-									</span>
-								</a>
-							</div>
-							<div class="CommentUserWrapper_main__3QYIJ">
-								<div class="CommentUserInfo_container__O9ACk">
-									<span class="CommentUserInfo_name__2GoPA">
-										<a href="#">
-											<strong>최연영</strong>
-										</a>
-									</span>
-									<span class="CommentUserInfo_badge__3x37f CommentUserInfo_supporter__MY651">펀딩 참여자</span>
-									<span class="CommentUserInfo_date__ccohg">응원 | ??분전</span>
-								</div>
-								<div>
-									<div class="CommentTextContent_container__3dH_P">
-										<div class="CommentTextContent_contentBox__5dJa1">
-											 펀딩 및 지지서명 완료했어요.<br> 차선이탈경보장치가 있지만 아날로그 감성으로<br>펀딩합니다.
-											 <br><br>
-										</div>
+						<!-- 리뷰 작성 -->
+						<% if(loginMember != null){ %>
+							<button class="wz button gray CommunityCommentWriteButton_button__1Ou6f"  type="button" onclick="review_insert();">글남기기</button>
+								<div id="review_insert_area" style="width:340px; height:450px; display:none; border-bottom:0.5px solid lightgray;margin-bottom:20px;">
+									<div class="review_close" style="width:100%; height:30px; text-align:right;">
+										<span class="review_close_button" style="font-size:15px; cursor:pointer; margin-right:10px;" onclick="review_insert_close();">close</span>
+									</div>
+									<div class="review_insert_title">
+										제목<input type="text" id="review_title" placeholder="제목" style="width:100%;">
+									</div>
+									<div class="review_insert_text"style=" margin-top:10px;">
+										내용<textarea id="review_text" placeholder="글을 작성해주세요." style="width:100%; height:200px;resize:none;"></textarea>
+									</div>
+									<div class="review_insert_grade"style="width:340px; height:50px;">
+										평점<select style="width:100%;">
+											<option value="1">1점</option>
+											<option value="2">2점</option>
+											<option value="3">3점</option>
+											<option value="4">4점</option>
+											<option value="5">5점</option>
+										</select>
+									</div>
+									<div class="review_insert_img"style="width:100%; height:50px; margin-top:10px;">
+										이미지<input type="file"  style="width:100%; height:30px;">
 									</div>
 								</div>
-							</div>
-							
+								
+								<script>
+									function review_insert(){
+										$("#review_insert_area").show(800);
+									};
+									function review_insert_close(){
+										$("#review_insert_area").hide(300);
+									};
+								</script>
+						<% } %>
+						<!-- 리뷰 작성 -->						
 						</div>
 					</div>
-				</div>
+					<!--  -->
+				<div class="review"></div>
+				<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/rv_list",
+							data:{p_no : "<%= project.getP_no() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								var after = null;
+								var grade = null;
+								var loginmember = "<%= loginMember.getuNo() %>";
+								var reviewuser = null;
+								var userprofile = null;
+								var rv_img = null;
+								if(json.list){
+									for(var i in json.list){
+										//리뷰 남긴 날짜 며칠 전 인지 (ex: 3일전)
+										if(json.list[i].rv_after == 0){after = "오늘"}else{after = (json.list[i].rv_after + "일전")}
+										//평점 에따른 별점으로의 변환
+										if(json.list[i].rv_grade <= 1){
+												grade = "★"	
+											}else if(json.list[i].rv_grade <= 2){
+												grade = "★★"
+											}else if(json.list[i].rv_grade <= 3){
+												grade = "★★★"
+											}else if(json.list[i].rv_grade <= 4){
+												grade = "★★★★"
+											}else if(json.list[i].rv_grade <= 5){
+												grade = "★★★★★"
+											}
+										if(json.list[i].u_profile == null){
+											userprofile = "i.png"
+										}else{
+											userprofile = json.list[i].u_profile
+										}
+										//리뷰 남긴 유저가 로그인 사용자면 마이페이지  타 유저라면 유저프로필 페이지 서블릿으로
+										if(json.list[i].u_no == loginmember){
+											reviewuser = "/RewardBook/views/mypage/mypage.jsp"
+										}else{
+											reviewuser = ("/RewardBook/user_profile?u_no=" + json.list[i].u_no)
+										}
+										//리뷰 이미지가 있을경우
+										if(json.list[i].rv_img == null){
+											rv_img = ""
+										}else{
+											rv_img = ("<img style='width:270px; height:150px;' src='/RewardBook/resources/images/review/"+json.list[i].rv_img+"'>")
+										}
+										$(".review").html($(".review").html()
+												+"<div class='CommunityCommentItem_container__13cs_'>"
+												+"<div class='CommentUserWrapper_container__2TCsu CommunityCommentContent_container__2qU3A'>"
+												+"<div class='CommentUserWrapper_avatar__3LN-8'>"
+												+"<span class='Avatar_wrap__1H4VB Avatar_border__3FglJ' style='width: 36px; height: 36px;'>"
+												//유저 프로필 이미지
+												+"<img class='Avatar_profile' src='/RewardBook/resources/images/profileImg/"+userprofile+"'>"
+												+"</span>"
+												+"</div>"
+												+"<div class='CommentUserWrapper_main__3QYIJ'>"
+												+"<div class='CommentUserInfo_container__O9ACk'>"
+												+"<span class='CommentUserInfo_name__2GoPA'>"
+												//리뷰 남긴 유저가 로그인 사용자면 마이페이지  타 유저라면 유저프로필 페이지
+												+"<a href='" + reviewuser + "'>"
+												+"<strong>"
+												//작성자 이름
+												+ decodeURIComponent(json.list[i].u_name).replace(/\+/gi, " ")
+												+"</strong>"
+												+"</a>"
+												+"</span>"
+												+"<span class='CommentUserInfo_badge__3x37f CommentUserInfo_supporter__MY651'>펀딩 참여자</span>"
+												+"<span class='CommentUserInfo_date__ccohg'>리뷰 | "
+												//며칠전 리뷰인지
+												+ after
+												+" | 평점 "
+												//평점 
+												+ grade
+												+"</span>"
+												+"</div>"
+												+"<div>"
+												+"<div class='CommentTextContent_container__3dH_P'>"
+												+"<div class='CommentTextContent_contentBox__5dJa1'>"
+												//작성글
+												+ decodeURIComponent(json.list[i].rv_title).replace(/\+/gi, " ")
+												+"</div>"
+												+"</div>"
+												+"</div>"
+												+"<span class='review_more' onclick='review_more();' style='color:gray;font-size:15px; cursor:pointer;'> 더보기..</span>"
+												+"<div id='more_review'>"
+												+"<p onclick='close_more();' style='font-size:20px; font-weight:bold; cursor:pointer;'>x</p>"
+												+"<span class='more_area'>"
+												+ decodeURIComponent(json.list[i].rv_text).replace(/\+/gi, " ")
+												+"</span>"
+												//리뷰 이미지 있을경우
+												+"<div>"
+												+rv_img
+												+"</div>"
+												+"</div>"
+												+"</div>"
+												+"</div>"
+												+"</div>"
+												);
+									}
+								}
+								else if(json.result){
+									$(".review").html($(".review").html()
+											+"<div class='CommunityCommentItem_container__13cs_'>"
+											+"<div class='CommentUserWrapper_container__2TCsu CommunityCommentContent_container__2qU3A'>"
+											+"<div class='CommentUserWrapper_avatar__3LN-8'>"
+											+"<a href='#'>"
+											+"<span class='Avatar_wrap__1H4VB Avatar_border__3FglJ' style='width: 36px; height: 36px;'>"
+											+"<span class='Avatar_picture__2CRnL Avatar_visible__1GVUZ' style='background-image: url();'></span>"
+											+"</span>"
+											+"</a>"
+											+"</div>"
+											+"<div class='CommentUserWrapper_main__3QYIJ'>"
+											+"<div class='CommentUserInfo_container__O9ACk'>"
+											+"<span class='CommentUserInfo_name__2GoPA'>"
+											+"</span>"
+											+"</div>"
+											+"<div>"
+											+"<div class='CommentTextContent_container__3dH_P'>"
+											+"<div class='CommentTextContent_contentBox__5dJa1'>"
+											//작성글
+											+"<span>아직 남겨진 리뷰가 없습니다.</span>"
+											+"<br><br>"
+											+"</div>"
+											+"</div>"
+											+"</div>"
+											+"</div>"
+											+"</div>"
+											+"</div>"
+											);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
+	        		</div>
+	        		
+	        		<!-- 리뷰 더보기 눌렀을 경우 -->
+	        		<script type="text/javascript">
+	        			function review_more(){
+	        				$("#more_review").show();
+	        			};
+	        			function close_more(){
+	        				$("#more_review").hide();
+	        			};
+	        		</script>
+	        		<!-- 리뷰 더보기 눌렀을 경우 -->
+	        		
+			<!-- 리뷰 -->
 			</div>
+				<!-- 리뷰 갯 수 -->
+					<script type="text/javascript">
+						//리뷰 갯 수 출력
+						$(function(){
+							$.ajax({
+								url:"/RewardBook/review_count",
+								data:{uNo : "<%= project.getU_no() %>"},
+								type:"get",
+								dataType: "json",
+								success: function(data){
+									$(".CommentTitle_count__3jfoJ").html($(".CommentTitle_count__3jfoJ").val() + data.listCount);
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					</script>
+				<!-- 리뷰 갯 수-->
+			
 		</div>
 		
 		<div class="detail_Contents info">

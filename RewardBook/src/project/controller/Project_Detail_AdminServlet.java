@@ -37,7 +37,6 @@ public class Project_Detail_AdminServlet extends HttpServlet {
 		String p_no = request.getParameter("p_no");
 		
 		Project project = pservice.detailProject(p_no);
-		pservice.updateOC(p_no);
 		
 		RequestDispatcher view = null;
 		view = request.getRequestDispatcher("/views/admin/adminProjectDetail.jsp");

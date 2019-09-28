@@ -567,7 +567,7 @@ width:33.333%;
 	        		<script type="text/javascript">
 	        		$(function(){
 						$.ajax({
-							url:"/RewardBook/mr_list",
+							url:"/RewardBook/ur_list",
 							data:{uNo : "<%= member.getuNo() %>"},
 							type:"get",
 							dataType: "json",
