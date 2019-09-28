@@ -236,7 +236,7 @@ public class NoticeDao {
 				notice.setNt_oc(rset.getString("nt_oc"));
 				notice.setNt_type(rset.getString("nt_type"));
 				notice.setA_no(rset.getString("a_no"));
-				System.out.println(notice);
+			
 				list.add(notice);
 			
 			}
