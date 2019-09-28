@@ -32,7 +32,12 @@ public class Project_PermissionDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Project project = new ProjectService().detailProject(request.getParameter("p_no"));
+		ProjectService pservice = new ProjectService();
+		
+		String p_no = (String)request.getParameter("p_no");
+		
+		Project project = pservice.detailProject(p_no);
+		pservice.updateOC(p_no);
 
 		RequestDispatcher view = null;
 		view = request.getRequestDispatcher("/views/admin/adminPermissionDetail.jsp");

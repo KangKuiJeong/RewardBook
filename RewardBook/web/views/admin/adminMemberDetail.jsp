@@ -54,7 +54,7 @@
 	font-size : 25px;
 	font-weight : 500;
 }
-.main_area2_section1 .close, .main_area2_section1 .update{
+.main_area2_section1 .close, .main_area2_section1 .update {
 	width : 100px;
 	float : right;
 	cursor : pointer;
@@ -91,7 +91,7 @@
 	height : 50px;
 	margin : 0px 0px 0px 10px;
 }
-.main_area3_section1 .info div .input input[type=text], .main_area3_section1 .info div .input input[type=password] {
+.main_area3_section1 .info div .input input[type=text] {
 	width : 150px;
 	height : 30px;
 	border : 1px solid gray;
@@ -100,6 +100,10 @@
 	margin : 0px 0px 0px 20px;
 	text-align : center;
 }
+.main_area3_section1 .info div .input input[type=file] {
+	font-size : 16px;
+	margin : 2px 0px 0px 20px;
+}
 .main_area3_section1 .info .profile div[name=picture] {
 	width : 180px;
 	height : 180px;
@@ -107,7 +111,7 @@
 	border : 1px solid gray;
 	border-radius : 50%;
 }
-.main_area3_section1 .info div .input input[name=name], .main_area3_section1 .info div .input input[name=id], .main_area3_section1 .info div .input input[name=pw], .main_area3_section1 .info div .input input[name=phone], .main_area3_section1 .info div .input input[name=address], .main_area3_section1 .info div .input input[name=bankAccount], .main_area3_section1 .info div .input input[name=mileage], .main_area3_section1 .info div .input input[name=homepage], .main_area3_section1 .info div .input input[name=category] {
+.main_area3_section1 .info div .input input[name=name], .main_area3_section1 .info div .input input[name=id], .main_area3_section1 .info div .input input[name=phone], .main_area3_section1 .info div .input input[name=address], .main_area3_section1 .info div .input input[name=bankAccount], .main_area3_section1 .info div .input input[name=mileage], .main_area3_section1 .info div .input input[name=homepage], .main_area3_section1 .info div .input input[name=category] {
 	width : 300px;
 }
 .main_area3_section1 .info div .input input[name=intro]{
@@ -123,7 +127,7 @@
 	width : 300px;
 	clear : none;
 }
-.main_area3_section1 .info .name, .main_area3_section1 .info .id, .main_area3_section1 .info .pw {
+.main_area3_section1 .info .name, .main_area3_section1 .info .id, .main_area3_section1 .info .profileFile {
 	width : 600px;
 	clear : none;
 }
@@ -153,7 +157,10 @@
 	height : 50px;
 	clear : none;
 }
-.main_area3_section1 .info .name .input, .main_area3_section1 .info .id .input, .main_area3_section1 .info .pw .input {
+.main_area3_section1 .info .profileFile .input {
+	width : 500px;
+}
+.main_area3_section1 .info .name .input, .main_area3_section1 .info .id .input, .main_area3_section1 .info .profileFile .input {
 	width : 500px;
 }
 .main_area3_section1 .info .phone .input, .main_area3_section1 .info .hompage .input, .main_area3_section1 .info .category .input, .main_area3_section1 .info .category .joinDate {
@@ -165,7 +172,12 @@
 <script type="text/javascript">
 
 	$(function() {
-		
+		$(".main_area3_section1 .info .profileFile .input input[type=file]").on("change", function() {
+			if ("C:\\fakepath\\" + $(".main_area3_section1 .info .profileFile input[type=hidden]").val() != $(this).val()) {
+				$(".main_area3_section1 .info .profileFile .fileChange").val("변경됨");
+				$(".main_area3_section1 .info .profileFile .input .fileChangeShow").text("변경됨");
+			}
+		});
 	});
 
 	var updateFlag = false;
@@ -178,22 +190,7 @@
 			});
 			updateFlag = true;
 		} else {
-			str = 'page=member';
-			str += "&no=" + $(".main_area3_section1 .info .no .input input").val();
-			str += "&bno=" + $(".main_area3_section1 .info .bno .input input").val();
-			str += "&name=" + $(".main_area3_section1 .info .name .input input").val();
-			str += "&id=" + $(".main_area3_section1 .info .id .input input").val();
-			str += "&pw=" + $(".main_area3_section1 .info .pw .input input").val();
-			str += "&phone=" + $(".main_area3_section1 .info .phone .input input").val();
-			str += "&post=" + $(".main_area3_section1 .info .post .input input").val();
-			str += "&address=" + $(".main_area3_section1 .info .address .input input").val();
-			str += "&bank=" + $(".main_area3_section1 .info .bank .input input").val();
-			str += "&bankAccount=" + $(".main_area3_section1 .info .bankAccount .input input").val();
-			str += "&mileage=" + $(".main_area3_section1 .info .mileage .input input").val();
-			str += "&homepage=" + $(".main_area3_section1 .info .homepage .input input").val();
-			str += "&category=" + $(".main_area3_section1 .info .category .input input").val();
-			str += "&intro=" + $(".main_area3_section1 .info .intro .input input").val();
-			location.href="/RewardBook/m_update_a?" + str;
+			$(".submitForm").submit();
 		}
 	}
 	
@@ -222,11 +219,13 @@
 				</div>
 			</div>
 		</div>
+		<form class="submitForm" method="post" enctype="multipart/form-data" action="/RewardBook/m_update_a">
 		<div class="main_area3">
 			<div class="main_area3_section1">
+			<input type="hidden" name="no" value="<%= memberDetail.getuNo() %>">
 				<div class="info">
 					<div class="profile">
-						<div name="picture"><img src="/RewardBook/resources/images/profileImg/<%= memberDetail.getProfileImg() == null ? "i.png" : memberDetail.getuNo() %>" style="width:100%; height:100%; border-radius:50%;"></div>
+						<div name="picture"><img src="/RewardBook/resources/images/profileImg/<%= memberDetail.getProfileImg() == null ? "i.png" : memberDetail.getProfileImg() %>" style="width:100%; height:100%; border-radius:50%;"></div>
 					</div>
 					<div class="no">
 						<div class="text"><span>회원 번호</span></div>
@@ -244,9 +243,11 @@
 						<div class="text"><span>아이디 </span></div>
 						<div class="input"><input type="text" name="id" value="<%= memberDetail.getId() == null ? "-" : memberDetail.getId() %>" disabled></div>
 					</div>
-					<div class="pw">
-						<div class="text"><span>비밀번호 </span></div>
-						<div class="input"><input type="password" name="pw" value="<%= memberDetail.getPw() == null ? "-" : memberDetail.getPw() %>" disabled></div>
+					<div class="profileFile">
+						<div class="text"><span>프로필 사진</span></div>
+						<input type="hidden" value="<%= memberDetail.getProfileImg() == null ? "" : memberDetail.getProfileImg() %>">
+						<input type="hidden" class="fileChange" name="fileChange" value="">
+						<div class="input"><input type="file" name="profile" disabled><span class="fileChangeShow" style="color : red; font-size : 18px; font-weight : 600;"></span></div>
 					</div>
 					<div class="phone">
 						<div class="text"><span>전화번호</span></div>
@@ -291,6 +292,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 </div>
 </body>

@@ -1,5 +1,6 @@
 package member.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -34,51 +40,66 @@ public class Member_Update_AdminServlet extends HttpServlet {
 
 		MemberService mservice = new MemberService();
 
-		request.setCharacterEncoding("utf-8");
+		if (ServletFileUpload.isMultipartContent(request)) {
 
-		String page = request.getParameter("page") == null ? "" : (String)request.getParameter("page");
-		String no = (((String)request.getParameter("no")).equals("") || ((String)request.getParameter("no")).equals("-") ? "" : (String)request.getParameter("no"));
-		String bno = (((String)request.getParameter("bno")).equals("") || ((String)request.getParameter("bno")).equals("-") ? "" : (String)request.getParameter("bno"));
-		String name = (((String)request.getParameter("name")).equals("") || ((String)request.getParameter("name")).equals("-") ? "" : (String)request.getParameter("name"));
-		String id = (((String)request.getParameter("id")).equals("") || ((String)request.getParameter("id")).equals("-") ? "" : (String)request.getParameter("id"));
-		String pw = (((String)request.getParameter("pw")).equals("") || ((String)request.getParameter("pw")).equals("-") ? "" : (String)request.getParameter("pw"));
-		String phone = (((String)request.getParameter("phone")).equals("") || ((String)request.getParameter("phone")).equals("-") ? "" : (String)request.getParameter("phone"));
-		String post = (((String)request.getParameter("post")).equals("") || ((String)request.getParameter("post")).equals("-") ? "" : (String)request.getParameter("post"));
-		String address = (((String)request.getParameter("address")).equals("") || ((String)request.getParameter("address")).equals("-") ? "" : (String)request.getParameter("address"));
-		String bank = (((String)request.getParameter("bank")).equals("") || ((String)request.getParameter("bank")).equals("-") ? "" : (String)request.getParameter("bank"));
-		String bankAccount = (((String)request.getParameter("bankAccount")).equals("") || ((String)request.getParameter("bankAccount")).equals("-") ? "" : (String)request.getParameter("bankAccount"));
-		int mileage = Integer.parseInt(request.getParameter("mileage"));
-		String homepage = (((String)request.getParameter("homepage")).equals("") || ((String)request.getParameter("homepage")).equals("-") ? "" : (String)request.getParameter("homepage"));
-		String category = (((String)request.getParameter("category")).equals("") || ((String)request.getParameter("category")).equals("-") ? "" : (String)request.getParameter("category"));
-		String intro = (((String)request.getParameter("intro")).equals("") || ((String)request.getParameter("intro")).equals("-") ? "" : (String)request.getParameter("intro"));
+			int maxSize = 1024 * 1024 * 10;
+			
+			String filePath = request.getSession().getServletContext().getRealPath("/resources/images/profileImg");
+			MultipartRequest mrequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
-		Member member = new Member();
-		member.setuNo(no);
-		member.setuBno(bno);
-		member.setName(name);
-		member.setId(id);
-		member.setPw(pw);
-		member.setPhone(phone);
-		member.setPost(post);
-		member.setAddress(address);
-		member.setBank(bank);
-		member.setBankAccount(bankAccount);
-		member.setMileage(mileage);
-		member.setHomepage(homepage);
-		member.setCategory(category);
-		member.setIntro(intro);
-		
-		int result = mservice.updateMember_A(member);
+			String page = mrequest.getParameter("page") == null ? "" : (String)mrequest.getParameter("page");
+			String no = (((String)mrequest.getParameter("no")).equals("") || ((String)mrequest.getParameter("no")).equals("-") ? "" : (String)mrequest.getParameter("no"));
+			String bno = (((String)mrequest.getParameter("bno")).equals("") || ((String)mrequest.getParameter("bno")).equals("-") ? "" : (String)mrequest.getParameter("bno"));
+			String name = (((String)mrequest.getParameter("name")).equals("") || ((String)mrequest.getParameter("name")).equals("-") ? "" : (String)mrequest.getParameter("name"));
+			String id = (((String)mrequest.getParameter("id")).equals("") || ((String)mrequest.getParameter("id")).equals("-") ? "" : (String)mrequest.getParameter("id"));
+			String phone = (((String)mrequest.getParameter("phone")).equals("") || ((String)mrequest.getParameter("phone")).equals("-") ? "" : (String)mrequest.getParameter("phone"));
+			String post = (((String)mrequest.getParameter("post")).equals("") || ((String)mrequest.getParameter("post")).equals("-") ? "" : (String)mrequest.getParameter("post"));
+			String address = (((String)mrequest.getParameter("address")).equals("") || ((String)mrequest.getParameter("address")).equals("-") ? "" : (String)mrequest.getParameter("address"));
+			String bank = (((String)mrequest.getParameter("bank")).equals("") || ((String)mrequest.getParameter("bank")).equals("-") ? "" : (String)mrequest.getParameter("bank"));
+			String bankAccount = (((String)mrequest.getParameter("bankAccount")).equals("") || ((String)mrequest.getParameter("bankAccount")).equals("-") ? "" : (String)mrequest.getParameter("bankAccount"));
+			int mileage = Integer.parseInt(mrequest.getParameter("mileage"));
+			String homepage = (((String)mrequest.getParameter("homepage")).equals("") || ((String)mrequest.getParameter("homepage")).equals("-") ? "" : (String)mrequest.getParameter("homepage"));
+			String category = (((String)mrequest.getParameter("category")).equals("") || ((String)mrequest.getParameter("category")).equals("-") ? "" : (String)mrequest.getParameter("category"));
+			String intro = (((String)mrequest.getParameter("intro")).equals("") || ((String)mrequest.getParameter("intro")).equals("-") ? "" : (String)mrequest.getParameter("intro"));
 
-		RequestDispatcher view = null;
-		
-		if (result > 0) {
-			view = request.getRequestDispatcher("/views/admin/adminMemberDetail.jsp");
-			request.setAttribute("member", member);
-			request.setAttribute("page", page);
-			view.forward(request, response);
+			String fileChangeName = mrequest.getFilesystemName("profile");
+			
+			Member member = new Member();
+			member.setuNo(no);
+			member.setuBno(bno);
+			member.setName(name);
+			member.setId(id);
+			member.setPhone(phone);
+			member.setPost(post);
+			member.setAddress(address);
+			member.setBank(bank);
+			member.setBankAccount(bankAccount);
+			member.setMileage(mileage);
+			member.setHomepage(homepage);
+			member.setCategory(category);
+			member.setIntro(intro);
+
+			String fileChange = (String)mrequest.getParameter("fileChange");
+			if (fileChange.equals("")) {
+				File deleteFile = new File(filePath + "\\" + fileChange);
+				deleteFile.delete();
+			} else if (fileChangeName != null) {
+				member.setProfileImg(fileChangeName);
+			}
+			
+			int result = mservice.updateMember_A(member);
+
+			RequestDispatcher view = null;
+			
+			if (result > 0) {
+				view = request.getRequestDispatcher("/views/admin/adminMemberDetail.jsp");
+				request.setAttribute("member", member);
+				request.setAttribute("page", page);
+				view.forward(request, response);
+			}
+			
 		}
-		
+
 	}
 
 	/**
