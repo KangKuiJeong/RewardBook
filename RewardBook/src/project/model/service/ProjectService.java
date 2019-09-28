@@ -187,6 +187,7 @@ public class ProjectService {
 	public void updateOC(String p_no) {
 		Connection conn = getConnection();
 		int result = pDao.updateOC(conn, p_no);
+	}
 
 	public ArrayList<Project> listProject(String category) {
 		Connection conn = getConnection();
