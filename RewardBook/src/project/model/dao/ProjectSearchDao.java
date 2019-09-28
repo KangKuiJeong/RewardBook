@@ -51,6 +51,7 @@ public class ProjectSearchDao {
 					pro.setP_permission(rset.getString("p_permission"));
 					pro.setP_pdate(rset.getDate("p_pdate"));
 					pro.setP_return(rset.getString("p_return"));
+					pro.setP_img(rset.getString("p_img"));
 
 					project.add(pro);
 					

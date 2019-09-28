@@ -132,30 +132,30 @@ function test(){
 				<% } %>>
 				
 				<div id="checkBoxDiv">
-					
+					<p class="selectCategory">카테고리를 선택해주세요</p>
 					<div class="checkArea">
-						<input type="checkbox" value="주류" id="category" name="category">
-						<label for="category" id="saveIdtext">주류</label>
+						<input type="checkbox" value="패션" id="category" name="category">
+						<label for="category" id="saveIdtext">패션</label>
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="생활" id="category" name="category">
-						<label for="category" id="saveIdtext">생활</label>
+						<input type="checkbox" value="테크" id="category" name="category">
+						<label for="category" id="saveIdtext">테크</label>
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="건강" id="category" name="category">
-						<label for="category" id="saveIdtext">건강</label>
+						<input type="checkbox" value="리빙" id="category" name="category">
+						<label for="category" id="saveIdtext">리빙</label>
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="의류" id="category" name="category">
-						<label for="category" id="saveIdtext">의류</label>
+						<input type="checkbox" value="공연,예술" id="category" name="category">
+						<label for="category" id="saveIdtext">공연,예술</label>
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="IT" id="category" name="category">
-						<label for="category" id="saveIdtext"> IT</label>
+						<input type="checkbox" value="뷰티" id="category" name="category">
+						<label for="category" id="saveIdtext">뷰티</label>
 					</div>
 					
 					<div class="checkArea">
@@ -164,18 +164,18 @@ function test(){
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="악세서리" id="category" name="category">
-						<label for="category" id="saveIdtext">악세서리</label>
+						<input type="checkbox" value="식품" id="category" name="category">
+						<label for="category" id="saveIdtext">식품</label>
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="가방" id="category" name="category">
-						<label for="category" id="saveIdtext">가방</label>
+						<input type="checkbox" value="디자인" id="category" name="category">
+						<label for="category" id="saveIdtext">디자인</label>
 					</div>
 					
 					<div class="checkArea">
-						<input type="checkbox" value="신발" id="category">
-						<label for="category" id="saveIdtext">신발</label>
+						<input type="checkbox" value="스포츠" id="category">
+						<label for="category" id="saveIdtext">스포츠</label>
 					</div>
 					
 				</div>

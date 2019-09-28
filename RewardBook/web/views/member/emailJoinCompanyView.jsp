@@ -35,9 +35,9 @@
 			    <% }else{%>
 			
 				<%= request.getAttribute("message") %>
-				</p>
 				
 			    <% } %>
+			    </p>
 				<input type="text" id="bName" name="bName" placeholder="사업자명 입력">
 				<p id="userNameCheck"></p>
 				<input type="password" id="userPWd" name="userPWd" placeholder="비밀번호(특수문자,영문,숫자를 포함하여 8자리 이상)">

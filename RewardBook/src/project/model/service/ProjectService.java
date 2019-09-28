@@ -194,7 +194,7 @@ public class ProjectService {
 		}
 		close(conn);
 	}
-
+  
 	public ArrayList<Project> listProject(String category) {
 		Connection conn = getConnection();
 		ArrayList<Project> list = pDao.listProject(conn, category);
