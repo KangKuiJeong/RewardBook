@@ -76,7 +76,7 @@ public class MemberDao {
 		
 		String query = "insert into users values "
 				+ "('A0000'|| TO_CHAR(SEQ_U_PNO.nextval), null, ?, ?, ?, sysdate, null, null,"
-				+ "null, null, null, 0, null, null, null, null, null, null)";
+				+ "null, null, null, 0, null, null, null, null, null, null, null)";
 	
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -104,7 +104,7 @@ public class MemberDao {
 		
 		String query = "insert into users values "
 				+ "('B0000'|| TO_CHAR(SEQ_U_CNO.nextval), ?, ?, ?, ?, sysdate, null, null,"
-				+ "null, null, null, 0, null, null, null, ?, null, null)";
+				+ "null, null, null, 0, null, null, null, ?, null, null, null)";
 	
 		try {
 			pstmt = conn.prepareStatement(query);

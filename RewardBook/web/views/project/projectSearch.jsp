@@ -42,7 +42,7 @@
          <% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
       <div class="invest_box invest_item<%= i+1 %>">
          <div class="invest_img">
-            <a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/index/main1.jpg"></a></div>
+            <a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/upfiles/project/<%= list.get(i).getP_img() %>"></a></div>
          <div class="invest_title">
             <a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
             <div class="invest_name">
