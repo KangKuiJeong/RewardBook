@@ -1,5 +1,6 @@
 package project.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.sql.Date;
@@ -10,6 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import project.model.service.ProjectService;
 import project.model.vo.Project;
@@ -36,39 +42,62 @@ public class Project_UpdateServlet extends HttpServlet {
 
 		ProjectService pservice = new ProjectService();
 
-		request.setCharacterEncoding("utf-8");
+		if (ServletFileUpload.isMultipartContent(request)) {
 
-		String page = request.getParameter("page") == null ? "" : (String)request.getParameter("page");
-		String no = (String)request.getParameter("no");
-		String title = URLDecoder.decode((String)request.getParameter("title"), "UTF-8");
-		title = title.equals("") || title.equals("-") ? "" : title;
-		String category = (((String)request.getParameter("category")).equals("") || ((String)request.getParameter("category")).equals("-") ? "" : (String)request.getParameter("category"));
-		int tprice = Integer.parseInt(request.getParameter("tprice"));
-		Date edate = Date.valueOf((String)request.getParameter("edate"));
-		Date ddate = Date.valueOf((String)request.getParameter("ddate"));
-		String story = (((String)request.getParameter("story")).equals("") || ((String)request.getParameter("story")).equals("-") ? "" : (String)request.getParameter("story"));
-		String info = (((String)request.getParameter("info")).equals("") || ((String)request.getParameter("info")).equals("-") ? "" : (String)request.getParameter("info"));
+			int maxSize = 1024 * 1024 * 10;
+			
+			String filePath = request.getSession().getServletContext().getRealPath("/resources/upfiles/project");
+			MultipartRequest mrequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
-		Project project = new Project();
+			String page = mrequest.getParameter("page") == null ? "" : (String)mrequest.getParameter("page");
+			String no = (String)mrequest.getParameter("no");
+			String title = URLDecoder.decode((String)mrequest.getParameter("title"), "UTF-8");
+			title = title.equals("") || title.equals("-") ? "" : title;
+			String category = (((String)mrequest.getParameter("category")).equals("") || ((String)mrequest.getParameter("category")).equals("-") ? "" : (String)mrequest.getParameter("category"));
+			int tprice = Integer.parseInt(mrequest.getParameter("tprice"));
+			Date edate = Date.valueOf((String)mrequest.getParameter("edate"));
+			Date ddate = Date.valueOf((String)mrequest.getParameter("ddate"));
+			String info = (((String)mrequest.getParameter("info")).equals("") || ((String)mrequest.getParameter("info")).equals("-") ? "" : (String)mrequest.getParameter("info"));
+			String thumnailChangeName = mrequest.getFilesystemName("thumnail");
+			String storyChangeName = mrequest.getFilesystemName("story");
+			
+			Project project = new Project();
 
-		project.setP_no(no);
-		project.setP_title(title);
-		project.setP_category(category);
-		project.setP_tprice(tprice);
-		project.setP_edate(edate);
-		project.setP_ddate(ddate);
-		project.setP_story(story);
-		project.setP_info(info);
-		
-		int result = pservice.updateProject(project);
+			project.setP_no(no);
+			project.setP_title(title);
+			project.setP_category(category);
+			project.setP_tprice(tprice);
+			project.setP_edate(edate);
+			project.setP_ddate(ddate);
+			project.setP_info(info);
 
-		RequestDispatcher view = null;
-		
-		if (result > 0) {
-			view = request.getRequestDispatcher("/views/admin/adminProjectDetail.jsp");
-			request.setAttribute("project", project);
-			request.setAttribute("page", page);
-			view.forward(request, response);
+			String thumnailChange = (String)mrequest.getParameter("thumnailChange");
+			if (thumnailChange.equals("")) {
+				File deleteFile = new File(filePath + "\\" + thumnailChange);
+				deleteFile.delete();
+			} else if (thumnailChangeName != null) {
+				project.setP_img(thumnailChangeName);
+			}
+
+			String storyChange = (String)mrequest.getParameter("storyChange");
+			if (storyChange.equals("")) {
+				File deleteFile = new File(filePath + "\\" + storyChange);
+				deleteFile.delete();
+			} else if (storyChangeName != null) {
+				project.setP_story(storyChangeName);
+			}
+			
+			int result = pservice.updateProject(project);
+
+			RequestDispatcher view = null;
+			
+			if (result > 0) {
+				view = request.getRequestDispatcher("/views/admin/adminProjectDetail.jsp");
+				request.setAttribute("project", project);
+				request.setAttribute("page", page);
+				view.forward(request, response);
+			}
+			
 		}
 		
 	}

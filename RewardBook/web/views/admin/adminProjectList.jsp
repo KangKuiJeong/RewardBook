@@ -264,7 +264,7 @@
 			<div class="main_area3_section1">
 				<div class="table">
 					<table cellspacing="0" cellpadding='0' style="width : 1175px; table-layout: fixed;">
-						<tr><th style="width : 40px">번호</th><th style="width : 60px">카테고리</th><th style="width : 120px">프로젝트 제목</th><th style="width : 50px">메이커</th><th style="width : 30px">승인여부</th><th style="width : 30px">차수</th><th style="width : 50px">시작일</th></tr>
+						<tr><th style="width : 40px">번호</th><th style="width : 60px">카테고리</th><th style="width : 120px">프로젝트 제목</th><th style="width : 50px">메이커</th><th style="width : 30px">승인여부</th><th style="width : 30px">조회수</th><th style="width : 50px">시작일</th></tr>
 						<% for (Project project : list) { %>
 							<tr OnClick="location.href='/RewardBook/p_detail_a?page=project&p_no=<%= project.getP_no() %>'" style="cursor : pointer;"><td><%= project.getP_no() %></td><td><%= project.getP_category() %></td><td><%= project.getP_title().length() > 20 ? project.getP_title().substring(0, 20) + "..." : project.getP_title() %></td><td><%= project.getU_name() %></td><td><%= project.getP_permission() %></td><td><%= project.getP_count() %></td><td><%= project.getP_sdate() %></td></tr>
 						<% } %>

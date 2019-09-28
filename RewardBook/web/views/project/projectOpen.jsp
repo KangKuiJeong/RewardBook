@@ -97,7 +97,7 @@
 	margin : 20px 0px 0px 10px;
 }
 .area1 .edit ul li, .area1 .edit ul li input[type=submit] {
-	width : 150px;
+	width : 189px;
 	height : 40px;
 	border-top : 1px solid #E8DEDC;
 	border-bottom : 1px solid #E8DEDC;
@@ -120,16 +120,10 @@
 	border-bottom-right-radius : 5px;
 }
 .area1 .edit ul li[name=five] {
-	background : #bdbdbd;
-	margin : 0px 0px 0px 32px;
-	border-right : 1px solid #E8DEDC;
-	border-radius : 5px;
-}
-.area1 .edit ul li[name=six] {
 	margin : 0px 0px 0px 32px;
 	border : none;
 }
-.area1 .edit ul li[name=six] .submit {
+.area1 .edit ul li[name=five] .submit {
 	height : 42px;
 	background : #FFB202;
 	border-right : 1px solid #E8DEDC;
@@ -455,7 +449,7 @@ function submit() {
 		alertText = "프로젝트 제목이 올바르지 않습니다.";
 	} else if ($(".edit .container .text[name=one] .part4 .input input").val() == "0") {
 		alertText = "프로젝트 목표 금액이 올바르지 않습니다.";
-	} else if (!$(".edit .container .text[name=one] .part6 .input div .radio2").is(":checked")) {
+	} else if (!$(".edit .container .text[name=one] .part6 .input div .radio2").is(":checked") && !$(".edit .container .text[name=one] .part6 .input div .radio1").is(":checked")) {
 		alertText = "필수 확인사항을 확인해주세요.";
 	} else if ($(".edit .container .text[name=one] .part7 .input input").val() == "") {
 		alertText = "프로젝트 종료일이 올바르지 않습니다.";
@@ -579,7 +573,7 @@ $(function() {
 		$(".edit .container .text[name=one] .part3 .input span").text($(".edit .container .text[name=one] .part3 .input input").val().length + " / 40");
 	})
 	
-	$(".edit .container .text[name=one] .part4 .input input").on("focus", function() {
+	$(".edit .container .text[name=one] .part4 .input input[type=text]").on("focus", function() {
     	var x = $(this).val();
     	x = removeCommas(x);
     	$(this).val(x);
@@ -595,6 +589,7 @@ $(function() {
 	}).on("keyup", function() {
     	$(this).val($(this).val().replace(/[^0-9]/g,""));
 	});
+	
 });
 </script>
 </head>
@@ -641,8 +636,7 @@ $(function() {
 					<li name="two">리워드</li>
 					<li name="three">스토리</li>
 					<li name="four">정산</li>
-					<li name="five">미리보기</li>
-					<li name="six"><div class="submit" onclick="submit();">신청하기</div></li>
+					<li name="five"><div class="submit" onclick="submit();">신청하기</div></li>
 				</ul>
 			</div>
 			<div class="container">
@@ -690,14 +684,14 @@ $(function() {
 						</div>
 						<div class="input">
 							<select name="category">
-								<option value="반려동물" selected>반려동물</option>
-								<option value="IT">IT</option>
-								<option value="생활용품">생활용품</option>
-								<option value="음식">음식</option>
-								<option value="하나">하나</option>
-								<option value="두시기">두시기</option>
-								<option value="석삼">석삼</option>
-								<option value="너구리">너구리</option>
+								<option value="fashion" selected>패션</option>
+								<option value="tech">테크</option>
+								<option value="living">리빙</option>
+								<option value="art_show">공연·예술</option>
+								<option value="beauty">뷰티·악세사리</option>
+								<option value="travel">여행</option>
+								<option value="food">식품</option>
+								<option value="design">디자인</option>
 							</select>
 						</div>
 					</div>
@@ -708,7 +702,7 @@ $(function() {
 						<div class="input">
 							<span style="font-size : 18px; font-weight : 600;">Q. 리워드가 타 크라우드펀딩사 및 온라인 커머스,자사 홈페이지 등 다른<br>판매처에서 유통된 적이 있거나 현재 유통 중인가요?<br></span>
 							<div style="width : 540px; height : 48px; margin : 10px 0px 0px 0px;"><span>선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트 취소 및 위약벌이 부과될 수 있습니다.</span></div>
-							<div style="width : 560px; height : 30px; margin : 10px 0px 0px 0px;"><input type="radio" class="radio1" name="radio" style="margin : 0px 5px 0px 0px" checked><span>아니요. 다른 곳에서 유통한 적이 없는 처음 선보이는 제품입니다.</span></div>
+							<div style="width : 560px; height : 30px; margin : 10px 0px 0px 0px;"><input type="radio" class="radio1" name="radio" style="margin : 0px 5px 0px 0px"><span>아니요. 다른 곳에서 유통한 적이 없는 처음 선보이는 제품입니다.</span></div>
 							<div style="width : 560px; height : 30px; margin : 0px 0px 0px 0px;"><input type="radio" class="radio2" name="radio" style="margin : 0px 5px 0px 0px"><span>예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</span></div>
 						</div>
 					</div>

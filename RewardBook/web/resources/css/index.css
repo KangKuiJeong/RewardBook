@@ -71,7 +71,7 @@
  	.indexCategory ul li{ float:left; width:31%; border:1px solid #d5d5d5; margin:0 10px; text-align:center;}
  	.cateBack { width:100%; height:182px; }
  	#cateBackIt{ background-image: url( "/RewardBook/resources/images/index/categoryIT.png"); }
- 	#cateBackBu{ background-image: url( "/RewardBook/resources/images/index/categoryAc.png"); }
+ 	#cateBackBu{ background-image: url( "/RewardBook/resources/images/index/categoryBu.png"); }
  	#cateBackFa{ background-image: url( "/RewardBook/resources/images/index/categoryFa.png"); }
  	.cateTitle { float:right; font-weight:bold; font-size:40px; position: relative; margin-top: 105px; 
  				 margin-right: 25px; color:#fff;}

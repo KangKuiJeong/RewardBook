@@ -96,9 +96,6 @@
 	float : left;
 	clear : none;
 }
-.main_area3_section1 .info .story {
-	height : 112px;
-}
 .main_area3_section1 .info .info, .main_area3_section1 .info .return {
 	height : 76px;
 }
@@ -115,6 +112,10 @@
 	font-size : 16px;
 	margin : 0px 0px 0px 20px;
 	text-align : center;
+}
+.main_area3_section1 .info div .input input[type=file] {
+	font-size : 16px;
+	margin : 2px 0px 0px 20px;
 }
 .main_area3_section1 .info div .input input[name=no], .main_area3_section1 .info div .input input[name=name], .main_area3_section1 .info div .input input[name=count] {
 	width : 150px;
@@ -164,7 +165,18 @@
 <script type="text/javascript">
 
 	$(function() {
-		
+		$(".main_area3_section1 .info .thumnail .input input[type=file]").on("change", function() {
+			if ("C:\\fakepath\\" + $(".main_area3_section1 .info .thumnail input[type=hidden]").val() != $(this).val()) {
+				$(".main_area3_section1 .info .thumnail .fileChange").val("변경됨");
+				$(".main_area3_section1 .info .thumnail .input .fileChangeShow").text("변경됨");
+			}
+		});
+		$(".main_area3_section1 .info .story .input input[type=file]").on("change", function() {
+			if ("C:\\fakepath\\" + $(".main_area3_section1 .info .story input[type=hidden]").val() != $(this).val()) {
+				$(".main_area3_section1 .info .story .fileChange").val("변경됨");
+				$(".main_area3_section1 .info .story .input .fileChangeShow").text("변경됨");
+			}
+		});
 	});
 
 	var updateFlag = false;
@@ -181,16 +193,7 @@
 			});
 			updateFlag = true;
 		} else {
-			str = 'page=project';
-			str += "&no=" + $(".main_area3_section1 .info .no .input input").val();
-			str += "&title=" + encodeURI($('.main_area3_section1 .info .title .input input').val());
-			str += "&category=" + $(".main_area3_section1 .info .category .input input").val();
-			str += "&tprice=" + $(".main_area3_section1 .info .tprice .input input").val();
-			str += "&edate=" + $(".main_area3_section1 .info .edate .input input").val();
-			str += "&ddate=" + $(".main_area3_section1 .info .ddate .input input").val();
-			str += "&story=" + $(".main_area3_section1 .info .story .textarea textarea").val();
-			str += "&info=" + $(".main_area3_section1 .info .info .textarea textarea").val();
-			location.href="/RewardBook/p_update?" + str;
+			$(".submitForm").submit();
 		}
 	}
 	
@@ -219,6 +222,8 @@
 				</div>
 			</div>
 		</div>
+		<form class="submitForm" method="post" enctype="multipart/form-data" action="/RewardBook/p_update">
+		<input type="hidden" name="no" value="<%= projectDetail.getP_no() %>">
 		<div class="main_area3">
 			<div class="main_area3_section1">
 				<div class="info">
@@ -258,17 +263,21 @@
 						<div class="text"><span>마감일 </span></div>
 						<div class="input"><input type="text" name="edate" value="<%= projectDetail.getP_edate() == null ? "-" : projectDetail.getP_edate() %>" disabled></div>
 					</div>
-					<div class="secondary">
-						<div class="text"><span>차수 </span></div>
-						<div class="input"><input type="text" name="secondary" value="<%= projectDetail.getP_secondary() == null ? "-" : projectDetail.getP_secondary() %>" disabled></div>
-					</div>
 					<div class="ddate">
 						<div class="text"><span>발송일 </span></div>
 						<div class="input"><input type="text" name="ddate" value="<%= projectDetail.getP_ddate() == null ? "-" : projectDetail.getP_ddate() %>" disabled></div>
 					</div>
+					<div class="thumnail">
+						<div class="text"><span>썸네일</span></div>
+						<input type="hidden" value="<%= projectDetail.getP_img() == null ? "" : projectDetail.getP_img() %>">
+						<input type="hidden" class="fileChange" name="thumnailChange" value="">
+						<div class="input"><input type="file" name="thumnail" disabled><span class="fileChangeShow" style="color : red; font-size : 18px; font-weight : 600;"></span></div>
+					</div>
 					<div class="story">
 						<div class="text"><span>본문</span></div>
-						<div class="textarea"><textarea name="story" rows="5" disabled><%= projectDetail.getP_story() == null ? "-" : projectDetail.getP_story() %></textarea></div>
+						<input type="hidden" value="<%= projectDetail.getP_story() == null ? "" : projectDetail.getP_story() %>">
+						<input type="hidden" class="fileChange" name="storyChange" value="">
+						<div class="input"><input type="file" name="story" disabled><span class="fileChangeShow" style="color : red; font-size : 18px; font-weight : 600;"></span></div>
 					</div>
 					<div class="info">
 						<div class="text"><span>안내</span></div>
@@ -289,6 +298,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 </div>
 </body>
