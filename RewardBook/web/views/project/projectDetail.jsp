@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
+<%@ page import="project.model.vo.ProjectNews" %>
 <%@ page import="memo.model.vo.Memo, review.model.vo.Review" %>
 <%
 	Project project = (Project)request.getAttribute("project"); 
@@ -8,6 +9,7 @@
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
 	String message = (String)request.getAttribute("message");
+	ArrayList<ProjectNews> newsList = (ArrayList<ProjectNews>)request.getAttribute("list");
 	Review review = (Review)request.getAttribute("review");
 %>
 
@@ -652,6 +654,74 @@ strong{font-weight: 700;}
 		<div class="detail_Nav">
 			<div class="menu content"><%= project.getP_story() %></div>
 			<div class="menu funding_info">펀딩안내</div>
+			<div class="menu project_news">
+				<div class="project_news"  id="project_news">
+					<div class="newsspace"></div>
+			<input type="hidden" id="pn_o" value="<%= project.getP_no() %>">
+			
+				</div>
+			<script type="text/javascript">
+			$(function(){
+			
+				$.ajax({
+					url: "p_ajax_nlist",
+					type: "get",
+ 					data : {pn_o: $("#pn_o").val()}, 
+					dataType: "text",
+					success: function(data){
+						//1.문자를 객체로 변환 처리
+						var obj = eval("("+data+")");
+						//2.객체를  문자로 바꿈
+						 var jsonStr = JSON.stringify(obj);
+						//3. 문자를 배열(제이슨)로바꾼것 
+						var json = JSON.parse(jsonStr);
+						var values = "";
+						
+					
+		
+						for(var i in json.list){
+						
+							values += 
+									"<li class='newsmain'>"					
+									+"<p class='newstitle'>" + "<img src='/RewardBook/resources/images/project/projectNews/새소식아이콘.png' class='pNewsicon'>" +  decodeURIComponent(json.list[i].pn_title).replace(/\+/gi, " ") 
+									+"</p>"
+									+ "<br><p class='newstext'>" +  decodeURIComponent(json.list[i].pn_text).replace(/\+/gi, " ") + "</p>"
+									+ "<p class='newsdate'>" + decodeURIComponent(json.list[i].pn_date).replace(/\+/gi, " ") + "</p>"
+									+"</li>" 
+					
+						} //for in
+						
+						
+						
+						
+						//테이블에 추가
+						 $("#project_news").html($("#project_news").html() + values); 
+					
+						
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						console.log("error : " + textStatus);
+					}
+					
+				});  //ajax 
+			
+			
+			});
+			</script>
+			<%if ( loginMember != null && loginMember.getuNo().equals( project.getU_no()  ) ){ %>
+			<button id="newsinsert" class="newsbutton" onclick="newsinsert();">글쓰기</button>			
+			<% } %>
+			<script type="text/javascript">
+			function newsinsert(){
+				$('#newsFormDiv').css('display','block');				
+			}
+			
+			function newsclose(){
+			$('#newsFormDiv').css('display','none');		
+			}
+			</script>
+			<div class="newsspace2"></div>
+			</div><!-- //새소식 -->
 			<div class="menu project_news">새소식</div>
 			<div class="menu community">
 				<div class="RewardCommunityPage_wrapper__28sk6">
