@@ -164,7 +164,6 @@
 						<dt>
 							<label class="rb checkbox">
 								<input type="checkbox" id="ckrw103382" class="reward-check" name="rewardId" value="<%= reward.getR_no() %>" />
-								<input type="hidden" name="p_no" value="<%= project.getP_no() %>">
 								<span></span>
 							</label>
 						</dt>
@@ -176,6 +175,7 @@
 							<input type="hidden" id="nameRw<%= reward.getR_no() %>" value="<%= reward.getR_name() %>" /> 
 							<input type="hidden" id="remainCnt<%= reward.getR_no() %>" class="remain-cnt" value="<%= reward.getR_amount() %>" /> 
 							<input type="hidden" id="limitCnt<%= reward.getR_no() %>" class="limit-cnt" value="800" /> 
+							<input type="hidden" name="p_no" value="<%= project.getP_no() %>">
 							<label for="ckrw103382">
 								<p class="sum"><%= reward.getR_price() %>	원 펀딩합니다.</p>
 								<p class="number">

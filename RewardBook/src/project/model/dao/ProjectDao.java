@@ -162,7 +162,7 @@ public class ProjectDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project join users using(u_no) where p_category = ? and p_permission = 'Y'";
+		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return, u_name from project join users using(u_no) where p_category = ? and p_permission = 'Y'";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -775,6 +775,9 @@ public class ProjectDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
 		}
 		
 		return list;
@@ -803,9 +806,55 @@ public class ProjectDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return list;
+	}
+
+	public int projectCount(Connection conn, String p_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update project set p_count = p_count + 1 where p_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int updatePayment(Connection conn, String p_no, int price) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update project set p_nprice = p_nprice + ? where p_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, price);
+			pstmt.setString(2, p_no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

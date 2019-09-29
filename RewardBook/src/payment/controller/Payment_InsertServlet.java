@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
 import payment.model.service.PaymentService;
 import payment.model.service.RewardService;
 import payment.model.vo.Payment;
+import project.model.service.ProjectService;
 
 /**
  * Servlet implementation class Payment_InsertServlet
@@ -62,7 +62,7 @@ public class Payment_InsertServlet extends HttpServlet {
 		
 		Payment pay = null;
 		int result2 = 0;
-		
+		int result3 = 0;
 			pay = new Payment();
 			
 			pay.setP_no(p_no);
@@ -75,7 +75,10 @@ public class Payment_InsertServlet extends HttpServlet {
 			pay.setPm_popen(popen);
 			pay.setPm_oid(order_id);
 			
+			//결제 정보 추가
 			result2 = new PaymentService().insertPayment(pay);
+			//프로젝트에 현재금액 업데이트
+			result3 = new ProjectService().updatePayment(p_no, price);
 			
 			if(result2 <= 0) {
 				RequestDispatcher view = request.getRequestDispatcher("/p_sel?p_no="+p_no);

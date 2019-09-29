@@ -56,7 +56,10 @@ public class Project_SelectServlet extends HttpServlet {
 		}
 		
 		Project project = new ProjectService().selectProject(p_no);
-
+		
+		//조회수 1증가 처리용
+		int result = new ProjectService().projectCount(p_no);
+		
 		RequestDispatcher view = null;
 		if(project != null) {
 			view = request.getRequestDispatcher("views/project/projectDetail.jsp");

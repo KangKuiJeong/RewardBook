@@ -50,57 +50,63 @@
 	</div>
 <div class="categoryWrap">
 	<div class="categoryList">
+		<a class="category fashionIcon" href="/RewardBook/p_list">
+			<span class="categoryIcon">
+				<span class="iconImage all"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="imageName">전체보기</span>
+			</span>
+		</a>
 		<a class="category fashionIcon" href="/RewardBook/p_list?category=fashion">
 			<span class="categoryIcon">
-				<span class="iconImage fashion"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage fashion"><img src="/RewardBook/resources/images/project/fashionimg.png"></span><br>
 				<span class="imageName">패션</span>
 			</span>
 		</a>
 		<a class="category techIcon" href="/RewardBook/p_list?category=tech">
 			<span class="categoryIcon">
-				<span class="iconImage fashion"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage tech"><img src="/RewardBook/resources/images/project/techimg.png"></span><br>
 				<span class="imageName">테크</span>
 			</span>
 		</a>
 		<a class="category livingIcon" href="/RewardBook/p_list?category=living">
 			<span class="categoryIcon">
-				<span class="iconImage living"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage living"><img src="/RewardBook/resources/images/project/livingimg.png"></span><br>
 				<span class="imageName">리빙</span>
 			</span>
 		</a>
 		<a class="category concertIcon" href="/RewardBook/p_list?category=art_show">
 			<span class="categoryIcon">
-				<span class="iconImage concert"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage concert"><img src="/RewardBook/resources/images/project/art_showimg.png"></span><br>
 				<span class="imageName">공연,예술</span>
 			</span>
 		</a>
 		<a class="category beautyIcon" href="/RewardBook/p_list?category=beauty">
 			<span class="categoryIcon">
-				<span class="iconImage beauty"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage beauty"><img src="/RewardBook/resources/images/project/beautyimg.png"></span><br>
 				<span class="imageName">뷰티</span>
 			</span>
 		</a>
 		<a class="category travalIcon" href="/RewardBook/p_list?category=travel">
 			<span class="categoryIcon">
-				<span class="iconImage traval"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png";></span><br>
+				<span class="iconImage traval"><img src="/RewardBook/resources/images/project/travelimg.png"></span><br>
 				<span class="imageName">여행</span>
 			</span>
 		</a>
 		<a class="category concertIcon" href="/RewardBook/p_list?category=food">
 			<span class="categoryIcon">
-				<span class="iconImage concert"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage concert"><img src="/RewardBook/resources/images/project/foodimg.png"></span><br>
 				<span class="imageName">식품</span>
 			</span>
 		</a>
 		<a class="category beautyIcon" href="/RewardBook/p_list?category=design">
 			<span class="categoryIcon">
-				<span class="iconImage beauty"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+				<span class="iconImage beauty"><img src="/RewardBook/resources/images/project/designimg.png"></span><br>
 				<span class="imageName">디자인</span>
 			</span>
 		</a>
 		<a class="category travalIcon" href="/RewardBook/p_list?category=sports">
 			<span class="categoryIcon">
-				<span class="iconImage traval"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png";></span><br>
+				<span class="iconImage traval"><img src="/RewardBook/resources/images/project/sportsimg.png"></span><br>
 				<span class="imageName">스포츠</span>
 			</span>
 		</a>
@@ -114,30 +120,54 @@
 			<form class="searchForm" action="/RewardBook/indexSearch">
 				<label for="searchProject">
 					<input id="searchProject"  type="text" name="searchText"  placeholder="검색" >
-				<button class="searchButton" type="submit"><i class="icon search"></i></button>
+				<button class="searchButton" type="button" onclick="searchSubmit();"><i class="icon search"></i></button>
 				</label>
 			</form>
 		</div>
 	</div>
 	<div class="invest_list">
-			<% for(int i = 0; i < listcount; i++){ %>
-			<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
-		<div class="invest_box invest_item<%= i+1 %>">
-			<div class="invest_img">
-				<a class="invest_imgtag" href="/RewardBook/p_sel?category=fashion&p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/images/bgimg.jpg"></a></div>
-			<div class="invest_title">
-				<a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
-				<div class="invest_name">
-					<span class="invest_category"><%= list.get(i).getP_category() %></span>
-					<span class="invest_maker"><%= list.get(i).getU_name() %></span>
-				</div>
-			</div>
-			<div class="target_gauge"><span class="gauge" style="width:<%= percent %>%;"></span></div>
-			<span class="percentage"><%= percent %>%</span>
-			<span class="invest_info nowprice"><%= list.get(i).getP_nprice() %>원</span>
-			<span class="invest_info enddate"><%= list.get(i).getP_rdate() %>일 남음</span>
-		</div>
-		
+			<% if(list.size() > 0){ %>
+				<% if(list.size() < listcount){ %>
+				<% for(int i = 0; i < list.size(); i++){ %>
+				<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
+					<div class="invest_box invest_item<%= i+1 %>">
+						<div class="invest_img">
+							<a class="invest_imgtag" href="/RewardBook/p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/upfiles/project/<%= list.get(i).getP_img() %>"></a></div>
+						<div class="invest_title">
+							<a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
+							<div class="invest_name">
+								<span class="invest_category"><%= list.get(i).getP_category() %></span>
+								<span class="invest_maker"><%= list.get(i).getU_name() %></span>
+							</div>
+						</div>
+						<div class="target_gauge"><span class="gauge" style="width:<%= percent %>%;"></span></div>
+						<span class="percentage"><%= percent %>%</span>
+						<span class="invest_info nowprice"><%= list.get(i).getP_nprice() %>원</span>
+						<span class="invest_info enddate"><%= list.get(i).getP_rdate() %>일 남음</span>
+					</div>
+				<% } %>
+				<% }else{ %>
+					<% for(int i = 0; i < listcount; i++){ %>
+					<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
+						<div class="invest_box invest_item<%= i+1 %>">
+							<div class="invest_img">
+								<a class="invest_imgtag" href="/RewardBook/p_sel?p_no=<%= list.get(i).getP_no() %>"><img src="/RewardBook/resources/upfiles/project/<%= list.get(i).getP_img() %>"></a></div>
+							<div class="invest_title">
+								<a href="/RewardBook//p_sel?p_no=<%= list.get(i).getP_no() %>" class="invest_titlelink"><p><%= list.get(i).getP_title() %></p></a>
+								<div class="invest_name">
+									<span class="invest_category"><%= list.get(i).getP_category() %></span>
+									<span class="invest_maker"><%= list.get(i).getU_name() %></span>
+								</div>
+							</div>
+							<div class="target_gauge"><span class="gauge" style="width:<%= percent %>%;"></span></div>
+							<span class="percentage"><%= percent %>%</span>
+							<span class="invest_info nowprice"><%= list.get(i).getP_nprice() %>원</span>
+							<span class="invest_info enddate"><%= list.get(i).getP_rdate() %>일 남음</span>
+						</div>
+					<% } %>
+				<% } %>
+			<% }else{ %>
+				등록된 프로젝트가 없습니다.
 			<% } %>
 </div>
 
@@ -172,7 +202,7 @@
 					$(".invest_list").append(
 						"<div class='invest_box invest_item'>"
 						+ "<div class='invest_img'>"
-						+ "<a class='invest_imgtag' href='/RewardBook/p_sel?category=fashion&p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/images/bgimg.jpg'></a></div>"
+						+ "<a class='invest_imgtag' href='/RewardBook/p_sel?category=fashion&p_no="+ json.list[count].no +"'><img src='/RewardBook/resources/upfiles/project/" + json.list[count].img + "'></a></div>"
 						+ "<div class='invest_title'>"
 						+ "<a href='/RewardBook//p_sel?p_no="+ json.list[count].no +"' class='invest_titlelink'><p>"+ decodeURIComponent(json.list[count].title).replace(/\+/gi, " ") +"</p></a>"
 						+ "<div class='invest_name'>"
@@ -199,6 +229,12 @@
 			}
 		});
 	});
+	
+	function searchSubmit(){
+		if($('#searchProject').val() != ""){
+			$('.searchForm').submit();
+		}
+	}
 
 </script>	
 

@@ -48,36 +48,28 @@ public class Project_ListServlet extends HttpServlet {
 				ArrayList<Project> list = new ProjectService().listProject();
 			
 				RequestDispatcher view = null;
-				if(list.size() > 0) {
+				
 					view = request.getRequestDispatcher("views/project/projectMain.jsp");
 					request.setAttribute("list", list);
 					request.setAttribute("result", result);
 					view.forward(request, response);
-				}else {
-					view = request.getRequestDispatcher("views/common/error.jsp");
-					request.setAttribute("message", "프로젝트 메인 조회 실패!");
-					view.forward(request, response);
-				}
+				
 			
 			}
 		}else {
-
+			System.out.println(category);
 			int result = new ProjectService().countProject();
 			
 			if(result > 0) {
 				ArrayList<Project> list = new ProjectService().listProject(category);
-			
+				System.out.println(list.size());
 				RequestDispatcher view = null;
-				if(list.size() > 0) {
+				
 					view = request.getRequestDispatcher("views/project/category/"+category+".jsp");
 					request.setAttribute("list", list);
 					request.setAttribute("result", result);
 					view.forward(request, response);
-				}else {
-					view = request.getRequestDispatcher("views/common/error.jsp");
-					request.setAttribute("message", "프로젝트 메인 조회 실패!");
-					view.forward(request, response);
-				}
+				
 			
 			}
 		}
