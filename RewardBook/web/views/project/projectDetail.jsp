@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
-<%@ page import="memo.model.vo.Memo" %>
 <%@ page import="project.model.vo.ProjectNews" %>
 <%@ page import="memo.model.vo.Memo, review.model.vo.Review" %>
 
@@ -11,7 +10,6 @@
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
 	String message = (String)request.getAttribute("message");
-
 	ArrayList<ProjectNews> newsList = (ArrayList<ProjectNews>)request.getAttribute("list");
 	Review review = (Review)request.getAttribute("review");
 %>
@@ -696,6 +694,9 @@ strong{font-weight: 700;}
 						//3. 문자를 배열(제이슨)로바꾼것 
 						var json = JSON.parse(jsonStr);
 						var values = "";
+						
+					
+		
 						for(var i in json.list){
 						
 							values += 
@@ -704,8 +705,13 @@ strong{font-weight: 700;}
 									+"</p>"
 									+ "<br><p class='newstext'>" +  decodeURIComponent(json.list[i].pn_text).replace(/\+/gi, " ") + "</p>"
 									+ "<p class='newsdate'>" + decodeURIComponent(json.list[i].pn_date).replace(/\+/gi, " ") + "</p>"
-									+"</li>"
+									+"</li>" 
+					
 						} //for in
+						
+						
+						
+						
 						//테이블에 추가
 						 $("#project_news").html($("#project_news").html() + values); 
 					
@@ -725,13 +731,11 @@ strong{font-weight: 700;}
 			<% } %>
 			<script type="text/javascript">
 			function newsinsert(){
-				$('#newsFormDiv').css('display','block');
-				
+				$('#newsFormDiv').css('display','block');				
 			}
 			
 			function newsclose(){
 			$('#newsFormDiv').css('display','none');		
-				
 			}
 			</script>
 			<div class="newsspace2"></div>
