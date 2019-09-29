@@ -196,11 +196,12 @@
 		});
 
 		$(".main_area3_section1 .table table tr").on("mouseover", function() {
-			if ($(".main_area3_section1 .table table tr").index(this) != 0)
-				$(this).css("text-decoration", "underline");
+			var str = $(".main_area3_section1 .table table tr:eq('" + $(".main_area3_section1 .table table tr").index(this) + "')").children("td:eq('0')").text();
+			if ($(".main_area3_section1 .table table tr").index(this) != 0 && str != "")
+				$(this).css("background", "#cccccc");
 		});
 		$(".main_area3_section1 .table table tr").on("mouseout", function() {
-			$(this).css("text-decoration", "none");
+			$(this).css("background", "none");
 		});
 		
 		//페이지 클릭 함수 하나로 통일시켜보기

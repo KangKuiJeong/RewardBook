@@ -12,39 +12,42 @@ import member.model.vo.Member;
 
 public class StatsService {
 	
-	private StatsDao vDao = new StatsDao();
+	private StatsDao sDao = new StatsDao();
 	
-	public int insertVisit(java.sql.Date date, int count) {
+	public void insertVisit(String date) {
 		Connection conn = getConnection();
-		int result = vDao.insertVisit(conn, date, count);
-		
+		int result = sDao.insertVisit(conn, date);
 		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
-		
-		return result;
 	}
 
-	public int updateVisit(int count) {
+	public void updateVisit(String date) {
 		Connection conn = getConnection();
-		int result = vDao.updateVisit(conn, count);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		sDao.updateVisit(conn, date);
 		close(conn);
-		
+	}
+
+	public int checkVisit(String date) {
+		Connection conn = getConnection();
+		int result = sDao.checkVisit(conn, date);
+		close(conn);
 		return result;
 	}
 
-	public int joinCount(int count) {
+	public int getVisitCount(String date) {
 		Connection conn = getConnection();
-		int result = vDao.joinCount(conn, count);
+		int result = sDao.getVisitCount(conn, date);
+		close(conn);
+		return result;
+	}
+
+	public int getUserCount(String date) {
+		Connection conn = getConnection();
+		int result = sDao.getUserCount(conn, date);
 		close(conn);
 		return result;
 	}

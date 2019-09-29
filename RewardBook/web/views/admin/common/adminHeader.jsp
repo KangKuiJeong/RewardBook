@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
+body {
+	margin : 0px 0px 0px 0px;
+}
+
 .header {
 	width : 100%;
 	height : 65px;
@@ -70,7 +75,7 @@
 </style>
 </head>
 <body>
-
+<% if (loginAdmin != null) { %>
 <div class="header">
 	<div class="header_area">
 		<div class="content" name="order1"><a href="/RewardBook/index.jsp"><img src="/RewardBook/resources/images/admin/admin_sampleLogo.png" width="150" alt="logo"></a></div>
@@ -95,5 +100,6 @@
 		
 	</div>
 </div>
+<% } %>
 </body>
 </html>

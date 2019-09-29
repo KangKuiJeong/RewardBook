@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
-<%@ page import="memo.model.vo.Memo" %>
-<%@ page import="project.model.vo.ProjectNews" %>
 <%@ page import="memo.model.vo.Memo, review.model.vo.Review" %>
-
 <%
 	Project project = (Project)request.getAttribute("project"); 
 	Memo memo = (Memo)request.getAttribute("memo");
 	ArrayList<Reward> rewardList = (ArrayList<Reward>)request.getAttribute("rewardList");
 	int percent = (int)((double)(project.getP_nprice()) / (double)(project.getP_tprice()) * 100);
 	String message = (String)request.getAttribute("message");
-
-	ArrayList<ProjectNews> newsList = (ArrayList<ProjectNews>)request.getAttribute("list");
 	Review review = (Review)request.getAttribute("review");
 %>
 
@@ -595,23 +590,6 @@ strong{font-weight: 700;}
 							<div class="inqBtnArea"><input type="submit" value="신고하기"></div>				
 						</form>
 					</div>
-			
-				<div id="newsFormDiv">
-						<button id="closeBtn" onclick="newsclose();">X</button>
-						<form action="/RewardBook/p_news_insert" id="inqForm" method="post">
-							<p class="inqTitle">새소식 등록하기</p>
-							<p class="inqSub_Title">제목</p>
-							<input type="text" name="pn_title" id="inqtitle">
-							<p class="inqSub_Title">내용</p>
-							<textarea name="pn_text" id="inqtext"></textarea>						
-							<!-- 프로젝트번호 넘김 -->
-							<input type="hidden" value="<%= project.getP_no() %>" name="p_no">
-			
-							<div class="inqBtnArea"><input type="submit" value="등록"></div>				
-							
-						</form>
-					</div>
-					
 					<% } %>
 					<script>
 						function inquryModal(){
@@ -674,68 +652,7 @@ strong{font-weight: 700;}
 		<div class="detail_Nav">
 			<div class="menu content"><%= project.getP_story() %></div>
 			<div class="menu funding_info">펀딩안내</div>
-			<div class="menu project_news">
-				<div class="project_news"  id="project_news">
-					<div class="newsspace"></div>
-			<input type="hidden" id="pn_o" value="<%= project.getP_no() %>">
-			
-				</div>
-			<script type="text/javascript">
-			$(function(){
-			
-				$.ajax({
-					url: "p_ajax_nlist",
-					type: "get",
- 					data : {pn_o: $("#pn_o").val()}, 
-					dataType: "text",
-					success: function(data){
-						//1.문자를 객체로 변환 처리
-						var obj = eval("("+data+")");
-						//2.객체를  문자로 바꿈
-						 var jsonStr = JSON.stringify(obj);
-						//3. 문자를 배열(제이슨)로바꾼것 
-						var json = JSON.parse(jsonStr);
-						var values = "";
-						for(var i in json.list){
-						
-							values += 
-									"<li class='newsmain'>"					
-									+"<p class='newstitle'>" + "<img src='/RewardBook/resources/images/project/projectNews/새소식아이콘.png' class='pNewsicon'>" +  decodeURIComponent(json.list[i].pn_title).replace(/\+/gi, " ") 
-									+"</p>"
-									+ "<br><p class='newstext'>" +  decodeURIComponent(json.list[i].pn_text).replace(/\+/gi, " ") + "</p>"
-									+ "<p class='newsdate'>" + decodeURIComponent(json.list[i].pn_date).replace(/\+/gi, " ") + "</p>"
-									+"</li>"
-						} //for in
-						//테이블에 추가
-						 $("#project_news").html($("#project_news").html() + values); 
-					
-						
-					},
-					error: function(jqXHR, textStatus, errorThrown){
-						console.log("error : " + textStatus);
-					}
-					
-				});  //ajax 
-			
-			
-			});
-			</script>
-			<%if ( loginMember != null && loginMember.getuNo().equals( project.getU_no()  ) ){ %>
-			<button id="newsinsert" class="newsbutton" onclick="newsinsert();">글쓰기</button>			
-			<% } %>
-			<script type="text/javascript">
-			function newsinsert(){
-				$('#newsFormDiv').css('display','block');
-				
-			}
-			
-			function newsclose(){
-			$('#newsFormDiv').css('display','none');		
-				
-			}
-			</script>
-			<div class="newsspace2"></div>
-			</div><!-- //새소식 -->
+			<div class="menu project_news">새소식</div>
 			<div class="menu community">
 				<div class="RewardCommunityPage_wrapper__28sk6">
 					<div>
@@ -1364,7 +1281,7 @@ strong{font-weight: 700;}
 				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
 				<div class="memodiv" id="memodiv">			
 				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모를 입력해주세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
 				<input class="memosubmit" type="submit" value="저장">			
 				</div>			
 				</form></div>	
@@ -1402,7 +1319,7 @@ strong{font-weight: 700;}
 		<div class="option_item">
 			<% if(loginMember == null){ %>
 				<% for(Reward reward : rewardList){ %>
-			<div class="reward option_iteminfo" onclick="loginFunction();">
+			<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/views/member/mainLoginView.jsp'">
 				<div class="reward item_left">
 					<div class="reward item_price">
 						<%= reward.getR_price() %> 원 펀딩

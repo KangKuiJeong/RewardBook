@@ -96,9 +96,6 @@
 	float : left;
 	clear : none;
 }
-.main_area3_section1 .info .story {
-	height : 112px;
-}
 .main_area3_section1 .info .info, .main_area3_section1 .info .return {
 	height : 76px;
 }
@@ -141,6 +138,28 @@
 .main_area3_section1 .info .no .text, .main_area3_section1 .info .name .text, .main_area3_section1 .info .count .text {
 	width : 80px;
 }
+.main_area3_section1 .info div .fileName {
+	width : 280px;
+	height : 50px;
+	clear : none;
+	font-size : 17px;
+	font-weight : 550;
+	line-height : 30px;
+	margin : 0px 0px 0px 20px;
+	color : green;
+}
+.main_area3_section1 .info div .fileView {
+	width : 100px;
+	height : 35px;
+	clear : none;
+	text-align : center;
+	font-size : 15px;
+	font-weight : 550;
+	line-height : 35px;
+	background : #ffb202;
+	border-radius : 8px;
+	cursor : pointer;
+}
 .main_area3_section1 .info div .input, .main_area3_section1 .info div .textarea {
 	width : 700px;
 	height : 50px;
@@ -152,10 +171,7 @@
 .main_area3_section1 .info .nprice .input, .main_area3_section1 .info .tprice .input, .main_area3_section1 .info .sdate .input, .main_area3_section1 .info .edate .input, .main_area3_section1 .info .secondary .input, .main_area3_section1 .info .ddate .input, .main_area3_section1 .info .permission .input, .main_area3_section1 .info .pdate .input {
 	width : 300px;
 }
-.main_area3_section1 .info .story .textarea {
-	height : 100px;
-}
-.main_area3_section1 .info .story .info, .main_area3_section1 .info .story .return {
+.main_area3_section1 .info .story .return {
 	hieght : 60px;
 }
 
@@ -163,6 +179,28 @@
 <script src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
+	function CaricaFoto(img) { 
+		foto1 = new Image(); 
+		foto1.src = (img); 
+		Controlla(img); 
+	}
+	
+	function Controlla(img) { 
+		if((foto1.width != 0)&&(foto1.height != 0)) { 
+			viewFoto(img); 
+		} else { 
+			funzione = "Controlla('" + img + "')"; 
+			intervallo = setTimeout(funzione, 20); 
+		} 
+	} 
+
+	function viewFoto(img) { 
+		largh = foto1.width + 20; 
+		altez = foto1.height + 20; 
+		stringa="width=" + largh + ",height=" + altez; 
+		finestra=window.open(img, "", stringa); 
+	} 
+	
 	$(function() {
 		
 	});
@@ -240,9 +278,15 @@
 						<div class="text"><span>발송일 </span></div>
 						<div class="input"><input type="text" name="ddate" value="<%= projectDetail.getP_ddate() == null ? "-" : projectDetail.getP_ddate() %>" disabled></div>
 					</div>
+					<div class="thumnail">
+						<div class="text"><span>썸네일</span></div>
+						<div class="fileName"><%= projectDetail.getP_img() == null ? "파일 없음" : projectDetail.getP_img() %></div>
+						<div class="fileView" onclick="javascript:CaricaFoto('/RewardBook/resources/upfiles/project/<%= projectDetail.getP_img() %>')">사진 보기</div>
+					</div>
 					<div class="story">
-						<div class="text"><span>본문</span></div>
-						<div class="textarea"><textarea name="story" rows="5" disabled><%= projectDetail.getP_story() == null ? "-" : projectDetail.getP_story() %></textarea></div>
+						<div class="text"><span>스토리</span></div>
+						<div class="fileName"><%= projectDetail.getP_story() == null ? "파일 없음" : projectDetail.getP_story() %></div>
+						<div class="fileView" onclick="javascript:CaricaFoto('/RewardBook/resources/upfiles/project/<%= projectDetail.getP_story() %>')">사진 보기</div>
 					</div>
 					<div class="info">
 						<div class="text"><span>안내</span></div>

@@ -184,7 +184,7 @@
 			</div>
 		</div>
 		<form class="submitForm" method="post" action="/RewardBook/iq_reply_a">
-		<input type="hidden" name="page" value="declare">
+		<input type="hidden" name="page" value="inquiry">
 		<input type="hidden" name="ano" value="<%= a_no %>">
 		<input type="hidden" name="no" value="<%= inquiryDetail.getIq_no() == null ? "-" : inquiryDetail.getIq_no() %>">
 		<div class="main_area3">
@@ -220,7 +220,7 @@
 					</div>
 					<div class="reply">
 						<div class="text"><span>답변</span></div>
-						<div class="textarea"><textarea name="reply" rows="5"><%= inquiryDetail.getIq_reply() == null ? "-" : inquiryDetail.getIq_reply() %></textarea></div>
+						<div class="textarea"><textarea name="reply" rows="5"><%= inquiryDetail.getIq_reply() == null ? "" : inquiryDetail.getIq_reply() %></textarea></div>
 					</div>
 				</div>
 			</div>

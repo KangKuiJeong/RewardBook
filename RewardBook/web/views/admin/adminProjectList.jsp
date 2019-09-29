@@ -153,6 +153,7 @@
 			var link = "page=project&movePage=1";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
@@ -162,6 +163,7 @@
 			var link = "page=project&movePage=1";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
@@ -171,6 +173,7 @@
 			var link = "page=project&movePage=<%= currentPage - 2 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
@@ -180,6 +183,7 @@
 			var link = "page=project&movePage=<%= currentPage - 1 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
@@ -189,6 +193,7 @@
 			var link = "page=project&movePage=<%= currentPage + 1 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
@@ -198,6 +203,7 @@
 			var link = "page=project&movePage=<%= currentPage + 2 %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
@@ -207,17 +213,19 @@
 			var link = "page=project&movePage=<%= maxPage %>";
 			link += "&s1check1=" + $(".main_area2_section1 .checkbox span input[name=s1check1]").is(":checked");
 			link += "&s1check2=" + $(".main_area2_section1 .checkbox span input[name=s1check2]").is(":checked");
+			link += "&s1check3=" + $(".main_area2_section1 .checkbox span input[name=s1check3]").is(":checked");
 			link += "&s2select1=" + $(".main_area2_section2 .search select[name=s2select1]").val();
 			link += "&s2text1=" + $(".main_area2_section2 .search input[name=s2text1]").val();
 			location.href="/RewardBook/p_list_a?" + link;
 		});
 
 		$(".main_area3_section1 .table table tr").on("mouseover", function() {
-			if ($(".main_area3_section1 .table table tr").index(this) != 0)
-				$(this).css("text-decoration", "underline");
+			var str = $(".main_area3_section1 .table table tr:eq('" + $(".main_area3_section1 .table table tr").index(this) + "')").children("td:eq('0')").text();
+			if ($(".main_area3_section1 .table table tr").index(this) != 0 && str != "")
+				$(this).css("background", "#cccccc");
 		});
 		$(".main_area3_section1 .table table tr").on("mouseout", function() {
-			$(this).css("text-decoration", "none");
+			$(this).css("background", "none");
 		});
 		
 		//페이지 클릭 함수 하나로 통일시켜보기
@@ -242,8 +250,8 @@
 				<div class="main_area2_section1">
 					<div class="checkbox">
 						<span><input type="checkbox" name="s1check1" <% if (s1check1.equals("true")) { %>checked="checked"<% } %>> 미승인</span>
-						<span><input type="checkbox" name="s1check2" <% if (s1check2.equals("true")) { %>checked="checked"<% } %>> 0차</span>
-						<span><input type="checkbox" name="s1check3" <% if (s1check3.equals("true")) { %>checked="checked"<% } %>> 1차</span>
+						<span><input type="checkbox" name="s1check2" <% if (s1check2.equals("true")) { %>checked="checked"<% } %>> 진행중</span>
+						<span><input type="checkbox" name="s1check3" <% if (s1check3.equals("true")) { %>checked="checked"<% } %>> 마감</span>
 					</div>
 				</div>
 				<div class="main_area2_section2">

@@ -93,8 +93,9 @@ public class Member_Update_AdminServlet extends HttpServlet {
 			
 			if (result > 0) {
 				view = request.getRequestDispatcher("/views/admin/adminMemberDetail.jsp");
-				request.setAttribute("member", member);
-				request.setAttribute("page", page);
+				request.setAttribute("member", mservice.selectOne(no));
+				request.setAttribute("page", "member");
+				request.setAttribute("alert", "회원 정보가 정상적으로 수정되었습니다.");
 				view.forward(request, response);
 			}
 			

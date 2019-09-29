@@ -600,6 +600,12 @@
 				}
 
 		});
+	
+	// 조회수 1 증가 ajax
+
+	$.ajax({
+		url: "/RewardBook/s_insert"
+	});
 });	
 </script>
 </head>

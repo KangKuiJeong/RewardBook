@@ -441,26 +441,49 @@ function addReward() {
 	$(".area1 input[name=rewardcount]").val(count);
 }
 
+function textCheck(str) {
+	
+	var alertText = "";
+	
+	var checkArray = ["금지어", "안돼요", "히힝힝"];
+	
+	for (var a = 0; a < checkArray.length; a++) {
+		console.log(checkArray[a] + " : " + str.indexOf(checkArray[a]))
+		if (str.indexOf(checkArray[a]) != -1) {
+			alertText = "프로젝트 제목에 금지어가 포함되어 있습니다. [ 금지어 : " + checkArray[a] + " ]";
+			return alertText;
+		}
+	}
+	
+	return alertText;
+	
+}
+
 function submit() {
 	
 	var alertText = "";
 	
 	if ($(".edit .container .text[name=one] .part3 .input input").val() == "") {
 		alertText = "프로젝트 제목이 올바르지 않습니다.";
-	} else if ($(".edit .container .text[name=one] .part4 .input input").val() == "0") {
-		alertText = "프로젝트 목표 금액이 올바르지 않습니다.";
-	} else if (!$(".edit .container .text[name=one] .part6 .input div .radio2").is(":checked") && !$(".edit .container .text[name=one] .part6 .input div .radio1").is(":checked")) {
-		alertText = "필수 확인사항을 확인해주세요.";
-	} else if ($(".edit .container .text[name=one] .part7 .input input").val() == "") {
-		alertText = "프로젝트 종료일이 올바르지 않습니다.";
-	} else if ($(".edit .container .text[name=one] .part8 .input input").val() == "") {
-		alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
-	} else if ($(".edit .container .text[name=one] .part8 .input input").val() == "") {
-		alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
-	} else if ($(".edit .container .text[name=three] .part1 .input input").val() == "") {
-		alertText = "썸네일 파일이 지정되지 않았습니다.";
-	} else if ($(".edit .container .text[name=three] .part2 .input input").val() == "") {
-		alertText = "스토리 파일이 지정되지 않았습니다.";
+	} else {
+		alertText = textCheck($(".edit .container .text[name=one] .part3 .input input").val());
+		if (alertText == "") {
+			if ($(".edit .container .text[name=one] .part4 .input input").val() == "0") {
+				alertText = "프로젝트 목표 금액이 올바르지 않습니다.";
+			} else if (!$(".edit .container .text[name=one] .part6 .input div .radio2").is(":checked") && !$(".edit .container .text[name=one] .part6 .input div .radio1").is(":checked")) {
+				alertText = "필수 확인사항을 확인해주세요.";
+			} else if ($(".edit .container .text[name=one] .part7 .input input").val() == "") {
+				alertText = "프로젝트 종료일이 올바르지 않습니다.";
+			} else if ($(".edit .container .text[name=one] .part8 .input input").val() == "") {
+				alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
+			} else if ($(".edit .container .text[name=one] .part8 .input input").val() == "") {
+				alertText = "프로젝트 발송 예정일이 올바르지 않습니다.";
+			} else if ($(".edit .container .text[name=three] .part1 .input input").val() == "") {
+				alertText = "썸네일 파일이 지정되지 않았습니다.";
+			} else if ($(".edit .container .text[name=three] .part2 .input input").val() == "") {
+				alertText = "스토리 파일이 지정되지 않았습니다.";
+			}
+		}
 	}
 
 	if (alertText == "") {
