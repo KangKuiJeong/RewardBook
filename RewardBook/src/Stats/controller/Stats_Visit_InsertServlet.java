@@ -1,21 +1,21 @@
 package Stats.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
+
+import Stats.model.service.StatsService;
 
 /**
  * Servlet implementation class Visit_InsertServlet
  */
-@WebServlet("/Visit_InsertServlet")
+@WebServlet("/s_insert")
 public class Stats_Visit_InsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,11 +32,19 @@ public class Stats_Visit_InsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		 }
-
-
-
-
+		StatsService sservice = new StatsService();
+		
+		Calendar now = Calendar.getInstance();
+		
+		String date = String.valueOf(now.get(Calendar.YEAR)) + String.format("%02d", now.get(Calendar.MONTH) + 1) + String.format("%02d", now.get(Calendar.DATE)) + String.format("%02d", now.get(Calendar.HOUR_OF_DAY)) + String.format("%02d", now.get(Calendar.MINUTE));
+		
+		if (sservice.checkVisit(date) > 0) {
+			sservice.updateVisit(date);
+		} else {
+			sservice.insertVisit(date);
+		}
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -3,6 +3,7 @@
 <%@ page import="member.model.vo.Member" %>
 <%
 	Member memberDetail = (Member)request.getAttribute("member");
+	String alertMessage = (String)request.getAttribute("alert");
 %>
 <!DOCTYPE html>
 <html>
@@ -105,8 +106,8 @@
 	margin : 2px 0px 0px 20px;
 }
 .main_area3_section1 .info .profile div[name=picture] {
-	width : 180px;
-	height : 180px;
+	width : 140px;
+	height : 140px;
 	margin : 0px 9px 9px 9px;
 	border : 1px solid gray;
 	border-radius : 50%;
@@ -119,15 +120,15 @@
 	height : 80px;
 }
 .main_area3_section1 .info .profile {
-	width : 200px;
-	height : 200px;
+	width : 150px;
+	height : 150px;
 	clear : none;
 }
 .main_area3_section1 .info .no, .main_area3_section1 .info .bno {
 	width : 300px;
 	clear : none;
 }
-.main_area3_section1 .info .name, .main_area3_section1 .info .id, .main_area3_section1 .info .profileFile {
+.main_area3_section1 .info .name, .main_area3_section1 .info .id {
 	width : 600px;
 	clear : none;
 }
@@ -152,16 +153,26 @@
 	font-weight : 600;
 	line-height : 30px;
 }
+.main_area3_section1 .info div .fileName {
+	width : 280px;
+	height : 50px;
+	clear : none;
+	font-size : 17px;
+	font-weight : 550;
+	line-height : 30px;
+	margin : 0px 0px 0px 20px;
+	color : green;
+}
 .main_area3_section1 .info div .input {
 	width : 200px;
 	height : 50px;
 	clear : none;
 }
-.main_area3_section1 .info .profileFile .input {
+.main_area3_section1 .info .name .input, .main_area3_section1 .info .id .input {
 	width : 500px;
 }
-.main_area3_section1 .info .name .input, .main_area3_section1 .info .id .input, .main_area3_section1 .info .profileFile .input {
-	width : 500px;
+.main_area3_section1 .info .profileFile .input {
+	width : 400px;
 }
 .main_area3_section1 .info .phone .input, .main_area3_section1 .info .hompage .input, .main_area3_section1 .info .category .input, .main_area3_section1 .info .category .joinDate {
 	width : 500px;
@@ -172,10 +183,24 @@
 <script type="text/javascript">
 
 	$(function() {
+		
+		var alertFlag = true;
+		<% if(alertMessage != null) { %>
+			if (alertFlag) {
+				alert('<%= alertMessage %>');
+				alertFlag = false;
+			}
+		<% } %>
+		
 		$(".main_area3_section1 .info .profileFile .input input[type=file]").on("change", function() {
 			if ("C:\\fakepath\\" + $(".main_area3_section1 .info .profileFile input[type=hidden]").val() != $(this).val()) {
-				$(".main_area3_section1 .info .profileFile .fileChange").val("변경됨");
-				$(".main_area3_section1 .info .profileFile .input .fileChangeShow").text("변경됨");
+				$(".main_area3_section1 .info .profileFile .fileChange").val("변경");
+				$(".main_area3_section1 .info .profileFile .input .fileChangeShow").text("변경");
+				$(".main_area3_section1 .info .profileFile .input .fileChangeShow").css("color", "red");
+			} else {
+				$(".main_area3_section1 .info .profileFile .fileChange").val("");
+				$(".main_area3_section1 .info .profileFile .input .fileChangeShow").text("동일");
+				$(".main_area3_section1 .info .profileFile .input .fileChangeShow").css("color", "blue");
 			}
 		});
 	});
@@ -247,7 +272,8 @@
 						<div class="text"><span>프로필 사진</span></div>
 						<input type="hidden" value="<%= memberDetail.getProfileImg() == null ? "" : memberDetail.getProfileImg() %>">
 						<input type="hidden" class="fileChange" name="fileChange" value="">
-						<div class="input"><input type="file" name="profile" disabled><span class="fileChangeShow" style="color : red; font-size : 18px; font-weight : 600;"></span></div>
+						<div class="fileName"><span><%= memberDetail.getProfileImg() == null ? "파일 없음" : memberDetail.getProfileImg() %></span></div>
+						<div class="input"><input type="file" name="profile" disabled><span class="fileChangeShow" style="font-size : 18px; font-weight : 600;"></span></div>
 					</div>
 					<div class="phone">
 						<div class="text"><span>전화번호</span></div>

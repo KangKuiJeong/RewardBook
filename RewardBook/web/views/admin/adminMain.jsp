@@ -8,6 +8,10 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <style type="text/css">
 
+body {
+	margin : 0px 0px 0px 0px;
+}
+
 .container {
 	width : 1440px;
 	height : 800px;
@@ -102,7 +106,10 @@
 <script src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+
+		count1();
 		setInterval("count1()", 1000);
+		count2();
 		setInterval("count2()", 1000);
 
 		$.ajax({
@@ -186,23 +193,52 @@
 	});
 	
 	function count1() {
-		
+		$.ajax({
+			url: "/RewardBook/s_vcount",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+
+				var val = data.visitCount;
+				
+				$(".main_area1_section1 .s1Count").text(val + " 회");
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error");
+			}
+		});
 	};
 
 	function count2() {
-		
+		$.ajax({
+			url: "/RewardBook/s_ucount",
+			type: "get",
+			dataType: "json",
+			success: function(data){
+
+				var val = data.userCount;
+				
+				$(".main_area1_section2 .s2Count").text(val + " 명");
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error");
+			}
+		});
 	};
 
 </script>
 </head>
 <body>
 <%@ include file="/views/admin/common/adminHeader.jsp" %>
+<% if (loginAdmin != null) { %>
 <div class="container">
 	<%@ include file="/views/admin/common/adminSideMenu.jsp" %>
 	<div class="main">
 		<div class="main_area1">
 			<div class="main_area1_section1">
-				<span class="s1Text">오늘 총 방문자 수</span><span class="s1Count">0 명</span>
+				<span class="s1Text">오늘 총 방문 수</span><span class="s1Count">0 회</span>
 			</div>
 			<div class="main_area1_section2">
 				<span class="s2Text">오늘 총 가입자 수</span><span class="s2Count">0 명</span>
@@ -230,5 +266,12 @@
 		</div>
 	</div>
 </div>
+<% } else { %>
+<script type="text/javascript">
+$(function() {
+	location.href="/RewardBook/views/admin/adminLogin.jsp";
+});
+</script>
+<% } %>
 </body>
 </html>

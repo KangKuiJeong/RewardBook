@@ -191,11 +191,12 @@
 		});
 
 		$(".main_area3_section1 .table table tr").on("mouseover", function() {
-			if ($(".main_area3_section1 .table table tr").index(this) != 0)
-				$(this).css("text-decoration", "underline");
+			var str = $(".main_area3_section1 .table table tr:eq('" + $(".main_area3_section1 .table table tr").index(this) + "')").children("td:eq('0')").text();
+			if ($(".main_area3_section1 .table table tr").index(this) != 0 && str != "")
+				$(this).css("background", "#cccccc");
 		});
 		$(".main_area3_section1 .table table tr").on("mouseout", function() {
-			$(this).css("text-decoration", "none");
+			$(this).css("background", "none");
 		});
 		
 		//페이지 클릭 함수 하나로 통일시켜보기
@@ -242,7 +243,7 @@
 					<table cellspacing="0" cellpadding='0' style="width : 1175px; table-layout: fixed;">
 						<tr><th style="width : 40px">번호</th><th style="width : 30px">등록인</th><th style="width : 120px">제목</th><th style="width : 50px">등록일</th><th style="width : 30px">확인여부</th><th style="width : 30px">답변인</th><th style="width : 50px">답변일</th></tr>
 						<% for (Inquiry inquiry : list) { %>
-							<tr OnClick="location.href='/RewardBook/dc_detail_a?page=declare&iq_no=<%= inquiry.getIq_no() %>'" style="cursor : pointer;"><td><%= inquiry.getIq_no() %></td><td><%= inquiry.getU_name() %></td><td><%= inquiry.getIq_title().length() > 20 ? inquiry.getIq_title().substring(0, 20) + "..." : inquiry.getIq_title() %></td><td><%= inquiry.getIq_date() %></td><td><%= inquiry.getIq_oc() %></td><td><%= inquiry.getA_name() == null ? "-" : inquiry.getA_name() %></td><td><%= inquiry.getIq_rdate() == null ? "-" : inquiry.getIq_rdate() %></td></tr>
+							<tr OnClick="location.href='/RewardBook/dc_detail_a?page=declare&iq_no=<%= inquiry.getIq_no() %>'" style="cursor : pointer;"><td><%= inquiry.getIq_no() %></td><td><%= inquiry.getU_name() %></td><td><%= inquiry.getIq_title().length() > 20 ? inquiry.getIq_title().substring(0, 20) + "..." : inquiry.getIq_title() %></td><td><%= inquiry.getIq_date() %></td><td><%= inquiry.getIq_oc() %></td><td <% if (inquiry.getA_name() == null) { %>style="color : red;"<% } else { %>style="color : blue;"<% } %>><%= (inquiry.getA_name() == null ? "미답변" : inquiry.getA_name()) %></td><td><%= inquiry.getIq_rdate() == null ? "-" : inquiry.getIq_rdate() %></td></tr>
 						<% } %>
 						<% for (int a = list.size(); a < 10; a++) { %>
 							<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>

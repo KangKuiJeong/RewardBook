@@ -1,27 +1,30 @@
-package project.controller;
+package Stats.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project.model.service.ProjectService;
+import org.json.simple.JSONObject;
+
+import Stats.model.service.StatsService;
 
 /**
- * Servlet implementation class Project_PermissionAcceptServlet
+ * Servlet implementation class Stats_UserCountServlet
  */
-@WebServlet("/pp_accept")
-public class Project_PermissionAcceptServlet extends HttpServlet {
+@WebServlet("/s_ucount")
+public class Stats_UserCountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Project_PermissionAcceptServlet() {
+    public Stats_UserCountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +33,22 @@ public class Project_PermissionAcceptServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ProjectService pservice = new ProjectService(); 
 
-		request.setCharacterEncoding("utf-8");
+		Calendar now = Calendar.getInstance();
 		
-		String no = (String)request.getParameter("no");
-		int result = pservice.permissionAccept(no);
+		String date = String.valueOf(now.get(Calendar.YEAR)) + String.format("%02d", now.get(Calendar.MONTH) + 1) + String.format("%02d", now.get(Calendar.DATE));
 		
-		RequestDispatcher view = null;
+		int result = new StatsService().getUserCount(date);
 		
-		if (result > 0) {
-			view = request.getRequestDispatcher("/pp_list?page=permission&movePage=1");
-			view.forward(request, response);
-		}
+		JSONObject sendJson = new JSONObject();
+
+		sendJson.put("userCount", result);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(sendJson.toJSONString());
+		out.flush();
+		out.close();
 		
 	}
 
