@@ -14,6 +14,7 @@ import payment.model.service.PaymentService;
 import payment.model.service.RewardService;
 import payment.model.vo.Payment;
 import payment.model.vo.Reward;
+import project.model.service.ProjectService;
 
 /**
  * Servlet implementation class Payment_CompleteServlet
@@ -63,6 +64,7 @@ public class Payment_CompleteServlet extends HttpServlet {
 			
 			Payment pay = null;
 			int result2 = 0;
+			int result3 = 0;
 			
 				pay = new Payment();
 				
@@ -77,6 +79,8 @@ public class Payment_CompleteServlet extends HttpServlet {
 				pay.setPm_oid(order_id);
 				
 				result2 = new PaymentService().insertPayment(pay);
+				//프로젝트에 현재금액 업데이트
+				result3 = new ProjectService().updatePayment(p_no, price);
 				
 				if(result2 <= 0) {
 					RequestDispatcher view = request.getRequestDispatcher("/p_sel?p_no="+p_no);

@@ -270,7 +270,12 @@ i.wadizicon, i.icon::before, [class*="icon-"]::before {
 
 .maker_info{
 border: 1px solid rgba(178, 178, 178, 0.67);
+display: block;
+cursor: pointer;
 }
+
+.maker_icon{cursor: pointer;}
+.maker_button{cursor: pointer;}
 
 .maker_qustion > div{
 	height: 48px;
@@ -632,7 +637,7 @@ strong{font-weight: 700;}
 <!-- detail Header영역 -->
 <div class="detail_Container">
 	<div class="detail_header">
-		<div class="bg" style="background-image: url(/RewardBook/resources/images/bgimg.jpg)"></div>
+		<div class="bg" style="background-image: url(/RewardBook/resources/upfiles/project/<%= project.getP_img() %>)"></div>
 		<p class="title-info">
 			<%= project.getP_category() %> 
 		</p>
@@ -1306,10 +1311,10 @@ strong{font-weight: 700;}
 				<div class="maker_info">
 					<div class="maker_icon">
 						<button class="maker_button"
-						style="background-image: url(/RewardBook/resources/images/icons8-fashion-trend-48.png)"></button>
+						style="background-image: url(/RewardBook/resources/images/index/profileSample2.jpg)" onclick="javascript:location.href='/RewardBook/user_profile?u_no=<%= project.getU_no() %>'"></button>
 					</div>
 					<div class="maker_profile">
-						<p>메이커 명</p>
+						<p><%= project.getU_name() %></p>
 						<a href="#">메이커 홈페이지 주소</a>
 					</div>
 				</div>

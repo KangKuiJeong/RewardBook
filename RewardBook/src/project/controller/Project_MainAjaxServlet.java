@@ -51,6 +51,7 @@ public class Project_MainAjaxServlet extends HttpServlet {
 				job.put("no", project.getP_no());
 				job.put("title", URLEncoder.encode(project.getP_title(), "UTF-8"));
 				job.put("category", URLEncoder.encode(project.getP_category(), "UTF-8"));
+				job.put("img", project.getP_img());
 				job.put("content", URLEncoder.encode(project.getP_story(), "UTF-8"));
 				job.put("rdate", project.getP_rdate());
 				job.put("nprice", project.getP_nprice());

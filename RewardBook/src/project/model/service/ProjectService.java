@@ -219,5 +219,35 @@ public class ProjectService {
 		
 		return list;
 	}
+
+	//프로젝트 조회수 증가 처리용
+	public int projectCount(String p_no) {
+		Connection conn = getConnection();
+		int result = pDao.projectCount(conn, p_no);
+    
+		if (result > 0) {
+			commit(conn);
+		} else {
+			commit(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	//결제가 진행되면 금액 업데이트
+	public int updatePayment(String p_no, int price) {
+		Connection conn = getConnection();
+		int result = pDao.updatePayment(conn, p_no, price);
+    
+		if (result > 0) {
+			commit(conn);
+		} else {
+			commit(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

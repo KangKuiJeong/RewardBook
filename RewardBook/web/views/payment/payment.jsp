@@ -17,6 +17,7 @@
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.4.min.js" type="application/javascript"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 function findPostCode() {
     new daum.Postcode({
@@ -344,14 +345,8 @@ function findPostCode() {
          
           </div>
 		
-		
-		
 	</div>
 </div>
-
-
-
-
 
 <%@ include file="/views/common/footer.jsp" %>
 
@@ -410,11 +405,12 @@ function payTest(){
 			<% } %>
 		<% } %>
 		
+		
 		$.ajax({
 			url: '/RewardBook/pm_comp',
 			data: {
 				billing_key : data.billing_key,
-				order_id : 'order_id_' + d.getTime() + '<%= loginMember.getuNo() %>'v,
+				order_id : 'order_id_'+'<%= pay.getP_no() %>' + '<%= loginMember.getuNo() %>',
 				p_no : "<%= request.getParameter("p_no") %>",
 				u_no : "<%= loginMember.getuNo() %>",
 				r_no : r_no,
@@ -422,7 +418,7 @@ function payTest(){
 				r_amount : r_amount,
 				donation : "<%= donation %>",
 				nopen : "<%= request.getParameter("dontShowNameYn") %>",
-				popen : <%= request.getParameter("dontShowAmountYn") %>,
+				popen : <%= request.getParameter("dontShowAmountYn") %>
 			},
 			type: 'POST',
 			success: function(){
@@ -475,7 +471,6 @@ function payTest(){
 			},
 		});
 	});
-	
 }
 
 function isbilling(){
@@ -512,7 +507,7 @@ function isbilling(){
 	$.ajax({
 		url: '/RewardBook/pm_ins',
 		data: {
-			order_id : "order_id_" + d.getTime() + "<%= loginMember.getuNo() %>",
+			order_id : 'order_id_'+ d.getTime() + '<%= loginMember.getuNo() %>',
 			p_no : "<%= request.getParameter("p_no") %>",
 			u_no : "<%= loginMember.getuNo() %>",
 			r_no : r_no,
@@ -572,7 +567,6 @@ function isbilling(){
 			console.log("error : " + textStatus);
 		},
 	});
-	
 }
 
 

@@ -116,7 +116,7 @@
 <div id="projectListWrap">
 	<div class="projectListHeader">
 		<div class="searchArea">
-			<h3 class="categoryName">식품</h3>
+			<h3 class="categoryName">공연·예술</h3>
 			<form class="searchForm" action="/RewardBook/indexSearch">
 				<label for="searchProject">
 					<input id="searchProject"  type="text" name="searchText"  placeholder="검색" >
@@ -126,7 +126,7 @@
 		</div>
 	</div>
 	<div class="invest_list">
-			<% if(list.size() > 0){ %>
+		<% if(list.size() > 0){ %>
 				<% if(list.size() < listcount){ %>
 				<% for(int i = 0; i < list.size(); i++){ %>
 				<% int percent = (int)((double)(list.get(i).getP_nprice()) / (double)(list.get(i).getP_tprice()) * 100); %>
@@ -189,7 +189,7 @@
 		$.ajax({
 			url: '/RewardBook/p_cajax', //주소
 			type: 'get', // get 또는 post 방식으로
-			data: {category: 'food'},
+			data: {category: 'art_show'},
 			dataType: "json",
 			success : function(data) { 
 				console.log("success");
