@@ -163,7 +163,7 @@ public class ProjectDao {
 		ResultSet rset = null;
 		
 		String query = "select to_number(round(p_edate - p_sdate)), p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return, u_name from project join users using(u_no) where p_category = ? and p_permission = 'Y'";
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, category);
@@ -358,19 +358,20 @@ public class ProjectDao {
 		String check = "";
 
 		if (check1.equals("true")) {
-			check += "where p_permission = 'N'";
+			check += "where (p_permission = 'N')";
 		}
 		if (check2.equals("true") || check3.equals("true")) {
 			if (check.length() > 0)
-				check += " and ";
-			check += "where p_secondary = ";
+				check += " or ";
+			else
+				check += "where ";
 			if (check2.equals("true")) {
-				check += "'N'";
+				check += "(p_permission = 'Y' and p_edate > sysdate)";
 				if (check3.equals("true")) {
-					check += "or p_secondary = 'Y'";
+					check += " or (p_permission = 'Y' and p_edate <= sysdate)";
 				}
 			} else {
-				check += "'Y'";
+				check += "(p_permission = 'Y' and p_edate <= sysdate)";
 			}
 		}
 		
@@ -439,19 +440,20 @@ public class ProjectDao {
 		String check = "";
 
 		if (check1.equals("true")) {
-			check += "where p_permission = 'N'";
+			check += "where (p_permission = 'N')";
 		}
 		if (check2.equals("true") || check3.equals("true")) {
 			if (check.length() > 0)
-				check += " and ";
-			check += "where p_secondary = ";
+				check += " or ";
+			else
+				check += "where ";
 			if (check2.equals("true")) {
-				check += "'N'";
+				check += "(p_permission = 'Y' and p_edate > sysdate)";
 				if (check3.equals("true")) {
-					check += "or p_secondary = 'Y'";
+					check += " or (p_permission = 'Y' and p_edate <= sysdate)";
 				}
 			} else {
-				check += "'Y'";
+				check += "(p_permission = 'Y' and p_edate <= sysdate)";
 			}
 		}
 		

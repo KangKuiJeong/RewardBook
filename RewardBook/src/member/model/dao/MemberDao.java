@@ -598,8 +598,6 @@ public class MemberDao {
 		
 		String query = "update users set u_bno=?, u_id=?, u_name=?, u_phone=?, u_intro=?, u_address=?, u_post=?, u_mileage=?, u_bank=?, u_bank_account=?, u_homepage=?, u_category=?";
 
-		System.out.println("이미지 링크 : " + member.getProfileImg());
-		
 		if (member.getProfileImg() != null)
 			query += ", u_profile=?";
 		
@@ -622,13 +620,15 @@ public class MemberDao {
 			pstmt.setString(11, member.getHomepage());
 			pstmt.setString(12, member.getCategory());
 
-			if (member.getProfileImg() != null)
+			if (member.getProfileImg() != null) {
 				pstmt.setString(13, member.getProfileImg());
+				pstmt.setString(14, member.getuNo());
+			} else {
+				pstmt.setString(13, member.getuNo());
+			}
 			
-			pstmt.setString(14, member.getuNo());
 
 			result = pstmt.executeUpdate();
-			System.out.println("결과 : " + result);
 			
 		} catch(Exception e) {
 			e.printStackTrace();

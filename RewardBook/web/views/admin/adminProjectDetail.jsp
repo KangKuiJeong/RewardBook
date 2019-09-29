@@ -3,8 +3,8 @@
 <%@ page import="project.model.vo.Project" %>
 <%
 	Project projectDetail = (Project)request.getAttribute("project");
+	String alertMessage = (String)request.getAttribute("alert");
 %>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -139,6 +139,16 @@
 	font-weight : 600;
 	line-height : 30px;
 }
+.main_area3_section1 .info div .fileName {
+	width : 280px;
+	height : 50px;
+	clear : none;
+	font-size : 17px;
+	font-weight : 550;
+	line-height : 30px;
+	margin : 0px 0px 0px 20px;
+	color : green;
+}
 .main_area3_section1 .info .no .text, .main_area3_section1 .info .name .text, .main_area3_section1 .info .count .text {
 	width : 80px;
 }
@@ -153,6 +163,9 @@
 .main_area3_section1 .info .nprice .input, .main_area3_section1 .info .tprice .input, .main_area3_section1 .info .sdate .input, .main_area3_section1 .info .edate .input, .main_area3_section1 .info .secondary .input, .main_area3_section1 .info .ddate .input, .main_area3_section1 .info .permission .input, .main_area3_section1 .info .pdate .input {
 	width : 300px;
 }
+.main_area3_section1 .info .thumnail .input, .main_area3_section1 .info .story .input {
+	width : 400px;
+}
 .main_area3_section1 .info .story .textarea {
 	height : 100px;
 }
@@ -165,16 +178,35 @@
 <script type="text/javascript">
 
 	$(function() {
+		
+		var alertFlag = true;
+		<% if(alertMessage != null) { %>
+			if (alertFlag) {
+				alert('<%= alertMessage %>');
+				alertFlag = false;
+			}
+		<% } %>
+		
 		$(".main_area3_section1 .info .thumnail .input input[type=file]").on("change", function() {
 			if ("C:\\fakepath\\" + $(".main_area3_section1 .info .thumnail input[type=hidden]").val() != $(this).val()) {
-				$(".main_area3_section1 .info .thumnail .fileChange").val("변경됨");
-				$(".main_area3_section1 .info .thumnail .input .fileChangeShow").text("변경됨");
+				$(".main_area3_section1 .info .thumnail .fileChange").val("변경");
+				$(".main_area3_section1 .info .thumnail .input .fileChangeShow").text("변경");
+				$(".main_area3_section1 .info .thumnail .input .fileChangeShow").css("color", "red");
+			} else {
+				$(".main_area3_section1 .info .thumnail .fileChange").val("동일");
+				$(".main_area3_section1 .info .thumnail .input .fileChangeShow").text("동일");
+				$(".main_area3_section1 .info .thumnail .input .fileChangeShow").css("color", "blue");	
 			}
 		});
 		$(".main_area3_section1 .info .story .input input[type=file]").on("change", function() {
 			if ("C:\\fakepath\\" + $(".main_area3_section1 .info .story input[type=hidden]").val() != $(this).val()) {
-				$(".main_area3_section1 .info .story .fileChange").val("변경됨");
-				$(".main_area3_section1 .info .story .input .fileChangeShow").text("변경됨");
+				$(".main_area3_section1 .info .story .fileChange").val("변경");
+				$(".main_area3_section1 .info .story .input .fileChangeShow").text("변경");
+				$(".main_area3_section1 .info .story .input .fileChangeShow").css("color", "red");
+			} else {
+				$(".main_area3_section1 .info .story .fileChange").val("동일");
+				$(".main_area3_section1 .info .story .input .fileChangeShow").text("동일");
+				$(".main_area3_section1 .info .story .input .fileChangeShow").css("color", "blue");	
 			}
 		});
 	});
@@ -271,12 +303,14 @@
 						<div class="text"><span>썸네일</span></div>
 						<input type="hidden" value="<%= projectDetail.getP_img() == null ? "" : projectDetail.getP_img() %>">
 						<input type="hidden" class="fileChange" name="thumnailChange" value="">
+						<div class="fileName"><span><%= projectDetail.getP_img() == null ? "파일 없음" : projectDetail.getP_img() %></span></div>
 						<div class="input"><input type="file" name="thumnail" disabled><span class="fileChangeShow" style="color : red; font-size : 18px; font-weight : 600;"></span></div>
 					</div>
 					<div class="story">
 						<div class="text"><span>본문</span></div>
 						<input type="hidden" value="<%= projectDetail.getP_story() == null ? "" : projectDetail.getP_story() %>">
 						<input type="hidden" class="fileChange" name="storyChange" value="">
+						<div class="fileName"><span><%= projectDetail.getP_story() == null ? "파일 없음" : projectDetail.getP_story() %></span></div>
 						<div class="input"><input type="file" name="story" disabled><span class="fileChangeShow" style="color : red; font-size : 18px; font-weight : 600;"></span></div>
 					</div>
 					<div class="info">
