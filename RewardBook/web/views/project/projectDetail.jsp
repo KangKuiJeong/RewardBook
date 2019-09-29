@@ -496,8 +496,7 @@ strong{font-weight: 700;}
 .m_text{border:0; width:300px; height:150px}
 .memosubmit{float:right;  padding: 5px; margin: 4px 10px; background: white;border: 1px solid #ff9800;}
 
-#more_review{display:none; width:550px; height:auto; border:1px solid lightgray; padding:5px; overflow: auto; word-break:break-all}
-
+.more_review{ width:550px; height:auto; border:1px solid lightgray; padding:5px; overflow: auto; word-break:break-all;}
 </style>
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
 <script>
@@ -852,9 +851,9 @@ strong{font-weight: 700;}
 			
 			<div class="menu supporter">서포터</div>
 			
-			
-			<div class="menu review">
 			<!-- 리뷰  -->
+			<div class="menu review">
+			<% if(loginMember != null){ %>
 			<div class="CommunityComment_container__hdKhk">
 					<div class="CommunityCommentTitle_commentTitle__srmGL">
 						<div class="CommentTitle_container__3aa7m">
@@ -862,35 +861,72 @@ strong{font-weight: 700;}
 						</div>
 						<p class="CommunityCommentTitle_explanation__1fMjM">펀딩 종료 후에 남긴 응원·의견입니다.</p>
 					</div>
+						<!-- 리뷰 작성 -->
 					<div>
 						<div>
-						<!-- 리뷰 작성 -->
-						<% if(loginMember != null){ %>
 							<button class="wz button gray CommunityCommentWriteButton_button__1Ou6f"  type="button" onclick="review_insert();">글남기기</button>
-								<div id="review_insert_area" style="width:340px; height:450px; display:none; border-bottom:0.5px solid lightgray;margin-bottom:20px;">
-									<div class="review_close" style="width:100%; height:30px; text-align:right;">
-										<span class="review_close_button" style="font-size:15px; cursor:pointer; margin-right:10px;" onclick="review_insert_close();">close</span>
-									</div>
-									<div class="review_insert_title">
-										제목<input type="text" id="review_title" placeholder="제목" style="width:100%;">
-									</div>
-									<div class="review_insert_text"style=" margin-top:10px;">
-										내용<textarea id="review_text" placeholder="글을 작성해주세요." style="width:100%; height:200px;resize:none;"></textarea>
-									</div>
-									<div class="review_insert_grade"style="width:340px; height:50px;">
-										평점<select style="width:100%;">
-											<option value="1">1점</option>
-											<option value="2">2점</option>
-											<option value="3">3점</option>
-											<option value="4">4점</option>
-											<option value="5">5점</option>
-										</select>
-									</div>
-									<div class="review_insert_img"style="width:100%; height:50px; margin-top:10px;">
-										이미지<input type="file"  style="width:100%; height:30px;">
-									</div>
+								<% if(review.getRv_no() == null){ %>
+									<div id="review_insert_area" style="width:340px; height:470px; display:none; border-bottom:0.5px solid lightgray;margin-bottom:20px;">
+										<div class="review_close" style="width:100%; height:30px; text-align:right;">
+											<span class="review_close_button" style="font-size:15px; cursor:pointer; margin-right:10px;" onclick="review_insert_close();">close</span>
+										</div>
+										<input type="hidden" id="review_u_no" value="<%= loginMember.getuNo() %>">
+										<input type="hidden" id="review_p_no" value="<%= project.getP_no() %>">
+										<div class="review_insert_title">
+											제목<input type="text" id="review_title" placeholder="제목" style="width:100%;">
+										</div>
+										<div class="review_insert_text"style=" margin-top:10px;">
+											내용<textarea id="review_text" placeholder="글을 작성해주세요." style="width:100%; height:200px;resize:none;"></textarea>
+										</div>
+										<div id="review_insert_grade"style="width:340px; height:50px;">
+											평점<select id="review_grade" style="width:100%; height:30px;">
+												<option value="1">1점</option>
+												<option value="2">2점</option>
+												<option value="3">3점</option>
+												<option value="4">4점</option>
+												<option value="5">5점</option>
+											</select>
+										</div>
+										<!-- <div id="review_insert_img"style="width:100%; height:50px; margin-top:10px;">
+											이미지<input type="file"  id="review_img" style="width:100%; height:30px;">
+										</div> -->
+										<div id="review_insert_button" style="widht:100%; height:50px;margin-top:10px; text-align:right;">
+											<span id="review_submit" onclick="reviewinsert();" style="width:100px; height:30px; background:silver; cursor:pointer;" >글 남기기</span>
+										</div>
 								</div>
+								<% }else{ %>
+									<div id="review_insert_area" style="width:340px; height:470px; display:none; border-bottom:0.5px solid lightgray;margin-bottom:20px;">
+										<div class="review_close" style="width:100%; height:30px; text-align:right;">
+											<span class="review_close_button" style="font-size:15px; cursor:pointer; margin-right:10px;" onclick="review_insert_close();">close</span>
+										</div>
+										<input type="hidden" id="review_u_no" value="<%= loginMember.getuNo() %>">
+										<input type="hidden" id="review_p_no" value="<%= project.getP_no() %>">
+										<div class="review_insert_title">
+											제목<input type="text" id="review_title" value="<%= review.getRv_title() %>" placeholder="제목" style="width:100%;">
+										</div>
+										<div class="review_insert_text"style=" margin-top:10px;">
+											내용<textarea id="review_text" placeholder="글을 작성해주세요." style="width:100%; height:200px;resize:none;"><%= review.getRv_text() %></textarea>
+										</div>
+										<div id="review_insert_grade"style="width:340px; height:50px;">
+											평점<select id="review_grade"  style="width:100%; height:30px;">
+												<option value="1">1점</option>
+												<option value="2">2점</option>
+												<option value="3">3점</option>
+												<option value="4">4점</option>
+												<option value="5">5점</option>
+											</select>
+										</div>
+										<!-- <div id="review_insert_img"style="width:100%; height:50px; margin-top:10px;">
+											이미지<input type="file"  id="review_img" style="width:100%; height:30px;">
+										</div> -->
+										<div id="review_insert_button" style="widht:100%; height:50px;margin-top:10px;">
+											<span id="review_updete" onclick="reviewupdate();" style="float:right;width:70px; height:30px; background:silver; cursor:pointer;" >글 수정</span>
+											<span id="review_delete" onclick="reviewdelete();" style="float:left;width:70px; height:30px; background:silver; cursor:pointer;" >글 삭제</span>
+										</div>
+								</div>
+								<% } %>
 								
+								<!-- 글남기기 버튼 -->
 								<script>
 									function review_insert(){
 										$("#review_insert_area").show(800);
@@ -899,11 +935,75 @@ strong{font-weight: 700;}
 										$("#review_insert_area").hide(300);
 									};
 								</script>
-						<% } %>
-						<!-- 리뷰 작성 -->						
+								<!-- 글남기기 버튼 -->
+								
+								<!-- 완료 submit --> 
+								<script type="text/javascript">
+									function reviewinsert(){
+										$(function(){
+											$.ajax({
+												url:"/RewardBook/rv_insert",
+												data:{u_no: $('#review_u_no').val(),
+													  p_no: $('#review_p_no').val(),
+													  rv_title: $('#review_title').val(),
+													  rv_text: $('#review_text').val(),
+													  rv_grade: $('#review_grade').val()},
+												type:"get",
+												dataType: "json",
+												success:function(data){
+													alert("리뷰가 등록되었습니다.");
+												},
+												error:function(jqXHR, textStatus, errorThrown){
+													console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+												}
+											});
+										});
+									};
+									
+									function reviewupdate(){
+										$(function(){
+											$.ajax({
+												url:"/RewardBook/rv_update",
+												data:{u_no: $('#review_u_no').val(),
+													  p_no: $('#review_p_no').val(),
+													  rv_title: $('#review_title').val(),
+													  rv_text: $('#review_text').val(),
+													  rv_grade: $('#review_grade').val()},
+												type:"get",
+												dataType: "json",
+												success:function(data){
+													alert("리뷰가 수정되었습니다.");
+												},
+												error:function(jqXHR, textStatus, errorThrown){
+													console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+												}
+											});
+										});
+									};
+									
+									function reviewdelete(){
+										$(function(){
+											$.ajax({
+												url:"/RewardBook/rv_delete",
+												data:{u_no: $('#review_u_no').val(),
+													  p_no: $('#review_p_no').val()},
+												type:"get",
+												dataType: "json",
+												success:function(data){
+													alert("리뷰가 삭제되었습니다.");
+												},
+												error:function(jqXHR, textStatus, errorThrown){
+													console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+												}
+											});
+										});
+									};
+								</script>
+								<!-- 완료 submit --> 
 						</div>
 					</div>
-					<!--  -->
+						<!-- 리뷰 작성 -->
+				<!-- 리뷰 내용 -->
 				<div class="review"></div>
 				<script type="text/javascript">
 	        		$(function(){
@@ -992,9 +1092,7 @@ strong{font-weight: 700;}
 												+"</div>"
 												+"</div>"
 												+"</div>"
-												+"<span class='review_more' onclick='review_more();' style='color:gray;font-size:15px; cursor:pointer;'> 더보기..</span>"
-												+"<div id='more_review'>"
-												+"<p onclick='close_more();' style='font-size:20px; font-weight:bold; cursor:pointer;'>x</p>"
+												+"<div class='more_review'>"
 												+"<span class='more_area'>"
 												+ decodeURIComponent(json.list[i].rv_text).replace(/\+/gi, " ")
 												+"</span>"
@@ -1039,8 +1137,6 @@ strong{font-weight: 700;}
 											+"</div>"
 											);
 								}
-									
-								
 							},
 							error: function(jqXHR, textStatus, errorThrown){
 								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
@@ -1048,21 +1144,30 @@ strong{font-weight: 700;}
 						});
 					});
 	        		</script>
+	        		<!-- 리뷰 내용 -->
 	        		</div>
 	        		
 	        		<!-- 리뷰 더보기 눌렀을 경우 -->
 	        		<script type="text/javascript">
-	        			function review_more(){
-	        				$("#more_review").show();
+	        			/* function review_more(){
+	        				$(".more_review").show();
 	        			};
 	        			function close_more(){
-	        				$("#more_review").hide();
-	        			};
+	        				$(".more_review").hide();
+	        			}; */
+	        			
+	        			/* function review_more(){
+	        				if (itemFlag) {
+	        					$(".more_review").addClass('active');
+	        					itemFlag = false;
+	        				} else {
+	        					$(".more_review").removeClass('active');
+	        					itemFlag = true;
+	        				}
+	        			}; */
 	        		</script>
 	        		<!-- 리뷰 더보기 눌렀을 경우 -->
 	        		
-			<!-- 리뷰 -->
-			</div>
 				<!-- 리뷰 갯 수 -->
 					<script type="text/javascript">
 						//리뷰 갯 수 출력
@@ -1082,6 +1187,11 @@ strong{font-weight: 700;}
 						});
 					</script>
 				<!-- 리뷰 갯 수-->
+			<% }else{ %>
+			<h3><i><b>회원 로그인 후 이용 가능합니다.</b></i></h3>
+			<% } %>
+			</div>
+			<!-- 리뷰 -->
 			
 		</div>
 		
@@ -1096,9 +1206,9 @@ strong{font-weight: 700;}
 			</div>
 			
 			
-<!-- 로그인 정보가 있는경우 -->
-			<% if(loginMember != null){ %>
 			<!-- 좋아요  -->
+			<!-- 로그인 정보가 있는경우 -->
+			<% if(loginMember != null){ %>
 			<div class="likearea">
 				<div class="likebutton">
 						<div id="like_pbutton"></div>
@@ -1257,7 +1367,6 @@ strong{font-weight: 700;}
 					};
 					</script>
 			</div>
-				<!-- 좋아요 -->
 			<% }else { %>
 			<!-- 로그인 정보가 없을경우 -->
 			<div class="likearea">
@@ -1301,8 +1410,8 @@ strong{font-weight: 700;}
 						}
 					</script>
 				</div>	
-				<!-- 좋아요 -->
 			<% } %>
+			<!-- 좋아요 -->
 
 			
 			
