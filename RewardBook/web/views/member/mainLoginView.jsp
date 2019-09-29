@@ -13,7 +13,6 @@
 <!-- 사용할 외부 자바스크립트 연결 -->
 <script type="text/javascript" src="/RewardBook/resources/js/member/Logincheck.js"></script>
 <script type="text/javascript" src="/RewardBook/resources/js/jquery-3.4.1.min.js"></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 
@@ -37,30 +36,7 @@
 			<p id="checkLogin"></p>
 			<input type="submit" value="로그인" id="subLogin">
 		</form>
-			<!-- API 영역시작 -->
-		<div id="snsWrap">
-			<ul>
-			<!-- 카카오톡 로그인 API 시작 -->
-			<li><a id="custom-login-btn" href="javascript:loginWithKakao()">카카오톡</a></li>
-			</ul>
-			<div id="naver_id_login"></div>
-		</div>
-		<script type='text/javascript'>
-		 
-		 Kakao.init('38eb46ae389d2f0f361c4a77827435b4');
-		    function loginWithKakao() {
-		      // 로그인 창을 띄웁니다.
-		      Kakao.Auth.login({
-		        success: function(authObj) {
-		          alert(JSON.stringify(authObj));
-		        },
-		        fail: function(err) {
-		          alert(JSON.stringify(err));
-		        }
-		      });
-		    };
-		    
-	</script>
+	
 		<p id="joinIntro">아직 리워드북 계정이 없으신가요? &nbsp;<a href="/RewardBook/views/member/joinMainView.jsp">회원가입하기</a></p>		
 	</div>
 	
