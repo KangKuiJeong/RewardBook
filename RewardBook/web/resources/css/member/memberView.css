@@ -31,7 +31,8 @@ input[id="saveId"]{ display: inline-block; width: 15px; height: 15px; border: 2p
 #joinIntro { text-align:center; font-size: 14px; font-weight:normal; margin-top:10px}
 #joinIntro a {font-weight:bold; text-decoration:none; color:#000;}
 #joinIntro a:hover { text-decoration:underline;}
-#emailJoin { width:400px; height:50px; border:1px solid #e1e1e1; margin-top:15px;}
+#emailJoin { width:195px; height:150px; border:1px solid #e1e1e1; margin-top:15px; display:inline-block;}
+#emailJoin img { display:block; margin: 0 auto;}
 #emailJoin:hover { background:#f1f1f1;}
 #emailJoin a{ font-size:20px; text-align:center; line-height:50px; text-decoration:none;}
 .snsJoinbtn { width:32.3%; display:inline-block; border:1px solid #e1e1e1; padding:13px 0; margin:15px 0;}
