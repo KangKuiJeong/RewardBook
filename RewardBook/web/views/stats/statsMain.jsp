@@ -1,22 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-
-<%
-int count = (int)session.getAttribute("count");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>RewordBook</title>
 
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="resources/css/commons.css">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -108,7 +100,6 @@ padding:5px 5px 10px 5px;
 
 <body>
 <%@ include file="/views/admin/common/adminHeader.jsp" %>
-<main class="statemain">	
 <%@ include file="/views/admin/common/adminSideMenu.jsp" %>
 	<!-- 컨텐츠 영역 -->
 	<br><br>
@@ -125,7 +116,7 @@ padding:5px 5px 10px 5px;
 
 <table border="1" align="center" class="charttable">
 <tr>
-<th><%= count %>오늘 가입자 수</th>
+<th>오늘 가입자 수</th>
 <th>어제 가입자 수</th>
 <th>금주 가입자 수</th>
 <th>전체 가입자 수</th>
@@ -137,17 +128,5 @@ padding:5px 5px 10px 5px;
 <td>0</td>
 </tr>
 </table>
-
-
-
-
-
-
-	<!-- //컨텐츠 영역 -->
-
-
-
-</main>
-
 </body>
 </html>

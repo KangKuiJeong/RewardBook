@@ -21,11 +21,17 @@
 		<p id="JoinMessage">리워드북 회원가입을 진심으로 환영합니다.</p>
 		
 		<ul>
-			<li id="emailJoin"><a href="/RewardBook/views/member/emailJoinView.jsp">이메일로 가입하기</a></li>
-			<li id="kakaoJoin" class="snsJoinbtn"><a href="#">카카오톡</a></li>
+			<li id="emailJoin"><a href="/RewardBook/views/member/emailJoinView.jsp">
+				<img src="/RewardBook/resources/images/index/personalIcon.png">
+				개인회원가입하기</a></li>
+			<li id="emailJoin"><a href="/RewardBook/views/member/emailJoinCompanyView.jsp">
+				<img src="/RewardBook/resources/images/index/companyIcon.png">
+				기업회원가입하기</a></li>
+			
+			<!-- <li id="kakaoJoin" class="snsJoinbtn"><a href="#">카카오톡</a></li>
 			<li id="naverJoin" class="snsJoinbtn"><a href="#">네이버</a></li>
 			<li id="googleJoin" class="snsJoinbtn"><a href="#" >구글</a></li>
-			<li id="companyJoin"><a href="/RewardBook/views/member/emailJoinCompanyView.jsp">기업회원가입</a></li>
+			<li id="companyJoin"><a href="/RewardBook/views/member/emailJoinCompanyView.jsp">기업회원가입</a></li> -->
 		</ul>
 		
 		<p id="joinIntro">이미 계정이 있으신가요? &nbsp;<a href="/RewardBook/views/member/mainLoginView.jsp">로그인</a></p>

@@ -3,7 +3,6 @@
 <%@ page import="project.model.vo.Project, payment.model.vo.Reward, java.util.ArrayList" %>
 <%@ page import="project.model.vo.ProjectNews" %>
 <%@ page import="memo.model.vo.Memo, review.model.vo.Review" %>
-
 <%
 	Project project = (Project)request.getAttribute("project"); 
 	Memo memo = (Memo)request.getAttribute("memo");
@@ -593,23 +592,6 @@ strong{font-weight: 700;}
 							<div class="inqBtnArea"><input type="submit" value="신고하기"></div>				
 						</form>
 					</div>
-			
-				<div id="newsFormDiv">
-						<button id="closeBtn" onclick="newsclose();">X</button>
-						<form action="/RewardBook/p_news_insert" id="inqForm" method="post">
-							<p class="inqTitle">새소식 등록하기</p>
-							<p class="inqSub_Title">제목</p>
-							<input type="text" name="pn_title" id="inqtitle">
-							<p class="inqSub_Title">내용</p>
-							<textarea name="pn_text" id="inqtext"></textarea>						
-							<!-- 프로젝트번호 넘김 -->
-							<input type="hidden" value="<%= project.getP_no() %>" name="p_no">
-			
-							<div class="inqBtnArea"><input type="submit" value="등록"></div>				
-							
-						</form>
-					</div>
-					
 					<% } %>
 					<script>
 						function inquryModal(){
@@ -740,6 +722,7 @@ strong{font-weight: 700;}
 			</script>
 			<div class="newsspace2"></div>
 			</div><!-- //새소식 -->
+			<div class="menu project_news">새소식</div>
 			<div class="menu community">
 				<div class="RewardCommunityPage_wrapper__28sk6">
 					<div>
@@ -1368,7 +1351,7 @@ strong{font-weight: 700;}
 				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
 				<div class="memodiv" id="memodiv">			
 				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모를 입력해주세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
 				<input class="memosubmit" type="submit" value="저장">			
 				</div>			
 				</form></div>	
@@ -1406,7 +1389,7 @@ strong{font-weight: 700;}
 		<div class="option_item">
 			<% if(loginMember == null){ %>
 				<% for(Reward reward : rewardList){ %>
-			<div class="reward option_iteminfo" onclick="loginFunction();">
+			<div class="reward option_iteminfo" onclick="javascript:location.href='/RewardBook/views/member/mainLoginView.jsp'">
 				<div class="reward item_left">
 					<div class="reward item_price">
 						<%= reward.getR_price() %> 원 펀딩

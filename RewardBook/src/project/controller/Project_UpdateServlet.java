@@ -49,7 +49,6 @@ public class Project_UpdateServlet extends HttpServlet {
 			String filePath = request.getSession().getServletContext().getRealPath("/resources/upfiles/project");
 			MultipartRequest mrequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
-			String page = mrequest.getParameter("page") == null ? "" : (String)mrequest.getParameter("page");
 			String no = (String)mrequest.getParameter("no");
 			String title = URLDecoder.decode((String)mrequest.getParameter("title"), "UTF-8");
 			title = title.equals("") || title.equals("-") ? "" : title;
@@ -93,8 +92,9 @@ public class Project_UpdateServlet extends HttpServlet {
 			
 			if (result > 0) {
 				view = request.getRequestDispatcher("/views/admin/adminProjectDetail.jsp");
-				request.setAttribute("project", project);
-				request.setAttribute("page", page);
+				request.setAttribute("project", pservice.selectProject(no));
+				request.setAttribute("page", "project");
+				request.setAttribute("alert", "프로젝트가 정상적으로 변경되었습니다.");
 				view.forward(request, response);
 			}
 			
