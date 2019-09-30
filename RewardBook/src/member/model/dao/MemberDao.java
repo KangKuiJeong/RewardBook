@@ -1,6 +1,6 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -685,6 +685,34 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+
+	public Member image(Connection conn, String u_no) {
+		Member member = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select u_profile from users where u_no= ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u_no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member.setProfileImg(rset.getString("U_PROFILE"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
 	}
 
 }

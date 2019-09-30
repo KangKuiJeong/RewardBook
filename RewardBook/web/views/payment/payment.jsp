@@ -337,7 +337,7 @@ function findPostCode() {
             </div>
           </div>
           <div class="btn-wrap">
-          <% if(loginMember.getP_billing() != null){ %>
+          <% if(loginMember.getP_billing() == null){ %>
           	<button type="button" id="btn-submit"  onclick="isbilling()" class="wz primary button">결제 예약하기</button>
           <% }else{ %>
             <button type="button" id="btn-submit" onclick="payTest()" class="wz primary button">결제 예약하기</button>

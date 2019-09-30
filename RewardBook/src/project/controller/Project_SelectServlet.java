@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.service.MemberService;
 import member.model.vo.Member;
 import memo.model.service.MemoService;
 import memo.model.vo.Memo;
@@ -61,6 +62,7 @@ public class Project_SelectServlet extends HttpServlet {
 		}
 		
 		Project project = new ProjectService().selectProject(p_no);
+		Member image = new MemberService().image(project.getU_no());
 		
 		//조회수 1증가 처리용
 		int result = new ProjectService().projectCount(p_no);
@@ -69,6 +71,7 @@ public class Project_SelectServlet extends HttpServlet {
 		if(project != null) {
 			view = request.getRequestDispatcher("views/project/projectDetail.jsp");
 			request.setAttribute("project", project);
+			request.setAttribute("image", image);
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");

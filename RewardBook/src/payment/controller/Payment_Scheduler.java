@@ -37,7 +37,7 @@ public class Payment_Scheduler implements ServletContextListener {
 			// define the job and tie it to our HelloJob class 
 			JobDetail job = newJob(Payment_RealPay.class) .withIdentity("Payment_RealPay", "group1") .build();
 			// Trigger the job to run now, ss mm hh dd MM Week 
-			Trigger trigger = newTrigger() .withIdentity("trigger1", "group1") .withSchedule(cronSchedule("0 11 * * * ?")) .build(); 
+			Trigger trigger = newTrigger() .withIdentity("trigger1", "group1") .withSchedule(cronSchedule("1 * * * * ?")) .build(); 
 			// Tell quartz to schedule the job using out trigger 
 			scheduler.scheduleJob(job, trigger); 
 			

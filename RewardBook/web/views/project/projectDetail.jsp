@@ -11,6 +11,7 @@
 	String message = (String)request.getAttribute("message");
 	ArrayList<ProjectNews> newsList = (ArrayList<ProjectNews>)request.getAttribute("list");
 	Review review = (Review)request.getAttribute("review");
+	Member image = (Member)request.getAttribute("image");
 %>
 
 <!DOCTYPE html>
@@ -596,6 +597,24 @@ strong{font-weight: 700;}
 							<div class="inqBtnArea"><input type="submit" value="신고하기"></div>				
 						</form>
 					</div>
+					
+					<div id="newsFormDiv">
+                  <button id="closeBtn" onclick="newsclose();">X</button>
+                  <form action="/RewardBook/p_news_insert" id="inqForm" method="post">
+                     <p class="inqTitle">새소식 등록하기</p>
+                     <p class="inqSub_Title">제목</p>
+                     <input type="text" name="pn_title" id="inqtitle">
+                     <p class="inqSub_Title">내용</p>
+                     <textarea name="pn_text" id="inqtext"></textarea>                  
+                     <!-- 프로젝트번호 넘김 -->
+                     <input type="hidden" value="<%= project.getP_no() %>" name="p_no">
+         
+                     <div class="inqBtnArea"><input type="submit" value="등록"></div>            
+                     
+                  </form>
+               </div>
+					
+					
 					<% } %>
 					<script>
 						function inquryModal(){
@@ -656,7 +675,9 @@ strong{font-weight: 700;}
 	</div>
 	<div class="detail_Content">
 		<div class="detail_Nav">
-			<div class="menu content"><%= project.getP_story() %></div>
+			<div class="menu content">
+			<img src="/RewardBook/resources/upfiles/project/<%= project.getP_story() %>">
+			</div>
 			<div class="menu funding_info">펀딩안내</div>
 			<div class="menu project_news">
 				<div class="project_news"  id="project_news">
@@ -726,7 +747,7 @@ strong{font-weight: 700;}
 			</script>
 			<div class="newsspace2"></div>
 			</div><!-- //새소식 -->
-			<div class="menu project_news">새소식</div>
+			<div class="menu project_news"></div>
 			<div class="menu community">
 				<div class="RewardCommunityPage_wrapper__28sk6">
 					<div>
@@ -1419,12 +1440,17 @@ strong{font-weight: 700;}
 			<div class="maker_box">
 				<div class="maker_info">
 					<div class="maker_icon">
+						<% if(image.getProfileImg() == null){ %>
 						<button class="maker_button"
 						style="background-image: url(/RewardBook/resources/images/index/profileSample2.jpg)" onclick="javascript:location.href='/RewardBook/user_profile?u_no=<%= project.getU_no() %>'"></button>
+						<% }else{ %>
+							<button class="maker_button"
+						style="background-image: url(/RewardBook/resources/images/profileImg/<%= image.getProfileImg() %>)" onclick="javascript:location.href='/RewardBook/user_profile?u_no=<%= project.getU_no() %>'"></button>
+						<% } %>
 					</div>
 					<div class="maker_profile">
 						<p><%= project.getU_name() %></p>
-						<a href="#">메이커 홈페이지 주소</a>
+						
 					</div>
 				</div>
 				
@@ -1446,7 +1472,7 @@ strong{font-weight: 700;}
 				<% } %>
 			</div>
 			
-			<div class="rank">
+			<!-- <div class="rank">
 				<h3>인기 프로젝트</h3>
 				<div class="rank_item">1</div>
 				<div class="rank_item">2</div>
@@ -1458,15 +1484,15 @@ strong{font-weight: 700;}
 				<div class="rank_item">8</div>
 				<div class="rank_item">9</div>
 				<div class="rank_item">10</div>
-			</div>		
+			</div>		 -->
 				<% if(loginMember != null) { %>
 			<div><form method="post" onsubmit="memoinsert();" name="memoInsertForm" >		
 				<input type="hidden" id="u_no" name="u_no" value="<%= loginMember.getuNo() %>">		
 				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
 				<div class="memodiv" id="memodiv">			
 				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모하세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
-				<input class="memosubmit" type="submit" value="저장">			
+				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모를 입력해주세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+				<input class="memosubmit" type="submit" value="저장" >			
 				</div>			
 				</form></div>	
 		</div>

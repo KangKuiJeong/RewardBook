@@ -663,8 +663,8 @@
 							</tr>
 							<tr id="tdline2">
 								<td><a href="#"> <img
-										src="/RewardBook/resources/images/index/t4.PNG"> 하나의
-										보조배터리로 다양한 스마트 디바이스를 충전할 수 있는 올인원 무선 충전 보조배터리!
+										src="/RewardBook/resources/images/index/t4.PNG"> 
+										다양한 스마트 디바이스를 충전할 수 있는 올인원 무선 충전 보조배터리!
 								</a></td>
 								<td colspan="2" id="tdline2Right"><a href="#"> <img
 										src="/RewardBook/resources/images/index/t5.png">
@@ -742,7 +742,7 @@
 					</div>
 					<ul id="itList">
 					</ul>
-					<button class="top3Listbtn">더보기</button>
+					<button class="top3Listbtn" onclick="location.href='/RewardBook/p_list?category=tech'">더보기</button>
 				</li>
 				<li>
 					<div class="cateBack" id="cateBackBu">
@@ -750,14 +750,14 @@
 					</div>
 					<ul id="beList">
 					</ul>
-					<button class="top3Listbtn">더보기</button>
+					<button class="top3Listbtn" onclick="location.href='/RewardBook/p_list?category=beauty'">더보기</button>
 				<li>
 					<div class="cateBack" id="cateBackFa">
 						<p class="cateTitle">Fashion</p>
 					</div>
 					<ul id="faList">
 					</ul>
-					<button class="top3Listbtn">더보기</button>					
+					<button class="top3Listbtn" onclick="location.href='/RewardBook/p_list?category=fashion'">더보기</button>					
 			</ul>
 		</div>
 

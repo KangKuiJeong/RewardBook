@@ -422,7 +422,7 @@ width:33.333%;
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/project/" + thumbnail + "' class='project_image'>"
+				        						+ "<img src='/RewardBook/resources/upfiles/project/" + thumbnail + "' class='project_image'>"
 				        						+ "</div>"
 				        						+ "<div class='itemname'>"
 				        						+ "<div class='itemname_text'>"

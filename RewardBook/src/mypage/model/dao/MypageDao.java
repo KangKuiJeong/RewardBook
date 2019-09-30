@@ -182,7 +182,7 @@ public class MypageDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select to_number(round(p_edate - p_sdate)),u_name, p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project join users using(u_no) where p_no = (select p_no from review where u_no = ?)";
+	      String query = "select to_number(round(p_edate - p_sdate)),u_name, p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project join users using(u_no) where p_no in (select p_no from review where u_no = ?)";
 	      
 	      try {
 	         pstmt = conn.prepareStatement(query);
@@ -235,7 +235,7 @@ public class MypageDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select to_number(round(p_edate - p_sdate)),u_name, p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project join users using(u_no) where p_no = (select p_no from review where p_no = (select p_no from project where u_no = ?))";
+	      String query = "select to_number(round(p_edate - p_sdate)),u_name, p_no, u_no, p_title, p_category, p_story, p_img, p_info, p_nprice, p_tprice, p_sdate, p_edate, p_secondary, p_ddate, p_count, p_permission, p_pdate, p_return from project join users using(u_no) where p_no in (select p_no from review where p_no in (select p_no from project where u_no = ?))";
 	      
 	      try {
 	         pstmt = conn.prepareStatement(query);
