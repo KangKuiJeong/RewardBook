@@ -260,7 +260,7 @@ width:16.66%;
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ "<img src='/RewardBook/resources/upfiles/project/"
 				        						+ thumbnail
 				        						+ "' class='project_image'>"
 				        						+ "</div>"
@@ -344,7 +344,7 @@ width:16.66%;
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ "<img src='/RewardBook/resources/upfiles/project/"
 				        						+ thumbnail
 				        						+ "' class='project_image' >"
 				        						+ "</div>"
@@ -561,7 +561,7 @@ width:16.66%;
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ "<img src='/RewardBook/resources/upfiles/project/"
 				        						+ thumbnail
 				        						+ "' class='project_image'>"
 				        						+ "</div>"
@@ -645,7 +645,7 @@ width:16.66%;
 												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
 						        				+ "<div class='boxarea'>"
 				        						+ "<div class='itemimage'>"
-				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ "<img src='/RewardBook/resources/upfiles/project/"
 				        						+ thumbnail
 				        						+ "' class='project_image'>"
 				        						+ "</div>"

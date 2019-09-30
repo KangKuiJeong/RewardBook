@@ -20,7 +20,7 @@ a{text-decoration: none;align: center; color: black;}
 .categoryName{display: none; font-size: 24px; font-weight: 700;}
 .categoryName{display: block; position: absolute; bottom: 12px; left: 0; line-height: 32px; font-size: 24px;}
 
-.invest_imgtag > img{style: max-width: 100%; height: auto;}
+.invest_imgtag > img{style: max-width: 100%; height: auto; width:100%;}
 .invest_list {display: grid;
     grid-template-columns: repeat(3,calc(33.33333% - 30px));
     grid-row-gap: 40px;

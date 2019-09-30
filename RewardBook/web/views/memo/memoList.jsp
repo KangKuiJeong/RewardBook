@@ -47,7 +47,7 @@ $(document).ready(function() {
 			
 		<div class="invest_box invest_item">
 			<div class="invest_img">
-				<a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= m.getP_no() %>"><img src="<%= m.getP_img() %>"></a></div>
+				<a class="invest_imgtag" href="/RewardBook//p_sel?p_no=<%= m.getP_no() %>"><img src="/RewardBook/resources/upfiles/project/<%= m.getP_img() %>"></a></div>
 			<div class="invest_title">
 				<div class="investap"><a href="/RewardBook//p_sel?p_no=<%= m.getP_no() %>" class="invest_titlelink"><p><%= m.getP_title() %></p></a></div>		
 				<div class="invest_name">

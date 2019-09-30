@@ -45,7 +45,7 @@ public class FaqDao {
 		ResultSet rset = null;
 		
 		String query = "select * from faq " + 
-				"order by to_number(faq_no) asc ";
+				"order by to_number(faq_no) desc ";
 		
 		try {
 			stmt = conn.createStatement();

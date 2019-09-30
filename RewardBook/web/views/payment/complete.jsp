@@ -57,7 +57,7 @@
 	
 	<img src="/RewardBook/resources/images/project/완료페이지.jpg" style="width : 100%">
 	<div class="area1">
-		<div class="line1">프로젝트 등록 신청이<br>성공적으로 완료되었습니다.</div>
+		<div class="line1">결제 예약이<br>성공적으로 완료되었습니다.</div>
 		<div class="line2" onclick="location.href='/RewardBook/index.jsp'">리워드북 메인</div>
 		<div class="line3" onclick="location.href='/RewardBook/p_list'">프로젝트 둘러보기</div>
 	</div>

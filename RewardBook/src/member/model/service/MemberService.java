@@ -243,5 +243,12 @@ public class MemberService {
 
 		return result;
 	}
+
+	public Member image(String u_no) {
+		Connection conn = getConnection();
+		Member member = mdao.image(conn, u_no);
+		close(conn);
+		return member;
+	}
 		
 }

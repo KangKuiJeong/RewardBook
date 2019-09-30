@@ -185,55 +185,55 @@ function moveOpen() {
 					<div class="categoryList">
 						<a class="category fashionIcon" href="/RewardBook/p_list?category=fashion">
 							<span class="categoryIcon">
-								<span class="iconImage fashion"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage fashion"><img src="/RewardBook/resources/images/project/fashionimg.png"></span><br>
 								<span class="imageName">패션</span>
 							</span>
 						</a>
 						<a class="category techIcon" href="/RewardBook/p_list?category=tech">
 							<span class="categoryIcon">
-								<span class="iconImage fashion"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage tech"><img src="/RewardBook/resources/images/project/techimg.png"></span><br>
 								<span class="imageName">테크</span>
 							</span>
 						</a>
 						<a class="category livingIcon" href="/RewardBook/p_list?category=living">
 							<span class="categoryIcon">
-								<span class="iconImage living"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage living"><img src="/RewardBook/resources/images/project/livingimg.png"></span><br>
 								<span class="imageName">리빙</span>
 							</span>
 						</a>
 						<a class="category concertIcon" href="/RewardBook/p_list?category=art&show">
 							<span class="categoryIcon">
-								<span class="iconImage concert"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage concert"><img src="/RewardBook/resources/images/project/art_showimg.png"></span><br>
 								<span class="imageName">공연,예술</span>
 							</span>
 						</a>
 						<a class="category beautyIcon" href="/RewardBook/p_list?category=beauty">
 							<span class="categoryIcon">
-								<span class="iconImage beauty"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage beauty"><img src="/RewardBook/resources/images/project/beautyimg.png"></span><br>
 								<span class="imageName">뷰티</span>
 							</span>
 						</a>
 						<a class="category travalIcon" href="/RewardBook/p_list?category=travel">
 							<span class="categoryIcon">
-								<span class="iconImage traval"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png";></span><br>
+								<span class="iconImage traval"><img src="/RewardBook/resources/images/project/travelimg.png"></span><br>
 								<span class="imageName">여행</span>
 							</span>
 						</a>
 						<a class="category concertIcon" href="/RewardBook/p_list?category=food">
 							<span class="categoryIcon">
-								<span class="iconImage concert"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage concert"><img src="/RewardBook/resources/images/project/foodimg.png"></span><br>
 								<span class="imageName">식품</span>
 							</span>
 						</a>
 						<a class="category beautyIcon" href="/RewardBook/p_list?category=design">
 							<span class="categoryIcon">
-								<span class="iconImage beauty"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png"></span><br>
+								<span class="iconImage beauty"><img src="/RewardBook/resources/images/project/designimg.png"></span><br>
 								<span class="imageName">디자인</span>
 							</span>
 						</a>
 						<a class="category travalIcon" href="/RewardBook/p_list?category=sports">
 							<span class="categoryIcon">
-								<span class="iconImage traval"><img src="/RewardBook/resources/images/icons8-fashion-trend-48.png";></span><br>
+								<span class="iconImage traval"><img src="/RewardBook/resources/images/project/sportsimg.png"></span><br>
 								<span class="imageName">스포츠</span>
 							</span>
 						</a>
