@@ -57,7 +57,6 @@ public class Notice_UpdateServlet extends HttpServlet {
       notice.setNt_no(mrequest.getParameter("nt_no"));
       notice.setNt_title(mrequest.getParameter("nt_title"));
       notice.setNt_text(mrequest.getParameter("nt_text"));
-      String nt_oc = mrequest.getParameter("nt_oc");
       String nt_ntevent = mrequest.getParameter("nt_ntevent");
 
       // 삭제여부값 추출
@@ -69,7 +68,7 @@ public class Notice_UpdateServlet extends HttpServlet {
       String newimg = mrequest.getParameter("newimg");
       // 업로드된 파일의 File 객체 만들기
 
-      if (img != null && !newimg.equals("")) { //예전 이미지가 들어있지 않을때는
+      if (img != null && !newimg.equals("") ) { //예전 이미지가 들어있지 않을때는
          if (newimg.equals("C:\\fakepath\\" + img)) { // 이미지가 예전이미지랑 같을때
             File deleteFile = new File(savePath + "/" + nt_img);
             deleteFile.delete();
@@ -80,11 +79,12 @@ public class Notice_UpdateServlet extends HttpServlet {
       
          }
       } else {
-         notice.setNt_img(img);
 
+         notice.setNt_img(img);
+    
       }
 
-      int result = new NoticeService().updateNotice(notice, nt_oc, nt_ntevent);
+      int result = new NoticeService().updateNotice(notice, nt_ntevent);
 
       if (result > 0) {
          response.sendRedirect("/RewardBook/nlist");

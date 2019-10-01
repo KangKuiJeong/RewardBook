@@ -56,7 +56,7 @@ public class Memo_InsertServlet extends HttpServlet {
 			result = new MemoService().updateMemo(memo);
 		}
 		
-		if(result > 0) {
+		/*if(result > 0) {
 			
 			response.setContentType("text/html;charset=utf-8");
 			view = request.getRequestDispatcher("//p_sel?p_no"+ p_no);
@@ -66,7 +66,7 @@ public class Memo_InsertServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/common/Error.jsp");
 			request.setAttribute("message", "Faq 수정 등록 실패!");
 			view.forward(request, response);
-		}
+		}*/
 	}
 
 	/**

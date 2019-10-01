@@ -37,7 +37,7 @@ public class NoticeDao {
 	
 	}
 
-	public int insertNotice(Connection conn, Notice notice,String nt_img, String nt_oc,String nt_ntevent) {
+	public int insertNotice(Connection conn, Notice notice,String nt_img, String nt_ntevent) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -50,7 +50,7 @@ public class NoticeDao {
 			pstmt.setString(1, notice.getNt_title());
 			pstmt.setString(2, notice.getNt_text());
 			pstmt.setString(3, nt_img);
-			pstmt.setString(4, nt_oc);
+			pstmt.setString(4, "Y");
 			pstmt.setString(5, nt_ntevent);
 			pstmt.setString(6, notice.getA_no());
 		
@@ -65,7 +65,7 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int updateNotice(Connection conn, Notice notice, String nt_oc, String nt_ntevent) {
+	public int updateNotice(Connection conn, Notice notice, String nt_ntevent) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -80,7 +80,7 @@ public class NoticeDao {
 			pstmt.setString(1, notice.getNt_title() );
 			pstmt.setString(2, notice.getNt_text());
 			pstmt.setString(3, notice.getNt_img());
-			pstmt.setString(4, nt_oc);
+			pstmt.setString(4, "Y");
 			pstmt.setString(5, nt_ntevent);
 			pstmt.setString(6, notice.getNt_no() );		
 			result = pstmt.executeUpdate();

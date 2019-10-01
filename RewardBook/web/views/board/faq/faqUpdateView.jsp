@@ -38,9 +38,7 @@
 <ul>
 <li class="textT"><h3 style="color:white">제목</h6><input type="text" name="faq_title" placeholder="제목을 입력하세요" name="faq_title" size="50" value="<%= q.getfaq_title() %>"></li>
 <li class="textT"><h3 style="color:white">내용</h6><textarea name="faq_text" placeholder="내용을 입력하세요" ><%= q.getFaq_text() %></textarea></li>
-<li><select id="faq_oc" class="faq_oc" name="faq_oc">
-							<option value="Y">공개</option>
-							<option value="N">비공개</option>
+
 	</select>
 </li>
 <li class="bt">

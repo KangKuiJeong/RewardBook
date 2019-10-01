@@ -203,7 +203,42 @@ public class MemoDao {
 	return 	result;
 
 	}
+	public ArrayList<Memo> listmMEMO(Connection conn, String p_no, String u_no) {
+		ArrayList<Memo> list = new ArrayList<Memo>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query =
+				" select * from memo where p_no = ? and u_no = ?";
 
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_no);
+			pstmt.setString(2, u_no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Memo memo = new Memo();
+			
+				memo.setP_no(rset.getString("p_no"));
+				memo.setM_no(rset.getString("m_no"));
+				memo.setU_no(rset.getString("u_no"));
+				memo.setM_text(rset.getString("m_text"));
+				memo.setM_date(rset.getDate("m_date"));
+			
+				list.add(memo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	} 
 
 
 

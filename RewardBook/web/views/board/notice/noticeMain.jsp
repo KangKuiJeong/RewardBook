@@ -56,18 +56,21 @@
 
 	</div>
 
-	<!-- //all-ui-header --> <!-- //전체/공지/이벤트 탭 --> <!-- 공지사항게시판 -->
+	<!-- //all-ui-header --><!-- 공지사항게시판 -->
 	<div class="noticeboard">
 		<ul>
 
 			<% for(Notice n : list){ %>
+
 			<li><a class="article"> <em class="category"><%= n.getNt_type() %></em>
-					<em class="status closed">진행중</em>
+					<em class="status closed"></em>
 					<div class="info">
 						<a href="/RewardBook/nlist?nt_no=<%= n.getNt_no() %>"></a>
 						<div class="thumb">
-							<% if(n.getNt_img() != null){ %>
+							<% if(n.getNt_img() != null && n.getNt_img() != "없음" ){ %>
+								
 							<img src="/RewardBook/resources/noticeimg/<%= n.getNt_img()%>">
+					
 							<% } %>
 						</div>
 					</div>
@@ -76,6 +79,8 @@
 					</h3> <span class="author">리워드북</span><span class="created-at"><%=n.getNt_date() %></span>
 
 			</a></li>
+		
+	
 			<% } %>
 
 		</ul>

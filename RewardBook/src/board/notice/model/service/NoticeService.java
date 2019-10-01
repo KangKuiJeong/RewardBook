@@ -25,9 +25,9 @@ public class NoticeService {
 		return result;
 	}
 
-	public int insertNotice(Notice notice, String nt_img, String nt_oc,  String nt_ntevent ) {
+	public int insertNotice(Notice notice, String nt_img, String nt_ntevent ) {
 		Connection conn = getConnection();
-		int result = nDao.insertNotice(conn, notice, nt_img, nt_oc, nt_ntevent);
+		int result = nDao.insertNotice(conn, notice, nt_img, nt_ntevent);
 		
 		if(result > 0) {
 			commit(conn);
@@ -39,9 +39,9 @@ public class NoticeService {
 		return result;
 	}
 
-	public int updateNotice(Notice notice, String nt_oc, String nt_ntevent) {
+	public int updateNotice(Notice notice, String nt_ntevent) {
 		Connection conn = getConnection();
-		int result = nDao.updateNotice(conn, notice, nt_oc, nt_ntevent);
+		int result = nDao.updateNotice(conn, notice, nt_ntevent);
 		
 		if(result > 0) {
 			commit(conn);

@@ -33,10 +33,7 @@
 <ul>
 <li class="textT"><h3 style="color:white">제목</h6><input type="text" name="faq_title" placeholder="제목을 입력하세요"></li>
 <li class="textT"><h3 style="color:white">내용</h6><textarea name="faq_text" placeholder="내용을 입력하세요" ></textarea></li>
-<li><select id="faq_oc" class="faq_oc" name="faq_oc">
-							<option value="Y">공개</option>
-							<option value="N">비공개</option>
-					</select></li>
+
 <li class="button"><input class="bt1" type="submit" value="등록">
 	&nbsp; <input class="bt2" type="reset" value="취소"  OnClick="javascript:history.back(-1)"></li>
 

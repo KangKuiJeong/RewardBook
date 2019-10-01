@@ -65,7 +65,7 @@ public class Notice_InsertServlet extends HttpServlet {
 		String nt_img = mrequest.getOriginalFileName("nt_img");
 		// 실제 서버에 업로드 된 파일시스템 네임
 
-		int result = new NoticeService().insertNotice(notice, nt_img, nt_oc, nt_ntevent);
+		int result = new NoticeService().insertNotice(notice, nt_img, nt_ntevent);
 		
 		if(result > 0) {
 			response.sendRedirect("/RewardBook/nlist");

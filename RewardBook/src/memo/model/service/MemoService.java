@@ -83,4 +83,11 @@ public class MemoService {
 		
 		return result;
 	}
+	public ArrayList<Memo> listmMemo(String p_no, String u_no) {
+		Connection conn = getConnection();
+		ArrayList<Memo> list = dDao.listMEMO(conn, u_no);
+				
+		close(conn);
+		return list;
+	}
 }
