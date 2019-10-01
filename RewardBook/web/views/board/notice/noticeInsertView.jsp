@@ -40,11 +40,7 @@
 							<textarea name="nt_text" placeholder="내용을 입력하세요"></textarea></li>
 					<li><input class="filebt" type="file" name="nt_img" size=40></li>
 
-					<li class="button"><select id="ntoc" class="nt_oc"
-						name="nt_oc">
-							<option value="Y">공개</option>
-							<option value="N">비공개</option>
-					</select> <input class="bt1" type="submit" value="등록">&nbsp; <input
+					<li class="button"> <input class="bt1" type="submit" value="등록">&nbsp; <input
 						class="bt2" type="reset" value="취소"
 						OnClick="javascript:history.back(-1)"></li>
 

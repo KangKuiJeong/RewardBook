@@ -12,6 +12,7 @@
 	ArrayList<ProjectNews> newsList = (ArrayList<ProjectNews>)request.getAttribute("list");
 	Review review = (Review)request.getAttribute("review");
 	Member image = (Member)request.getAttribute("image");
+	ArrayList<Memo> listm = (ArrayList<Memo>)request.getAttribute("listm");
 %>
 
 <!DOCTYPE html>
@@ -1491,7 +1492,7 @@ strong{font-weight: 700;}
 				<input type="hidden" id="p_no" name="p_no" value="<%= project.getP_no() %>">			
 				<div class="memodiv" id="memodiv">			
 				<h3 class="memoh3">메모</h3>		
-				<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모를 입력해주세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
+		 	<textarea class="m_text"name="m_text" id="m_text" required placeholder="메모를 입력해주세요"><%= (memo.getM_text() == null ? "" : memo.getM_text()) %></textarea> &nbsp;			
 				<input class="memosubmit" type="submit" value="저장" >			
 				</div>			
 				</form></div>	
@@ -1507,11 +1508,10 @@ strong{font-weight: 700;}
 				p_no: $("#p_no").val(),
 				m_text: $("#m_text").val()
 				},
-		type: "get",
+		type: "post",
 		success: function(data){
 			
-	alert('메모가 저장되었습니다.');
-
+	location.reload(true);
 		
 		}
 	});
@@ -1519,8 +1519,7 @@ strong{font-weight: 700;}
 	
 }
 	</script>
-	
-	
+
 	</div>
 </div>
 <div class="reward_select">

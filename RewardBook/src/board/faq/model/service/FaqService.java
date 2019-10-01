@@ -44,9 +44,9 @@ public class FaqService {
 		return result;
 	}
 	
-	public int insertFAQ(Faq faq, String faq_oc) {
+	public int insertFAQ(Faq faq) {
 		Connection conn = getConnection();
-		int result = fDao.insertFAQ(conn, faq, faq_oc);
+		int result = fDao.insertFAQ(conn, faq);
 		
 		if(result > 0) {
 			commit(conn);

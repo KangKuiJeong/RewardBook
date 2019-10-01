@@ -85,7 +85,7 @@ public class FaqDao {
 
 			pstmt.setString(1, faq.getfaq_title());
 			pstmt.setString(2, faq.getFaq_text());
-			pstmt.setString(3, faq.getFaq_oc());		
+			pstmt.setString(3, "Y");		
 			pstmt.setString(4, faq.getfaq_no());		
 			result = pstmt.executeUpdate();
 			
@@ -98,7 +98,7 @@ public class FaqDao {
 		return result;
 	}
 
-	public int insertFAQ(Connection conn, Faq faq, String faq_oc) {
+	public int insertFAQ(Connection conn, Faq faq) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
@@ -112,7 +112,7 @@ public class FaqDao {
 			pstmt.setString(1, faq.getA_no());
 			pstmt.setString(2, faq.getfaq_title());
 			pstmt.setString(3, faq.getFaq_text());
-			pstmt.setString(4, faq_oc);
+			pstmt.setString(4, "Y");
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
