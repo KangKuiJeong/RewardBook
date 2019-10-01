@@ -160,6 +160,7 @@ width:33.333%;
 <!-- 헤더부분  -->
 <hr>
 
+<% if(loginMember != null){ %>
 <div id="box">
 
 <div id="top">
@@ -634,7 +635,348 @@ width:33.333%;
 </div>
 
 </div>
+<% }else { %>
+<div id="box">
 
+<div id="top">
+	<div id="left">
+		<ul id="leftul">
+			<li id="myname"><%= member.getName() %></li>
+			
+			<li id="my">
+				<%if(member.getuNo().substring(0,1).equals("A")){ 	//A로 시작하면 개인회원이라고 노출 %>
+							개인회원
+						<% }else{ %>
+							기업회원
+						<% } %>	
+			</li>
+			
+			
+			<li class="litype">
+				<% if(member.getIntro() == null){ %>
+					<span>안녕하세요. <%= member.getName() %> 입니다.</span>
+				<% } else {  %>
+					<%= member.getIntro() %>
+				<% } %>
+			</li>
+			
+			
+			<li class="litype">
+				<% if(member.getCategory() == null){ %>
+					<span class="category_style">등록된 카테고리가 없습니다.</span>
+				<% } else {  %>
+					<span class="category_style"><%= member.getCategory() %></span>
+				<% } %>
+			</li>
+			
+			
+			<li class="litype">
+				<% if(member.getHomepage() == null){ %>
+					<span class="category_style">등록된 홈페이지가 없습니다.</span>
+				<% } else {  %>
+					<a href="<%= member.getHomepage() %>">홈페이지</a>
+				<% } %>
+			</li>
+			
+			<li class="litype">
+				<span class="flwc">팔로워 : </span><span id="flwcount"></span>
+					<script type="text/javascript">
+						//총 팔로워 수 출력
+						$(function(){
+							$.ajax({
+								url:"/RewardBook/flw_listcount",
+								data:{uNo : "<%= member.getuNo() %>"},
+								type:"get",
+								dataType: "json",
+								success: function(data){
+									$("#flwcount").html($("#flwcount").val() + data.listCount);
+									
+								},
+								error: function(jqXHR, textStatus, errorThrown){
+									console.log("error : " + textStatus);
+								}
+							});
+						});
+					</script>
+			</li>
+			
+			
+			<li class="litype">
+				<div id="follow_button"></div>
+					<img class="fbtn" src="/RewardBook/resources/images/mypage/fbtn1.png" onclick="beforeLogin();">
+				<script type="text/javascript">
+					function beforeLogin(){
+						if (confirm("회원 로그인 후 이용가능합니다. \n로그인 페이지로 이동하시겠습니까?") == true){    //확인
+								location.href = "/RewardBook/views/member/mainLoginView.jsp"; //로그인페이지로 이동
+						}else{   //취소
+							return;
+						}
+					};
+				</script>
+			</li>
+			
+					
+			
+		</ul>
+	</div>
+	<div id="right">
+		<div id="myimage">
+			<!-- 이미지가 있을 때 -->
+			<% if(member.getProfileImg() != null){ %>
+				<img src="/RewardBook/resources/images/profileImg/<%= member.getProfileImg() %>">
+			<% }else{	//이미지가 없을때 기본이미지 보여지게함 %>
+				
+				<img src="/RewardBook/resources/images/index/profile.jpg">
+				
+			<% } %>
+			
+		</div>
+		
+	</div>
+</div>
+
+
+<div id="bottom">
+	<div class="tabs"> 
+		<input type="radio" name="tabs" id="tabone" checked="checked">     
+	    <label for="tabone">프로젝트</label> 
+	      <div class="tab">
+	        <div class="tabbox">
+			    <div class="boxtop">   	
+			       	<div class="tabsearch">
+						<!-- <input type="text" placeholder="검색어를 입력하세요.">
+						<button>검색</button> -->
+					</div>
+				</div> 
+	        	<div class="boxbottom">
+	        		<div class="myproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/up_list",
+							data:{uNo : "<%= member.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
+								if(json.list){
+									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
+										$(".myproject").html($(".myproject").html()
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/project/" + thumbnail + "' class='project_image'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>"+ json.list[i].rdate +"일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".myproject").html($(".myproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 진행중인 프로젝트가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
+	        	</div>
+	        </div>
+	       
+	       </div>       
+    	    
+	    <input type="radio" name="tabs" id="tabfour">     
+	    <label for="tabfour">팔로워</label> 
+		  <div class="tab">
+				<div class="tabbox">
+			    <div class="boxtop">   	
+			       	<div class="tabsearch">
+						
+					</div>
+				</div> 
+	        	<div class="boxbottom">
+	        		<div class="bottomcenter">
+	        			<div class="followerlink"></div>
+	        				<script type="text/javascript">
+							$(function(){
+								$.ajax({
+									url:"/RewardBook/flwer_list",
+									data:{uNo : "<%= member.getuNo() %>"},
+									type:"get",
+									dataType: "json",
+									success: function(data){
+										var jsonStr = JSON.stringify(data);
+										//string => json 객체로 바꿈
+										var json = JSON.parse(jsonStr);
+										var count = 0;
+										var image = null;
+										
+										for(var i in json.result){
+											count++;
+											if(json.result[i].u_profile == null){image = "i.png"}else{image = json.result[i].u_profile}
+											var str = "<a href='/RewardBook/user_profile?u_no=" + json.result[i].u_no;
+											
+											str += "'>"
+												+ "<div class='followerarea'>"
+												+ "<div class='flwimg'>"
+												+ "<img class='followerimg' src='/RewardBook/resources/images/profileImg/" 
+												+ image
+												+ "' class='profile_image'>"
+							        			+ "</div>"
+								        		+ "<div class='flwname'>"
+								        		+ "<span class='followername'>"
+								        		+ decodeURIComponent(json.result[i].name)
+								        		+ "</span>"
+								        		+ "</div>"
+								        		+ "<div class='flwtype'>"
+								        		+ "<span class='followertype'>"
+								        		+ (json.result[i].u_no.charAt(0) == 'A' ? "개인" : "기업")
+								        		+ "</span>"
+								        		+ "</div>"
+								        		+ "</div>"
+								        		+ "</a>";
+
+											$(".followerlink").html($(".followerlink").html() + str);
+										}
+										if(count == 0){
+											$(".followerlink").html($(".followerlink").html()
+												+ "<br>" + "<br>"
+					        					+ "<div class='flwname'>"
+					        					+ "<span class='followername'>"
+					        					+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 팔로워하는 친구가 없습니다."
+					        					+ "</span>"
+					        					+ "</div>"
+					        					);
+										}
+									},
+									error: function(jqXHR, textStatus, errorThrown){
+										console.log("error : " + textStatus);
+									}
+								});
+							});
+							</script>
+										
+	        		</div>	
+	        	</div>
+	       	 </div>	
+	       	 
+	      	</div>  
+	    
+	    
+	    <input type="radio" name="tabs" id="tabsix">     
+	    <label for="tabsix">리뷰</label> 
+	      <div class="tab"> 
+	      <div class="tabbox">
+			    <div class="boxtop">   	
+			       	<div class="tabsearch">
+						
+					</div>
+				</div> 
+	        	<div class="boxbottom">
+	        		<div class="reviewproject"></div>
+	        		<script type="text/javascript">
+	        		$(function(){
+						$.ajax({
+							url:"/RewardBook/ur_list",
+							data:{uNo : "<%= member.getuNo() %>"},
+							type:"get",
+							dataType: "json",
+							success: function(data){
+								var jsonStr = JSON.stringify(data);
+								//string => json 객체로 바꿈
+								var json = JSON.parse(jsonStr);
+								var thumbnail = null;
+								if(json.list){
+									for(var i in json.list){
+										if(json.list[i].img == null){thumbnail = "noimage.png"}else{thumbnail = json.list[i].img}
+										$(".reviewproject").html($(".reviewproject").html()
+												+"<a class='boxitem' href='/RewardBook/p_sel?p_no=" + json.list[i].p_no + "'>"
+						        				+ "<div class='boxarea'>"
+				        						+ "<div class='itemimage'>"
+				        						+ "<img src='/RewardBook/resources/images/project/"
+				        						+ thumbnail
+				        						+ "' class='project_image'>"
+				        						+ "</div>"
+				        						+ "<div class='itemname'>"
+				        						+ "<div class='itemname_text'>"
+				        						+ "<span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "</div>"
+				        						+ "<div class='iteminfo'>"
+				        						+ "<span class='iteminfo_name'>"+ decodeURIComponent(json.list[i].name).replace(/\+/gi, " ") +"</span>"
+				        						+ "<span class='iteminfo_category'>"+ decodeURIComponent(json.list[i].category).replace(/\+/gi, " ") +"</span>"
+				        						+ "</div>"
+				        						+ "<div class='itemper'>"
+				        						+ "<div class='target_gauge'>"
+				        						+ "<span class='gauge' style='width:" + (json.list[i].nprice / json.list[i].tprice) * 100 + "%;'></span>"
+				        						+ "</div>"
+				        						+ "<span class='percentage'>" + parseInt((json.list[i].nprice / json.list[i].tprice) * 100) + "%</span>"
+				        						+ "<span class='invest_info enddate'>" + json.list[i].rdate + "일 남음</span>"
+				        						+ "</div>"
+					        					+ "</div>"
+				        						+ "</a>");
+									}
+								}
+								else if(json.result){
+									$(".reviewproject").html($(".reviewproject").html()
+											+ "<div class='bottomcenter'>"
+											+ "<br><br>"
+				        					+ "<div class='flwname'>"
+				        					+ 	"<span class='followername'>"
+				        					+ 	 "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "아직 남겨진 리뷰가 없습니다."
+				        					+	"</span>"
+				        					+ "</div></div>"
+				        					);
+								}
+									
+								
+							},
+							error: function(jqXHR, textStatus, errorThrown){
+								console.log("error : " + textStatus + " / " + jqXHR + " / " + errorThrown);
+							}
+						});
+					});
+	        		</script>
+	        	</div>
+	        </div>
+	      </div>          
+	</div>
+</div>
+
+</div>
+
+<% } %>
 
 
 
